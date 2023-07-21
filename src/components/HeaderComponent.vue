@@ -1,0 +1,70 @@
+<template>
+  <q-header class="bg-header text-primary font-petrona q-py-md" :class="isDesktop ? 'q-px-xl': 'q-px-sm'">
+    <div class="row justify-between align-center">
+      <div class="row items-center q-gutter-sm cursor-pointer">
+        <q-icon name="menu" size="md" v-if="!isDesktop" class="text-primary cursor-pointer q-pr-sm" @click="openDrawer"/>
+        <img src="~assets/Logo128.png" alt="Ajit nursing home logo" :width="isDesktop ? '75' : '50'">
+        <div :class="isDesktop ? 'fs-24' : 'fs-22'">Ajit Nursing Home</div>
+      </div>
+      <div class="row items-center q-gutter-md fs-16 text-bold" v-if="isDesktop">
+        <div class="cursor-pointer">About Us</div>
+        <div class="cursor-pointer">Pregnancy</div>
+        <div class="cursor-pointer">Getting Pregnant</div>
+        <div class="cursor-pointer">Tools</div>
+        <div class="cursor-pointer">Life as a Parent?</div>
+        <div class="cursor-pointer">Gynaecology</div>
+        <div class="cursor-pointer">News</div>
+      </div>
+    </div>
+    <q-drawer v-if="!isDesktop"
+    v-model="openMenu">
+      <div class="row items-center q-gutter-sm bg-header q-pa-md">
+        <img src="~assets/Logo128.png" alt="Ajit nursing home logo" width="50">
+        <div class="fs-20">Ajit Nursing Home</div>
+      </div>
+      <div class="column q-gutter-md text-bold q-mt-sm q-pa-md">
+        <div class="cursor-pointer">About Us</div>
+        <div class="cursor-pointer">Pregnancy</div>
+        <div class="cursor-pointer">Getting Pregnant</div>
+        <div class="cursor-pointer">Tools</div>
+        <div class="cursor-pointer">Life as a Parent?</div>
+        <div class="cursor-pointer">Gynaecology</div>
+        <div class="cursor-pointer">News</div>
+      </div>
+    </q-drawer>
+  </q-header>
+</template>
+
+<script>
+export default {
+  name: 'HeaderComponent',
+  data () {
+    return {
+      openMenu: false
+    }
+  },
+  methods: {
+    openDrawer () {
+      this.openMenu = true
+    }
+  },
+  computed: {
+    isMobile () {
+      return this.$q.screen.lt.sm
+    },
+    isTablet () {
+      return this.$q.screen.gt.xs && this.$q.screen.lt.md
+    },
+    isDesktop () {
+      return this.$q.screen.gt.sm
+    }
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+.bg-header {
+  background-image: linear-gradient(to right, #C2E2E1 , #CFECE8, #DEEFEE);
+
+}
+</style>
