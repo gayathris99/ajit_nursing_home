@@ -1,8 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Petrona:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orelega+One&family=Overlock:wght@400;700;900&family=Petrona:wght@100;200;300;400;500;600;700;800;900&family=Red+Hat+Text:wght@300;400;500;600;700&display=swap');
 
+.font-overlock {
+  font-family: 'Overlock', cursive;
+}
 .font-petrona {
   font-family: 'Petrona', serif;
 }
+.font-red-hat-text {
+  font-family: 'Red Hat Text', sans-serif;
+}
+.font-orelega {
+  font-family: 'Orelega One', cursive;
+}
+
 
 .fw-900 {
   font-weight: 900;
@@ -38,6 +48,9 @@
 }
 .fs-60 {
   font-size: 60px;
+}
+.fs-56 {
+  font-size: 56px;
 }
 .fs-48 {
   font-size: 48px;
