@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    <h2>AJIT NURSING HOME test</h2>
+    <h2>AJIT NURSING HOME TEST CHECK</h2>
   </q-page>
 </template>
 
