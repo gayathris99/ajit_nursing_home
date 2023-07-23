@@ -55,12 +55,7 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-.bg-light-pink {
-  background-color: #FFD8E9;
-  border-radius: 40px;
-  display: inline-block;
+  max-height: 679px;
 }
 .para-block {
   max-width: 450px;
@@ -74,9 +69,9 @@ export default {
 
 .hero-image
 {
-    img {
+  img {
   max-width: 700px;
-  width: 600px;
+  width: 599px;
   @media only screen and (max-width: 1240px) and (min-width:1061px){
     width: 500px;
   }
