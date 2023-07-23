@@ -5,9 +5,12 @@
       <div class="fw-600 col-md-6 q-mt-sm title padding-left">Specialist obgyne, <br/> pediatricians team</div>
       <div class="description col-md-6 q-px-lg items-start">Has a team of the best specialist doctors in the field of obstetrics & gynaecology as well as paediatricians. In addition, we also have several other specialists.</div>
     </div>
-  <Carousel :itemsToShow="isMobile ? 1.5 : 3.95" :wrapAround="true" :transition="500" class="q-mt-xl">
+  <Carousel :itemsToShow="isMobile ? 1.95 : 3.95" :wrapAround="true" :transition="500" class="q-mt-xl">
     <Slide v-for="slide in 10" :key="slide">
-      <div class="carousel__item">{{ slide }}</div>
+      <div class="column">
+      <img src="~assets/doctor1.svg" alt="" width="230">
+      <p>Dr. Gayathri</p>
+      </div>
     </Slide>
     <template #addons>
       <Navigation />
