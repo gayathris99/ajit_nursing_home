@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Orelega+One&family=Overlock:wght@400;700;900&family=Petrona:wght@100;200;300;400;500;600;700;800;900&family=Red+Hat+Text:wght@300;400;500;600;700&display=swap');
 
+
+body {
+  margin: 0 auto;
+  max-width: 1600px;
+}
+
 .font-overlock {
   font-family: 'Overlock', cursive;
 }
@@ -45,6 +51,9 @@
 // Font Sizes
 .fs-100 {
   font-size: 100px;
+}
+.fs-64 {
+  font-size: 64px;
 }
 .fs-60 {
   font-size: 60px;
