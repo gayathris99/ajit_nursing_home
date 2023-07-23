@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Orelega+One&family=Overlock:wght@400;700;900&family=Petrona:wght@100;200;300;400;500;600;700;800;900&family=Red+Hat+Text:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Overpass:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Radley&display=swap');
 
 body {
   margin: 0 auto;
@@ -20,6 +22,12 @@ body {
 }
 .font-overpass {
   font-family: 'Overpass', sans-serif;
+}
+.font-oxygen {
+  font-family: 'Oxygen', sans-serif;
+}
+.font-radley {
+  font-family: 'Radley', serif;
 }
 
 
@@ -69,6 +77,9 @@ body {
 }
 .fs-36 {
   font-size: 36px;
+}
+.fs-32 {
+  font-size: 32px;
 }
 .fs-30 {
   font-size: 30px;
