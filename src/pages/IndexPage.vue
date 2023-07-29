@@ -7,6 +7,7 @@
     <make-appointment/>
     <our-testimonials/>
     <our-blog/>
+    <contact-us/>
   </q-page>
 </template>
 
@@ -18,6 +19,7 @@ import OurDoctors from 'src/components/HomePageComponents/OurDoctors.vue'
 import MakeAppointment from 'src/components/HomePageComponents/MakeAppointment.vue'
 import OurTestimonials from 'src/components/HomePageComponents/OurTestimonials.vue'
 import OurBlog from 'src/components/HomePageComponents/OurBlog.vue'
+import ContactUs from 'src/components/HomePageComponents/ContactUs.vue'
 export default {
   name: 'IndexPage',
   components: {
@@ -27,7 +29,8 @@ export default {
     OurDoctors,
     MakeAppointment,
     OurTestimonials,
-    OurBlog
+    OurBlog,
+    ContactUs
   }
 }
 </script>
