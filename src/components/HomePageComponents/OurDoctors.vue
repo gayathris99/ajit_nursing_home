@@ -26,15 +26,6 @@ export default {
     padding: 0 24px;
   }
 }
-.title {
-  font-size: 36px;
-   @media only screen and (max-width: 999px) and (min-width:500px) {
-    font-size: 30px;
-   }
-  @media only screen and (max-width: 499px) and (min-width:0px) {
-    font-size: 24px;
-    }
-}
 .description {
   font-size: 20px;
   max-width: 600px;

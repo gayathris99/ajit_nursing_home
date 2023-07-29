@@ -70,15 +70,6 @@ export default {
   background-size: cover;
   max-height: 800px;
 }
-.title {
-  font-size: 36px;
-   @media only screen and (max-width: 999px) and (min-width:500px) {
-    font-size: 30px;
-   }
-  @media only screen and (max-width: 499px) and (min-width:0px) {
-    font-size: 24px;
-    }
-}
 .q-card {
   width: 350px;
   height: 220px;
