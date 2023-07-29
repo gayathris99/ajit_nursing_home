@@ -20,12 +20,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.padding-left {
-  padding-left: 48px;
-  @media only screen and (max-width: 799px) and (min-width:0px)  {
-    padding-left: 24px;
-  }
-}
 .padding-x-axis {
   padding: 0 48px;
   @media only screen and (max-width: 799px) and (min-width:0px)  {
