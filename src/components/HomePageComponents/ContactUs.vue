@@ -5,24 +5,26 @@
       <div class="column q-mt-lg">
         <div class="fw-600 q-mt-sm title font-radley text-primary q-mt-md">Want to make an <br/> appointment easily? <br/>Contact us!</div>
         <div class="q-mt-md font-radley column q-gutter-y-sm q-pb-xl">
-        <q-input v-model="fullName" dense placeholder="Full Name">
+        <q-input class="fs-18" v-model="fullName" dense placeholder="Full Name">
           <template v-slot:append>
             <q-icon name="person" size="24px" color="primary"/>
           </template>
         </q-input>
-        <q-input v-model="contactNumber" dense placeholder="Contact Number">
+        <q-input class="fs-18" v-model="contactNumber" dense placeholder="Contact Number">
           <template v-slot:append>
             <q-icon name="call" size="24px" color="primary"/>
           </template>
         </q-input>
-        <q-input v-model="email" dense placeholder="Email ID" type="email">
+        <q-input class="fs-18" v-model="email" dense placeholder="Email ID" type="email">
           <template v-slot:append>
             <q-icon name="mail" size="24px" color="primary"/>
           </template>
         </q-input>
-        <q-input v-model="date" placeholder="Date (dd/mm/yyyy)">
+        <q-input class="fs-18" v-model="date" placeholder="Date (dd/mm/yyyy)" @focus="onDateInputClick">
           <template v-slot:append>
-            <q-icon name="calendar_month" size="24px" color="primary"/>
+            <q-btn-dropdown icon="calendar_month" color="primary" dense flat ref="dateBtnDropdown">
+              <q-date minimal v-model="date" mask="DD/MM/YYYY" :options="dateOption"/>
+            </q-btn-dropdown>
           </template>
         </q-input>
         </div>
@@ -41,7 +43,16 @@ export default {
       email: '',
       date: ''
     }
-  }
+  },
+  methods: {
+    onDateInputClick () {
+      this.$refs.dateBtnDropdown.show()
+    },
+    dateOption (date) {
+      const today = new Date().toLocaleDateString('en-ZA') //dd/mm/yyyy
+      return date >= today
+    }
+  },
 }
 </script>
 
@@ -51,5 +62,8 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+:deep(.q-btn-dropdown__arrow) {
+  display: none;
 }
 </style>
