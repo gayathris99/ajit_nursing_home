@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="bg-image no-padding no-margin" v-if="isDesktop">
-      <div class="row justify-evenly items-center q-gutter-x-md no-padding no-margin">
+      <div class="row justify-evenly items-center q-gutter-x-md no-padding no-margin desktop-section">
         <img src="~assets/flowerbehindlady.svg" alt="">
         <q-form>
           <div class="column q-mt-lg">
@@ -205,6 +205,11 @@ export default {
 .q-img {
   max-height: 600px;
 }
+}
+.desktop-section {
+  img {
+    height: 590px;
+  }
 }
 .btn-fixed-width {
   width: 250px;
