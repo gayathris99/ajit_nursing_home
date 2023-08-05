@@ -34,11 +34,16 @@ export default {
     OurBlog,
     ContactUs
   },
+  computed: {
+    isMobile () {
+      return this.$q.screen.lt.sm
+    },
+  },
   methods: {
     onScrollElement (el) {
       const elementPosition = document.getElementById(el).offsetTop;
       window.scrollTo({
-        top: elementPosition - 120,
+        top: this.isMobile ? elementPosition + 480 : elementPosition - 120,
         behavior: "smooth",
       });
     }
