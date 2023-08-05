@@ -32,7 +32,8 @@
       </div>
     </div>
     <div v-else class="tab-mobile">
-      <img src="~assets/heroImage.svg" alt="">
+      <img v-if="isTablet" src="~assets/heroImage.svg" alt="">
+      <img v-if="isMobile" src="~assets/heroMobile.svg" alt="">
       <div class="content column justify-center items-center">
         <div class="fs-40 font-orelega text-primary q-mt-sm">Collaborative care focused on you!</div>
         <div class="q-mt-md font-overlock fs-20 fs-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et vehicula justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</div>
@@ -108,8 +109,13 @@ export default {
 .tab-mobile {
   position: relative;
   img {
+    display: block;
+    vertical-align: middle;
     opacity: 0.6;
     object-fit: scale-down;
+    @media only screen and (max-width: $breakpoint-xs-max) {
+      height: 501px !important;
+    }
   }
   .content {
     position: absolute;
