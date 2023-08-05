@@ -10,6 +10,7 @@
       no-caps
       class="font-overlock"
       :size="isDesktop ? 'lg' : 'md'"
+      @click="scrollToContact"
       />
     </div>
   </div>
@@ -22,7 +23,12 @@ export default {
   computed: {
   isDesktop () {
     return this.$q.screen.gt.sm
-  }
+    }
+  },
+  methods: {
+    scrollToContact () {
+      this.$emit('onScrollElement', 'contact-us')
+    }
   }
 }
 </script>

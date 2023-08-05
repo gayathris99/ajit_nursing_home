@@ -15,6 +15,7 @@
             <q-btn
             color="secondary"
             label="Make an appointment"
+            @click="scrollToContact"
             no-caps
             rounded
             class="fs-20 btn-fixed-width"/>
@@ -38,6 +39,7 @@
         <q-btn
           color="secondary"
           label="Make an appointment"
+          @click="scrollToContact"
           no-caps
           rounded
           class="fs-20 q-mt-md btn-fixed-width font-overlock"/>
@@ -59,6 +61,11 @@ export default {
       return this.$q.screen.gt.sm
     }
   },
+  methods: {
+    scrollToContact () {
+      this.$emit('onScrollElement', 'contact-us')
+    }
+  }
 }
 </script>
 

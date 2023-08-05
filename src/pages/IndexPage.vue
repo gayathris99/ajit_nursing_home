@@ -1,13 +1,15 @@
 <template>
   <q-page>
-    <hero-section/>
+    <hero-section
+    @onScrollElement="onScrollElement"/>
     <hero-navbar/>
     <why-choseus/>
     <our-doctors/>
-    <make-appointment/>
+    <make-appointment
+    @onScrollElement="onScrollElement"/>
     <our-testimonials/>
     <our-blog/>
-    <contact-us/>
+    <contact-us id="contact-us"/>
   </q-page>
 </template>
 
@@ -31,6 +33,15 @@ export default {
     OurTestimonials,
     OurBlog,
     ContactUs
+  },
+  methods: {
+    onScrollElement (el) {
+      const elementPosition = document.getElementById(el).offsetTop;
+      window.scrollTo({
+        top: elementPosition - 120,
+        behavior: "smooth",
+      });
+    }
   }
 }
 </script>
