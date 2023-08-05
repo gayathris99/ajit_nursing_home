@@ -25,7 +25,7 @@
     <div v-if="isMobile" class="q-mb-lg mobile-blog">
       <q-card v-for="(blog, key) in blogs" :key="key" flat class="q-my-sm">
         <q-card-section class="row items-center justify-between q-py-md">
-          <div class="col-8 font-overpass">
+          <div class="col-6 font-overpass">
             <div class="text-uppercase text-bold text-primary">{{ blog.category }}</div>
              <div class="q-mt-md fs-20 blog-title text-primary">{{ blog.title }}</div>
              <div class="fs-12" style="color:#646464">Medically reviewed by Abhishek, MBBS</div>
