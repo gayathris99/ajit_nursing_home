@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div :class="isMobile ? 'bg-greyish': ''">
     <div class="font-oxygen text-primary fs-16 fw-700 padding-left" :class="isMobile ? 'q-pt-md': 'q-pt-xl'">OUR DOCTORS</div>
     <div class="row justify-between  font-radley text-primary padding-x-axis">
       <div class="fw-600 q-mt-sm title">Specialist obgyne, <br/>pediatricians team</div>
-      <div class="text-justify description q-pb-xl q-mt-md">Has a team of the best specialist doctors in the field of obstetrics & gynaecology as well as paediatricians. In addition, we also have several other specialists.</div>
+      <div class="text-justify description q-mt-md" :class="isMobile ? 'q-pb-md': 'q-pb-xl'">Has a team of the best specialist doctors in the field of obstetrics & gynaecology as well as paediatricians. In addition, we also have several other specialists.</div>
       <!-- Desktop and Tablet Swiper -->
       <swiper
       v-if="isDesktop || isTablet"
@@ -24,7 +24,19 @@
         <div class="fs-14">{{doctor.experience}}</div>
       </swiper-slide>
       </swiper>
-
+    </div>
+    <div v-if="isMobile">
+      <q-card v-for="(doctor, key) in doctors" :key="key" class="q-my-xs font-overlock" flat>
+        <q-card-section class="row justify-around items-center q-px-md">
+          <q-img src="~assets/checkdoctor.svg" alt=""/>
+          <div class="col-6">
+            <div class="text-black q-mt-sm fs-18">{{doctor.name}}</div>
+            <div class="fs-14">{{doctor.qualification}}</div>
+            <div class="fs-14">{{doctor.position}}</div>
+            <div class="fs-14">{{doctor.experience}}</div>
+          </div>
+        </q-card-section>
+      </q-card>
     </div>
   </div>
 </template>
@@ -137,12 +149,10 @@ export default {
   max-width: 250px;
 }
 
-.swiper-button-prev {
-    color: red;
+.bg-greyish {
+  background-color: #f6f6f6;
 }
-
-.swiper-button-next {
-    color: #000;
+.q-card .q-img {
+  max-width: 130px;
 }
-
 </style>
