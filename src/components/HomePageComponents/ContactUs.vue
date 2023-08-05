@@ -40,10 +40,16 @@
               label="Make an appointment"
               type="submit"
               @click="createAppointment"
+              :loading="makingAppointment"
               no-caps
               dense
               rounded
-              class="fs-20 q-mt-md btn-fixed-width font-overlock"/>
+              class="fs-20 q-mt-md btn-fixed-width font-overlock">
+                <template v-slot:loading>
+                  <q-spinner class="on-right" />
+                  Make an appointment
+                </template>
+              </q-btn>
             </div>
             </div>
           </div>
@@ -88,13 +94,19 @@
           <div class="row justify-center">
             <q-btn
             color="secondary"
+            :loading="makingAppointment"
             label="Make an appointment"
             type="submit"
             @click="createAppointment"
             no-caps
             dense
             rounded
-            class="fs-20 q-mt-lg btn-fixed-width font-overlock"/>
+            class="fs-20 q-mt-lg btn-fixed-width font-overlock">
+              <template v-slot:loading>
+                <q-spinner class="on-right" />
+                    Make an appointment
+                </template>
+            </q-btn>
           </div>
           </div>
         </div>
@@ -108,7 +120,7 @@
           </div>
           <div class="q-mt-sm font-petrona q-pa-sm text-primary text-center">
             <div class="fs-18 fw-500 q-mb-md">
-              We have received your details. Our team members will contact you shortly to confirm your appointment.
+              Hi {{fullName}}, we have received your details for your appointment on <b>{{date}}</b>. Our team members will contact you shortly to confirm your appointment.
             </div>
             <i>
               "Good health and good sense are two of life’s greatest blessings."
@@ -135,6 +147,19 @@ export default {
       return this.$q.screen.gt.sm
     }
   },
+  watch: {
+    showPopup: {
+      handler (newVal, oldVal) {
+        if (oldVal && !newVal) {
+          this.fullName = ''
+          this.email = ''
+          this.date = ''
+          this.contactNumber = ''
+          this.reasonForVisit = ''
+        }
+      }
+    }
+  },
   data () {
     return {
       fullName: '',
@@ -142,7 +167,8 @@ export default {
       email: '',
       appointmentReason: '',
       date: '',
-      showPopup: false
+      showPopup: false,
+      makingAppointment: false
     }
   },
   methods: {
@@ -161,6 +187,7 @@ export default {
       return
       }
       try {
+        this.makingAppointment = true
         const payload = {
           fullName: this.fullName,
           phoneNumber: this.contactNumber,
@@ -169,8 +196,8 @@ export default {
           appointmentDate: '2023-08-26',
           emailAddress: this.email
         }
-        const result = await this.makeAppointment(payload)
-        console.log(result)
+        const { data: { message }} = await this.makeAppointment(payload)
+        if (message) this.showPopup = true
       } catch (error) {
         this.$q.notify({
           message: "Something went wrong, please try again",
@@ -178,6 +205,8 @@ export default {
           position: "top",
           icon: "warning",
         });
+      } finally {
+        this.makingAppointment = false
       }
     },
     onDateInputClick () {
