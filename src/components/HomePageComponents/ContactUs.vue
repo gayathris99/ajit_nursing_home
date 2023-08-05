@@ -165,7 +165,8 @@ export default {
           fullName: this.fullName,
           phoneNumber: this.contactNumber,
           reasonForVisit: this.appointmentReason,
-          appointmentDate: this.date,
+          // appointmentDate: this.date,
+          appointmentDate: '2023-08-26',
           emailAddress: this.email
         }
         const result = await this.makeAppointment(payload)

@@ -9,13 +9,13 @@
         <q-card rounded class="q-pa-sm">
           <q-card-section>
             <div class="font-radley fs-20 text-primary"><q-icon name="format_quote"></q-icon>{{ review.title }}</div>
-            <div class="font-roboto-slab q-mt-md text-primary">{{ review.description }}</div>
+            <div class="font-roboto-slab q-mt-md text-primary" style="min-height: 70px">{{ review.description }}</div>
             <div class="q-mt-lg row items-center q-gutter-x-md">
               <div class="row items-center">
                 <template v-for="(rating, index) in review.rating" :key="index">
                   <q-icon name="grade" size="sm" color="warning"/>
                 </template>
-                <div class="text-primary fs-18 font-roboto-slab q-pl-sm q-mb-sm"> - {{ review.name }}</div>
+                <div class="text-primary fs-18 font-roboto-slab q-pl-sm q-mb-sm"> - {{ review.clientName }}</div>
               </div>
             </div>
           </q-card-section>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'OurTestimonials',
   computed: {
@@ -41,22 +42,44 @@ export default {
       return this.$q.screen.lt.sm
     },
   },
+  methods: {
+    ...mapActions({
+      getReviews: 'nursingHome/getReviews'
+    }),
+    async callReviews () {
+      try {
+        const { data } = await this.getReviews()
+        this.reviews = data.slice(0,2)
+      } catch (error) {
+        this.$q.notify({
+          message: "Something went wrong, please try again",
+          color: "red",
+          position: "top",
+          icon: "warning",
+        });
+      }
+    }
+  },
+  mounted () {
+    this.callReviews()
+  },
   data () {
     return {
-      reviews: [
-        {
-          title: 'Very Satisfying',
-          description: 'pregnancy check-up and delivery experience, from the early weeks of pregnancy until delivery was very well served”',
-          name: 'Sunita J',
-          rating: 5
-        },
-        {
-          title: 'Satisfied experience',
-          description: 'pregnancy check-up and delivery experience, from the early weeks of pregnancy until delivery was very well served” ',
-          name: 'Ramachandra Rao',
-          rating: 5
-        },
-      ]
+      // reviews: [
+      //   {
+      //     title: 'Very Satisfying',
+      //     description: 'pregnancy check-up and delivery experience, from the early weeks of pregnancy until delivery was very well served”',
+      //     name: 'Sunita J',
+      //     rating: 5
+      //   },
+      //   {
+      //     title: 'Satisfied experience',
+      //     description: 'pregnancy check-up and delivery experience, from the early weeks of pregnancy until delivery was very well served” ',
+      //     name: 'Ramachandra Rao',
+      //     rating: 5
+      //   },
+      // ]
+      reviews: []
     }
   }
 }
