@@ -148,10 +148,6 @@ export default {
 .swiper-slide .q-img {
   max-width: 250px;
 }
-
-.bg-greyish {
-  background-color: #f6f6f6;
-}
 .q-card .q-img {
   max-width: 130px;
 }
