@@ -177,7 +177,7 @@ export default {
     }),
     async createAppointment (e) {
       e.preventDefault()
-      if (!this.fullName && !this.contactNumber && !this.date) {
+      if (!this.fullName.length || !this.contactNumber.length || !this.date.length) {
         this.$q.notify({
           message: "Please fill in all the fields marked with *",
           color: "red",
@@ -185,28 +185,29 @@ export default {
           icon: "warning",
         });
       return
-      }
-      try {
-        this.makingAppointment = true
-        const payload = {
-          fullName: this.fullName,
-          phoneNumber: this.contactNumber,
-          reasonForVisit: this.appointmentReason,
-          // appointmentDate: this.date,
-          appointmentDate: '2023-08-26',
-          emailAddress: this.email
+      } else {
+        try {
+          this.makingAppointment = true
+          const payload = {
+            fullName: this.fullName,
+            phoneNumber: this.contactNumber,
+            reasonForVisit: this.appointmentReason,
+            // appointmentDate: this.date,
+            appointmentDate: '2023-08-26',
+            emailAddress: this.email
+          }
+          const { data: { message }} = await this.makeAppointment(payload)
+          if (message) this.showPopup = true
+        } catch (error) {
+          this.$q.notify({
+            message: "Something went wrong, please try again",
+            color: "red",
+            position: "top",
+            icon: "warning",
+          });
+        } finally {
+          this.makingAppointment = false
         }
-        const { data: { message }} = await this.makeAppointment(payload)
-        if (message) this.showPopup = true
-      } catch (error) {
-        this.$q.notify({
-          message: "Something went wrong, please try again",
-          color: "red",
-          position: "top",
-          icon: "warning",
-        });
-      } finally {
-        this.makingAppointment = false
       }
     },
     onDateInputClick () {
