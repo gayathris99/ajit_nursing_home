@@ -8,12 +8,12 @@
       </div>
       <div class="row items-center q-gutter-md fs-16 text-bold" v-if="isDesktop">
         <div class="cursor-pointer">About Us</div>
-        <div class="cursor-pointer">Pregnancy</div>
-        <div class="cursor-pointer">Getting Pregnant</div>
-        <div class="cursor-pointer">Tools</div>
-        <div class="cursor-pointer">Life as a Parent?</div>
-        <div class="cursor-pointer">Gynaecology</div>
-        <div class="cursor-pointer">News</div>
+        <div class="cursor-pointer" @click="comingSoon">Pregnancy</div>
+        <div class="cursor-pointer" @click="comingSoon">Getting Pregnant</div>
+        <div class="cursor-pointer" @click="comingSoon">Tools</div>
+        <div class="cursor-pointer" @click="comingSoon">Life as a Parent?</div>
+        <div class="cursor-pointer" @click="comingSoon">Gynaecology</div>
+        <div class="cursor-pointer" @click="comingSoon">News</div>
       </div>
     </div>
     <q-drawer v-if="!isDesktop"
@@ -24,12 +24,12 @@
       </div>
       <div class="column q-gutter-md text-bold q-mt-sm q-pa-md">
         <div class="cursor-pointer">About Us</div>
-        <div class="cursor-pointer">Pregnancy</div>
-        <div class="cursor-pointer">Getting Pregnant</div>
-        <div class="cursor-pointer">Tools</div>
-        <div class="cursor-pointer">Life as a Parent?</div>
-        <div class="cursor-pointer">Gynaecology</div>
-        <div class="cursor-pointer">News</div>
+        <div class="cursor-pointer" @click="comingSoon">Pregnancy</div>
+        <div class="cursor-pointer" @click="comingSoon">Getting Pregnant</div>
+        <div class="cursor-pointer" @click="comingSoon">Tools</div>
+        <div class="cursor-pointer" @click="comingSoon">Life as a Parent?</div>
+        <div class="cursor-pointer" @click="comingSoon">Gynaecology</div>
+        <div class="cursor-pointer" @click="comingSoon">News</div>
       </div>
     </q-drawer>
   </q-header>
@@ -46,6 +46,13 @@ export default {
   methods: {
     openDrawer () {
       this.openMenu = true
+    },
+    comingSoon () {
+      this.$q.notify({
+        message: "We are working on it, Stay tuned! :)",
+        color: "green",
+        position: "top"
+      });
     }
   },
   computed: {

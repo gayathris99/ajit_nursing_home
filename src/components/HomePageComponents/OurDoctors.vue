@@ -16,24 +16,24 @@
       :modules="modules"
       class="mySwiper"
     >
-      <swiper-slide class="q-pt-md q-pb-xl font-overlock column" v-for="(doctor,key) in doctors" :key="key">
-        <q-img src="~assets/checkdoctor.svg" alt=""/>
-        <div class="text-black q-mt-sm fs-18">{{doctor.name}}</div>
-        <div class="fs-14">{{doctor.qualification}}</div>
-        <div class="fs-14">{{doctor.position}}</div>
-        <div class="fs-14">{{doctor.experience}}</div>
+      <swiper-slide class="q-pt-md q-pb-xl font-overlock column" v-for="(doctor,key) in doctors" :key="key" @click="consoledoc(doctor)">
+        <q-img :src="doctor.profileImage" alt=""/>
+        <div class="text-black q-mt-sm fs-18">{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</div>
+        <div class="fs-14">{{doctor.education}}</div>
+        <div class="fs-14">{{doctor.profilesShowcase}}</div>
+        <div class="fs-14">with {{doctor.yearsOfExperience }} years experience overall</div>
       </swiper-slide>
       </swiper>
     </div>
     <div v-if="isMobile">
       <q-card v-for="(doctor, key) in doctors" :key="key" class="q-my-xs font-overlock" flat>
         <q-card-section class="row justify-around items-center q-px-md">
-          <q-img src="~assets/checkdoctor.svg" alt=""/>
+          <q-img :src="doctor.profileImage" alt=""/>
           <div class="col-6">
-            <div class="text-black q-mt-sm fs-18">{{doctor.name}}</div>
-            <div class="fs-14">{{doctor.qualification}}</div>
-            <div class="fs-14">{{doctor.position}}</div>
-            <div class="fs-14">{{doctor.experience}}</div>
+            <div class="text-black q-mt-sm fs-18">{{doctor.firstName}} {{doctor.lastName}}</div>
+            <div class="fs-14">{{doctor.education}}</div>
+            <div class="fs-14">{{doctor.profilesShowcase}}</div>
+            <div class="fs-14">with {{doctor.yearsOfExperience }} years experience overall</div>
           </div>
         </q-card-section>
       </q-card>
@@ -52,30 +52,12 @@
 
   // import required modules
   import { Navigation, Pagination } from 'swiper/modules';
+import { mapActions } from 'vuex';
 export default {
   name: 'OurDoctors',
   data () {
     return {
-      doctors: [
-        {
-          name: 'Dr. Gayathri S Bane',
-          qualification: 'MBBS, MD - Obstetrics & Gynaecology',
-          position: 'Obstetrician , Gynaecologist',
-          experience: 'with 30 years experience overall'
-        },
-        {
-          name: 'Dr. Shrimant.S.Bane',
-          qualification: 'MBBS, MS - General Surrgery',
-          position: 'General Surgeon',
-          experience: 'with 33 years experience overall'
-        },
-        {
-          name: 'Dr. Abhishek S Bane',
-          qualification: 'MBBS, MS - General Surrgery',
-          position: 'General Surgeon',
-          experience: 'with 7 years experience overall'
-        }
-      ]
+      doctors: []
     }
   },
   computed: {
@@ -101,6 +83,30 @@ export default {
       modules: [Pagination, Navigation],
     };
   },
+  methods: {
+    consoledoc (doc) {
+      console.log(doc)
+    },
+    ...mapActions({
+      getDoctors: 'nursingHome/getDoctors'
+    }),
+    async fetchDoctors () {
+      try {
+        const { data } = await this.getDoctors()
+        this.doctors = data
+      } catch (error) {
+          this.$q.notify({
+            message: "Something went wrong, please try again",
+            color: "red",
+            position: "top",
+            icon: "warning",
+          });
+      }
+    }
+  },
+  mounted () {
+    this.fetchDoctors()
+  }
 }
 </script>
 

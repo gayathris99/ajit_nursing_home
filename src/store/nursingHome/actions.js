@@ -30,3 +30,13 @@ export async function getFAQs({ commit, dispatch }) {
     throw (error)
   }
 }
+export async function getDoctors({ commit, dispatch }) {
+  try {
+    const data = await axios.get(
+      `${process.env.BASE_URL}/doctors`
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
