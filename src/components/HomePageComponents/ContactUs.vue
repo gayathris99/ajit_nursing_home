@@ -129,6 +129,44 @@
         </q-card-section>
       </q-card>
     </q-dialog>
+    <div class="bg-greyish">
+      <div class="padding-left font-radley text-primary fw-600 title q-pt-lg">Contact Us</div>
+      <div class=" padding-left padding-right row justify-between align-start items-start text-primary font-petrona q-pb-lg q-gutter-lg q-px-md q-pt-md">
+        <div>
+          <div class="row items-center q-gutter-x-sm">
+            <q-icon name="call" size="sm"/>
+            <div class="fs-20 fw-500">REACH US AT</div>
+          </div>
+          <div class="fs-16 q-mt-sm">
+            <a href="tel:08046808371">080 4680 8371</a><br/>
+            <a href="tel:8951197936">89511 97936</a>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div class="row items-center  q-gutter-x-sm">
+              <q-icon name="location_on" size="sm"/>
+              <div class="fs-20 fw-500">LOCATION</div>
+            </div>
+          </div>
+          <div class="fs-16 q-mt-sm" style="max-width: 220px">
+            <a href="https://goo.gl/maps/C1FRWzovnftC26i17">
+            #640 Ajit Nursing Home, Dr.Bane Hospital Road, Raibag, Landmark: Beside HP Petrol Bunk, Raibag
+            </a>
+          </div>
+        </div>
+        <div>
+          <div class="row items-center q-gutter-x-sm">
+            <q-icon name="schedule" size="sm"/>
+            <div class="fs-20 fw-500">HOURS (Open 24/7)</div>
+          </div>
+          <div class="fs-16 q-mt-sm">
+            <div>Mon-Sun</div>
+            <div>12:00AM - 11:59PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -246,5 +284,15 @@ export default {
    @media only screen and (max-width: 1060px) and (min-width:1024px){
     width: 220px;
    }
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.padding-right {
+  padding-right: 48px;
+  @media only screen and (max-width: 799px) and (min-width:0px)  {
+    padding-right: 24px;
+  }
 }
 </style>
