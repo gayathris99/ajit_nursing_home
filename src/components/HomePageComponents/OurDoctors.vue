@@ -16,7 +16,7 @@
       :modules="modules"
       class="mySwiper"
     >
-      <swiper-slide class="q-pt-md q-pb-xl font-overlock column" v-for="(doctor,key) in doctors" :key="key" @click="consoledoc(doctor)">
+      <swiper-slide class="q-pt-md q-pb-xl font-overlock column" v-for="(doctor,key) in doctors" :key="key">
         <q-img :src="doctor.profileImage" alt=""/>
         <div class="text-black q-mt-sm fs-18">{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</div>
         <div class="fs-14">{{doctor.education}}</div>
@@ -84,9 +84,6 @@ export default {
     };
   },
   methods: {
-    consoledoc (doc) {
-      console.log(doc)
-    },
     ...mapActions({
       getDoctors: 'nursingHome/getDoctors'
     }),
