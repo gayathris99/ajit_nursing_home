@@ -7,7 +7,7 @@
     <div v-if="isTablet || isDesktop" class="tablet-desktop-blog">
       <div class="row q-mt-md q-pb-xl items-center q-gutter-lg q-px-md" :class="isMobile ? 'justify-center' : 'justify-evenly'">
         <template v-for="i in countBlog" :key="i">
-          <q-card rounded class="cursor-pointer">
+          <q-card @click="goToBlog(blogs[i-1]?.id)" rounded class="cursor-pointer">
             <q-card-section class="no-padding no-margin">
               <div>
                 <img :src="blogs[i-1]?.image.meta.download_url" alt="">
@@ -24,7 +24,7 @@
     </div>
     <div v-if="isMobile" class="q-mb-lg mobile-blog">
       <q-card v-for="(blog, key) in blogs" :key="key" flat class="q-my-sm">
-        <q-card-section class="row items-center justify-between q-py-md">
+        <q-card-section class="row items-center justify-between q-py-md" @click="goToBlog(blog.id)">
           <div class="col-6 font-overpass">
             <div class="text-uppercase text-bold text-primary">{{ blog.tag }}</div>
              <div class="q-mt-md fs-20 blog-title text-primary">{{ blog.title }}</div>
@@ -79,6 +79,15 @@ export default {
           icon: "warning",
         });
       }
+    },
+    goToBlog (id) {
+      console.log(id)
+      this.$router.push({
+        name: 'individual-blog',
+        params: {
+          id
+        }
+      })
     }
   },
   mounted () {

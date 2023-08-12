@@ -50,3 +50,13 @@ export async function getAllBlogs({ commit, dispatch }) {
     throw (error)
   }
 }
+export async function getBlog({ commit, dispatch }, { blogId }) {
+  try {
+    const data = await axios.get(
+      `https://anh.foxgloveteam.com/api/v2/pages/${blogId}/`
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
