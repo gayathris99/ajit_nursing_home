@@ -10,10 +10,10 @@
           <q-card rounded class="cursor-pointer">
             <q-card-section class="no-padding no-margin">
               <div>
-                <img src="~assets/blog1.svg" alt="">
+                <img :src="blogs[i-1]?.image.meta.download_url" alt="">
               </div>
               <div class="q-pa-md font-overpass">
-                <div class="text-uppercase text-bold text-primary">{{ blogs[i-1]?.category }}</div>
+                <div class="text-uppercase text-bold text-primary">{{ blogs[i-1]?.tag }}</div>
                 <div class="q-mt-md fs-20 blog-title text-primary">{{ blogs[i-1]?.title }}</div>
                 <div class="fs-12" style="color:#646464">Medically reviewed by Abhishek, MBBS</div>
               </div>
@@ -26,11 +26,11 @@
       <q-card v-for="(blog, key) in blogs" :key="key" flat class="q-my-sm">
         <q-card-section class="row items-center justify-between q-py-md">
           <div class="col-6 font-overpass">
-            <div class="text-uppercase text-bold text-primary">{{ blog.category }}</div>
+            <div class="text-uppercase text-bold text-primary">{{ blog.tag }}</div>
              <div class="q-mt-md fs-20 blog-title text-primary">{{ blog.title }}</div>
              <div class="fs-12" style="color:#646464">Medically reviewed by Abhishek, MBBS</div>
           </div>
-          <q-img src="~assets/blog1.svg" class="rounded-borders"/>
+          <q-img :src="blog?.image.meta.download_url" class="rounded-borders"/>
         </q-card-section>
       </q-card>
     </div>
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'OurBlog',
   computed: {
@@ -62,28 +63,30 @@ export default {
       return this.isTablet ? 2 : 3
     }
   },
+  methods: {
+    ...mapActions({
+      getAllBlogs: 'nursingHome/getAllBlogs'
+    }),
+    async fetchAllBlogs () {
+      try {
+        const { data: { items }} = await this.getAllBlogs()
+        this.blogs = items
+      } catch (error) {
+        this.$q.notify({
+          message: "Something went wrong, please try again",
+          color: "red",
+          position: "top",
+          icon: "warning",
+        });
+      }
+    }
+  },
+  mounted () {
+    this.fetchAllBlogs()
+  },
   data () {
     return {
-      blogs: [
-        {
-          category: 'PREGNANCY',
-          title: 'The First Two Weeks of Pregnancy',
-          reviewed: 'Medically reviewed by Abhishek, MBBS',
-          img: '~assets/blog1.svg'
-        },
-        {
-          category: 'PARENTING',
-          title: 'Deciding Whether or Not to Work Until next time',
-          reviewed: 'Fact checked by Shrimanth MBBS,MS - General Surgery',
-          img: '~assets/blog2.svg'
-        },
-        {
-          category: 'Weeks and Trimesters',
-          title: 'A Partner\'s Guide to the First Trimester',
-          reviewed: 'Fact checked by Abhishek, MBBS',
-          img: '~assets/blog3.svg'
-        },
-      ]
+      blogs: []
     }
   }
 }

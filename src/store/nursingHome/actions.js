@@ -40,3 +40,13 @@ export async function getDoctors({ commit, dispatch }) {
     throw (error)
   }
 }
+export async function getAllBlogs({ commit, dispatch }) {
+  try {
+    const data = await axios.get(
+     'https://anh.foxgloveteam.com/api/v2/pages/?type=blog.BlogPage&fields=tag%2Cdate%2Cintro%2Cimage'
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}

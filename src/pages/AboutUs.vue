@@ -4,7 +4,7 @@
      <div class="row justify-center q-mt-md">
         <q-img src="~assets/hospitalImage.svg" alt=""/>
      </div>
-     <div class="q-mt-md row font-overlock justify-evenly q-gutter-md items-center vision-mission">
+     <div class="q-mt-md row font-overlock justify-evenly q-gutter-md items-center vision-mission text-primary">
       <div class="column items-center fs-20 fw-500">
         <q-img src="~assets/ourVision.svg" :width="isMobile ? '90px': '120px'"/>
         <div class="text-underline text-center fw-700">OUR VISION</div>
