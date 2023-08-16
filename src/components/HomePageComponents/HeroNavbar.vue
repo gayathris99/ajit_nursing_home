@@ -4,18 +4,18 @@
     <div class="row items-center text-white cursor-pointer q-gutter-x-xl">
       <div class="row items-center q-gutter-x-xs">
         <q-icon name="near_me" size="sm"></q-icon>
-        <div class="fs-20 q-pr-sm q-pl-xs">Get Directions</div>
+        <a href="https://goo.gl/maps/C1FRWzovnftC26i17" target="_blank" class="fs-20 q-pr-sm q-pl-xs">Get Directions</a>
       </div>
       <div class="border-right text-navbar">&nbsp;</div>
     </div>
     <div class="row items-center text-white cursor-pointer q-gutter-x-xl">
       <div class="row items-center q-gutter-x-xs">
         <q-icon name="phone_in_talk" size="sm"></q-icon>
-        <div class="fs-20 q-pr-sm q-pl-xs">Call Now</div>
+        <a href="tel:08046808371" class="fs-20 q-pr-sm q-pl-xs">Call Now</a>
       </div>
       <div class="border-right text-navbar">&nbsp;</div>
     </div>
-    <div class="row items-center text-white cursor-pointer q-gutter-x-xl">
+    <div class="row items-center text-white cursor-pointer q-gutter-x-xl" @click="scrollToContact">
       <div class="row items-center q-gutter-x-xs">
         <q-icon name="bookmarks" size="sm"></q-icon>
         <div class="fs-20 q-pr-sm q-pl-xs">Book an Appointment</div>
@@ -45,6 +45,11 @@ export default {
     isDesktop () {
       return this.$q.screen.gt.sm
     }
+  },
+  methods: {
+    scrollToContact () {
+      this.$emit('onScrollElement', 'contact-us')
+    }
   }
 }
 </script>
@@ -58,5 +63,9 @@ export default {
 }
 .border-right {
   border-right: 1px solid white;
+}
+a {
+  color: inherit;
+  text-decoration: none;
 }
 </style>

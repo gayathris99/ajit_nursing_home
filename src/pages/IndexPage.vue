@@ -2,7 +2,8 @@
   <q-page>
     <hero-section
     @onScrollElement="onScrollElement"/>
-    <hero-navbar/>
+    <hero-navbar
+    @onScrollElement="onScrollElement"/>
     <why-choseus/>
     <our-doctors/>
     <make-appointment

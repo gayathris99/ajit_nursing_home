@@ -153,7 +153,7 @@
             <q-icon name="location_on" size="sm"/>
               <div class="fs-20 fw-600">Location</div>
               <div class="location text-center">
-                <a href="https://goo.gl/maps/C1FRWzovnftC26i17">
+                <a href="https://goo.gl/maps/C1FRWzovnftC26i17" target="_blank">
                 #640 Ajit Nursing Home, Dr.Bane Hospital Road, Raibag, Landmark: Beside HP Petrol Bunk, Raibag
                 </a>
               </div>
