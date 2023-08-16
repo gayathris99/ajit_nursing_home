@@ -1,17 +1,17 @@
 <template>
-  <div :class="isMobile || isTablet ? 'bg-footer' : ''">
-    <div class="row items-center q-gutter-md" :class="isMobile ? 'justify-center q-pa-sm' : 'justify-between q-pa-sm'">
+  <div class="bg-footer text-white font-inter">
+    <div class="row items-center q-gutter-md" :class="isMobile ? 'justify-center q-pa-sm' : isDesktop ? 'justify-between q-pa-sm' :'justify-evenly q-pa-sm'">
       <div class="row items-center q-gutter-sm">
         <img src="~assets/Logo128.png" width="40" alt="">
-        <div class="font-petrona text-primary fs-18 text-bold">Ajit <br/> Nursing Home</div>
+        <div class="text-white fs-16 fw-400">Ajit Nursing Home</div>
       </div>
-      <div class="font-petrona fs-18" :class="isMobile ? 'text-center' : ''">2023 Ajith Nursing Home. All right reserved</div>
-      <div class="q-gutter-x-md row items-center font-petrona fs-18" >
+      <div class="fs-16" :class="isMobile ? 'text-center' : ''">2023 Ajith Nursing Home. All right reserved</div>
+      <div class="q-gutter-x-md row items-center fs-16" >
         <div class="cursor-pointer">Privacy</div>
         <div class="cursor-pointer">FAQs</div>
         <div class="cursor-pointer">Terms</div>
       </div>
-      <div class="q-gutter-x-md row items-center">
+      <div class="q-gutter-x-md justify-center row items-center">
         <img src="~assets/brand/facebook.svg" class="cursor-pointer" alt="facebook" width="30">
         <img src="~assets/brand/instagram.svg" class="cursor-pointer" alt="instagram" width="25">
         <img src="~assets/brand/LinkedIn.svg" class="cursor-pointer" alt="linkedin" width="30">
@@ -31,6 +31,9 @@ export default {
     },
     isTablet () {
       return this.$q.screen.gt.xs && this.$q.screen.lt.md
+    },
+    isDesktop () {
+      return this.$q.screen.gt.sm
     }
   },
 }
@@ -38,6 +41,6 @@ export default {
 
 <style lang="scss" scoped>
 .bg-footer {
-  background-image: linear-gradient(to right, #C2E2E1 , #CFECE8, #DEEFEE);
+  background: #3363AC;
 }
 </style>
