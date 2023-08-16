@@ -8,25 +8,26 @@
       </div>
       <div class="q-mt-xl col-6">
         <div>
-          <div class="fs-56 font-orelega text-primary q-mt-sm">Collaborative <br/>care focused on you!</div>
-          <div class="q-mt-md font-overlock fs-20 fs-500 para-block">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et vehicula justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</div>
+          <div class="fs-60 font-oxygen fw-400 text-primary q-mt-sm">Collaborative <br/>care focused on you!</div>
+          <div class="q-mt-md font-oxygen color-primary-two  fs-20 fw-400 para-block">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et vehicula justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</div>
 
-          <div class="row items-center q-gutter-md font-overlock q-my-xl">
+          <div class="row items-center q-gutter-md font-inter fw-500 q-my-xl">
             <q-btn
             color="secondary"
             label="Make an appointment"
             @click="scrollToContact"
             no-caps
             rounded
-            class="fs-20 btn-fixed-width"/>
+            class="btn-fixed-width fs-18 q-py-sm"/>
 
             <q-btn
             outline
             color="secondary"
+            style="background-color: white"
             label="Promo"
             no-caps
             rounded
-            class="fs-20 btn-fixed-width"/>
+            class="btn-fixed-width fs-18 q-py-sm"/>
           </div>
         </div>
       </div>
@@ -34,16 +35,16 @@
     <div v-else class="tab-mobile">
       <img v-if="isTablet" src="~assets/heroImage.svg" alt="">
       <img v-if="isMobile" src="~assets/heroMobile.svg" alt="">
-      <div class="content column justify-center items-center">
-        <div class="fs-40 font-orelega text-primary q-mt-sm">Collaborative care focused on you!</div>
-        <div class="q-mt-md font-overlock fs-20 fs-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et vehicula justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</div>
+      <div class="content">
+        <div class="fs-36 font-oxygen fw-400 text-primary q-mt-sm">Collaborative care focused on you!</div>
+        <div class="q-mt-sm font-oxygen fs-20 fs-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et vehicula justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</div>
         <q-btn
           color="secondary"
           label="Make an appointment"
           @click="scrollToContact"
           no-caps
           rounded
-          class="fs-20 q-mt-md btn-fixed-width font-overlock"/>
+          class="fs-18 q-mt-md btn-fixed-width font-inter"/>
       </div>
     </div>
   </div>
@@ -79,7 +80,7 @@ export default {
   max-height: 679px;
 }
 .para-block {
-  max-width: 450px;
+  max-width: 500px;
 }
 .btn-fixed-width {
   width: 250px;
