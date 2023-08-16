@@ -1,10 +1,17 @@
 <template>
   <div :class="isMobile ? 'bg-greyish': ''">
-    <div class="font-oxygen text-primary fs-16 fw-700 padding-left" :class="isMobile ? 'q-pt-md': 'q-pt-xl'">OUR BLOGS</div>
-    <div class="padding-left font-radley text-primary">
-      <div class="fw-600 q-mt-sm title">See the latest <br/> news we present</div>
+    <div class="font-inter text-primary fs-24 fw-600 padding-left" :class="isMobile ? 'q-pt-md': 'q-pt-xl'">Our Blogs</div>
+    <div class="padding-left font-oxygen text-primary">
+      <div class="fw-400 q-mt-sm title">See the latest news we present</div>
     </div>
-    <div v-if="isTablet || isDesktop" class="tablet-desktop-blog">
+    <div class="row justify-between items-center">
+      <div v-for="(blog, key) in blogs" :key="key" class="col-md-6 col-sm-12 col-sm-12">
+        <div v-if="isTablet || isDesktop">
+          <q-img :src="blog?.image?.meta?.download_url" crossorigin="desktop-image"/>
+        </div>
+      </div>
+    </div>
+    <!-- <div v-if="isTablet || isDesktop" class="tablet-desktop-blog">
       <div class="row q-mt-md q-pb-xl items-center q-gutter-lg q-px-md" :class="isMobile ? 'justify-center' : 'justify-evenly'">
         <template v-for="i in countBlog" :key="i">
           <q-card @click="goToBlog(blogs[i-1]?.id)" rounded class="cursor-pointer">
@@ -33,13 +40,13 @@
           <q-img :src="blog?.image.meta.download_url" class="rounded-borders"/>
         </q-card-section>
       </q-card>
-    </div>
+    </div> -->
     <div class="row justify-center">
       <q-btn
       no-caps
       rounded
-      class="fs-20 q-mb-xl font-overlock text-bold"
-      style="background: #21222B; color: white"
+      class="fs-18 q-mb-xl q-px-lg font-inter fw-500"
+      style="background: #3363AC; color: white"
       label="See More"/>
     </div>
   </div>
@@ -128,16 +135,16 @@ export default {
     height: 75px;
   }
 }
-.q-btn {
-  width: 220px;
-  @media only screen and (max-width: $breakpoint-xs-max) {
-    widows: 200px;
-  }
-}
+
 .mobile-blog {
   .q-img {
     max-width: 140px;
   }
+}
+
+.desktop-image {
+  widows: 160px;
+  height: 140px;
 }
 
 </style>
