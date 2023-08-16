@@ -2,46 +2,31 @@
   <div :class="isMobile ? 'bg-greyish': ''">
     <div class="font-inter text-primary fs-24 fw-600 padding-left" :class="isMobile ? 'q-pt-md': 'q-pt-xl'">Our Blogs</div>
     <div class="padding-left font-oxygen text-primary">
-      <div class="fw-400 q-mt-sm title">See the latest news we present</div>
+      <div class="fw-400 q-mt-sm title padding-right">See the latest news we present</div>
     </div>
-    <div class="row justify-between items-center">
-      <div v-for="(blog, key) in blogs" :key="key" class="col-md-6 col-sm-12 col-sm-12">
-        <div v-if="isTablet || isDesktop">
-          <q-img :src="blog?.image?.meta?.download_url" crossorigin="desktop-image"/>
+    <div class="row items-center justify-evenly q-gutter-y-lg padding-left q-mt-md">
+      <div class="col-md-6 col-sm-12 col-xs-12 cursor-pointer" v-for="(blog, key) in blogs" :key="key"  @click="goToBlog(blog.id)">
+        <div class="row items-center q-gutter-md" v-if="isDesktop || isTablet">
+           <img :src="blog?.image.meta.download_url" class="desktop-image"/>
+           <div class="column font-inter">
+              <div class="color-primary-two fs-12 fw-600">{{blog.tag}}</div>
+              <div class="color-primary-two fs-18 fw-600 blog-title">{{blog.title}}</div>
+              <div class="text-grey intro fs-12 ellipsis-2-lines">{{blog.intro}}</div>
+              <div class="color-primary-two fs-12 fw-600 q-mt-md">Fact Checked By</div>
+              <div class="fw-400 color-primary-two fs-12">Dr. Abhishek MBBS &#x2022; {{blog.date}}</div>
+           </div>
+        </div>
+        <div class="padding-right font-inter" v-if="isMobile" @click="goToBlog(blog.id)">
+          <img :src="blog?.image.meta.download_url" class="mobile-image"/>
+          <div class="color-primary-two fs-12 fw-600 q-mt-lg">{{blog.tag}}</div>
+          <div class="color-primary-two fs-18 fw-600">{{blog.title}}</div>
+          <div class="text-grey fs-12 ellipsis-2-lines q-mt-sm">{{blog.intro}}</div>
+          <div class="color-primary-two fs-12 fw-600 q-mt-md">Fact Checked By</div>
+          <div class="fw-400 color-primary-two fs-12">Dr. Abhishek MBBS &#x2022; {{blog.date}}</div>
         </div>
       </div>
     </div>
-    <!-- <div v-if="isTablet || isDesktop" class="tablet-desktop-blog">
-      <div class="row q-mt-md q-pb-xl items-center q-gutter-lg q-px-md" :class="isMobile ? 'justify-center' : 'justify-evenly'">
-        <template v-for="i in countBlog" :key="i">
-          <q-card @click="goToBlog(blogs[i-1]?.id)" rounded class="cursor-pointer">
-            <q-card-section class="no-padding no-margin">
-              <div>
-                <img :src="blogs[i-1]?.image.meta.download_url" alt="">
-              </div>
-              <div class="q-pa-md font-overpass">
-                <div class="text-uppercase text-bold text-primary">{{ blogs[i-1]?.tag }}</div>
-                <div class="q-mt-md fs-20 blog-title text-primary">{{ blogs[i-1]?.title }}</div>
-                <div class="fs-12" style="color:#646464">Medically reviewed by Abhishek, MBBS</div>
-              </div>
-            </q-card-section>
-          </q-card>
-        </template>
-      </div>
-    </div>
-    <div v-if="isMobile" class="q-mb-lg mobile-blog">
-      <q-card v-for="(blog, key) in blogs" :key="key" flat class="q-my-sm">
-        <q-card-section class="row items-center justify-between q-py-md" @click="goToBlog(blog.id)">
-          <div class="col-6 font-overpass">
-            <div class="text-uppercase text-bold text-primary">{{ blog.tag }}</div>
-             <div class="q-mt-md fs-20 blog-title text-primary">{{ blog.title }}</div>
-             <div class="fs-12" style="color:#646464">Medically reviewed by Abhishek, MBBS</div>
-          </div>
-          <q-img :src="blog?.image.meta.download_url" class="rounded-borders"/>
-        </q-card-section>
-      </q-card>
-    </div> -->
-    <div class="row justify-center">
+    <div class="row justify-center q-mt-xl">
       <q-btn
       no-caps
       rounded
@@ -78,6 +63,7 @@ export default {
       try {
         const { data: { items }} = await this.getAllBlogs()
         this.blogs = items
+        console.log(this.blogs)
       } catch (error) {
         this.$q.notify({
           message: "Something went wrong, please try again",
@@ -136,15 +122,49 @@ export default {
   }
 }
 
-.mobile-blog {
-  .q-img {
-    max-width: 140px;
+.mobile-image {
+  width: 100%;
+  height: 150px;
+  object-fit: center;
+  @media only screen and (max-width: 599px) and (min-width: 400px) {
+    height: 200px;
   }
 }
 
 .desktop-image {
-  widows: 160px;
+  width: 180px;
   height: 140px;
+  object-fit: center;
 }
 
+.intro {
+  max-width: 320px;
+  width: 200px;
+  @media only screen and (max-width: $breakpoint-sm-max) and (min-width: 731px) {
+    max-width: 500px;
+    width: 500px;
+  }
+  @media only screen and (max-width: 730px) and (min-width: 620px){
+    max-width: 400px;
+    width: 400px;
+  }
+  @media only screen and (max-width: 620px) and (min-width: 600px){
+    max-width: 350px;
+    width: 350px;
+  }
+}
+.blog-title {
+   @media only screen and (max-width: 1190px) and (min-width: 1024px) {
+      max-width: 250px;
+   }
+   @media only screen and (max-width: 730px) and (min-width: 600px) {
+    max-width: 200px;
+   }
+}
+.padding-right {
+  padding-right: 48px;
+  @media only screen and (max-width: 799px) and (min-width:0px)  {
+    padding-right: 24px;
+  }
+}
 </style>
