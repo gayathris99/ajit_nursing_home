@@ -7,7 +7,7 @@
       </div>
       <div class="fs-16" :class="isMobile ? 'text-center' : ''">2023 Ajith Nursing Home. All right reserved</div>
       <div class="q-gutter-x-md row items-center fs-16" >
-        <div class="cursor-pointer">Privacy</div>
+        <div class="cursor-pointer" @click="goTo('privacy')">Privacy</div>
         <div class="cursor-pointer" @click="goTo('faq')">FAQs</div>
         <div class="cursor-pointer" @click="goTo('terms')">Terms</div>
       </div>
