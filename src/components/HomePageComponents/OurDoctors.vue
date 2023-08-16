@@ -21,7 +21,7 @@
         <div class="q-mt-xs fs-14 color-grey font-inter fw-600 text-center">{{doctor.profilesShowcase}}</div>
         <div class="fs-12 color-grey font-inter fw-500 text-center">with {{doctor.yearsOfExperience }} years experience overall</div>
       </swiper-slide>
-      </swiper>
+    </swiper>
     <div v-if="isMobile">
       <q-card v-for="(doctor, key) in doctors" :key="key" class="q-my-xs" flat>
         <q-card-section class="row justify-around items-center q-px-md">
@@ -39,16 +39,14 @@
 </template>
 
 <script>
-  import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
 
-  // Import Swiper styles
-  import 'swiper/css';
+import 'swiper/css';
 
-  import 'swiper/css/pagination';
-  import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
-  // import required modules
-  import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 import { mapActions } from 'vuex';
 export default {
   name: 'OurDoctors',
