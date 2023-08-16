@@ -129,8 +129,50 @@
       </q-card>
     </q-dialog>
     <div class="bg-greyish">
-      <div class="padding-left font-radley text-primary fw-600 title q-pt-lg">Contact Us</div>
-      <div class=" padding-left padding-right row justify-between align-start items-start text-primary font-petrona q-pb-lg q-gutter-lg q-px-md q-pt-md">
+      <div class="font-oxygen text-primary">
+        <div class="fw-400 padding-left q-pt-md title">Contact us</div>
+      </div>
+      <div class="row justify-evenly items-center font-inter text-primary q-mt-lg q-pb-xl" :class="isDesktop ? '' : 'q-gutter-xl'" >
+        <!-- Contact -->
+        <div class="col-md-4 col-sm-4 col-xs-6">
+          <div class="column items-center">
+            <q-icon name="call" size="sm"/>
+            <div class="fs-20 fw-600">Reach out to us</div>
+            <div class="fs-16 q-mt-sm">
+              <a href="tel:08046808371">080 4680 8371</a>
+            </div>
+            <div class="fs-16">
+              <a href="tel:8951197936">+91 89511 97936</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="col-md-4 col-sm-4 col-xs-6">
+          <div class="column items-center">
+            <q-icon name="location_on" size="sm"/>
+              <div class="fs-20 fw-600">Location</div>
+              <div class="location text-center">
+                <a href="https://goo.gl/maps/C1FRWzovnftC26i17">
+                #640 Ajit Nursing Home, Dr.Bane Hospital Road, Raibag, Landmark: Beside HP Petrol Bunk, Raibag
+                </a>
+              </div>
+          </div>
+        </div>
+
+        <!-- Timings -->
+        <div class="col-md-4 col-sm-4 col-xs-6">
+          <div class="column items-center">
+            <q-icon name="schedule" size="sm"/>
+            <div class="fs-20 fw-600">Timings (open 24/7)</div>
+            <div class="fs-16 q-mt-sm text-center">
+              <div>Mon-Sun</div>
+              <div>12:00AM - 11:59PM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class=" padding-left padding-right row justify-between align-start items-start text-primary font-petrona q-pb-lg q-gutter-lg q-px-md q-pt-md">
         <div>
           <div class="row items-center q-gutter-x-sm">
             <q-icon name="call" size="sm"/>
@@ -164,7 +206,7 @@
             <div>12:00AM - 11:59PM</div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -282,8 +324,13 @@ export default {
   width: 90px;
 }
 a {
-  text-decoration: none;
   color: inherit;
+}
+.location {
+  max-width: 250px;
+  a {
+    text-decoration: none;
+  }
 }
 .padding-right {
   padding-right: 48px;
