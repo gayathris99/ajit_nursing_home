@@ -9,7 +9,7 @@
       <div class="q-gutter-x-md row items-center fs-16" >
         <div class="cursor-pointer">Privacy</div>
         <div class="cursor-pointer" @click="goTo('faq')">FAQs</div>
-        <div class="cursor-pointer">Terms</div>
+        <div class="cursor-pointer" @click="goTo('terms')">Terms</div>
       </div>
       <div class="q-gutter-x-md justify-center row items-center">
         <img src="~assets/brand/facebook.svg" class="cursor-pointer" alt="facebook" width="30">
