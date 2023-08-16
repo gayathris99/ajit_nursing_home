@@ -1,6 +1,6 @@
 <template>
   <div class="bg-footer text-white font-inter">
-    <div class="row items-center q-gutter-md" :class="isMobile ? 'justify-center q-pa-sm' : isDesktop ? 'justify-between q-pa-sm' :'justify-evenly q-pa-sm'">
+    <div class="row items-center q-gutter-x-md" :class="isMobile ? 'justify-center q-pa-sm q-gutter-y-sm' : isDesktop ? 'justify-between q-pa-sm' :'justify-evenly q-pa-sm'">
       <div class="row items-center q-gutter-sm">
         <img src="~assets/Logo128.png" width="40" alt="">
         <div class="text-white fs-16 fw-400">Ajit Nursing Home</div>
@@ -8,7 +8,7 @@
       <div class="fs-16" :class="isMobile ? 'text-center' : ''">2023 Ajith Nursing Home. All right reserved</div>
       <div class="q-gutter-x-md row items-center fs-16" >
         <div class="cursor-pointer">Privacy</div>
-        <div class="cursor-pointer">FAQs</div>
+        <div class="cursor-pointer" @click="goTo('faq')">FAQs</div>
         <div class="cursor-pointer">Terms</div>
       </div>
       <div class="q-gutter-x-md justify-center row items-center">
@@ -36,6 +36,13 @@ export default {
       return this.$q.screen.gt.sm
     }
   },
+  methods: {
+    goTo (name) {
+      this.$router.push({
+        name
+      })
+    }
+  }
 }
 </script>
 

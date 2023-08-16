@@ -1,5 +1,5 @@
 <template>
-  <q-header class="bg-header text-primary font-quicksand q-py-sm" :class="isDesktop ? 'q-px-xl': 'q-px-sm'">
+  <q-header class="text-primary font-quicksand q-py-sm" :class="[{ 'q-px-xl' : isDesktop, 'q-px-sm' : '!isDesktop', 'bg-header': isHomePage, 'bg-white-header': !isHomePage }]">
     <div class="row justify-between align-center">
       <div class="row items-center q-gutter-sm cursor-pointer">
         <q-icon name="menu" size="md" v-if="!isDesktop" class="text-primary cursor-pointer q-pr-sm" @click="openDrawer"/>
@@ -69,6 +69,9 @@ export default {
     },
     isDesktop () {
       return this.$q.screen.gt.sm
+    },
+    isHomePage () {
+      return this.$route.name === 'home'
     }
   },
 }
@@ -77,5 +80,8 @@ export default {
 <style lang="scss" scoped>
 .bg-header {
   background-image: linear-gradient(to right, #C2E2E1 , #CFECE8, #DEEFEE);
+}
+.bg-white-header {
+  background: #FFF;
 }
 </style>
