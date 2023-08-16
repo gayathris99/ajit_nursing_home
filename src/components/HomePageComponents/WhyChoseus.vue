@@ -1,10 +1,10 @@
 <template>
   <div class="bg-image">
-    <div class="font-oxygen text-primary fs-16 fw-700 padding-left" :class="isMobile ? 'q-pt-md': 'q-pt-xl'">WHY CHOSE US</div>
+    <div class="font-inter text-primary fw-600 padding-left" :class="isMobile ? 'q-pt-md fs-20': 'q-pt-xl fs-24'">Why Chose Us ?</div>
     <div class="check-row">
-      <div class="padding-left font-radley text-primary">
-        <div class="fw-600 q-mt-sm title">Clinic experts on <br/>obstetric, gynecologic.</div>
-        <div class="q-mt-md text-justify description q-pb-xl">Located in Raibag, our hospital stands as a beacon of healthcare within the community. With its state-of-the-art facilities and compassionate staff, it has garnered a reputation for delivering exceptional medical services. The hospital's commitment to patient care is evident in every aspect of its operation, making it a trusted institution among locals.</div>
+      <div class="padding-left font-oxygen text-primary col-sm-6 col-xs-12">
+        <div class="fw-400 fs-48 q-mt-sm title">Clinic experts on <br/>obstetric, gynecologic.</div>
+        <div class="q-mt-md text-justify description fw-400 q-pb-xl">Located in Raibag, our hospital stands as a beacon of healthcare within the community. With its state-of-the-art facilities and compassionate staff, it has garnered a reputation for delivering exceptional medical services. The hospital's commitment to patient care is evident in every aspect of its operation, making it a trusted institution among locals.</div>
       </div>
       <div class="image-section">
         <img src="~assets/pregnantcarryingchild.svg" alt="">
@@ -41,10 +41,10 @@ export default {
     width: 600px;
     }
     @media only screen and (max-width: 1099px) and (min-width:1000px){
-    width: 500px;
+    width: 475px;
     }
     @media only screen and (max-width: 999px) and (min-width:800px){
-    width: 475px;
+    width: 420px;
     }
     @media only screen and (max-width: 799px) and (min-width:500px) {
       width: 500px
@@ -58,7 +58,7 @@ export default {
   }
 }
 .description {
-  font-size: 20px;
+  font-size: 18px;
   max-width: 500px;
    @media only screen and (max-width: 1099px) and (min-width:1000px) {
     font-size: 16px;
