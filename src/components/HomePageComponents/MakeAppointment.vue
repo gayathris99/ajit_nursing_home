@@ -2,13 +2,13 @@
   <div class="container"></div>
   <div class="bg-bar" :class="isDesktop ? 'q-px-xl q-py-lg' : 'q-pa-md'">
     <div class="row justify-between items-center q-gutter-md make-appt">
-      <div class="text-white font-radley title text-bold">Want to make an appointment now?</div>
+      <div class="text-white font-inter title text-bold">Want to make an appointment now?</div>
       <q-btn
-      style="background: #D05757; color: white"
+      style="background: #3363AC; color: white"
       label="Make an appointment"
       rounded
       no-caps
-      class="font-overlock"
+      class="font-inter fs-18"
       :size="isDesktop ? 'lg' : 'md'"
       @click="scrollToContact"
       />
