@@ -4,7 +4,7 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-    <footer-component/>
+    <footer-component class="footer"/>
   </q-layout>
 </template>
 
@@ -19,3 +19,10 @@ export default {
   }
 }
 </script>
+
+
+<style lang="scss" scoped>
+.q-page-container {
+  min-height: 100vh;
+}
+</style>

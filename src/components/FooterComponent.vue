@@ -49,5 +49,6 @@ export default {
 <style lang="scss" scoped>
 .bg-footer {
   background: #3363AC;
+  margin-top: auto; 
 }
 </style>
