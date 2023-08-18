@@ -32,7 +32,8 @@
       rounded
       class="fs-18 q-mb-xl q-px-lg font-inter fw-500"
       style="background: #3363AC; color: white"
-      label="See More"/>
+      label="See More"
+      @click="goTo('blogs')"/>
     </div>
   </div>
 </template>
@@ -59,11 +60,15 @@ export default {
     ...mapActions({
       getAllBlogs: 'nursingHome/getAllBlogs'
     }),
+    goTo (name) {
+      this.$router.push({
+        name
+      })
+    },
     async fetchAllBlogs () {
       try {
         const { data: { items }} = await this.getAllBlogs()
-        this.blogs = items
-        console.log(this.blogs)
+        this.blogs = items.slice(0,4)
       } catch (error) {
         this.$q.notify({
           message: "Something went wrong, please try again",
@@ -74,7 +79,6 @@ export default {
       }
     },
     goToBlog (id) {
-      console.log(id)
       this.$router.push({
         name: 'individual-blog',
         params: {
