@@ -22,7 +22,7 @@
       </q-expansion-item>
       <q-separator />
     </q-list>
-    <div class="q-mt-xl column items-center font-inter">
+    <div class="q-mt-xl column items-center font-inter" v-if="faqs.length">
       <div class=" fw-600 text-primary fs-30">Still have a question?</div>
       <div class="fs-16 fw-400 text-primary">Our experienced doctors are here to help you with any of your queries </div>
       <q-btn
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 export default {
   name: 'FaqPage',
   data () {
@@ -53,8 +53,18 @@ export default {
     ...mapActions({
       getFAQs: 'nursingHome/getFAQs'
     }),
+    ...mapMutations({
+      setScrollToContact: 'nursingHome/setScrollToContact'
+    }),
+    scrollToContact () {
+      this.setScrollToContact(true)
+      this.$router.push({
+        name: 'home'
+      })
+    },
     async fetchFaqs () {
     try {
+        this.$q.loading.show()
         const { data } = await this.getFAQs()
         this.faqs = data
       } catch (error) {
@@ -64,6 +74,8 @@ export default {
             position: "top",
             icon: "warning",
           });
+      } finally {
+        this.$q.loading.hide()
       }
     },
     goTo (name) {

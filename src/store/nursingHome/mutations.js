@@ -1,2 +1,3 @@
-export function someMutation (/* state */) {
+export function setScrollToContact (state, value) {
+  state.scrollToContact = true
 }

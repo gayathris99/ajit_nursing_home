@@ -23,6 +23,7 @@ import MakeAppointment from 'src/components/HomePageComponents/MakeAppointment.v
 import OurTestimonials from 'src/components/HomePageComponents/OurTestimonials.vue'
 import OurBlog from 'src/components/HomePageComponents/OurBlog.vue'
 import ContactUs from 'src/components/HomePageComponents/ContactUs.vue'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'IndexPage',
   components: {
@@ -36,11 +37,17 @@ export default {
     ContactUs
   },
   computed: {
+    ...mapGetters({
+      getScrollToContact: 'nursingHome/getScrollToContact'
+    }),
     isMobile () {
       return this.$q.screen.lt.sm
     },
   },
   methods: {
+    ...mapMutations({
+      setScrollToContact: 'nursingHome/setScrollToContact'
+    }),
     onScrollElement (el) {
       const elementPosition = document.getElementById(el).offsetTop;
       window.scrollTo({
@@ -48,7 +55,14 @@ export default {
         behavior: "smooth",
       });
     }
-  }
+  },
+  // mounted () {
+  //     const elementPosition = document.getElementById('contact-us').offsetTop;
+  //     window.scrollTo({
+  //       top: this.isMobile ? elementPosition + 480 : elementPosition - 120,
+  //       behavior: "smooth",
+  //     });
+  // }
 }
 </script>
 

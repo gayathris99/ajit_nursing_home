@@ -5,7 +5,7 @@
         <img src="~assets/Logo128.png" width="40" alt="">
         <div class="text-white fs-16 fw-400">Ajit Nursing Home</div>
       </div>
-      <div class="fs-16" :class="isMobile ? 'text-center' : ''">2023 Ajith Nursing Home. All right reserved</div>
+      <div class="fs-16" :class="isMobile ? 'text-center' : ''">2023 Ajit Nursing Home. All right reserved</div>
       <div class="q-gutter-x-md row items-center fs-16" >
         <div class="cursor-pointer" @click="goTo('privacy')">Privacy</div>
         <div class="cursor-pointer" @click="goTo('faq')">FAQs</div>
@@ -15,7 +15,6 @@
         <img src="~assets/brand/facebook.svg" class="cursor-pointer" alt="facebook" width="30">
         <img src="~assets/brand/instagram.svg" class="cursor-pointer" alt="instagram" width="25">
         <img src="~assets/brand/LinkedIn.svg" class="cursor-pointer" alt="linkedin" width="30">
-        <img src="~assets/brand/twitter.svg" class="cursor-pointer" alt="twitter" width="30">
       </div>
     </div>
   </div>
@@ -49,6 +48,6 @@ export default {
 <style lang="scss" scoped>
 .bg-footer {
   background: #3363AC;
-  margin-top: auto; 
+  margin-top: auto;
 }
 </style>

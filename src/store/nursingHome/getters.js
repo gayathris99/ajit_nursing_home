@@ -1,2 +1,3 @@
-export function someGetter (/* state */) {
+export function getScrollToContact (state) {
+  return state.scrollToContact
 }

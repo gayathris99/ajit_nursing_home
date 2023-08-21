@@ -23,21 +23,21 @@
             <q-btn
             outline
             color="secondary"
-            style="background-color: white"
             label="Promo"
             no-caps
             rounded
-            class="btn-fixed-width fs-18 q-py-sm"/>
+            class="btn-fixed-width bg-white fs-18 q-py-sm"/>
           </div>
         </div>
       </div>
     </div>
-    <div v-else class="tab-mobile">
-      <img v-if="isTablet" src="~assets/heroImage.svg" alt="">
-      <img v-if="isMobile" src="~assets/heroMobile.svg" alt="">
-      <div class="content">
-        <div class="fs-36 font-oxygen fw-400 text-primary q-mt-sm">Collaborative care focused on you!</div>
-        <div class="q-mt-sm font-oxygen fs-20 fs-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et vehicula justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</div>
+    <div v-else class="bg-image">
+      <!-- <img v-if="isTablet" src="~assets/heroImage.svg" alt=""> -->
+      <!-- <img v-if="isMobile" src="~assets/heroMobile.svg" alt=""> -->
+      <div class="content q-pt-lg q-px-md">
+        <div class="fs-36 font-oxygen fw-400 text-primary q-mt-sm text-center">Collaborative care focused on you!</div>
+        <div class="q-mt-sm font-oxygen fs-400 text-center" :class="isMobile ? 'fs-16': 'fs-20'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et vehicula justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</div>
+        <div class="column justify-center items-center q-gutter-md q-mt-md">
         <q-btn
           color="secondary"
           label="Make an appointment"
@@ -45,6 +45,14 @@
           no-caps
           rounded
           class="fs-18 q-mt-md btn-fixed-width font-inter"/>
+        <q-btn
+          color="secondary"
+          label="Promo"
+          outline
+          no-caps
+          rounded
+          class="fs-18 bg-white q-mt-md btn-fixed-width font-inter"/>
+        </div>
       </div>
     </div>
   </div>
@@ -78,6 +86,14 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   max-height: 679px;
+  @media only screen and (max-width: $breakpoint-sm-max){
+    background-image: url('~assets/heroMobile.svg');
+    height: 500px;
+  }
+  @media only screen and (max-width: $breakpoint-xs-max){
+    background-image: url('~assets/heroMobile.svg');
+    height: 450px;
+  }
 }
 .para-block {
   max-width: 500px;
@@ -107,23 +123,26 @@ export default {
     max-width: 300px;
   }
 }
-.tab-mobile {
-  position: relative;
-  img {
-    display: block;
-    vertical-align: middle;
-    opacity: 0.6;
-    object-fit: scale-down;
-    @media only screen and (max-width: $breakpoint-xs-max) {
-      height: 501px !important;
-    }
-  }
-  .content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    text-align: center;
-    transform: translate(-50%, -50%);
-  }
-}
+  // .content {
+
+  // }
+// .tab-mobile {
+//   position: relative;
+//   img {
+//     display: block;
+//     vertical-align: middle;
+//     opacity: 0.6;
+//     object-fit: scale-down;
+//     @media only screen and (max-width: $breakpoint-xs-max) {
+//       height: 501px !important;
+//     }
+//   }
+//   .content {
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     text-align: center;
+//     transform: translate(-50%, -50%);
+//   }
+// }
 </style>

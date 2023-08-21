@@ -117,7 +117,7 @@ export default {
 .q-card {
   border-radius: 6px;
   width: 350px;
-  height: 300px;
+  height: 260px;
   @media only screen and (max-width: 1200px) and (min-width:1050px) {
     width: 320px;
   }
@@ -148,6 +148,6 @@ export default {
 }
 
 .review {
-  height: 180px
+  height: 140px
 }
 </style>

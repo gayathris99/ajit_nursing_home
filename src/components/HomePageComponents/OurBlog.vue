@@ -136,14 +136,14 @@ export default {
 }
 
 .desktop-image {
-  width: 180px;
-  height: 140px;
-  object-fit: center;
+  width: 200px;
+  height: 160px;
+  object-fit: contain;
 }
 
 .intro {
   max-width: 320px;
-  width: 200px;
+  width: 240px;
   @media only screen and (max-width: $breakpoint-sm-max) and (min-width: 731px) {
     max-width: 500px;
     width: 500px;

@@ -3,7 +3,7 @@
     <div class="font-inter fs-16 fw-600 q-px-sm">
       <span class="text-grey cursor-pointer" @click="goTo('home')">Home / </span>
       <span class="text-primary cursor-pointer"  @click="goTo('about-us')">About Us</span>
-      <div class="grey-border q-pa-lg q-mt-md">
+      <div class="grey-border  q-mt-md" :class="isMobile ? 'q-pa-sm': 'q-py-lg q-px-md'">
         <q-img src="~assets/hospitalImage.svg"/>
       </div>
       <div class="row justify-center q-mt-md font-inter fs-20 fw-400 text-grey">

@@ -1,14 +1,14 @@
 <template>
-  <q-header class="text-primary font-quicksand q-py-sm" :class="[{ 'bg-header': isHomePage, 'bg-white-header': !isHomePage }]">
+  <q-header class="text-primary font-quicksand q-py-sm bg-header">
     <div>
-      <div class="row justify-between align-center q-px-xl">
+      <div class="row justify-between align-center" :class="isDesktop ? 'q-px-xl' : 'q-px-md'">
         <div class="row items-center q-gutter-sm cursor-pointer">
           <q-icon name="menu" size="md" v-if="!isDesktop" class="text-primary cursor-pointer q-pr-sm" @click="openDrawer"/>
           <img src="~assets/Logo128.png" alt="Ajit nursing home logo" width="45" @click="goTo('home')">
           <div class="fs-16 fw-600" @click="goTo('home')">Ajit Nursing Home</div>
         </div>
         <div class="row items-center q-gutter-md fs-16 fw-600" v-if="isDesktop">
-          <div class="cursor-pointer" @click="goTo('about-us')">About Us</div>
+          <div class="cursor-pointer" @click="goTo('about-us')" :class="this.$route.name === 'about-us' ? 'text-underline' : ''">About Us</div>
           <div class="cursor-pointer" @click="comingSoon">Pregnancy</div>
           <div class="cursor-pointer" @click="comingSoon">Getting Pregnant</div>
           <div class="cursor-pointer" @click="comingSoon">Tools</div>
@@ -17,7 +17,6 @@
           <div class="cursor-pointer" @click="comingSoon">News</div>
         </div>
       </div>
-    <q-separator v-if="!isHomePage" class="q-mt-sm"/>
       <q-drawer v-if="!isDesktop"
       v-model="openMenu" class="q-px-sm">
         <div class="row items-center q-gutter-sm bg-header q-pa-md" @click="goTo('home')">
@@ -84,7 +83,7 @@ export default {
 .bg-header {
   background-image: linear-gradient(to right, #C2E2E1 , #CFECE8, #DEEFEE);
 }
-.bg-white-header {
-  background: #FFF;
+.text-underline {
+  text-decoration: underline;
 }
 </style>
