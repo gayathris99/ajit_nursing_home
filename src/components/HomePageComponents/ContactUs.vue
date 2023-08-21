@@ -2,60 +2,61 @@
   <div>
     <div class="bg-image no-padding no-margin" v-if="isDesktop">
       <div class="row justify-evenly items-center q-gutter-x-md no-padding no-margin desktop-section">
+        <img src="~assets/flowerbehindlady.svg" alt="">
         <q-form>
           <div class="column q-mt-lg">
           <div class="font-inter text-primary fs-16 fw-600" :class="isMobile ? 'q-pt-md': 'q-pt-xl'">Contact Us</div>
           <div class="font-oxygen text-primary">
             <div class="fw-400 q-mt-sm title">Want to book an <br/> appointment ? Contact us!</div>
           </div>
-          <div class="q-mt-md font-oxygen column q-gutter-y-sm q-pb-xl">
-            <!-- Full Name -->
-            <label class="text-primary font-inter fw-400">Full Name <span style="color: red">*</span></label>
-            <q-input class="fs-16" v-model="fullName" dense required outlined/>
-
-            <!-- Contact Number & Email -->
-            <div class="row justify-between q-mt-lg">
-              <div>
-                <label class="text-primary font-inter fw-400">Contact Number <span style="color: red">*</span></label>
-                <q-input class="fs-16" v-model="contactNumber" dense required outlined style="min-width: 260px"/>
-              </div>
-              <div>
-                <label class="text-primary font-inter fw-400">Email</label>
-                <q-input class="fs-16" v-model="email" dense  type="email" outlined style="min-width: 260px"/>
-              </div>
-            </div>
-
-            <!-- Appointment Reason -->
-            <label class="text-primary font-inter fw-400 q-mt-lg">Appointment Reason</label>
-            <q-input class="fs-16" v-model="appointmentReason" dense placeholder="Type your message..." type="textarea" outlined/>
-
-            <!-- Date -->
-            <label class="text-primary font-inter fw-400 q-mt-lg">Date (DD/MM/YYY) <span style="color: red">*</span></label>
-            <q-input class="fs-16" v-model="date" required outlined @focus="onDateInputClick">
+            <div class="q-mt-md font-radley column q-gutter-y-sm q-pb-xl">
+            <q-input class="fs-18" v-model="fullName" dense placeholder="Full Name *" required>
+              <template v-slot:append>
+                <q-icon name="person" size="24px" color="primary"/>
+              </template>
+            </q-input>
+            <q-input class="fs-18" v-model="contactNumber" dense placeholder="Contact Number *" required>
+              <template v-slot:append>
+                <q-icon name="call" size="24px" color="primary"/>
+              </template>
+            </q-input>
+            <q-input class="fs-18" v-model="email" dense placeholder="Email ID" type="email">
+              <template v-slot:append>
+                <q-icon name="mail" size="24px" color="primary"/>
+              </template>
+            </q-input>
+            <q-input class="fs-18" v-model="appointmentReason" dense placeholder="Reason for appointment" autogrow>
+              <template v-slot:append>
+                <q-icon name="stethoscope" size="24px" color="primary"/>
+              </template>
+            </q-input>
+            <q-input class="fs-18" v-model="date" placeholder="Date (dd/mm/yyyy) *" required  @focus="onDateInputClick">
               <template v-slot:append>
                 <q-btn-dropdown icon="calendar_month" color="primary" dense flat ref="dateBtnDropdown">
                   <q-date minimal v-model="date" mask="DD/MM/YYYY" :options="dateOption"/>
                 </q-btn-dropdown>
               </template>
             </q-input>
-            <q-btn
-            color="secondary"
-            label="Submit"
-            type="submit"
-            @click="createAppointment"
-            :loading="makingAppointment"
-            no-caps
-            dense
-            class="fs-16 fw-400 q-mt-md btn-fixed-width font-inter">
-              <template v-slot:loading>
-                <q-spinner class="on-right" />
-                Submit
-              </template>
-            </q-btn>
-          </div>
+            <div class="row justify-center">
+              <q-btn
+              color="secondary"
+              label="Make an appointment"
+              type="submit"
+              @click="createAppointment"
+              :loading="makingAppointment"
+              no-caps
+              dense
+              rounded
+              class="fs-20 q-mt-md btn-fixed-width font-overlock">
+                <template v-slot:loading>
+                  <q-spinner class="on-right" />
+                  Make an appointment
+                </template>
+              </q-btn>
+            </div>
+            </div>
           </div>
         </q-form>
-        <img src="~assets/flowerbehindlady.svg" alt="" class="desktop-image">
       </div>
     </div>
     <div v-else class="mobile-tab-design">
@@ -68,45 +69,51 @@
           <div class="font-oxygen text-primary">
             <div class="fw-400 q-mt-sm title">Want to book an <br/> appointment ? Contact us!</div>
           </div>
-          <div class="q-mt-md font-oxygen column q-gutter-y-sm q-pb-xl q-px-md">
-          <!-- Full Name -->
-          <label class="font-inter fw-400 text-primary">Full Name <span style="color: red">*</span></label>
-          <q-input class="fs-16" v-model="fullName" dense required outlined/>
-
-          <!-- Contact Number -->
-          <label class="font-inter fw-400 q-mt-lg text-primary">Contact Number <span style="color: red">*</span></label>
-          <q-input class="fs-16" v-model="contactNumber" dense  required outlined/>
-
-          <!-- Email -->
-          <label class="font-inter fw-400 q-mt-lg text-primary">Email</label>
-          <q-input class="fs-16" v-model="email" dense  type="email" outlined/>
-
-          <!-- Appointment Reason -->
-          <label class="font-inter fw-400 text-primary q-mt-lg">Appointment Reason</label>
-          <q-input class="fs-16" v-model="appointmentReason" dense placeholder="Type your message..." type="textarea" outlined/>
-
-          <label class="font-inter fw-400 text-primary q-mt-lg">Date (DD/MM/YYYY)</label>
-          <q-input class="fs-16" v-model="date" placeholder="Date (dd/mm/yyyy) *" required @focus="onDateInputClick" outlined>
+          <div class="q-mt-md font-radley column q-gutter-y-sm q-pb-xl q-px-md">
+          <q-input class="fs-18" v-model="fullName" dense placeholder="Full Name *" required>
+            <template v-slot:append>
+              <q-icon name="person" size="24px" color="primary"/>
+            </template>
+          </q-input>
+          <q-input class="fs-18" v-model="contactNumber" dense placeholder="Contact Number *" required>
+            <template v-slot:append>
+              <q-icon name="call" size="24px" color="primary"/>
+            </template>
+          </q-input>
+          <q-input class="fs-18" v-model="email" dense placeholder="Email ID" type="email">
+            <template v-slot:append>
+              <q-icon name="mail" size="24px" color="primary"/>
+            </template>
+          </q-input>
+          <q-input class="fs-18" v-model="appointmentReason" dense placeholder="Reason for appointment" autogrow>
+            <template v-slot:append>
+              <q-icon name="stethoscope" size="24px" color="primary"/>
+            </template>
+          </q-input>
+          <q-input class="fs-18" v-model="date" placeholder="Date (dd/mm/yyyy) *" required @focus="onDateInputClick">
             <template v-slot:append>
               <q-btn-dropdown icon="calendar_month" color="primary" dense flat ref="dateBtnDropdown">
                 <q-date minimal v-model="date" mask="DD/MM/YYYY" :options="dateOption"/>
               </q-btn-dropdown>
             </template>
           </q-input>
-          <q-btn
-          color="secondary"
-          label="Submit"
-          type="submit"
-          @click="createAppointment"
-          :loading="makingAppointment"
-          no-caps
-          dense
-          class="fs-16 fw-400 q-mt-lg btn-fixed-width font-inter">
-            <template v-slot:loading>
-              <q-spinner class="on-right" />
-              Submit
-            </template>
-          </q-btn>
+          <div class="row justify-center">
+            <q-btn
+            color="secondary"
+            :loading="makingAppointment"
+            label="Make an appointment"
+            type="submit"
+            @click="createAppointment"
+            no-caps
+            dense
+            rounded
+            class="fs-20 q-mt-lg btn-fixed-width font-overlock">
+              <template v-slot:loading>
+                <q-spinner class="on-right" />
+                    Make an appointment
+                </template>
+            </q-btn>
+          </div>
           </div>
         </div>
       </q-form>
@@ -172,41 +179,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class=" padding-left padding-right row justify-between align-start items-start text-primary font-petrona q-pb-lg q-gutter-lg q-px-md q-pt-md">
-        <div>
-          <div class="row items-center q-gutter-x-sm">
-            <q-icon name="call" size="sm"/>
-            <div class="fs-20 fw-500">REACH US AT</div>
-          </div>
-          <div class="fs-16 q-mt-sm">
-            <a href="tel:08046808371">080 4680 8371</a><br/>
-            <a href="tel:8951197936">89511 97936</a>
-          </div>
-        </div>
-        <div>
-          <div>
-            <div class="row items-center  q-gutter-x-sm">
-              <q-icon name="location_on" size="sm"/>
-              <div class="fs-20 fw-500">LOCATION</div>
-            </div>
-          </div>
-          <div class="fs-16 q-mt-sm" style="max-width: 220px">
-            <a href="https://goo.gl/maps/C1FRWzovnftC26i17">
-            #640 Ajit Nursing Home, Dr.Bane Hospital Road, Raibag, Landmark: Beside HP Petrol Bunk, Raibag
-            </a>
-          </div>
-        </div>
-        <div>
-          <div class="row items-center q-gutter-x-sm">
-            <q-icon name="schedule" size="sm"/>
-            <div class="fs-20 fw-500">HOURS (Open 24/7)</div>
-          </div>
-          <div class="fs-16 q-mt-sm">
-            <div>Mon-Sun</div>
-            <div>12:00AM - 11:59PM</div>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 </template>
@@ -321,26 +293,19 @@ export default {
   }
 }
 .btn-fixed-width {
-  width: 90px;
+  width: 250px;
+   @media only screen and (max-width: 1060px) and (min-width:1024px){
+    width: 220px;
+   }
 }
 a {
+  text-decoration: none;
   color: inherit;
-}
-.location {
-  max-width: 250px;
-  a {
-    text-decoration: none;
-  }
 }
 .padding-right {
   padding-right: 48px;
   @media only screen and (max-width: 799px) and (min-width:0px)  {
     padding-right: 24px;
   }
-}
-.desktop-image {
-   @media only screen and (max-width: 1082px) and (min-width:1024px) {
-    width: 400px;
-   }
 }
 </style>
