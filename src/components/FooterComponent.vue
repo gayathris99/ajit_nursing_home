@@ -12,9 +12,12 @@
         <div class="cursor-pointer" @click="goTo('terms')">Terms</div>
       </div>
       <div class="q-gutter-x-md justify-center row items-center">
-        <img src="~assets/brand/facebook.svg" class="cursor-pointer" alt="facebook" width="30">
-        <img src="~assets/brand/instagram.svg" class="cursor-pointer" alt="instagram" width="25">
-        <img src="~assets/brand/LinkedIn.svg" class="cursor-pointer" alt="linkedin" width="30">
+        <a href="https://www.facebook.com/ajitnursinghome" target="_blank" class="q-mt-sm">
+          <img src="~assets/brand/facebook.svg" class="cursor-pointer" alt="facebook" width="25">
+        </a>
+        <a href="https://www.instagram.com/ajitnursinghome" target="_blank" class="q-mt-sm">
+          <img src="~assets/brand/instagram.svg" class="cursor-pointer" alt="instagram" width="25">
+        </a>
       </div>
     </div>
   </div>

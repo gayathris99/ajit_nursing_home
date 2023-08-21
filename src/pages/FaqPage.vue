@@ -31,7 +31,7 @@
       rounded
       no-caps
       class="font-inter fs-16 q-mt-lg"
-      @click="scrollToContact"
+      @click="goToContact"
       />
     </div>
   </div>
@@ -56,7 +56,7 @@ export default {
     ...mapMutations({
       setScrollToContact: 'nursingHome/setScrollToContact'
     }),
-    scrollToContact () {
+    goToContact () {
       this.setScrollToContact(true)
       this.$router.push({
         name: 'home'

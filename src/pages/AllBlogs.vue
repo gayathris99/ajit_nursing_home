@@ -4,8 +4,8 @@
       <span class="text-grey cursor-pointer" @click="goTo('home')">Home / </span>
       <span class="text-primary cursor-pointer"  @click="goTo('blogs')">Blogs</span>
       <div class="font-roboto text-primary fw-700 q-mt-sm q-mb-lg " :class="isMobile ? 'fs-28': 'fs-40'">All blogs</div>
-      <div class="q-mt-md row justify-start items-center">
-        <div v-if="!isMobile" class="col-md-4 col-sm-4 categories">
+      <div class="q-mt-md row justify-start">
+        <div v-if="!isMobile" class="col-md-3 col-sm-3 categories">
           <div class="q-mb-sm">Blog Categories</div>
           <div v-for="(category, key) in categories" :key="key">
             <div class="q-py-md font-inter fs-14 cursor-pointer text-primary" @click="selectCategory(category)" :class="checkCategory(category) ? 'selected-category': ''">{{category.label}}</div>
@@ -16,9 +16,9 @@
           <q-select class="q-mt-sm" v-model="selectedCategory" map-options emit-value outlined :options="categories" />
         </div>
         <div>
-          <div class="first-blog">
-            <q-img :src="blogs[0]?.image?.meta?.download_url"></q-img>
-            <div>{{firstBlog.title}}</div>
+          <div class="first-blog col-md-6 col-sm-6">
+            <img :src="firstBlog[0]?.image?.meta?.download_url"/>
+            <div>{{firstBlog[0]?.title}}</div>
           </div>
         </div>
       </div>
@@ -51,6 +51,7 @@ export default {
       return category.label === this.selectedCategory
     },
     async fetchAllBlogs () {
+      this.$q.loading.show()
       try {
         const { data: { items }} = await this.getAllBlogs()
         if (!items.length) this.isNoBlogs = true
@@ -66,7 +67,6 @@ export default {
         })
         this.firstBlog = items.splice(0,1)
         this.blogs = items
-        console.log(this.firstBlog)
       } catch (error) {
         this.$q.notify({
           message: "Something went wrong, please try again",
@@ -74,8 +74,10 @@ export default {
           position: "top",
           icon: "warning",
         });
+      } finally {
+        this.$q.loading.hide()
       }
-    },
+    }
   },
   mounted () {
     this.fetchAllBlogs()
@@ -120,5 +122,13 @@ export default {
   font-size: 14.222px;
   font-style: normal;
   font-weight: 600;
+}
+
+.first-blog {
+  img {
+    width: 900px;
+    height: 450px;
+    object-fit: cover;
+  }
 }
 </style>

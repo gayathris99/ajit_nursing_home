@@ -56,13 +56,6 @@ export default {
       });
     }
   },
-  // mounted () {
-  //     const elementPosition = document.getElementById('contact-us').offsetTop;
-  //     window.scrollTo({
-  //       top: this.isMobile ? elementPosition + 480 : elementPosition - 120,
-  //       behavior: "smooth",
-  //     });
-  // }
 }
 </script>
 

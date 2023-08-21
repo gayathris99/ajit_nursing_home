@@ -25,7 +25,7 @@
     <div class="row items-center text-white cursor-pointer q-gutter-x-xl">
       <div class="row items-center q-gutter-x-xs">
         <q-icon name="mark_email_unread" size="sm"></q-icon>
-        <div class="fs-20 q-pr-sm q-pl-xs">Connect on Mail</div>
+        <a href = "mailto:ajitnursinghomeraybag@gmail.com" class="fs-20 q-pr-sm q-pl-xs">Connect on Mail</a>
       </div>
     </div>
     </div>

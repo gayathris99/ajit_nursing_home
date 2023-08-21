@@ -34,10 +34,10 @@
     <div v-else class="bg-image">
       <!-- <img v-if="isTablet" src="~assets/heroImage.svg" alt=""> -->
       <!-- <img v-if="isMobile" src="~assets/heroMobile.svg" alt=""> -->
-      <div class="content q-pt-lg q-px-md">
+      <div class="content q-pt-xl q-px-md">
         <div class="fs-36 font-oxygen fw-400 text-primary q-mt-sm text-center">Collaborative care focused on you!</div>
-        <div class="q-mt-sm font-oxygen fs-400 text-center" :class="isMobile ? 'fs-16': 'fs-20'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et vehicula justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</div>
-        <div class="column justify-center items-center q-gutter-md q-mt-md">
+        <div class="q-mt-md font-oxygen fs-400 text-center" :class="isMobile ? 'fs-16': 'fs-20'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et vehicula justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</div>
+        <div class=" justify-center items-center q-gutter-md q-mt-md column">
         <q-btn
           color="secondary"
           label="Make an appointment"
@@ -87,8 +87,8 @@ export default {
   background-size: cover;
   max-height: 679px;
   @media only screen and (max-width: $breakpoint-sm-max){
-    background-image: url('~assets/heroMobile.svg');
-    height: 500px;
+    background-image: url('~assets/heroTablet.svg');
+    height: 400px;
   }
   @media only screen and (max-width: $breakpoint-xs-max){
     background-image: url('~assets/heroMobile.svg');
