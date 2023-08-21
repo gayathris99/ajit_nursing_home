@@ -40,14 +40,14 @@
             <div class="row justify-center">
               <q-btn
               color="secondary"
-              label="Make an appointment"
+              label="Submit"
               type="submit"
               @click="createAppointment"
               :loading="makingAppointment"
               no-caps
               dense
               rounded
-              class="fs-20 q-mt-md btn-fixed-width font-overlock">
+              class="fs-16 q-mt-md q-px-lg font-inter">
                 <template v-slot:loading>
                   <q-spinner class="on-right" />
                   Make an appointment
@@ -101,13 +101,13 @@
             <q-btn
             color="secondary"
             :loading="makingAppointment"
-            label="Make an appointment"
+            label="Submit"
             type="submit"
             @click="createAppointment"
             no-caps
             dense
             rounded
-            class="fs-20 q-mt-lg btn-fixed-width font-overlock">
+            class="fs-16 q-mt-lg q-px-lg font-inter">
               <template v-slot:loading>
                 <q-spinner class="on-right" />
                     Make an appointment
