@@ -11,7 +11,7 @@
         <div class="cursor-pointer" @click="goTo('faq')">FAQs</div>
         <div class="cursor-pointer" @click="goTo('terms')">Terms</div>
       </div>
-      <div class="q-gutter-x-md justify-center row items-center">
+      <div class="q-gutter-x-md justify-center row items-center" :class="isDesktop ? 'q-pr-lg': ''">
         <a href="https://www.facebook.com/ajitnursinghome" target="_blank" class="q-mt-sm">
           <img src="~assets/brand/facebook.svg" class="cursor-pointer" alt="facebook" width="25">
         </a>
@@ -20,6 +20,7 @@
         </a>
       </div>
     </div>
+    <div class="text-center">Designed and Developed by <a href="https://www.foxgloveteam.com/#/" target="_blank"> Foxglove Tech</a></div>
   </div>
 </template>
 
@@ -52,5 +53,10 @@ export default {
 .bg-footer {
   background: #3363AC;
   margin-top: auto;
+}
+
+a {
+  color: inherit;
+  font-weight: bold;
 }
 </style>

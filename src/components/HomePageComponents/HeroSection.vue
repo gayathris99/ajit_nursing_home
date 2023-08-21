@@ -9,7 +9,7 @@
       <div class="q-mt-xl col-6">
         <div>
           <div class="fs-60 font-oxygen fw-400 text-primary q-mt-sm">Collaborative <br/>care focused on you!</div>
-          <div class="q-mt-md font-oxygen color-primary-two  fs-20 fw-400 para-block">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et vehicula justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</div>
+          <div class="q-mt-md font-oxygen color-primary-two  fs-20 fw-400 para-block">Discover the difference at Ajit Nursing Home, where medical excellence meets personalised care. Our mission is to guide you on your path to better health with cutting-edge treatments and unwavering support.</div>
 
           <div class="row items-center q-gutter-md font-inter fw-500 q-my-xl">
             <q-btn
@@ -36,7 +36,7 @@
       <!-- <img v-if="isMobile" src="~assets/heroMobile.svg" alt=""> -->
       <div class="content q-pt-xl q-px-md">
         <div class="fs-36 font-oxygen fw-400 text-primary q-mt-sm text-center">Collaborative care focused on you!</div>
-        <div class="q-mt-md font-oxygen fs-400 text-center" :class="isMobile ? 'fs-16': 'fs-20'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et vehicula justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</div>
+        <div class="q-mt-md font-oxygen fs-400 text-center" :class="isMobile ? 'fs-16': 'fs-20'">Discover the difference at Ajit Nursing Home, where medical excellence meets personalised care. Our mission is to guide you on your path to better health with cutting-edge treatments and unwavering support.</div>
         <div class=" justify-center items-center q-gutter-md q-mt-md column">
         <q-btn
           color="secondary"
@@ -58,9 +58,13 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'HeroSection',
   computed: {
+    ...mapGetters({
+      getScrollToContact: 'nursingHome/getScrollToContact'
+    }),
     isMobile () {
       return this.$q.screen.lt.sm
     },
@@ -72,9 +76,18 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      setScrollToContact: 'nursingHome/setScrollToContact'
+    }),
     scrollToContact () {
       this.$emit('onScrollElement', 'contact-us')
     }
+  },
+  mounted () {
+    if (this.getScrollToContact) {
+      this.$emit('onScrollElement', 'contact-us')
+    }
+    this.setScrollToContact(false)
   }
 }
 </script>
@@ -92,7 +105,7 @@ export default {
   }
   @media only screen and (max-width: $breakpoint-xs-max){
     background-image: url('~assets/heroMobile.svg');
-    height: 450px;
+    height: 550px;
   }
 }
 .para-block {

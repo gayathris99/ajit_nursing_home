@@ -37,18 +37,19 @@ export default {
     ContactUs
   },
   computed: {
-    ...mapGetters({
-      getScrollToContact: 'nursingHome/getScrollToContact'
-    }),
+    // ...mapGetters({
+    //   getScrollToContact: 'nursingHome/getScrollToContact'
+    // }),
     isMobile () {
       return this.$q.screen.lt.sm
     },
   },
   methods: {
-    ...mapMutations({
-      setScrollToContact: 'nursingHome/setScrollToContact'
-    }),
+    // ...mapMutations({
+    //   setScrollToContact: 'nursingHome/setScrollToContact'
+    // }),
     onScrollElement (el) {
+      console.log('scroling')
       const elementPosition = document.getElementById(el).offsetTop;
       window.scrollTo({
         top: this.isMobile ? elementPosition + 480 : elementPosition - 120,
@@ -58,7 +59,3 @@ export default {
   },
 }
 </script>
-
-
-,
-    TestiMonials
