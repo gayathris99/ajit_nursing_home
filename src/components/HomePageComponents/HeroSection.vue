@@ -20,13 +20,13 @@
             rounded
             class="btn-fixed-width fs-18 q-py-sm"/>
 
-            <q-btn
+            <!-- <q-btn
             outline
             color="secondary"
             label="Promo"
             no-caps
             rounded
-            class="btn-fixed-width bg-white fs-18 q-py-sm"/>
+            class="btn-fixed-width bg-white fs-18 q-py-sm"/> -->
           </div>
         </div>
       </div>
@@ -45,13 +45,13 @@
           no-caps
           rounded
           class="fs-18 q-mt-md btn-fixed-width font-inter"/>
-        <q-btn
+        <!-- <q-btn
           color="secondary"
           label="Promo"
           outline
           no-caps
           rounded
-          class="fs-18 bg-white q-mt-md btn-fixed-width font-inter"/>
+          class="fs-18 bg-white q-mt-md btn-fixed-width font-inter"/> -->
         </div>
       </div>
     </div>
@@ -101,7 +101,7 @@ export default {
   max-height: 679px;
   @media only screen and (max-width: $breakpoint-sm-max){
     background-image: url('~assets/heroTablet.svg');
-    height: 400px;
+    height: 350px;
   }
   @media only screen and (max-width: $breakpoint-xs-max){
     background-image: url('~assets/heroMobile.svg');
