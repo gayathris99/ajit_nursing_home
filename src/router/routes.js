@@ -9,7 +9,8 @@ const routes = [
       { path: 'blogs/:id', name: 'individual-blog', component: () => import('pages/IndividualBlogs.vue') },
       { path: 'faq', name: 'faq', component: () => import('pages/FaqPage.vue') },
       { path: 'terms', name: 'terms', component: () => import('pages/TermsAndCondition.vue') },
-      { path: 'privacy', name: 'privacy', component: () => import('pages/PrivacyPolicy.vue') }
+      { path: 'privacy', name: 'privacy', component: () => import('pages/PrivacyPolicy.vue') },
+      { path: 'appointment', name: 'appointment', component: () => import('pages/AppointmentPage.vue') }
     ]
   },
   {

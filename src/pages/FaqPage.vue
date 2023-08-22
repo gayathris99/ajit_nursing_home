@@ -31,14 +31,14 @@
       rounded
       no-caps
       class="font-inter fs-16 q-mt-lg"
-      @click="goToContact"
+      @click="redirectToWhatsapp"
       />
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   name: 'FaqPage',
   data () {
@@ -53,14 +53,8 @@ export default {
     ...mapActions({
       getFAQs: 'nursingHome/getFAQs'
     }),
-    ...mapMutations({
-      setScrollToContact: 'nursingHome/setScrollToContact'
-    }),
-    goToContact () {
-      this.setScrollToContact(true)
-      this.$router.push({
-        name: 'home'
-      })
+    redirectToWhatsapp () {
+      window.open('https://wa.me/919448420369', '_blank')
     },
     async fetchFaqs () {
     try {

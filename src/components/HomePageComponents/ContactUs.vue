@@ -1,122 +1,36 @@
 <template>
   <div>
-    <div class="bg-image no-padding no-margin" v-if="isDesktop">
-      <div class="row justify-evenly items-center q-gutter-x-md no-padding no-margin desktop-section">
-        <img src="~assets/flowerbehindlady.svg" alt="">
-        <q-form>
-          <div class="column q-mt-lg">
-          <div class="font-inter text-primary fs-16 fw-600" :class="isMobile ? 'q-pt-md': 'q-pt-xl'">Contact Us</div>
-          <div class="font-oxygen text-primary">
-            <div class="fw-400 q-mt-sm title">Want to book an <br/> appointment ? Contact us!</div>
-          </div>
-            <div class="q-mt-md font-radley column q-gutter-y-sm q-pb-xl">
-            <q-input class="fs-18" v-model="fullName" dense placeholder="Full Name *" required>
-              <template v-slot:append>
-                <q-icon name="person" size="24px" color="primary"/>
-              </template>
-            </q-input>
-            <q-input class="fs-18" v-model="contactNumber" dense placeholder="Contact Number *" required>
-              <template v-slot:append>
-                <q-icon name="call" size="24px" color="primary"/>
-              </template>
-            </q-input>
-            <q-input class="fs-18" v-model="email" dense placeholder="Email ID" type="email">
-              <template v-slot:append>
-                <q-icon name="mail" size="24px" color="primary"/>
-              </template>
-            </q-input>
-            <q-input class="fs-18" v-model="appointmentReason" dense placeholder="Reason for appointment" autogrow>
-              <template v-slot:append>
-                <q-icon name="stethoscope" size="24px" color="primary"/>
-              </template>
-            </q-input>
-            <q-input class="fs-18" v-model="date" placeholder="Date (dd/mm/yyyy) *" required  @focus="onDateInputClick">
-              <template v-slot:append>
-                <q-btn-dropdown icon="calendar_month" color="primary" dense flat ref="dateBtnDropdown">
-                  <q-date minimal v-model="date" mask="DD/MM/YYYY" :options="dateOption"/>
-                </q-btn-dropdown>
-              </template>
-            </q-input>
-            <div class="row justify-center">
-              <q-btn
-              color="secondary"
-              label="Submit"
-              type="submit"
-              @click="createAppointment"
-              :loading="makingAppointment"
-              no-caps
-              dense
-              rounded
-              class="fs-16 q-mt-md q-px-lg font-inter">
-                <template v-slot:loading>
-                  <q-spinner class="on-right" />
-                  Make an appointment
-                </template>
-              </q-btn>
+    <div class="bg-image no-padding no-margin">
+      <div class="row items-center justify-between q-pb-md">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="q-pa-md padding-left">
+            <div class="font-inter text-primary fw-600" :class="isMobile ? 'q-pt-md fs-20': 'q-pt-lg fs-24'">QUESTION ?</div>
+            <div class="font-oxygen fw-500 text-primary fs-18 q-mt-md">
+              Have any questions regarding pregnancy, gynaecology, health or wellness? Ask our experienced doctors through Whatsapp and get quick answers.
             </div>
-            </div>
-          </div>
-        </q-form>
-      </div>
-    </div>
-    <div v-else class="mobile-tab-design">
-      <div class="row justify-center bg-image">
-        <img src="~assets/flowerbehindlady.svg" alt="">
-      </div>
-      <q-form>
-        <div class="column q-mt-lg q-px-lg justify-center">
-          <div class="font-inter text-primary fs-16 fw-600 " :class="isMobile ? 'q-pt-md': 'q-pt-xl'">Contact Us</div>
-          <div class="font-oxygen text-primary">
-            <div class="fw-400 q-mt-sm title">Want to book an <br/> appointment ? Contact us!</div>
-          </div>
-          <div class="q-mt-md font-radley column q-gutter-y-sm q-pb-xl q-px-md">
-          <q-input class="fs-18" v-model="fullName" dense placeholder="Full Name *" required>
-            <template v-slot:append>
-              <q-icon name="person" size="24px" color="primary"/>
-            </template>
-          </q-input>
-          <q-input class="fs-18" v-model="contactNumber" dense placeholder="Contact Number *" required>
-            <template v-slot:append>
-              <q-icon name="call" size="24px" color="primary"/>
-            </template>
-          </q-input>
-          <q-input class="fs-18" v-model="email" dense placeholder="Email ID" type="email">
-            <template v-slot:append>
-              <q-icon name="mail" size="24px" color="primary"/>
-            </template>
-          </q-input>
-          <q-input class="fs-18" v-model="appointmentReason" dense placeholder="Reason for appointment" autogrow>
-            <template v-slot:append>
-              <q-icon name="stethoscope" size="24px" color="primary"/>
-            </template>
-          </q-input>
-          <q-input class="fs-18" v-model="date" placeholder="Date (dd/mm/yyyy) *" required @focus="onDateInputClick">
-            <template v-slot:append>
-              <q-btn-dropdown icon="calendar_month" color="primary" dense flat ref="dateBtnDropdown">
-                <q-date minimal v-model="date" mask="DD/MM/YYYY" :options="dateOption"/>
-              </q-btn-dropdown>
-            </template>
-          </q-input>
-          <div class="row justify-center">
             <q-btn
             color="secondary"
-            :loading="makingAppointment"
-            label="Submit"
-            type="submit"
-            @click="createAppointment"
+            label="Ask a question"
+            @click="redirectToWhatsapp"
             no-caps
-            dense
-            rounded
-            class="fs-16 q-mt-lg q-px-lg font-inter">
-              <template v-slot:loading>
-                <q-spinner class="on-right" />
-                    Make an appointment
-                </template>
-            </q-btn>
-          </div>
+            class="fs-18 q-mt-lg font-inter"/>
           </div>
         </div>
-      </q-form>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="q-pa-md padding-left">
+            <div class="font-inter text-primary fw-600" :class="isMobile ? 'q-pt-md fs-20': 'q-pt-lg fs-24'">APPOINTMENT ?</div>
+            <div class="font-oxygen fw-500 text-primary fs-18 q-mt-md">
+              Book an appointment with our doctors and get the best consultation, care and solutions.
+            </div>
+            <q-btn
+            color="secondary"
+            label="Make an Appointment"
+            @click="this.$router.push({ name: 'appointment' })"
+            no-caps
+            class="fs-18 q-mt-lg font-inter"/>
+          </div>
+        </div>
+      </div>
     </div>
     <q-dialog v-model="showPopup" rounded>
       <q-card>
@@ -267,6 +181,9 @@ export default {
     dateOption (date) {
       const today = new Date().toLocaleDateString('en-ZA') //dd/mm/yyyy
       return date >= today
+    },
+    redirectToWhatsapp () {
+      window.open('https://wa.me/919448420369', '_blank')
     }
   },
 }

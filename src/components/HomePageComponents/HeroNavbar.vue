@@ -15,7 +15,7 @@
       </div>
       <div class="border-right text-navbar">&nbsp;</div>
     </div>
-    <div class="row items-center text-white cursor-pointer q-gutter-x-xl" @click="scrollToContact">
+    <div class="row items-center text-white cursor-pointer q-gutter-x-xl" @click="this.$router.push({ name: 'appointment' })">
       <div class="row items-center q-gutter-x-xs">
         <q-icon name="bookmarks" size="sm"></q-icon>
         <div class="fs-20 q-pr-sm q-pl-xs">Book an Appointment</div>
@@ -44,11 +44,6 @@ export default {
     },
     isDesktop () {
       return this.$q.screen.gt.sm
-    }
-  },
-  methods: {
-    scrollToContact () {
-      this.$emit('onScrollElement', 'contact-us')
     }
   }
 }
