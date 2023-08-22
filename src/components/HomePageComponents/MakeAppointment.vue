@@ -10,7 +10,7 @@
       no-caps
       class="font-inter fs-18"
       :size="isDesktop ? 'lg' : 'md'"
-      @click="this.$router.push({ name: 'appointment' })"
+      @click="scrollToContact"
       />
     </div>
   </div>
@@ -24,6 +24,11 @@ export default {
   isDesktop () {
     return this.$q.screen.gt.sm
     }
+  },
+  methods: {
+  scrollToContact () {
+    this.$emit('onScrollElement', 'contact-us')
+  }
   }
 }
 </script>

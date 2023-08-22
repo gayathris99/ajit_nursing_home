@@ -15,7 +15,7 @@
             <q-btn
             color="secondary"
             label="Make an appointment"
-            @click="this.$router.push({ name: 'appointment' })"
+            @click="scrollToContact"
             no-caps
             rounded
             class="btn-fixed-width fs-18 q-py-sm"/>
@@ -41,7 +41,7 @@
         <q-btn
           color="secondary"
           label="Make an appointment"
-          @click="this.$router.push({ name: 'appointment' })"
+          @click="scrollToContact"
           no-caps
           rounded
           class="fs-18 q-mt-md btn-fixed-width font-inter"/>
@@ -76,15 +76,9 @@ export default {
     }
   },
   methods: {
-    ...mapMutations({
-      setScrollToContact: 'nursingHome/setScrollToContact'
-    })
-  },
-  mounted () {
-    if (this.getScrollToContact) {
+    scrollToContact () {
       this.$emit('onScrollElement', 'contact-us')
     }
-    this.setScrollToContact(false)
   }
 }
 </script>

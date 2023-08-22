@@ -1,3 +1,3 @@
 <template>
-  <div>APPOINTMENT</div>
+  <div>Appointments</div>
 </template>
