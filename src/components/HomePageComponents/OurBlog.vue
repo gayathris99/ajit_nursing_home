@@ -6,7 +6,7 @@
     </div>
     <div class="row items-center justify-evenly q-gutter-y-lg padding-left q-mt-md">
       <div class="col-md-6 col-sm-12 col-xs-12 cursor-pointer" v-for="(blog, key) in blogs" :key="key"  @click="goToBlog(blog.id)">
-        <div class="row items-center q-gutter-md" v-if="isDesktop || isTablet">
+        <div class="row items-center q-gutter-md blog-image" v-if="isDesktop || isTablet">
            <img :src="blog?.image.meta.download_url" class="desktop-image"/>
            <div class="column font-inter">
               <div class="color-primary-two fs-12 fw-600">{{blog.tag}}</div>
@@ -99,32 +99,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tablet-desktop-blog {
-  .q-card {
-    width: 350px;
-    height: 350px;
-    border-radius: 20px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    @media only screen and (max-width: $breakpoint-xs-max) {
-      width: 280px;
-      // height: 240px;
-    }
-  }
-  .q-card:hover {
-    transform: scale(1.05);
-  }
-  img {
-    width: 100%;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    height: 175px; //static
-    object-fit: cover;
-    transition: transform .4s;
-  }
-  .blog-title {
-    height: 75px;
-  }
-}
+// .tablet-desktop-blog {
+//   .q-card {
+//     width: 350px;
+//     height: 350px;
+//     border-radius: 20px;
+//     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+//     @media only screen and (max-width: $breakpoint-xs-max) {
+//       width: 280px;
+//       // height: 240px;
+//     }
+//   }
+//   .q-card:hover {
+//     transform: scale(1.05);
+//   }
+//   img {
+//     width: 100%;
+//     border-top-left-radius: 20px;
+//     border-top-right-radius: 20px;
+//     height: 175px; //static
+//     object-fit: cover;
+//     transition: transform .4s;
+//   }
+//   .blog-title {
+//     height: 75px;
+//   }
+// }
 
 .mobile-image {
   width: 100%;
@@ -169,6 +169,16 @@ export default {
   padding-right: 48px;
   @media only screen and (max-width: 799px) and (min-width:0px)  {
     padding-right: 24px;
+  }
+}
+.blog-image {
+  img {
+    // max-width: 200px;
+    height: 150px;
+    // height: auto;
+    width: 200px;
+    object-fit: cover;
+    // object-position: bottom;
   }
 }
 </style>
