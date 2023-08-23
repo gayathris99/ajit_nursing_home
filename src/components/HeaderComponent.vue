@@ -2,7 +2,7 @@
   <q-header class="text-primary font-quicksand q-py-sm bg-header">
     <div>
       <div class="row justify-between align-center items-center" :class="isDesktop ? 'q-px-xl' : 'q-px-md'">
-        <div class="row items-center">
+        <div class="row items-center cursor-pointer">
           <q-icon name="menu" size="md" v-if="!isDesktop" class="text-primary cursor-pointer q-pr-sm" @click="openDrawer"/>
           <img src="~assets/Logo128.png" alt="Ajit nursing home logo" width="45" @click="goTo('home')">
           <div class="column fw-600 q-pl-md" @click="goTo('home')">
@@ -10,15 +10,6 @@
             <div :class="isMobile ? 'fs-14' : 'fs-16'">Healing Hands and Caring Hearts</div>
           </div>
         </div>
-        <!-- <div class="row items-center q-gutter-sm cursor-pointer">
-          <q-icon name="menu" size="md" v-if="!isDesktop" class="text-primary cursor-pointer q-pr-sm" @click="openDrawer" :class="isMobile ? 'q-mt-xl' : ''"/>
-          <img src="~assets/Logo128.png" alt="Ajit nursing home logo" width="45" @click="goTo('home')">
-          <div class="column fw-600" @click="goTo('home')">
-            <div class="fs-24">Ajit Nursing Home</div>
-            <div class="fs-16" v-if="isDesktop">Healing Hands and Caring Hearts</div>
-          </div>
-        </div> -->
-        <!-- <div class="fs-16 fw-600" v-if="!isDesktop" :class="isMobile ? 'q-ml-xl q-pl-xl' : ''">Healing Hands and Caring Hearts</div> -->
         <div class="row items-center q-gutter-md fs-16 fw-600" v-if="isDesktop">
           <q-btn-dropdown label="Hospital" no-caps class="fs-16 fw-600 font-quicksand" flat dense>
             <q-list class="fs-14 fw-600 font-quicksand text-primary column justify-center" style="width: 150px">
@@ -122,8 +113,6 @@
       </q-drawer>
     </div>
   </q-header>
-            <!-- // <q-icon name="menu" size="md" v-if="!isDesktop" class="text-primary cursor-pointer q-pr-sm" @click="openDrawer" :class="isMobile ? 'q-mt-xl' : ''"/>
-          // <img src="~assets/Logo128.png" alt="Ajit nursing home logo" width="45" @click="goTo('home')"> -->
 </template>
 <script>
 export default {
