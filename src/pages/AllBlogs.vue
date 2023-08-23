@@ -1,24 +1,34 @@
 <template>
-  <div :class="isMobile ? 'q-pa-md' : 'q-pa-xl'">
+  <div :class="isMobile ? 'q-pa-md' : 'q-pa-lg'">
     <div class="font-inter fs-16 fw-600 q-px-sm">
       <span class="text-grey cursor-pointer" @click="goTo('home')">Home / </span>
       <span class="text-primary cursor-pointer"  @click="goTo('blogs')">Blogs</span>
-      <div class="font-roboto text-primary fw-700 q-mt-sm q-mb-lg " :class="isMobile ? 'fs-28': 'fs-40'">All blogs</div>
-      <div class="q-mt-md row justify-start">
+      <div class="font-roboto text-primary fw-700 q-mt-sm q-mb-lg " :class="isMobile ? 'fs-28': 'fs-40'">{{selectedCategory}}</div>
+      <div class="q-mt-md row justify-start q-gutter-x-sm">
         <div v-if="!isMobile" class="col-md-3 col-sm-3 categories">
           <div class="q-mb-sm">Blog Categories</div>
           <div v-for="(category, key) in categories" :key="key">
             <div class="q-py-md font-inter fs-14 cursor-pointer text-primary" @click="selectCategory(category)" :class="checkCategory(category) ? 'selected-category': ''">{{category.label}}</div>
           </div>
         </div>
-        <div v-else class="col-xs-12">
+        <div v-else class="col-xs-12 q-mb-md">
           <label class="fw-400">Choose categories</label>
           <q-select class="q-mt-sm" v-model="selectedCategory" map-options emit-value outlined :options="categories" />
         </div>
         <div>
-          <div class="first-blog col-md-6 col-sm-6">
+          <div class="first-blog col-md-6 col-sm-6 col-xs-12 text-primary cursor-pointer" @click="goToBlog(firstBlog[0]?.id)">
             <img :src="firstBlog[0]?.image?.meta?.download_url"/>
-            <div>{{firstBlog[0]?.title}}</div>
+            <br>
+            <div class="q-my-md category q-px-sm q-py-xs fs-12 fw-600">
+              <div>{{firstBlog[0]?.tag}}</div>
+            </div>
+            <div class="fs-24 fw-600">{{firstBlog[0]?.title}}</div>
+            <div class="q-mt-sm text-grey fs-14 fw-400 first-blog-intro">{{firstBlog[0]?.intro}}</div>
+            <div class="font-inter fs-14 fw-600 q-mt-sm">
+              <span class="color-primary-two">Fact checked by: </span>
+              <span class="fw-400">Dr. Abhishek MBBS &#8226; {{firstBlog[0]?.date}}</span>
+            </div>
+            <div class="q-mt-md fw-400">Read More &nbsp; &#62;</div>
           </div>
         </div>
       </div>
@@ -77,6 +87,14 @@ export default {
       } finally {
         this.$q.loading.hide()
       }
+    },
+    goToBlog (id) {
+      this.$router.push({
+        name: 'individual-blog',
+        params: {
+          id
+        }
+      })
     }
   },
   mounted () {
@@ -100,7 +118,7 @@ export default {
   watch: {
     selectedCategory: {
       handler (newVal) {
-        const blogs = this.allBlogs.filter(blog => blog.tag === newVal)
+        const blogs = newVal === 'View All' ? JSON.parse(JSON.stringify(this.allBlogs)) : this.allBlogs.filter(blog => blog.tag === newVal)
         if (blogs.length) {
           this.firstBlog = blogs.splice(0,1)
           this.blogs = blogs
@@ -126,9 +144,28 @@ export default {
 
 .first-blog {
   img {
-    width: 900px;
-    height: 450px;
+    width: 65vw;
+    height: 400px;
+    max-height: 600px;
     object-fit: cover;
+    @media only screen and (max-width: 999px) and (min-width:600px) {
+      height: 350px;
+    }
+    @media only screen and (max-width: 599px) and (min-width:0px) {
+      width: 88vw;
+      height: 200px;
+    }
   }
+}
+.first-blog-intro {
+  width: 65vw;
+  @media only screen and (max-width: 599px) and (min-width:0px) {
+  width: 88vw;
+  }
+}
+.category {
+  display: inline-block;
+  border-radius: 2px;
+  background: var(--light-grey, #F4F4F4);
 }
 </style>
