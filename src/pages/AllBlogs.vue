@@ -15,8 +15,8 @@
           <label class="fw-400">Choose categories</label>
           <q-select class="q-mt-sm" v-model="selectedCategory" map-options emit-value outlined :options="categories" />
         </div>
-        <div>
-          <div class="first-blog col-md-6 col-sm-6 col-xs-12 text-primary cursor-pointer" @click="goToBlog(firstBlog[0]?.id)">
+        <div class="col">
+          <div class="first-blog text-primary cursor-pointer" @click="goToBlog(firstBlog[0]?.id)">
             <img :src="firstBlog[0]?.image?.meta?.download_url"/>
             <br>
             <div class="q-my-md category q-px-sm q-py-xs fs-12 fw-600">
@@ -29,6 +29,22 @@
               <span class="fw-400">Dr. Abhishek MBBS &#8226; {{firstBlog[0]?.date}}</span>
             </div>
             <div class="q-mt-md fw-400">Read More &nbsp; &#62;</div>
+          </div>
+          <div class="q-mt-md row justify-between q-gutter-x-sm q-gutter-y-md items-center other-blogs col-md-9 col-sm-9 col-xs-12">
+            <div class="cursor-pointer" v-for="(blog, i) in blogs" :key="i" @click="goToBlog(blog?.id)">
+              <img :src="blog?.image?.meta?.download_url"/>
+              <br>
+              <div class="q-my-md category q-px-sm q-py-xs fs-12 fw-600">
+                <div>{{blog?.tag}}</div>
+              </div>
+              <div class="fs-24 fw-600 other-blog-title">{{blog?.title}}</div>
+              <div class="q-mt-sm text-grey fs-14 fw-400 other-blog-intro">{{blog?.intro}}</div>
+              <div class="font-inter fs-14 fw-600 q-mt-sm fact-checked">
+                <span class="color-primary-two">Fact checked by: </span>
+                <span class="fw-400">Dr. Abhishek MBBS &#8226; {{blog?.date}}</span>
+              </div>
+              <div class="q-mt-md fw-400" :class="isMobile ? 'q-mb-md' : ''">Read More &nbsp; &#62;</div>
+            </div>
           </div>
         </div>
       </div>
@@ -144,7 +160,7 @@ export default {
 
 .first-blog {
   img {
-    width: 65vw;
+    width: 70vw;
     height: 400px;
     max-height: 600px;
     object-fit: cover;
@@ -167,5 +183,28 @@ export default {
   display: inline-block;
   border-radius: 2px;
   background: var(--light-grey, #F4F4F4);
+}
+.other-blogs {
+  img {
+    width: 34vw;
+    height: 250px;
+    @media only screen and (max-width: 940px) and (min-width:600px) {
+      width: 32vw;
+      height: 220px;
+    }
+    @media only screen and (max-width: 599px) and (min-width:0px) {
+      width: 88vw;
+      height: 200px;
+    }
+  }
+}
+.other-blog-intro, .fact-checked, .other-blog-title {
+    width: 34vw;
+    @media only screen and (max-width: 940px) and (min-width:600px) {
+      width: 32vw;
+    }
+    @media only screen and (max-width: 599px) and (min-width:0px) {
+      width: 88vw;
+    }
 }
 </style>
