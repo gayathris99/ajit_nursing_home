@@ -15,7 +15,7 @@
           <label class="fw-400">Choose categories</label>
           <q-select class="q-mt-sm" v-model="selectedCategory" map-options emit-value outlined :options="categories" />
         </div>
-        <div class="col">
+        <div class="col" v-if="!isLoading && !noResults">
           <div class="first-blog text-primary cursor-pointer" @click="goToBlog(firstBlog[0]?.id)">
             <img :src="firstBlog[0]?.image?.meta?.download_url"/>
             <br>
@@ -45,6 +45,12 @@
               </div>
               <div class="q-mt-md fw-400" :class="isMobile ? 'q-mb-md' : ''">Read More &nbsp; &#62;</div>
             </div>
+          </div>
+        </div>
+        <div class="col" v-if="noResults">
+          <div class="column justify-center align-center items-center q-mt-md">
+            <q-img src="~assets/noResultFound.svg" width="250px"></q-img>
+            <div class="text-primary q-ml-md font-inter fs-16 fw-600 q-mt-md">No results found</div>
           </div>
         </div>
       </div>
@@ -77,6 +83,7 @@ export default {
       return category.label === this.selectedCategory
     },
     async fetchAllBlogs () {
+      this.isLoading = true
       this.$q.loading.show()
       try {
         const { data: { items }} = await this.getAllBlogs()
@@ -93,6 +100,7 @@ export default {
         })
         this.firstBlog = items.splice(0,1)
         this.blogs = items
+        this.noResults = !this.firstBlog.length && !this.blogs.length
       } catch (error) {
         this.$q.notify({
           message: "Something went wrong, please try again",
@@ -101,6 +109,7 @@ export default {
           icon: "warning",
         });
       } finally {
+        this.isLoading = false
         this.$q.loading.hide()
       }
     },
@@ -128,7 +137,8 @@ export default {
           value: 'View All'
         }
       ],
-      isNoBlogs: false
+      isLoading: false,
+      noResults: false
     }
   },
   watch: {
@@ -138,7 +148,7 @@ export default {
         if (blogs.length) {
           this.firstBlog = blogs.splice(0,1)
           this.blogs = blogs
-        } else this.isNoBlogs = true
+        } else this.noResults = true
       }
     }
   }
