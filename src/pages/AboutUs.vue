@@ -4,7 +4,7 @@
       <span class="text-grey cursor-pointer" @click="goTo('home')">Home / </span>
       <span class="text-primary cursor-pointer"  @click="goTo('about-us')">About Us</span>
       <div class="grey-border  q-mt-md" :class="isMobile ? 'q-pa-sm': 'q-py-lg q-px-md'">
-        <q-img src="~assets/hospitalImage.svg"/>
+        <img src="~assets/hospitalImage.svg" alt="">
       </div>
       <div class="row justify-center q-mt-md font-inter fs-20 fw-400 text-grey">
         Ajit Nursing Home Raibag
@@ -71,5 +71,10 @@ export default {
 <style lang="scss" scoped>
 .grey-border {
   border: 1px solid #EEE;
+  img {
+    width: 100%;
+    min-height: 220px;
+    object-fit: cover;
+  }
 }
 </style>
