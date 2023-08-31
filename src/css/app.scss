@@ -173,3 +173,10 @@ body {
 .text-underline {
   text-decoration: underline;
 }
+
+.padding-right {
+  padding-right: 48px;
+  @media only screen and (max-width: 799px) and (min-width:0px)  {
+    padding-right: 24px;
+  }
+}

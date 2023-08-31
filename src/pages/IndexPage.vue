@@ -11,6 +11,7 @@
     <our-testimonials/>
     <our-blog/>
     <contact-us id="contact-us"/>
+    <contact-details/>
   </q-page>
 </template>
 
@@ -23,6 +24,7 @@ import MakeAppointment from 'src/components/HomePageComponents/MakeAppointment.v
 import OurTestimonials from 'src/components/HomePageComponents/OurTestimonials.vue'
 import OurBlog from 'src/components/HomePageComponents/OurBlog.vue'
 import ContactUs from 'src/components/HomePageComponents/ContactUs.vue'
+import ContactDetails from 'src/components/HomePageComponents/ContactDetails.vue'
 import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'IndexPage',
@@ -34,7 +36,8 @@ export default {
     MakeAppointment,
     OurTestimonials,
     OurBlog,
-    ContactUs
+    ContactUs,
+    ContactDetails
   },
   computed: {
     // ...mapGetters({

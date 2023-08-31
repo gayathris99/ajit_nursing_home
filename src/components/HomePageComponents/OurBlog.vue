@@ -129,7 +129,7 @@ export default {
 .mobile-image {
   width: 100%;
   height: 150px;
-  object-fit: center;
+  object-fit: cover;
   @media only screen and (max-width: 599px) and (min-width: 400px) {
     height: 200px;
   }

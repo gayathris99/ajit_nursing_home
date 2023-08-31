@@ -1,8 +1,8 @@
 <template>
   <div :class="isMobile ? 'bg-greyish': ''">
     <div class="font-inter text-primary fs-24 fw-600 text-center q-px-md" :class="isMobile ? 'q-pt-md': 'q-pt-xl'">Our Doctors</div>
-    <div class="fw-400 text-primary q-mt-sm title text-center font-oxygen q-px-md">Specialist obgyne, pediatricians team</div>
-    <div class="q-mt-md text-center fw-400 font-oxygen fs-18 text-primary q-px-md" :class="isMobile ? 'q-pb-md': 'q-pb-xl'">Has a team of the best specialist doctors in the field of obstetrics & gynaecology as well as paediatricians. In addition, we also have several other specialists.</div>
+    <div class="fw-400 text-primary q-mt-sm title text-center font-oxygen q-px-md">Specialist obgyne, surgical team</div>
+    <div class="q-mt-md text-center fw-400 font-oxygen fs-18 text-primary q-px-md" :class="isMobile ? 'q-pb-md': 'q-pb-xl'">Has a team of the best specialist doctors in the field of obstetrics & gynaecology as well as surgery. In addition, we also have several other specialists.</div>
     <swiper
       v-if="isDesktop || isTablet"
       :slidesPerView="slidesCount"
