@@ -63,7 +63,7 @@ export async function getAllNews({ commit, dispatch }) {
 export async function getBlog({ commit, dispatch }, { blogId }) {
   try {
     const data = await axios.get(
-      `https://anh.foxgloveteam.com/api/v2/pages/${blogId}/`
+      `https://anh.foxgloveteam.com/api/v2/pages/${blogId}/?site=anh-cms.foxgloveteam`
     );
     return data;
   } catch (error) {
