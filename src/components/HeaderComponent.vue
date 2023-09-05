@@ -17,7 +17,7 @@
                 <q-item-section @click="goTo('about-us')">About Us</q-item-section>
               </q-item>
               <q-item clickable v-close-popup>
-                <q-item-section>Our Doctors</q-item-section>
+                <q-item-section @click="goTo('our-doctors')">Our Doctors</q-item-section>
               </q-item>
               <q-item clickable v-close-popup>
                 <q-item-section>Facilities</q-item-section>
@@ -80,7 +80,7 @@
             dense
             >
             <div class="q-py-sm q-px-md cursor-pointer fs-14" @click="goTo('about-us')">About Us</div>
-            <div class="q-py-sm q-px-md cursor-pointer fs-14">Our Doctors</div>
+            <div class="q-py-sm q-px-md cursor-pointer fs-14" @click="goTo('our-doctors')">Our Doctors</div>
             <div class="q-py-sm q-px-md cursor-pointer fs-14">Facilities</div>
             <div class="q-py-sm q-px-md cursor-pointer fs-14">Gallery</div>
           </q-expansion-item>

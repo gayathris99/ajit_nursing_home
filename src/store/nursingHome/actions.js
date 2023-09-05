@@ -43,7 +43,7 @@ export async function getDoctors({ commit, dispatch }) {
 export async function getAllBlogs({ commit, dispatch }) {
   try {
     const data = await axios.get(
-     'https://anh.foxgloveteam.com/api/v2/pages/?type=blog.BlogPage&fields=tag%2Cdate%2Cintro%2Cimage'
+     'https://anh.foxgloveteam.com/api/v2/pages/?type=cms_dashboard.BlogPage&fields=tag%2Cdate%2Cintro%2Cimage&site=anh-cms.foxgloveteam'
     );
     return data;
   } catch (error) {

@@ -5,11 +5,11 @@
     <hero-navbar
     @onScrollElement="onScrollElement"/>
     <why-choseus/>
-    <our-doctors/>
+    <doctors-component/>
     <make-appointment
     @onScrollElement="onScrollElement"/>
     <our-testimonials/>
-    <our-blog/>
+    <blog-news/>
     <contact-us id="contact-us"/>
     <contact-details/>
   </q-page>
@@ -19,10 +19,10 @@
 import HeroSection from 'src/components/HomePageComponents/HeroSection.vue'
 import HeroNavbar from 'src/components/HomePageComponents/HeroNavbar.vue'
 import WhyChoseus from 'src/components/HomePageComponents/WhyChoseus.vue'
-import OurDoctors from 'src/components/HomePageComponents/OurDoctors.vue'
+import DoctorsComponent from 'src/components/HomePageComponents/DoctorsComponent.vue'
 import MakeAppointment from 'src/components/HomePageComponents/MakeAppointment.vue'
 import OurTestimonials from 'src/components/HomePageComponents/OurTestimonials.vue'
-import OurBlog from 'src/components/HomePageComponents/OurBlog.vue'
+import BlogNews from 'src/components/HomePageComponents/BlogNews.vue'
 import ContactUs from 'src/components/HomePageComponents/ContactUs.vue'
 import ContactDetails from 'src/components/HomePageComponents/ContactDetails.vue'
 import { mapGetters, mapMutations } from 'vuex'
@@ -32,10 +32,10 @@ export default {
     HeroSection,
     HeroNavbar,
     WhyChoseus,
-    OurDoctors,
+    DoctorsComponent,
     MakeAppointment,
     OurTestimonials,
-    OurBlog,
+    BlogNews,
     ContactUs,
     ContactDetails
   },

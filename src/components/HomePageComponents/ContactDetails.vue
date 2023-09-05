@@ -75,6 +75,9 @@ iframe {
     height: 200px;
   }
 }
+.gmap_canvas {
+  border: 1px solid lightgrey;
+}
 a {
   color: inherit;
 }
