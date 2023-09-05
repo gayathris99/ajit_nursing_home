@@ -7,7 +7,7 @@
     </div>
     <div class="row justify-between items-center font-inter fw-600 q-mt-lg q-gutter-y-xs-md">
       <div class="title  text-primary col-md-10 col-sm-8 col-xs-12">{{blogContent.title}}</div>
-      <div class="fs-16 color-primary-two cursor-pointer">Share this post &nbsp;<span class="bg-icon q-pa-xs"><q-icon name="link"/></span></div>
+      <div class="fs-16 color-primary-two cursor-pointer" @click="openSharePopup">Share this post &nbsp;<span class="bg-icon q-pa-xs"><q-icon name="link"/></span></div>
     </div>
     <div class="font-inter fs-14 fw-600 q-mt-sm">
       <span class="color-primary-two">Fact checked by: </span>
@@ -18,6 +18,26 @@
     </div>
     <div class="q-mt-md blog-body font-inter text-primary fs-18" v-html="blogContent.body">
     </div>
+    <q-dialog v-model="sharePopup" class="share-popup">
+     <q-card>
+        <q-card-section class="q-pa-md font-inter">
+          <div class="row justify-end cursor-pointer">
+            <q-icon name="close" v-close-popup size="xs"/>
+          </div>
+          <div class="q-mt-md">
+            <div class="text-primary fw-600 fs-18 font-inter q-my-sm">Share this post on:</div>
+            <img src="~assets/whatsapp.png" alt="" width="40" class="cursor-pointer" @click="shareOnWhatsapp">
+            <hr>
+            <div class="text-primary fw-600 fs-18 font-inter q-my-sm">Copy link to clipboard</div>
+            <div class="row items-center q-gutter-sm">
+              <q-input readonly outlined v-model="blogLink"/>
+              <q-icon name="content_copy" :size="isMobile ? 'xs': 'md'" color="primary" class="cursor-pointer" @click="copyLink"></q-icon>
+            </div>
+            <div v-if="showCopied" class="text-positive fs-12 fw-600 q-mt-sm">Copied</div>
+          </div>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
@@ -27,7 +47,10 @@ export default {
   name: 'IndividualBlogs',
   data () {
    return {
-     blogContent: ''
+     blogContent: '',
+     sharePopup: false,
+     blogLink: null,
+     showCopied: false
    }
   },
   computed: {
@@ -39,6 +62,13 @@ export default {
     ...mapActions({
       getBlog: 'nursingHome/getBlog'
     }),
+    copyLink () {
+      navigator.clipboard.writeText(this.blogLink)
+      this.showCopied = true
+    },
+    shareOnWhatsapp () {
+      window.open(`https://api.whatsapp.com/send?text=${this.blogLink}`)
+    },
     goTo (name) {
       this.$router.push({
         name
@@ -51,6 +81,10 @@ export default {
           id: this.$route.params.id
         }
       })
+    },
+    openSharePopup () {
+      this.showCopied = false
+      this.sharePopup = true
     },
     async fetchBlog () {
       const blogId = this.$route.params.id
@@ -75,6 +109,7 @@ export default {
   },
   mounted () {
     this.fetchBlog()
+    this.blogLink = window.location.href
   }
 }
 </script>
@@ -109,5 +144,13 @@ export default {
     font-weight: 600;
   }
 }
-
+.q-dialog {
+  width: 300px;
+}
+.q-input {
+  width: 300px;
+  @media only screen and (max-width: $breakpoint-xs-max) {
+    width: 220px;
+  }
+}
 </style>

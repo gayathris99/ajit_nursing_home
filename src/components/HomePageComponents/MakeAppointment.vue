@@ -59,12 +59,12 @@ export default {
     }
   },
   methods: {
-  scrollToContact () {
-    this.$emit('onScrollElement', 'contact-us')
-  },
-  redirectToWhatsapp () {
-    window.open('https://wa.me/919448420369', '_blank')
-  },
+    scrollToContact () {
+      this.$emit('onScrollElement', 'contact-us')
+    },
+    redirectToWhatsapp () {
+      window.open('https://wa.me/919448420369', '_blank')
+    }
   }
 }
 </script>
