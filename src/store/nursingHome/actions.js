@@ -50,6 +50,16 @@ export async function getAllBlogs({ commit, dispatch }) {
     throw (error)
   }
 }
+export async function getAllNews({ commit, dispatch }) {
+  try {
+    const data = await axios.get(
+     'https://anh.foxgloveteam.com/api/v2/pages/?type=cms_dashboard.NewsArticlePage&fields=date%2Cintro%2Cimage&site=anh-cms.foxgloveteam'
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
 export async function getBlog({ commit, dispatch }, { blogId }) {
   try {
     const data = await axios.get(

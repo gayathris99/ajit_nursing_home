@@ -1,46 +1,63 @@
 <template>
-  <div class="row items-center justify-evenly q-py-lg font-inter">
+  <div class="row items-center align-center justify-evenly q-py-lg font-inter q-gutter-y-md" :class="{'q-px-lg' : !isDesktop}">
     <!-- Blogs -->
-    <div class="container col-md-5 col-sm-5 q-mr-xs col-xs-12 q-pa-md">
-      <div class="fs-24 fw-600 text-primary">Blogs</div>
-    <swiper
-      :direction="'vertical'"
-      :slidesPerView="2"
-      :slidesPerGroup="2"
-      :spaceBetween="30"
-      :pagination="{
-        clickable: true
-      }"
-      :modules="modules"
-      class="mySwiper"
-    >
-      <swiper-slide></swiper-slide>
-      <!-- <swiper-slide class="q-pt-md q-pb-xl column" v-for="(doctor,key) in doctors" :key="key">
-        <q-img :src="doctor.profileImage" alt=""/>
-        <div class="text-primary q-mt-sm fs-16 font-inter fw-600 text-center">{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</div>
-        <div class="fs-14 font-inter fw-500 text-primary text-center">{{doctor.education}}</div>
-        <div class="q-mt-xs fs-14 color-grey font-inter fw-600 text-center">{{doctor.profilesShowcase}}</div>
-        <div class="fs-12 color-grey font-inter fw-500 text-center">with {{doctor.yearsOfExperience }} years experience overall</div>
-      </swiper-slide> -->
-    </swiper>
+    <div class="container col-md-5  col-sm-12 q-mr-xs  q-pa-md">
+      <div class="fs-24 fw-600 text-primary q-mb-md">Blogs</div>
+      <div v-for="(blog) in blogs" :key="blog.id" class="q-mb-lg cursor-pointer" @click="goToBlog(blog.id)">
+        <div class="row items-center font-inter q-gutter-x-md">
+          <div class="image-container">
+            <img :src="blog?.image?.meta?.download_url"/>
+          </div>
+          <div class="details">
+            <div class="color-primary-two fw-600 fs-12" :class="{'q-mt-sm' : isMobile}">{{blog.tag}}</div>
+            <div class="q-mt-sm text-primary fw-600 fs-18 blog-title">{{blog.title}}</div>
+            <div class="blog-intro q-mt-xs fw-400 fs-12 ellipsis-2-lines">{{blog.intro}}</div>
+            <div class="q-mt-md fw-600 fs-12 text-primary">Fact Checked By</div>
+            <span class="fw-400 fs-12">Dr. Abhishek MBBS &#8226; {{blog?.date}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-center q-mt-lg">
+        <q-btn
+          color="secondary"
+          label="See More"
+          @click="goTo('blogs')"
+          no-caps
+          rounded
+          class="fs-18 q-mt-md q-px-lg font-inter"/>
+      </div>
     </div>
 
     <!-- News -->
-    <div class="container col-md-5 col-sm-5 col-xs-12 q-pa-md">
-      <div class="fs-24 fw-600 text-primary">News</div>
+    <div class="container col-md-5  col-sm-12 q-pa-md">
+      <div class="fs-24 fw-600 text-primary q-mb-md">News</div>
+      <div v-for="(singleNews) in news" :key="singleNews.id" class="q-mb-lg cursor-pointer">
+        <div class="row items-center font-inter q-gutter-x-md">
+          <div class="image-container">
+            <img :src="singleNews?.image?.meta?.download_url"/>
+          </div>
+          <div class="details">
+            <div class="color-primary-two fw-600 fs-12">{{singleNews.tag}}</div>
+            <div class="q-mt-sm text-primary fw-600 fs-18 blog-title">{{singleNews.title}}</div>
+            <div class="blog-intro q-mt-xs fw-400 fs-12 ellipsis-2-lines">{{singleNews.intro}}</div>
+            <div class="q-mt-md fw-600 fs-12 text-primary">Fact Checked By</div>
+            <span class="fw-400 fs-12">Dr. Abhishek MBBS &#8226; {{singleNews?.date}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-center q-mt-sm">
+        <q-btn
+          color="secondary"
+          label="See More"
+          no-caps
+          rounded
+          class="fs-18 q-mt-md q-px-lg font-inter"/>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'swiper/vue';
-
-import 'swiper/css';
-
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-
-import { Navigation, Pagination } from 'swiper/modules';
 import { mapActions } from 'vuex'
 export default {
   name: 'OurBlog',
@@ -60,7 +77,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      getAllBlogs: 'nursingHome/getAllBlogs'
+      getAllBlogs: 'nursingHome/getAllBlogs',
+      getAllNews: 'nursingHome/getAllNews'
     }),
     goTo (name) {
       this.$router.push({
@@ -70,8 +88,21 @@ export default {
     async fetchAllBlogs () {
       try {
         const { data: { items }} = await this.getAllBlogs()
-        this.blogs = items
-        console.log(items)
+        this.blogs = items.slice(0,2)
+      } catch (error) {
+        this.$q.notify({
+          message: "Something went wrong, please try again",
+          color: "red",
+          position: "top",
+          icon: "warning",
+        });
+      }
+    },
+    async fetchAllNews () {
+      try {
+        const { data: { items }} = await this.getAllNews()
+        this.news = items.slice(0,2)
+        console.log(items , 'news')
       } catch (error) {
         this.$q.notify({
           message: "Something went wrong, please try again",
@@ -92,21 +123,14 @@ export default {
   },
   mounted () {
     this.fetchAllBlogs()
+    this.fetchAllNews()
   },
   data () {
     return {
-      blogs: []
+      blogs: [],
+      news: []
     }
-  },
-  components: {
-    Swiper,
-    SwiperSlide,
-  },
-  setup() {
-    return {
-      modules: [Pagination, Navigation],
-    };
-  },
+  }
 }
 </script>
 
@@ -114,5 +138,85 @@ export default {
 .container {
   border-radius: 15px;
   background: #F6F6F6;
+  height: 540px;
+  @media only screen and (max-width: 1024px) {
+    height: 560px;
+  }
+  @media only screen and (max-width: 1023px) and (min-width: 0px) {
+    height: auto;
+  }
+}
+.image-container {
+  img {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    @media only screen and (max-width: 1317px) and (min-width:1174px)  {
+      width: 190px;
+      height: 150px;
+      object-fit: cover;
+    }
+    @media only screen and (max-width: 1173px) and (min-width: 1024px)  {
+      width: 160px;
+      height: 130px;
+      object-fit: cover;
+    }
+    @media only screen and (max-width: 599px) and (min-width: 0px)  {
+      width: 85vw;
+      height: 200px;
+      object-fit: cover;
+    }
+
+  }
+}
+
+.blog-title {
+  max-width: 300px;
+  @media only screen and (max-width: 1317px) and (min-width:1245px)  {
+    max-width: 280px;
+  }
+  @media only screen and (max-width: 1244px) and (min-width:1102px)  {
+    max-width: 250px;
+  }
+  @media only screen and (max-width: 1101px) and (min-width: 1024px)  {
+    max-width: 210px;
+  }
+  @media only screen and (max-width: 1023px) and (min-width: 850px)  {
+    max-width: 65vw;
+  }
+  @media only screen and (max-width: 849px) and (min-width: 740px)  {
+    max-width: 60vw;
+  }
+  @media only screen and (max-width: 739px) and (min-width: 600px)  {
+    max-width: 50vw;
+  }
+  @media only screen and (max-width: 599px) and (min-width: 0px)  {
+    width: 85vw;
+  }
+}
+.blog-intro {
+ color: rgba(29, 47, 78, 0.40);
+ max-width: 300px;
+  @media only screen and (max-width: 1317px) and (min-width:1245px)  {
+    max-width: 280px;
+  }
+  @media only screen and (max-width: 1244px) and (min-width:1102px)  {
+    max-width: 250px;
+  }
+  @media only screen and (max-width: 1101px) and (min-width: 1024px)  {
+    max-width: 210px;
+  }
+  @media only screen and (max-width: 1023px) and (min-width: 850px)  {
+    max-width: 65vw;
+  }
+  @media only screen and (max-width: 849px) and (min-width: 740px)  {
+    max-width: 60vw;
+  }
+  @media only screen and (max-width: 739px) and (min-width: 600px)  {
+    max-width: 50vw;
+  }
+  @media only screen and (max-width: 599px) and (min-width: 0px)  {
+    width: 85vw;
+  }
 }
 </style>
