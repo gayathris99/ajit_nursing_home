@@ -14,6 +14,39 @@
       />
     </div>
   </div>
+  <div class="row justify-center items-center">
+    <q-card flat dense bordered class="col-md-6 col-sm-12 col-xs-12 q-pa-xl font-oxygen">
+      <div class=" text-primary fw-700 fs-36">QUESTION ?</div>
+      <div class="text-primary fw-700 fs-20 q-mt-sm">Ask to doctor</div>
+      <div class="q-mt-md fw-400 fs-18 text-primary">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</div>
+      <div class="q-mt-lg">
+        <q-btn
+        style="background: #3363AC; color: white"
+        label="Ask a question"
+        rounded
+        no-caps
+        class="font-inter fs-18"
+        :size="isDesktop ? 'lg' : 'md'"
+        @click="redirectToWhatsapp"
+        />
+      </div>
+    </q-card>
+    <q-card flat dense bordered class="col-md-6 col-sm-12 col-xs-12 q-pa-xl font-oxygen">
+      <div class=" text-primary fw-700 fs-36">APPOINTMENT</div>
+      <div class="text-primary fw-700 fs-20 q-mt-sm">Book  with gynecologist</div>
+      <div class="q-mt-md fw-400 fs-18 text-primary">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</div>
+      <div class="q-mt-lg">
+        <q-btn
+        style="background: #3363AC; color: white"
+        label="Make an Appointment"
+        rounded
+        no-caps
+        class="font-inter fs-18"
+        :size="isDesktop ? 'lg' : 'md'"
+        />
+      </div>
+    </q-card>
+  </div>
 </template>
 
 
@@ -28,7 +61,10 @@ export default {
   methods: {
   scrollToContact () {
     this.$emit('onScrollElement', 'contact-us')
-  }
+  },
+  redirectToWhatsapp () {
+    window.open('https://wa.me/919448420369', '_blank')
+  },
   }
 }
 </script>
