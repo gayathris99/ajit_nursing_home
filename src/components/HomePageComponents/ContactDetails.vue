@@ -6,7 +6,7 @@
     <div>
     <div class="row justify-between  q-gutter-xs padding-left padding-right text-primary font-oxygen">
       <div class="col-md-4 col-sm-6 col-xs-12 q-gutter-sm">
-        <q-card class="q-pa-md">
+        <q-card class="q-pa-md" flat dense>
           <div class="row items-center q-gutter-x-sm">
             <q-icon name="schedule" size="sm"/>
             <div class="fs-20 fw-600">Timings (open 24/7)</div>
@@ -16,7 +16,7 @@
             <div>Mon-Sun - 12:00AM - 11:59PM</div>
           </div>
         </q-card>
-        <q-card class="q-pa-md">
+        <q-card class="q-pa-md" flat dense>
           <div class="row items-center q-gutter-x-sm">
             <q-icon name="call" size="sm"/>
             <div class="fs-20 fw-600">Reach out to us</div>
@@ -31,7 +31,7 @@
         </q-card>
       </div>
       <div class="col-md-8 col-sm-6 col-xs-12 q-gutter-sm location">
-        <q-card class="q-pa-md" dense>
+        <q-card class="q-pa-md" flat dense>
           <div class="row items-center q-gutter-x-sm">
             <q-icon name="location_on" size="sm"/>
             <div class="fs-20 fw-600">Location</div>
