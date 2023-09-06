@@ -6,8 +6,19 @@
         <div class="text-center appt-img">
           <img src="~assets/AppointmentIllustration.svg"/>
         </div>
-        <div class="row justify-center q-mt-md">
+        <div class="row justify-center q-mt-md" v-if="!isMobile">
           <practo:abs_widget widget="c1652e7290313b78"></practo:abs_widget>
+        </div>
+        <div v-else class="row justify-center q-mt-md">
+          <q-btn
+          style="background: #3363AC; color: white"
+          label="Book Appointment"
+          rounded
+          no-caps
+          class="font-inter fs-18"
+          :size="isDesktop ? 'lg' : 'md'"
+          @click="goToPracto"
+          />
         </div>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12 table-container" :class="isMobile ? 'q-pa-md' : 'q-px-lg q-py-xl'">
@@ -28,16 +39,6 @@
         </table>
       </div>
     </div>
-    <!-- <q-dialog v-model="practoModel">
-      <q-card>
-      <iframe src="https://www.practo.com/health/widgets/c1652e7290313b78/doctors?practice_id=null" style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>
-    </q-card>
-    </q-dialog>
-    <embed data="https://www.practo.com/health/widgets/c1652e7290313b78/doctors?practice_id=null"
-    width="400"
-    height="300"
-    type="text/html"/>
-    <a href="https://www.practo.com/health/widgets/c1652e7290313b78/doctors?practice_id=null">https://www.practo.com/health/widgets/c1652e7290313b78/doctors?practice_id=null</a> -->
   </div>
 </template>
 
@@ -46,7 +47,6 @@ export default {
   name: 'AppointmentPage',
   data () {
     return {
-      practoModel: true,
       tableData: [
         {
           day: 'Monday',
@@ -107,6 +107,11 @@ export default {
       tag.setAttribute("src", script);
       document.head.appendChild(tag);
     });
+  },
+  methods: {
+    goToPracto () {
+      window.open('https://www.practo.com/raibag/clinic/ajit-nursing-home-belgaum', '_blank');
+    }
   }
 }
 </script>
@@ -150,5 +155,8 @@ th, .day-column {
       width: 300px;
     }
   }
+}
+:deep(.practo_link) {
+  display: none;
 }
 </style>

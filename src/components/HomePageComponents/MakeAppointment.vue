@@ -11,8 +11,7 @@
       class="font-inter fs-18"
       :size="isDesktop ? 'lg' : 'md'"
       @click="goTo('appointment')"
-      >
-      </q-btn>
+      />
     </div>
   </div>
   <div class="row justify-center items-center">
