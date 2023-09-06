@@ -12,9 +12,6 @@
       :size="isDesktop ? 'lg' : 'md'"
       @click="goTo('appointment')"
       >
-      <div v-show="false">
-        <practo:abs_widget widget="c1652e7290313b78"></practo:abs_widget>
-      </div>
       </q-btn>
     </div>
   </div>
@@ -77,16 +74,6 @@ export default {
         name
       })
     }
-  },
-  mounted () {
-    const scripts = [
-      'https://www.practo.com/bundles/practopractoapp/js/abs_widget_helper.js'
-    ];
-    scripts.forEach(script => {
-      let tag = document.createElement("script");
-      tag.setAttribute("src", script);
-      document.head.appendChild(tag);
-    });
   }
 }
 </script>
