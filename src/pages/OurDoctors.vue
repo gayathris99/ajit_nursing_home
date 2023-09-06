@@ -50,7 +50,7 @@
               <q-btn
               color="secondary"
               label="Make an Appointment"
-              @click="scrollToContact"
+              @click="goTo('appointment')"
               no-caps
               rounded
               class="fs-18 q-py-sm q-mb-lg"/>

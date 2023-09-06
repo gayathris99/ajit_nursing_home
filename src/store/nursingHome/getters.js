@@ -1,3 +1,3 @@
-export function getScrollToContact (state) {
-  return state.scrollToContact
+export function functionName (state) {
+  return state
 }

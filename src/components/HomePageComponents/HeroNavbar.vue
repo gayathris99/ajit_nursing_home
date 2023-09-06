@@ -15,7 +15,7 @@
       </div>
       <div class="border-right text-navbar">&nbsp;</div>
     </div>
-    <div class="row items-center cursor-pointer q-gutter-x-xl" @click="scrollToContact">
+    <div class="row items-center cursor-pointer q-gutter-x-xl" @click="goTo('aappointment')">
       <div class="row items-center q-gutter-x-xs">
         <q-icon name="bookmarks" size="sm"></q-icon>
         <div class="fs-20 q-pr-sm q-pl-xs">Book an Appointment</div>
@@ -47,8 +47,10 @@ export default {
     }
   },
   methods: {
-    scrollToContact () {
-      this.$emit('onScrollElement', 'contact-us')
+    goTo (name) {
+      this.$router.push({
+        name
+      })
     }
   }
 }

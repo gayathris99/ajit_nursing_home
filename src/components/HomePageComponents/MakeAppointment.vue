@@ -10,7 +10,7 @@
       no-caps
       class="font-inter fs-18"
       :size="isDesktop ? 'lg' : 'md'"
-      @click="onClickAppt"
+      @click="goTo('appointment')"
       >
       <div v-show="false">
         <practo:abs_widget widget="c1652e7290313b78"></practo:abs_widget>
@@ -45,6 +45,7 @@
         label="Make an Appointment"
         rounded
         no-caps
+        @click="goTo('appointment')"
         class="font-inter fs-18"
         :size="isDesktop ? 'lg' : 'md'"
         />
@@ -63,15 +64,18 @@ export default {
     }
   },
   methods: {
-    scrollToContact () {
-      this.$emit('onScrollElement', 'contact-us')
-    },
+
     redirectToWhatsapp () {
       window.open('https://wa.me/919448420369', '_blank')
     },
     onClickAppt () {
       console.log( document.getElementsByClassName('practo_abs_widget_button'))
       document.getElementsByClassName('practo_abs_widget_button').href.click()
+    },
+    goTo (name) {
+      this.$router.push({
+        name
+      })
     }
   },
   mounted () {

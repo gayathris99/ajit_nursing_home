@@ -15,7 +15,7 @@
             <q-btn
             color="secondary"
             label="Make an appointment"
-            @click="scrollToContact"
+            @click="goTo('appointment')"
             no-caps
             rounded
             class="btn-fixed-width fs-18 q-py-sm"/>
@@ -41,7 +41,7 @@
         <q-btn
           color="secondary"
           label="Make an appointment"
-          @click="scrollToContact"
+          @click="goTo('appointment')"
           no-caps
           rounded
           class="fs-18 q-mt-md btn-fixed-width font-inter"/>
@@ -58,13 +58,9 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'HeroSection',
   computed: {
-    ...mapGetters({
-      getScrollToContact: 'nursingHome/getScrollToContact'
-    }),
     isMobile () {
       return this.$q.screen.lt.sm
     },
@@ -76,8 +72,10 @@ export default {
     }
   },
   methods: {
-    scrollToContact () {
-      this.$emit('onScrollElement', 'contact-us')
+    goTo (name) {
+      this.$router.push({
+        name
+      })
     }
   }
 }

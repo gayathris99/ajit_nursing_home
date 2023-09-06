@@ -11,7 +11,7 @@ const routes = [
       { path: 'our-doctors', name: 'our-doctors', component: () => import('pages/OurDoctors.vue') },
       { path: 'terms', name: 'terms', component: () => import('pages/TermsAndCondition.vue') },
       { path: 'privacy', name: 'privacy', component: () => import('pages/PrivacyPolicy.vue') },
-      { path: 'appointment', name: 'appointment', component: () => import('pages/AppointmentPage.vue') }
+      { path: 'make-an-appointment', name: 'appointment', component: () => import('pages/AppointmentPage.vue') }
     ]
   },
   {

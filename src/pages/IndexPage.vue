@@ -10,7 +10,7 @@
     @onScrollElement="onScrollElement"/>
     <our-testimonials/>
     <blog-news/>
-    <contact-us id="contact-us"/>
+    <!-- <contact-us id="contact-us"/> -->
     <contact-details/>
   </q-page>
 </template>
@@ -23,7 +23,7 @@ import DoctorsComponent from 'src/components/HomePageComponents/DoctorsComponent
 import MakeAppointment from 'src/components/HomePageComponents/MakeAppointment.vue'
 import OurTestimonials from 'src/components/HomePageComponents/OurTestimonials.vue'
 import BlogNews from 'src/components/HomePageComponents/BlogNews.vue'
-import ContactUs from 'src/components/HomePageComponents/ContactUs.vue'
+// import ContactUs from 'src/components/HomePageComponents/ContactUs.vue'
 import ContactDetails from 'src/components/HomePageComponents/ContactDetails.vue'
 import { mapGetters, mapMutations } from 'vuex'
 export default {
@@ -36,21 +36,16 @@ export default {
     MakeAppointment,
     OurTestimonials,
     BlogNews,
-    ContactUs,
+    // ContactUs,
     ContactDetails
   },
   computed: {
-    // ...mapGetters({
-    //   getScrollToContact: 'nursingHome/getScrollToContact'
-    // }),
     isMobile () {
       return this.$q.screen.lt.sm
     },
   },
   methods: {
-    // ...mapMutations({
-    //   setScrollToContact: 'nursingHome/setScrollToContact'
-    // }),
+
     onScrollElement (el) {
       const elementPosition = document.getElementById(el).offsetTop;
       window.scrollTo({
