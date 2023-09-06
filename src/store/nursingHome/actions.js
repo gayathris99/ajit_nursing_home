@@ -70,3 +70,13 @@ export async function getBlog({ commit, dispatch }, { blogId }) {
     throw (error)
   }
 }
+export async function getBlogFAQ({ commit, dispatch }, { blogId }) {
+  try {
+    const data = await axios.get(
+      `${process.env.BASE_URL}/faq/${blogId}`
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}

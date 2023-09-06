@@ -10,8 +10,12 @@
       no-caps
       class="font-inter fs-18"
       :size="isDesktop ? 'lg' : 'md'"
-      @click="scrollToContact"
-      />
+      @click="onClickAppt"
+      >
+      <div v-show="false">
+        <practo:abs_widget widget="c1652e7290313b78"></practo:abs_widget>
+      </div>
+      </q-btn>
     </div>
   </div>
   <div class="row justify-center items-center">
@@ -64,7 +68,21 @@ export default {
     },
     redirectToWhatsapp () {
       window.open('https://wa.me/919448420369', '_blank')
+    },
+    onClickAppt () {
+      console.log( document.getElementsByClassName('practo_abs_widget_button'))
+      document.getElementsByClassName('practo_abs_widget_button').href.click()
     }
+  },
+  mounted () {
+    const scripts = [
+      'https://www.practo.com/bundles/practopractoapp/js/abs_widget_helper.js'
+    ];
+    scripts.forEach(script => {
+      let tag = document.createElement("script");
+      tag.setAttribute("src", script);
+      document.head.appendChild(tag);
+    });
   }
 }
 </script>
@@ -99,4 +117,7 @@ export default {
     justify-content: center;
    }
 }
+// :deep(.practo_link) {
+//   display: none;
+// }
 </style>

@@ -18,6 +18,26 @@
     </div>
     <div class="q-mt-md blog-body font-inter text-primary fs-18" v-html="blogContent.body">
     </div>
+    <div class="q-mt-xl" v-if="blogContentFAQ?.length">
+      <div class="text-primary fw-600 fs-30 q-mb-sm">Frequently Asked Questions</div>
+      <q-list  v-for="(faq, key) in blogContentFAQ" :key="key">
+        <q-expansion-item class="no-padding" >
+          <template v-slot:header>
+            <div class="font-roboto fw-700 fs-18 text-primary font-inter faq-question q-py-sm">
+              {{faq.question}}
+            </div>
+          </template>
+          <q-card>
+            <q-card-section>
+              <div class="font-inter fs-16 color-primary-two fw-400">
+                {{faq.answer}}
+              </div>
+            </q-card-section>
+          </q-card>
+        </q-expansion-item>
+        <q-separator />
+      </q-list>
+    </div>
     <q-dialog v-model="sharePopup" class="share-popup">
      <q-card>
         <q-card-section class="q-pa-md font-inter">
@@ -48,6 +68,7 @@ export default {
   data () {
    return {
      blogContent: '',
+     blogContentFAQ: '',
      sharePopup: false,
      blogLink: null,
      showCopied: false
@@ -60,7 +81,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      getBlog: 'nursingHome/getBlog'
+      getBlog: 'nursingHome/getBlog',
+      getBlogFAQ: 'nursingHome/getBlogFAQ'
     }),
     copyLink () {
       navigator.clipboard.writeText(this.blogLink)
@@ -105,10 +127,31 @@ export default {
       finally {
         this.$q.loading.hide()
       }
+    },
+    async fetchBlogFAQ () {
+      const blogId = this.$route.params.id
+      try {
+        this.$q.loading.show()
+        const { data } = await this.getBlogFAQ({
+          blogId
+        })
+        if (data?.length) this.blogContentFAQ = data
+      } catch (error) {
+        this.$q.notify({
+          message: "Something went wrong, please try again",
+          color: "red",
+          position: "top",
+          icon: "warning",
+        });
+      }
+      finally {
+        this.$q.loading.hide()
+      }
     }
   },
   mounted () {
     this.fetchBlog()
+    this.fetchBlogFAQ()
     this.blogLink = window.location.href
   }
 }
@@ -143,6 +186,9 @@ export default {
     font-style: normal;
     font-weight: 600;
   }
+}
+.faq-question {
+  width: 100%;
 }
 .q-dialog {
   width: 300px;
