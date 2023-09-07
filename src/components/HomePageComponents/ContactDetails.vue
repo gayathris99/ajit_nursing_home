@@ -13,7 +13,8 @@
           </div>
           <div class="fs-14 fw-400 q-mt-sm">Timings that hospitals is open for and their timings</div>
           <div class="fs-16 q-mt-sm font-inter">
-            <div>Mon-Sun - 12:00AM - 11:59PM</div>
+            <div>Mon-Sat - 10:00AM - 7:00PM</div>
+            <div class="fw-500">24/7 Emergency Care Available</div>
           </div>
         </q-card>
         <q-card class="q-pa-md" flat dense>
@@ -23,10 +24,10 @@
           </div>
           <div class="fs-14 fw-400 q-mt-sm">You could reach out to us for any assistance or any queries</div>
           <div class="fs-16 q-mt-sm">
-            <a href="tel:08046808371">080 4680 8371</a>
+            <a href="tel:08331225603">08331225603</a>
           </div>
           <div class="fs-16 q-mt-sm">
-            <a href="tel:8951197936">+91 89511 97936</a>
+            <a href="tel:94811 62129">94811 62129</a>
           </div>
         </q-card>
       </div>
@@ -66,7 +67,7 @@ export default {
 <style lang="scss" scoped>
 iframe {
   width: 100%;
-  height: 180px;
+  height: 190px;
   @media only screen and (max-width: $breakpoint-sm-max) {
     height: 150px;
   }
