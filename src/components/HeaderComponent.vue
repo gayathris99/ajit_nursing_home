@@ -140,7 +140,7 @@
         </div>
         <div class="fs-16 fw-500 cursor-pointer font-montserrat login-tagline q-mb-md">Forgot Password ?</div>
         <q-btn
-        class="q-mb-md  login-btn font-montserrat"
+        class="q-mb-lg login-btn font-montserrat"
         label="LOG IN"
         color="secondary"
         size="md"
@@ -149,7 +149,59 @@
     </q-card>
   </q-dialog>
   <q-dialog v-model="signupPopup">
-    <q-card>Signup</q-card>
+    <q-card class="signup-popup no-padding">
+      <q-card-section class="no-padding">
+        <div class="close-btn cursor-pointer" @click="closeUserPopup('signup')">
+          <img src="~assets/closeIcon.svg" width="24" alt="">
+        </div>
+        <div class="signup-image">
+          <img src="~assets/signuppopupImage.svg" alt="">
+        </div>
+        <div class="q-px-sm q-py-xs text-center column items-center justify-center">
+          <div class="font-montserrat fw-700 fs-18 q-px-xs">Track your baby's development</div>
+          <div class="sub-title fs-16 fw-500 text-center q-mt-xs q-px-xs font-montserrat">
+            Get expert guidance from the world's #1 pregnancy and parenting resource, delivered via email, our apps, and website.
+          </div>
+          <q-input color="black" class="font-montserrat fw-500 q-mb-md q-px-sm" label-color="primary" outlined v-model="emailAddress" label="Email Address:">
+          </q-input>
+          <q-input color="black" label-color="primary" class="font-montserrat fw-500 q-mb-md q-px-sm" :type="isPwd ? 'password' : 'text'" outlined v-model="password" label="Password:">
+            <template v-slot:append>
+              <q-icon
+                :name="isPwd ? 'visibility_off' : 'visibility'"
+                class="cursor-pointer"
+                color="primary"
+                @click="isPwd = !isPwd"
+              />
+            </template>
+          </q-input>
+          <q-input color="black" label-color="primary" class="font-montserrat fw-500 q-px-sm" outlined v-model="dueDate" label="Due date or child's birthday:">
+            <!-- <template v-slot:append>
+              <q-icon
+                name="event"
+                class="cursor-pointer"
+                color="primary"
+              />
+            </template> -->
+          </q-input>
+        </div>
+        <div class="fs-12 font-montserrat q-px-md q-pb-xs q-mb-sm" style="text-align:left;">
+          <span style="color:#56584B">Don't know your due date? </span>
+          <span class="text-primary login-tagline cursor-pointer fw-500">Calculate my due date</span>
+        </div>
+        <div class="q-px-sm">
+          <q-checkbox v-model="isConceive" class="fs-16 fw-500 font-montserrat" label="Trying to Conceive?" />
+          <hr class="q-my-md q-mx-sm">
+        </div>
+        <div class="column items-center justify-center">
+          <q-btn
+          label="JOIN NOW"
+          class="font-montserrat signup-btn"
+          color="secondary"></q-btn>
+          <div class="font-montserrat sub-title q-px-sm fs-12" style="color:#56584B; margin-bottom:20px">By registering, you confirm that you are 16 years of age or older, and you agree to our <span class="cursor-pointer text-underline" @click="goToNewTab('terms')">Terms of Use</span> & <span class="cursor-pointer text-underline" @click="goToNewTab('privacy')">Privacy Policy</span>. We use your information to send you emails, product samples, and promotions, and may share your information with partners as described <span class="cursor-pointer text-underline" @click="goToNewTab('privacy')">here</span>. We use your health information to make our site even more helpful.</div>
+          <div class="text-primary font-montserrat fs-12 fw-500 cursor-pointer login-tagline" @click="openUserPopup('login')" style="margin-bottom: 28px">Already a member? Log in</div>
+        </div>
+      </q-card-section>
+    </q-card>
   </q-dialog>
 </template>
 <script>
@@ -162,7 +214,9 @@ export default {
       signupPopup: false,
       isPwd: 'password',
       emailAddress: '',
-      password: ''
+      password: '',
+      dueDate: '',
+      isConceive: false,
     }
   },
   methods: {
@@ -172,6 +226,8 @@ export default {
     openUserPopup (action) {
       this.emailAddress = ''
       this.password = ''
+      this.dueDate = '',
+      this.isConceive = false
       if (!this.isDesktop) this.openMenu = false
       if (action === 'login') {
         this.signupPopup = false
@@ -184,6 +240,8 @@ export default {
     closeUserPopup (action) {
       this.emailAddress = ''
       this.password = ''
+      this.dueDate = '',
+      this.isConceive = false
       if (action === 'login') {
         this.loginPopup = false
       } else {
@@ -201,6 +259,10 @@ export default {
       this.$router.push({
         name: route
       })
+    },
+    goToNewTab (path) {
+      let route = this.$router.resolve({name: path});
+      window.open(route.href, '_blank');
     }
   },
   computed: {
@@ -251,6 +313,39 @@ export default {
     width: 400px;
     @media only screen and (max-width: $breakpoint-sm-max) {
       width: auto;
+    }
+  }
+}
+.signup-popup {
+  position: relative;
+  .close-btn {
+    position:absolute;
+    top:5px;
+    right:5px;
+  }
+  .signup-image {
+    img {
+      width: 100%;
+    }
+  }
+  .sub-title {
+    max-width: 410px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .q-input {
+    width: 100%;
+  }
+  .signup-btn {
+    width: 150px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: bolder;
+    padding: 0px 16px;
+    :deep(.q-btn__content) {
+      font-size: 16px;
     }
   }
 }
