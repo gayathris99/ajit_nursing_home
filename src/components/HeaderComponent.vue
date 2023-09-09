@@ -118,18 +118,17 @@
     </div>
   </q-header>
   <q-dialog v-model="loginPopup">
-    <q-card class="font-poppins">
-      <div class="row items-center justify-end cursor-pointer q-py-sm q-pr-sm" @click="closeUserPopup('login')">
-        <!-- <q-icon name="cancel" size="md" color="secondary"></q-icon> -->
+    <q-card class="font-domine login-popup">
+      <div class="row items-center justify-end cursor-pointer q-pt-sm q-pr-sm" @click="closeUserPopup('login')">
         <img src="~assets/closeIcon.svg" width="24" alt="">
       </div>
-      <q-card-section class="q-px-lg q-py-md text-primary ">
-        <div class="fs-18 fw-500 cursor-pointer text-underline" @click="openUserPopup('signup')">New to Ajit Nursing Home? Join now!</div>
-        <div class="fs-24 fw-600 q-my-md">Login</div>
-        <div class="column q-gutter-md q-mb-md">
-          <q-input color="primary" outlined v-model="userName" label="User Name">
+      <q-card-section class="q-px-lg q-py-xs text-primary ">
+        <div class="fs-16 fw-500 cursor-pointer login-tagline font-montserrat" @click="openUserPopup('signup')">New to Ajit Nursing Home? Join now!</div>
+        <div class="fs-30 q-my-sm text-black" style="font-weight:bolder">Please log in</div>
+        <div class="column q-gutter-md q-mb-md font-montserrat fw-500">
+          <q-input color="black" label-color="primary" outlined v-model="emailAddress" label="Email Address:">
           </q-input>
-          <q-input color="primary" :type="isPwd ? 'password' : 'text'" outlined v-model="password" label="Password">
+          <q-input color="black" label-color="primary" :type="isPwd ? 'password' : 'text'" outlined v-model="password" label="Password:">
             <template v-slot:append>
               <q-icon
                 :name="isPwd ? 'visibility_off' : 'visibility'"
@@ -139,10 +138,10 @@
             </template>
           </q-input>
         </div>
-        <div class="fs-16 fw-500 cursor-pointer login-tagline q-mb-md">Forgot Password ?</div>
+        <div class="fs-16 fw-500 cursor-pointer font-montserrat login-tagline q-mb-md">Forgot Password ?</div>
         <q-btn
-        class="q-mb-md fs-24"
-        label="LOGIN"
+        class="q-mb-md  login-btn font-montserrat"
+        label="LOG IN"
         color="secondary"
         size="md"
         ></q-btn>
@@ -162,7 +161,7 @@ export default {
       loginPopup: false,
       signupPopup: false,
       isPwd: 'password',
-      userName: '',
+      emailAddress: '',
       password: ''
     }
   },
@@ -171,7 +170,7 @@ export default {
       this.openMenu = true
     },
     openUserPopup (action) {
-      this.userName = ''
+      this.emailAddress = ''
       this.password = ''
       if (!this.isDesktop) this.openMenu = false
       if (action === 'login') {
@@ -183,7 +182,7 @@ export default {
       }
     },
     closeUserPopup (action) {
-      this.userName = ''
+      this.emailAddress = ''
       this.password = ''
       if (action === 'login') {
         this.loginPopup = false
@@ -237,5 +236,22 @@ export default {
 
 .q-card {
   border-radius: 10px;
+}
+.login-btn {
+  width: 140px;
+  height: 50px;
+  font-weight: bolder;
+  padding: 0px 16px;
+  :deep(.q-btn__content) {
+    font-size: 16px;
+  }
+}
+.login-popup {
+  .q-input {
+    width: 400px;
+    @media only screen and (max-width: $breakpoint-sm-max) {
+      width: auto;
+    }
+  }
 }
 </style>
