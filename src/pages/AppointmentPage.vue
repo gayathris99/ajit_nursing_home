@@ -166,6 +166,8 @@ th, .day-column {
     width: auto;
     @media only screen and (max-width: $breakpoint-xs-max) {
       width: 300px;
+      height: 250px;
+      object-fit: cover;
     }
   }
 }
