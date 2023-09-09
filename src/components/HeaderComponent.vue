@@ -61,7 +61,10 @@
           </q-btn-dropdown>
           <q-btn-dropdown label="News" no-caps class="fs-16 fw-600 font-quicksand" flat dense></q-btn-dropdown>
           <q-btn-dropdown label="Contact Us" no-caps class="fs-16 fw-600 font-quicksand" flat dense></q-btn-dropdown>
-          <q-btn-dropdown label="Login" no-caps class="fs-16 fw-600 font-quicksand" flat dense></q-btn-dropdown>
+          <div class="fs-16 fw-600 font-quicksand cursor-pointer">
+            <span @click="openUserPopup('login')">LOGIN&nbsp;/&nbsp;</span>
+            <span @click="openUserPopup('signup')">SIGNUP</span>
+          </div>
         </div>
       </div>
       <q-drawer v-if="!isDesktop"
@@ -108,23 +111,85 @@
           </q-expansion-item>
           <div class="cursor-pointer q-py-sm q-px-md fs-16">News</div>
           <div class="cursor-pointer q-py-sm q-px-md fs-16">Contact Us</div>
-          <div class="cursor-pointer q-py-sm q-px-md fs-16">Login</div>
+          <div class="cursor-pointer q-py-sm q-px-md fs-16" @click="openUserPopup('login')">Login</div>
+          <div class="cursor-pointer q-py-sm q-px-md fs-16" @click="openUserPopup('signup')">Signup</div>
         </div>
       </q-drawer>
     </div>
   </q-header>
+  <q-dialog v-model="loginPopup">
+    <q-card class="font-poppins">
+      <div class="row items-center justify-end cursor-pointer q-py-sm q-pr-sm" @click="closeUserPopup('login')">
+        <!-- <q-icon name="cancel" size="md" color="secondary"></q-icon> -->
+        <img src="~assets/closeIcon.svg" width="24" alt="">
+      </div>
+      <q-card-section class="q-px-lg q-py-md text-primary ">
+        <div class="fs-18 fw-500 cursor-pointer text-underline" @click="openUserPopup('signup')">New to Ajit Nursing Home? Join now!</div>
+        <div class="fs-24 fw-600 q-my-md">Login</div>
+        <div class="column q-gutter-md q-mb-md">
+          <q-input color="primary" outlined v-model="userName" label="User Name">
+          </q-input>
+          <q-input color="primary" :type="isPwd ? 'password' : 'text'" outlined v-model="password" label="Password">
+            <template v-slot:append>
+              <q-icon
+                :name="isPwd ? 'visibility_off' : 'visibility'"
+                class="cursor-pointer"
+                @click="isPwd = !isPwd"
+              />
+            </template>
+          </q-input>
+        </div>
+        <div class="fs-16 fw-500 cursor-pointer login-tagline q-mb-md">Forgot Password ?</div>
+        <q-btn
+        class="q-mb-md fs-24"
+        label="LOGIN"
+        color="secondary"
+        size="md"
+        ></q-btn>
+      </q-card-section>
+    </q-card>
+  </q-dialog>
+  <q-dialog v-model="signupPopup">
+    <q-card>Signup</q-card>
+  </q-dialog>
 </template>
 <script>
 export default {
   name: 'HeaderComponent',
   data () {
     return {
-      openMenu: false
+      openMenu: false,
+      loginPopup: false,
+      signupPopup: false,
+      isPwd: 'password',
+      userName: '',
+      password: ''
     }
   },
   methods: {
     openDrawer () {
       this.openMenu = true
+    },
+    openUserPopup (action) {
+      this.userName = ''
+      this.password = ''
+      if (!this.isDesktop) this.openMenu = false
+      if (action === 'login') {
+        this.signupPopup = false
+        this.loginPopup = true
+      } else {
+        this.loginPopup = false
+        this.signupPopup = true
+      }
+    },
+    closeUserPopup (action) {
+      this.userName = ''
+      this.password = ''
+      if (action === 'login') {
+        this.loginPopup = false
+      } else {
+        this.signupPopup = false
+      }
     },
     comingSoon () {
       this.$q.notify({
@@ -165,5 +230,12 @@ export default {
 }
 :deep(.q-btn-dropdown__arrow) {
   display: none;
+}
+.login-tagline:hover {
+  text-decoration: underline;
+}
+
+.q-card {
+  border-radius: 10px;
 }
 </style>
