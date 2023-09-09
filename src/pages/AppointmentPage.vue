@@ -6,10 +6,16 @@
         <div class="text-center appt-img">
           <img src="~assets/AppointmentIllustration.svg"/>
         </div>
-        <div class="row justify-center q-mt-md" v-if="!isMobile">
-          <practo:abs_widget widget="c1652e7290313b78"></practo:abs_widget>
+        <div class="row justify-center fw-700">
+          <q-btn
+          label="Book AppointmenT"
+          class="font-montserrat q-mt-lg"
+          color="secondary"></q-btn>
         </div>
-        <div v-else class="row justify-center q-mt-md">
+        <!-- <div class="row justify-center q-mt-md" v-if="!isMobile">
+          <practo:abs_widget widget="c1652e7290313b78"></practo:abs_widget>
+        </div> -->
+        <!-- <div v-else class="row justify-center q-mt-md">
           <q-btn
           style="background: #3363AC; color: white"
           label="Book Appointment"
@@ -19,10 +25,10 @@
           :size="isDesktop ? 'lg' : 'md'"
           @click="goToPracto"
           />
-        </div>
+        </div> -->
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12 table-container" :class="isMobile ? 'q-pa-md' : 'q-px-lg q-py-xl'">
-        <div class="font-oxygen fs-36 fw-700 text-primary">Open Hours</div>
+        <div class="font-oxygen fs-36 fw-700 text-primary">OPD functioning <br/> Days & time</div>
         <table class="font-inter q-mt-md">
           <tr>
             <th class="q-pa-sm">Day</th>
@@ -36,7 +42,17 @@
             <td class="q-pa-sm text-primary" v-html="row.afternoon"></td>
             <td class="q-pa-sm text-primary" v-html="row.evening"></td>
           </tr>
+          <tr>
+            <td class="day-column q-pa-xs">Sunday</td>
+            <td class="q-pa-sm text-primary">HOLIDAY</td>
+            <td class="q-pa-sm text-primary">HOLIDAY</td>
+            <td class="q-pa-sm text-primary">HOLIDAY</td>
+          </tr>
         </table>
+        <ul class="text-primary q-mt-lg font-oxygen fs-18 fw-700">
+          <li class="q-pb-sm">Please call and confirm appointment date & time for USG</li>
+          <li>24x7 Emergency Support</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -83,13 +99,7 @@ export default {
           morning: '10:00 AM to <br/> 1:00 PM',
           afternoon: ' 3:00 PM to <br/> 5:00 PM',
           evening: '5:30 PM to <br/> 7:00 PM'
-        },
-        {
-          day: 'Sunday',
-          morning: '10:00 AM to <br/> 1:00 PM',
-          afternoon: ' 3:00 PM to <br/> 5:00 PM',
-          evening: '5:30 PM to <br/> 7:00 PM'
-        },
+        }
       ]
     }
   },
@@ -99,14 +109,14 @@ export default {
     },
   },
   mounted () {
-    const scripts = [
-      'https://www.practo.com/bundles/practopractoapp/js/abs_widget_helper.js'
-    ];
-    scripts.forEach(script => {
-      let tag = document.createElement("script");
-      tag.setAttribute("src", script);
-      document.head.appendChild(tag);
-    });
+    // const scripts = [
+    //   'https://www.practo.com/bundles/practopractoapp/js/abs_widget_helper.js'
+    // ];
+    // scripts.forEach(script => {
+    //   let tag = document.createElement("script");
+    //   tag.setAttribute("src", script);
+    //   document.head.appendChild(tag);
+    // });
   },
   methods: {
     goToPracto () {
@@ -130,9 +140,12 @@ export default {
    min-height: auto;
   }
 }
-table, th, td {
-  border: 2px solid #EEE;;
+td {
+  border: 2px solid #0946A3;;
   border-collapse: collapse;
+  td:first-child {
+    border: 2px solid #fff;
+  }
 }
 table {
   width: 90%;
@@ -145,7 +158,7 @@ td {
   font-weight: 400;
 }
 th, .day-column {
-  background: #3363AC;
+  background: #0946A3;
   color: #FFF;
 }
 .appt-img {
@@ -158,5 +171,8 @@ th, .day-column {
 }
 :deep(.practo_link) {
   display: none;
+}
+.q-btn {
+  font-weight: 700;
 }
 </style>

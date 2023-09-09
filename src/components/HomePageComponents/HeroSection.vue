@@ -8,7 +8,7 @@
       </div>
       <div class="q-mt-xl col-6">
         <div>
-          <div class="fs-60 font-oxygen fw-400 text-primary q-mt-sm">You never understand <br/>life until it grows inside you!</div>
+          <div class="fs-60 font-oxygen fw-400 text-primary q-mt-sm q-mr-md">You never understand <br/>life until it grows inside you!</div>
           <div class="q-mt-md font-oxygen color-primary-two  fs-20 fw-400 para-block">Discover the difference at Ajit Nursing Home, where medical excellence meets personalised care. Our mission is to guide you on your path to better health with cutting-edge treatments and unwavering support.</div>
 
           <div class="row items-center q-gutter-md font-inter fw-500 q-my-xl">
