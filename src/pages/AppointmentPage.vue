@@ -4,7 +4,7 @@
       <div class="col-md-6 col-sm-12 col-xs-12 appointment-container" :class="isMobile ? 'q-pa-md' : 'q-px-lg q-py-xl'">
         <div class="font-oxygen fs-36 fw-700 text-primary q-mb-lg">Want to book an appointment ?</div>
         <div class="text-center appt-img">
-          <img src="~assets/AppointmentIllustration.svg"/>
+          <img src="~assets/AppointmentIllustration.png"/>
         </div>
         <div class="row justify-center fw-700">
           <q-btn
