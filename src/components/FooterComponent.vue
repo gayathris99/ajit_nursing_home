@@ -2,7 +2,7 @@
   <div class="bg-footer text-white font-inter">
     <div class="row items-center q-gutter-x-md" :class="isMobile ? 'justify-center q-pa-sm q-gutter-y-sm' : isDesktop ? 'justify-between q-pa-sm' :'justify-evenly q-pa-sm'">
       <div class="row items-center q-gutter-sm">
-        <img src="~assets/Logo128.png" width="40" alt="">
+        <img src="~assets/footerLogo.svg" width="40" alt="">
         <div class="text-white fs-16 fw-400">Ajit Nursing Home</div>
       </div>
       <div class="fs-16" :class="isMobile ? 'text-center' : ''">2023 Ajit Nursing Home. All right reserved</div>

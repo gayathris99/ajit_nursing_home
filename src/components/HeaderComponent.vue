@@ -152,7 +152,7 @@
     <q-card class="signup-popup no-padding">
       <q-card-section class="no-padding">
         <div class="close-btn cursor-pointer" @click="closeUserPopup('signup')">
-          <img src="~assets/closeIcon.svg" width="24" alt="">
+          <img src="~assets/closeIconSecondary.svg" width="24" alt="">
         </div>
         <div class="signup-image">
           <img src="~assets/signuppopupImage.svg" alt="">
@@ -169,19 +169,12 @@
               <q-icon
                 :name="isPwd ? 'visibility_off' : 'visibility'"
                 class="cursor-pointer"
-                color="primary"
+                color="secondary"
                 @click="isPwd = !isPwd"
               />
             </template>
           </q-input>
           <q-input color="black" label-color="primary" class="font-montserrat fw-500 q-px-sm" outlined v-model="dueDate" label="Due date or child's birthday:">
-            <!-- <template v-slot:append>
-              <q-icon
-                name="event"
-                class="cursor-pointer"
-                color="primary"
-              />
-            </template> -->
           </q-input>
         </div>
         <div class="fs-12 font-montserrat q-px-md q-pb-xs q-mb-sm" style="text-align:left;">
@@ -189,7 +182,7 @@
           <span class="text-primary login-tagline cursor-pointer fw-500">Calculate my due date</span>
         </div>
         <div class="q-px-sm">
-          <q-checkbox v-model="isConceive" class="fs-16 fw-500 font-montserrat" label="Trying to Conceive?" />
+          <q-checkbox v-model="isConceive" class="fs-16 fw-500 font-montserrat" label="Trying to Conceive?" color="secondary"/>
           <hr class="q-my-md q-mx-sm">
         </div>
         <div class="column items-center justify-center">
