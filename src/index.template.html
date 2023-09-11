@@ -14,9 +14,13 @@
     <link rel="icon" type="image/png" sizes="32x32" href="icons/Logo32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="icons/Logo16.png">
     <link rel="icon" type="image/png" href="icons/Logo128.png">
+    <style>
+      [v-cloak] > * { display:none }
+      [v-cloak]::before { content: "Loading…" }
+    </style>
   </head>
   <body>
     <!-- DO NOT touch the following DIV -->
-    <div id="q-app"></div>
+    <div id="q-app" v-cloak></div>
   </body>
 </html>
