@@ -23,7 +23,7 @@
             label="Emergency Contact"
             no-caps
             style="background: #BC3430;"
-            @click="goToWhatsapp"
+            @click="toggleEmergencyPopup(true)"
             class="btn-fixed-width fs-18 text-white q-py-sm"/>
           </div>
         </div>
@@ -44,16 +44,41 @@
           label="Emergency Contact"
           no-caps
           style="background: #BC3430;"
-          @click="goToWhatsapp"
+          @click="toggleEmergencyPopup(true)"
           class="btn-fixed-width fs-18 text-white q-py-sm"/>
         </div>
       </div>
     </div>
+    <q-dialog v-model="isEmergency">
+      <q-card>
+        <div class="row items-center justify-end cursor-pointer q-pt-sm q-pr-sm" v-close-popup>
+          <img src="~assets/closeIcon.svg" width="24" alt="">
+        </div>
+        <q-card-section class="font-montserrat emergency-contacts q-px-md">
+          <div>
+            <div class="fw-700 fs-16 text-primary">Connect via phone:</div>
+            <a href="tel:08046808371" class="fs-20 q-pr-sm q-pl-xs">
+              <q-btn label="Call Now" color="secondary" class="fw-700 q-my-sm"></q-btn>
+            </a>
+          </div>
+          <div class="or-content q-my-lg"><span>or</span></div>
+          <div>
+            <div class="fw-700 fs-16 text-primary">Connect via Whatsapp:</div>
+            <q-btn label="Whatsapp Now" color="secondary" class="fw-700 q-my-sm" @click="goToWhatsapp"></q-btn>
+          </div>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 <script>
 export default {
   name: 'HeroSection',
+  data () {
+    return {
+      isEmergency: false
+    }
+  },
   computed: {
     isMobile () {
       return this.$q.screen.lt.sm
@@ -73,6 +98,9 @@ export default {
     },
     goToWhatsapp () {
       window.open('https://wa.me/919448420369', '_blank')
+    },
+    toggleEmergencyPopup (value) {
+      this.isEmergency = value
     }
   }
 }
@@ -145,4 +173,21 @@ export default {
 //     transform: translate(-50%, -50%);
 //   }
 // }
+.or-content {
+   width: 100%;
+   text-align: center;
+   border-bottom: 1px solid #000;
+   line-height: 0.1em;
+   margin: 10px 0 20px;
+}
+
+.or-content span {
+    background:#fff;
+    padding:0 10px;
+}
+.emergency-contacts {
+  .q-btn {
+    width: 200px;
+  }
+}
 </style>
