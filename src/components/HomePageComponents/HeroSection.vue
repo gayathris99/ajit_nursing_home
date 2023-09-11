@@ -30,26 +30,22 @@
       </div>
     </div>
     <div v-else class="bg-image">
-      <!-- <img v-if="isTablet" src="~assets/heroImage.svg" alt=""> -->
-      <!-- <img v-if="isMobile" src="~assets/heroMobile.svg" alt=""> -->
       <div class="content q-pt-xl q-px-md">
         <div class="fs-36 font-oxygen fw-400 text-primary q-mt-sm text-center">You never understand life until it grows inside you!</div>
         <div class="q-mt-md font-oxygen fs-400 text-center" :class="isMobile ? 'fs-16': 'fs-20'">Discover the difference at Ajit Nursing Home, where medical excellence meets personalised care. Our mission is to guide you on your path to better health with cutting-edge treatments and unwavering support.</div>
-        <div class=" justify-center items-center q-gutter-md q-mt-md column">
+        <div class=" justify-center items-center q-gutter-md q-mt-md" :class="isMobile ? 'column' : 'row'">
         <q-btn
           color="secondary"
           label="Make an appointment"
           @click="goTo('appointment')"
           no-caps
-          rounded
           class="fs-18 q-mt-md btn-fixed-width font-inter"/>
-        <!-- <q-btn
-          color="secondary"
-          label="Promo"
-          outline
+          <q-btn
+          label="Emergency Contact"
           no-caps
-          rounded
-          class="fs-18 bg-white q-mt-md btn-fixed-width font-inter"/> -->
+          style="background: #BC3430;"
+          @click="goToWhatsapp"
+          class="btn-fixed-width fs-18 text-white q-py-sm"/>
         </div>
       </div>
     </div>
@@ -91,11 +87,11 @@ export default {
   max-height: 679px;
   @media only screen and (max-width: $breakpoint-sm-max){
     background-image: url('~assets/heroTablet.svg');
-    height: 350px;
+    height: 380px;
   }
   @media only screen and (max-width: $breakpoint-xs-max){
     background-image: url('~assets/heroMobile.svg');
-    height: 480px;
+    height: 550px;
   }
 }
 .para-block {
