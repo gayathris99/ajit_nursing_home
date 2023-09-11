@@ -3,6 +3,7 @@
     <div style="background:#004953" class="text-center q-pa-sm font-montserrat fw-700" @click="openUserPopup('signup')">
       <div class="cursor-pointer" :class="isMobile ? 'fs-14' : 'fs-16'" style="display:inline"><span class="text-underline">Join now</span> to personalize Ajit Nursing Home for your pregnancy <q-icon name="expand_more" :size="isMobile ? 'sm' : 'md'"></q-icon></div>
     </div>
+    <div style="background:#F1B490" class="thin-line"></div>
     <div class="text-primary font-quicksand q-py-sm bg-header">
       <div class="row justify-between align-center items-center" :class="isDesktop ? 'q-px-xl' : 'q-px-md'">
         <div class="row items-center cursor-pointer">
@@ -344,5 +345,8 @@ export default {
       font-size: 16px;
     }
   }
+}
+.thin-line {
+  padding: 2px;
 }
 </style>
