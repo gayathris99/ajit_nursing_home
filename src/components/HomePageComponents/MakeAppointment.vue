@@ -1,6 +1,6 @@
 <template>
-  <div class="container"></div>
-  <div class="bg-bar" :class="isDesktop ? 'q-px-xl q-py-lg' : 'q-pa-md'">
+  <!-- <div class="container"></div> -->
+  <!-- <div class="bg-bar" :class="isDesktop ? 'q-px-xl q-py-lg' : 'q-pa-md'">
     <div class="row justify-between items-center q-gutter-md make-appt">
       <div class="text-white font-inter title text-bold">Want to make an appointment now?</div>
       <q-btn
@@ -13,10 +13,10 @@
       @click="goTo('appointment')"
       />
     </div>
-  </div>
+  </div> -->
   <div class="row justify-center items-center">
-    <q-card flat dense bordered class="col-md-6 col-sm-12 col-xs-12 q-pa-xl font-oxygen">
-      <div class=" text-primary fw-700 fs-36">QUESTION ?</div>
+    <q-card flat dense class="col-md-6 col-sm-12 col-xs-12 q-pa-xl font-oxygen question-card">
+      <div class=" text-primary font-domine fw-700 fs-36">QUESTION ?</div>
       <div class="text-primary fw-700 fs-20 q-mt-sm">Ask to doctor</div>
       <div class="q-mt-md fw-400 fs-18 text-primary">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</div>
       <div class="q-mt-lg">
@@ -31,8 +31,8 @@
         />
       </div>
     </q-card>
-    <q-card flat dense bordered class="col-md-6 col-sm-12 col-xs-12 q-pa-xl font-oxygen">
-      <div class=" text-primary fw-700 fs-36">APPOINTMENT</div>
+    <q-card flat dense class="col-md-6 col-sm-12 col-xs-12 q-pa-xl font-oxygen">
+      <div class=" text-primary fw-700 font-domine fs-36">APPOINTMENT</div>
       <div class="text-primary fw-700 fs-20 q-mt-sm">Book  with gynecologist</div>
       <div class="q-mt-md fw-400 fs-18 text-primary">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</div>
       <div class="q-mt-lg">
@@ -107,7 +107,14 @@ export default {
     justify-content: center;
    }
 }
+
 // :deep(.practo_link) {
 //   display: none;
 // }
+.question-card {
+  border-right: dashed 1px lightgray;
+  @media only screen and (max-width: $breakpoint-sm-max) {
+    border-bottom: dashed 1px lightgray
+  }
+}
 </style>
