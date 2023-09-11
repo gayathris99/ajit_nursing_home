@@ -7,8 +7,8 @@
       <div class="row justify-between align-center items-center" :class="isDesktop ? 'q-px-xl' : 'q-px-md'">
         <div class="row items-center cursor-pointer">
           <q-icon name="menu" size="md" v-if="!isDesktop" class="text-primary cursor-pointer q-pr-sm" @click="openDrawer"/>
-          <img src="~assets/Logo128.png" alt="Ajit nursing home logo" width="45" @click="goTo('home')">
-          <div class="column fw-600 q-pl-md" @click="goTo('home')">
+          <img src="~assets/Logo128.png" alt="Ajit nursing home logo" :width="isDesktop ? '55' : '45'" @click="goTo('home')">
+          <div class="column fw-600 q-pl-md font-petrona" @click="goTo('home')">
             <div :class="isMobile ? 'fs-16 fw-700' : 'fs-24'">Ajit Nursing Home</div>
             <div :class="isMobile ? 'fs-14' : 'fs-16'">Healing Hands and Caring Hearts</div>
           </div>

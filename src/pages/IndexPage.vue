@@ -6,8 +6,8 @@
     @onScrollElement="onScrollElement"/> -->
     <why-choseus/>
     <doctors-component/>
-    <make-appointment
-    @onScrollElement="onScrollElement"/>
+    <!-- <make-appointment
+    @onScrollElement="onScrollElement"/> -->
     <our-testimonials/>
     <blog-news/>
     <!-- <contact-us id="contact-us"/> -->
@@ -20,7 +20,7 @@ import HeroSection from 'src/components/HomePageComponents/HeroSection.vue'
 // import HeroNavbar from 'src/components/HomePageComponents/HeroNavbar.vue'
 import WhyChoseus from 'src/components/HomePageComponents/WhyChoseus.vue'
 import DoctorsComponent from 'src/components/HomePageComponents/DoctorsComponent.vue'
-import MakeAppointment from 'src/components/HomePageComponents/MakeAppointment.vue'
+// import MakeAppointment from 'src/components/HomePageComponents/MakeAppointment.vue'
 import OurTestimonials from 'src/components/HomePageComponents/OurTestimonials.vue'
 import BlogNews from 'src/components/HomePageComponents/BlogNews.vue'
 // import ContactUs from 'src/components/HomePageComponents/ContactUs.vue'
@@ -33,7 +33,7 @@ export default {
     // HeroNavbar,
     WhyChoseus,
     DoctorsComponent,
-    MakeAppointment,
+    // MakeAppointment,
     OurTestimonials,
     BlogNews,
     // ContactUs,
