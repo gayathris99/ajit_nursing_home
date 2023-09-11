@@ -6,26 +6,26 @@
         <div class="text-center appt-img">
           <img src="~assets/AppointmentIllustration.png"/>
         </div>
-        <div class="row items-center justify-center q-mt-md q-gutter-x-sm q-gutter-y-sm font-montserrat">
+        <div class="column items-center justify-center q-gutter-x-sm q-gutter-y-md q-mt-sm font-montserrat">
           <!-- <div class="fw-700 fs-18 text-primary q-mr-md">Book via Practo</div> -->
           <!-- <div v-if="!isMobile">
             <practo:abs_widget widget="c1652e7290313b78"></practo:abs_widget>
           </div> -->
           <q-btn
-          style="background: #3363AC; color: white"
-          label="BOOK APPOINTMENT ON PRACTO"
-          no-caps
-          class="font-montserrat fs-18"
-          :size="isDesktop ? 'lg' : 'md'"
-          @click="goToPracto"
-          />
-          <q-btn
-          style="background: #3363AC; color: white"
+          style="background: #3363AC; color: white; width: 310px;"
           label="BOOK APPOINTMENT ON WHATSAPP"
           no-caps
           class="font-montserrat fs-18"
           :size="isDesktop ? 'lg' : 'md'"
           @click="bookWhatsappAppointment"
+          />
+          <q-btn
+          style="background: #3363AC; color: white; width: 310px;"
+          label="BOOK APPOINTMENT ON PRACTO"
+          no-caps
+          class="font-montserrat fs-18"
+          :size="isDesktop ? 'lg' : 'md'"
+          @click="goToPracto"
           />
         </div>
         <!-- <div class="row justify-center fw-700">
@@ -67,9 +67,9 @@
           </tr>
           <tr>
             <td class="day-column q-pa-xs">Sunday</td>
-            <td class="q-pa-sm text-primary">HOLIDAY</td>
-            <td class="q-pa-sm text-primary">HOLIDAY</td>
-            <td class="q-pa-sm text-primary">HOLIDAY</td>
+            <td class="q-pa-md text-primary">HOLIDAY</td>
+            <td class="q-pa-md text-primary">HOLIDAY</td>
+            <td class="q-pa-md text-primary">HOLIDAY</td>
           </tr>
         </table>
         <ul class="text-primary q-mt-lg font-oxygen fs-18 fw-700">
