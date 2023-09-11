@@ -10,11 +10,14 @@
         <img src="~assets/pregnantcarryingchild.svg" alt="">
       </div>
     </div>
+    <hero-navbar/>
   </div>
 </template>
 
 <script>
+import HeroNavbar from './HeroNavbar.vue'
 export default {
+  components: { HeroNavbar },
   name: 'WhyChoseus',
   computed: {
     isMobile () {
@@ -37,6 +40,7 @@ export default {
   img {
     max-width: 800px;
     width: 700px;
+    display: block;
     @media only screen and (max-width: 1210px) and (min-width:1100px){
     width: 600px;
     }

@@ -23,6 +23,7 @@
             label="Emergency Contact"
             no-caps
             style="background: #BC3430;"
+            @click="goToWhatsapp"
             class="btn-fixed-width fs-18 text-white q-py-sm"/>
           </div>
         </div>
@@ -73,6 +74,9 @@ export default {
       this.$router.push({
         name
       })
+    },
+    goToWhatsapp () {
+      window.open('https://wa.me/919448420369', '_blank')
     }
   }
 }
@@ -107,6 +111,7 @@ export default {
 .hero-image
 {
   img {
+  display: block;
   max-width: 700px;
   width: 599px;
   @media only screen and (max-width: 1240px) and (min-width:1061px){

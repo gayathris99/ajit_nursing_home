@@ -2,8 +2,8 @@
   <q-page>
     <hero-section
     @onScrollElement="onScrollElement"/>
-    <hero-navbar
-    @onScrollElement="onScrollElement"/>
+    <!-- <hero-navbar
+    @onScrollElement="onScrollElement"/> -->
     <why-choseus/>
     <doctors-component/>
     <make-appointment
@@ -17,7 +17,7 @@
 
 <script>
 import HeroSection from 'src/components/HomePageComponents/HeroSection.vue'
-import HeroNavbar from 'src/components/HomePageComponents/HeroNavbar.vue'
+// import HeroNavbar from 'src/components/HomePageComponents/HeroNavbar.vue'
 import WhyChoseus from 'src/components/HomePageComponents/WhyChoseus.vue'
 import DoctorsComponent from 'src/components/HomePageComponents/DoctorsComponent.vue'
 import MakeAppointment from 'src/components/HomePageComponents/MakeAppointment.vue'
@@ -30,7 +30,7 @@ export default {
   name: 'IndexPage',
   components: {
     HeroSection,
-    HeroNavbar,
+    // HeroNavbar,
     WhyChoseus,
     DoctorsComponent,
     MakeAppointment,

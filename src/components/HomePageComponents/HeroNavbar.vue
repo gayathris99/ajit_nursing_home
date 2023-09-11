@@ -1,5 +1,5 @@
 <template>
-  <div class=" bg-navbar">
+  <div class="bg-primary text-white">
     <div class="row items-center justify-evenly align-center q-pa-lg font-inter fw-600" v-if="isDesktop">
     <div class="row items-center cursor-pointer q-gutter-x-xl">
       <div class="row items-center q-gutter-x-xs">
@@ -65,7 +65,7 @@ export default {
   color: #21222A;
 }
 .border-right {
-  border-right: 1px solid #3363AC;
+  border-right: 1px solid white;
 }
 a {
   color: inherit;

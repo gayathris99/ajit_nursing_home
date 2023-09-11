@@ -10,7 +10,8 @@
           <q-btn
           label="Book AppointmenT"
           class="font-montserrat q-mt-lg"
-          color="secondary"></q-btn>
+          color="secondary"
+          @click="bookWhatsappAppointment()"/>
         </div>
         <!-- <div class="row justify-center q-mt-md" v-if="!isMobile">
           <practo:abs_widget widget="c1652e7290313b78"></practo:abs_widget>
@@ -121,6 +122,9 @@ export default {
   methods: {
     goToPracto () {
       window.open('https://www.practo.com/raibag/clinic/ajit-nursing-home-belgaum', '_blank');
+    },
+    bookWhatsappAppointment () {
+      window.open('https://wa.me/919448420369/?text=Hello, I want to book an appointment', '_blank')
     }
   }
 }
