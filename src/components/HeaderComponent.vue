@@ -1,7 +1,7 @@
 <template>
   <q-header class="">
     <div style="background:#004953" class="text-center q-pa-sm font-montserrat fw-700" @click="openUserPopup('signup')">
-      <div class="cursor-pointer fs-16" style="display:inline"><span class="text-underline">Join now</span> to personalize Ajit Nursing Home for your pregnancy <q-icon name="expand_more" size="md"></q-icon></div>
+      <div class="cursor-pointer" :class="isMobile ? 'fs-14' : 'fs-16'" style="display:inline"><span class="text-underline">Join now</span> to personalize Ajit Nursing Home for your pregnancy <q-icon name="expand_more" :size="isMobile ? 'sm' : 'md'"></q-icon></div>
     </div>
     <div class="text-primary font-quicksand q-py-sm bg-header">
       <div class="row justify-between align-center items-center" :class="isDesktop ? 'q-px-xl' : 'q-px-md'">
@@ -14,8 +14,8 @@
           </div>
         </div>
         <div class="row items-center q-gutter-md fs-16 fw-600" v-if="isDesktop">
-          <q-btn-dropdown label="Hospital" no-caps class="fs-16 fw-600 font-quicksand" flat dense>
-            <q-list class="fs-14 fw-600 font-quicksand text-primary column justify-center" style="width: 150px">
+          <q-btn-dropdown label="Hospital" no-caps class="fs-16 fw-600 font-montserrat" flat dense>
+            <q-list class="fs-14 fw-600 font-montserrat text-primary column justify-center" style="width: 150px">
               <q-item clickable v-close-popup @click="goTo('about-us')">
                 <q-item-section @click="goTo('about-us')">About Us</q-item-section>
               </q-item>
@@ -30,8 +30,8 @@
               </q-item>
             </q-list>
           </q-btn-dropdown>
-          <q-btn-dropdown label="Women Wellness" no-caps class="fs-16 fw-600 font-quicksand" flat dense>
-            <q-list class="fs-14 fw-600 font-quicksand text-primary column justify-center" style="width: 150px">
+          <q-btn-dropdown label="Women Wellness" no-caps class="fs-16 fw-600 font-montserrat" flat dense>
+            <q-list class="fs-14 fw-600 font-montserrat text-primary column justify-center" style="width: 150px">
               <q-item clickable v-close-popup>
                 <q-item-section>Planning a pregnancy</q-item-section>
               </q-item>
@@ -52,8 +52,8 @@
               </q-item>
             </q-list>
           </q-btn-dropdown>
-          <q-btn-dropdown label="Tools" no-caps class="fs-16 fw-600 font-quicksand" flat dense>
-            <q-list class="fs-14 fw-600 font-quicksand text-primary column justify-center" style="width: 150px">
+          <q-btn-dropdown label="Tools" no-caps class="fs-16 fw-600 font-montserrat" flat dense>
+            <q-list class="fs-14 fw-600 font-montserrat text-primary column justify-center" style="width: 150px">
               <q-item clickable v-close-popup>
                 <q-item-section>Ovulation Calculator</q-item-section>
               </q-item>
@@ -62,9 +62,9 @@
               </q-item>
             </q-list>
           </q-btn-dropdown>
-          <q-btn-dropdown label="News" no-caps class="fs-16 fw-600 font-quicksand" flat dense></q-btn-dropdown>
-          <q-btn-dropdown label="Contact Us" no-caps class="fs-16 fw-600 font-quicksand" flat dense></q-btn-dropdown>
-          <div class="fs-16 fw-600 font-quicksand cursor-pointer">
+          <q-btn-dropdown label="News" no-caps class="fs-16 fw-600 font-montserrat" flat dense></q-btn-dropdown>
+          <q-btn-dropdown label="Contact Us" no-caps class="fs-16 fw-600 font-montserrat" flat dense></q-btn-dropdown>
+          <div class="fs-16 fw-600 font-montserrat cursor-pointer">
             <span @click="openUserPopup('login')">LOGIN&nbsp;/&nbsp;</span>
             <span @click="openUserPopup('signup')">SIGNUP</span>
           </div>

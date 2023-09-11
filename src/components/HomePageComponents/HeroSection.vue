@@ -8,25 +8,22 @@
       </div>
       <div class="q-mt-xl col-6">
         <div>
-          <div class="fs-60 font-oxygen fw-400 text-primary q-mt-sm q-mr-md">You never understand <br/>life until it grows inside you!</div>
+          <div class="fs-60 font-domine fw-700 text-primary q-mt-sm q-mr-lg">You never understand <br/>life until it grows inside you!</div>
           <div class="q-mt-md font-oxygen color-primary-two  fs-20 fw-400 para-block">Discover the difference at Ajit Nursing Home, where medical excellence meets personalised care. Our mission is to guide you on your path to better health with cutting-edge treatments and unwavering support.</div>
 
-          <div class="row items-center q-gutter-md font-inter fw-500 q-my-xl">
+          <div class="row items-center q-gutter-x-lg font-inter fw-500 q-my-xl">
             <q-btn
             color="secondary"
             label="Make an appointment"
             @click="goTo('appointment')"
             no-caps
-            rounded
             class="btn-fixed-width fs-18 q-py-sm"/>
 
-            <!-- <q-btn
-            outline
-            color="secondary"
-            label="Promo"
+            <q-btn
+            label="Emergency Contact"
             no-caps
-            rounded
-            class="btn-fixed-width bg-white fs-18 q-py-sm"/> -->
+            style="background: #BC3430;"
+            class="btn-fixed-width fs-18 text-white q-py-sm"/>
           </div>
         </div>
       </div>
