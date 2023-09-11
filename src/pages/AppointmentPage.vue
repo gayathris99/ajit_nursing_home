@@ -6,13 +6,35 @@
         <div class="text-center appt-img">
           <img src="~assets/AppointmentIllustration.png"/>
         </div>
-        <div class="row justify-center fw-700">
+        <div class="row items-center justify-center q-mt-md q-gutter-x-sm q-gutter-y-sm font-montserrat">
+          <!-- <div class="fw-700 fs-18 text-primary q-mr-md">Book via Practo</div> -->
+          <!-- <div v-if="!isMobile">
+            <practo:abs_widget widget="c1652e7290313b78"></practo:abs_widget>
+          </div> -->
+          <q-btn
+          style="background: #3363AC; color: white"
+          label="BOOK APPOINTMENT ON PRACTO"
+          no-caps
+          class="font-montserrat fs-18"
+          :size="isDesktop ? 'lg' : 'md'"
+          @click="goToPracto"
+          />
+          <q-btn
+          style="background: #3363AC; color: white"
+          label="BOOK APPOINTMENT ON WHATSAPP"
+          no-caps
+          class="font-montserrat fs-18"
+          :size="isDesktop ? 'lg' : 'md'"
+          @click="bookWhatsappAppointment"
+          />
+        </div>
+        <!-- <div class="row justify-center fw-700">
           <q-btn
           label="Book AppointmenT"
           class="font-montserrat q-mt-lg"
           color="secondary"
           @click="bookWhatsappAppointment()"/>
-        </div>
+        </div> -->
         <!-- <div class="row justify-center q-mt-md" v-if="!isMobile">
           <practo:abs_widget widget="c1652e7290313b78"></practo:abs_widget>
         </div> -->
@@ -110,14 +132,14 @@ export default {
     },
   },
   mounted () {
-    // const scripts = [
-    //   'https://www.practo.com/bundles/practopractoapp/js/abs_widget_helper.js'
-    // ];
-    // scripts.forEach(script => {
-    //   let tag = document.createElement("script");
-    //   tag.setAttribute("src", script);
-    //   document.head.appendChild(tag);
-    // });
+    const scripts = [
+      'https://www.practo.com/bundles/practopractoapp/js/abs_widget_helper.js'
+    ];
+    scripts.forEach(script => {
+      let tag = document.createElement("script");
+      tag.setAttribute("src", script);
+      document.head.appendChild(tag);
+    });
   },
   methods: {
     goToPracto () {
@@ -144,13 +166,14 @@ export default {
    min-height: auto;
   }
 }
-td {
-  border: 2px solid #0946A3;;
-  border-collapse: collapse;
-  td:first-child {
-    border: 2px solid #fff;
-  }
-}
+// td {
+//   border: 2px solid #0946A3;;
+//   border-collapse: collapse;
+//   td:first-child {
+//     border: 2px solid #fff;
+//     border-collapse: collapse;
+//   }
+// }
 table {
   width: 90%;
   @media only screen and (max-width: $breakpoint-xs-max) {
@@ -165,19 +188,27 @@ th, .day-column {
   background: #0946A3;
   color: #FFF;
 }
+table, th {
+  border: 2px solid #0946A3;
+  border-collapse: collapse;
+}
+table, td {
+  border: 2px solid #0946A3;
+  border-collapse: collapse;
+}
 .appt-img {
   img {
     width: auto;
     @media only screen and (max-width: $breakpoint-xs-max) {
-      width: 300px;
+      width: 310px;
       height: 250px;
       object-fit: cover;
     }
   }
 }
-:deep(.practo_link) {
-  display: none;
-}
+// :deep(.practo_link) {
+//   display: none;
+// }
 .q-btn {
   font-weight: 700;
 }

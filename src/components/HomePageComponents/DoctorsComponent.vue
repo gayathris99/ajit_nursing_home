@@ -41,7 +41,7 @@
       <q-expansion-item class="no-padding bg-grey-desktop" >
         <template v-slot:header>
           <div class="font-domine text-center fw-700 fs-20 text-primary  expander q-py-sm">
-            Medical Review Board
+            Medical Advisory Board
           </div>
         </template>
         <q-card>
@@ -49,8 +49,8 @@
             <div class="font-montserrat fs-16 text-primary fw-500">
               Meet our medical advisors — highly respected experts who ensure our content is complete and accurate.
             </div>
-            <div class="row items-center q-gutter-y-md q-my-sm">
-              <div v-for="(doctor, key) in doctors" :key="key" class="col-md-6 col-sm-6 col-xs-12">
+            <div class="row items-center q-gutter-y-md q-gutter-x-md q-my-sm" :class="isDesktop || isMobile ? 'justify-center' : 'justify-between'">
+              <div v-for="(doctor, key) in doctors" :key="key" class="">
                 <div class="row items-center justify-center align-start">
                 <img :src="doctor.profileImage" alt=""/>
                  <div class="font-montserrat q-pl-xs" :style="isMobile ? 'text-align: center' : 'text-align: start'">
@@ -60,6 +60,15 @@
                  </div>
                 </div>
               </div>
+            </div>
+            <div class="row justify-center text-white q-mt-xl meet-button">
+              <q-btn
+              label="Meet the team"
+              class="font-montserrat fw-700 fs-16"
+              color="secondary"
+              icon-right="arrow_forward"
+              @click="goToDoctorPage"
+              ></q-btn>
             </div>
           </q-card-section>
         </q-card>
@@ -116,7 +125,7 @@ export default {
       setDoctorId: 'nursingHome/setDoctorId'
     }),
     goToDoctorPage (key) {
-      this.setDoctorId(key)
+      // this.setDoctorId(key)
       this.$router.push({
         name: 'our-doctors'
       })
@@ -202,6 +211,12 @@ export default {
   :deep(.q-icon) {
     font-size: 30px;
     color: $primary;
+  }
+  .meet-button {
+    :deep(.q-icon) {
+      font-size: 24px;
+      color: white;
+    }
   }
   img {
     width: 90px;

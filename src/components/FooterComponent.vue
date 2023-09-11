@@ -21,6 +21,9 @@
         <a href="https://www.instagram.com/ajitnursinghome" target="_blank" class="q-mt-sm">
           <img src="~assets/brand/instagram.svg" class="cursor-pointer" alt="instagram" width="25">
         </a>
+        <!-- <a href="https://www.instagram.com/ajitnursinghome" target="_blank" class="q-mt-sm">
+          <img src="~assets/brand/linkedin.svg" class="cursor-pointer" alt="linkedin" width="23">
+        </a> -->
       </div>
     </div>
     <div class="text-center">Designed and Developed by <a href="https://www.foxgloveteam.com/#/" target="_blank"> Foxglove Tech</a></div>
@@ -54,7 +57,7 @@ export default {
 
 <style lang="scss" scoped>
 .bg-footer {
-  background: #3363AC;
+  background: #192D4E;
   margin-top: auto;
 }
 

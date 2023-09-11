@@ -23,7 +23,6 @@
         <q-btn
         style="background: #3363AC; color: white"
         label="Ask a question"
-        rounded
         no-caps
         class="font-inter fs-18"
         :size="isDesktop ? 'lg' : 'md'"
@@ -39,7 +38,6 @@
         <q-btn
         style="background: #3363AC; color: white"
         label="Make an Appointment"
-        rounded
         no-caps
         @click="goTo('appointment')"
         class="font-inter fs-18"

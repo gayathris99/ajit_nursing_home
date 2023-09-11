@@ -63,7 +63,6 @@
               </q-item>
             </q-list>
           </q-btn-dropdown>
-          <q-btn-dropdown label="News" no-caps class="fs-16 fw-600 font-montserrat" flat dense></q-btn-dropdown>
           <q-btn-dropdown label="Contact Us" no-caps class="fs-16 fw-600 font-montserrat" flat dense></q-btn-dropdown>
           <div class="fs-16 fw-600 font-montserrat cursor-pointer">
             <span @click="openUserPopup('login')">LOGIN&nbsp;/&nbsp;</span>
@@ -113,7 +112,6 @@
             <div class="q-py-sm q-px-md cursor-pointer fs-14">Ovulation Calculator</div>
             <div class="q-py-sm q-px-md cursor-pointer fs-14">Pregnancy Due Date Calculator</div>
           </q-expansion-item>
-          <div class="cursor-pointer q-py-sm q-px-md fs-16">News</div>
           <div class="cursor-pointer q-py-sm q-px-md fs-16">Contact Us</div>
           <div class="cursor-pointer q-py-sm q-px-md fs-16" @click="openUserPopup('login')">Login</div>
           <div class="cursor-pointer q-py-sm q-px-md fs-16" @click="openUserPopup('signup')">Signup</div>
@@ -130,7 +128,7 @@
         <div class="fs-16 fw-500 cursor-pointer login-tagline font-montserrat" @click="openUserPopup('signup')">New to Ajit Nursing Home? Join now!</div>
         <div class="fs-30 q-my-sm text-black" style="font-weight:bolder">Please log in</div>
         <div class="column q-gutter-md q-mb-md font-montserrat fw-500">
-          <q-input color="black" label-color="primary" outlined v-model="emailAddress" label="Email Address:">
+          <q-input color="black" label-color="primary" outlined v-model="userName" label="Username:">
           </q-input>
           <q-input color="black" label-color="primary" :type="isPwd ? 'password' : 'text'" outlined v-model="password" label="Password:">
             <template v-slot:append>
@@ -166,7 +164,7 @@
           <div class="sub-title fs-16 fw-500 text-center q-mt-xs q-px-xs font-montserrat">
             Get expert guidance from the world's #1 pregnancy and parenting resource, delivered via email, our apps, and website.
           </div>
-          <q-input color="black" class="font-montserrat fw-500 q-mb-md q-px-sm" label-color="primary" outlined v-model="emailAddress" label="Email Address:">
+          <q-input color="black" class="font-montserrat fw-500 q-mb-md q-px-sm" label-color="primary" outlined v-model="userName" label="Username:">
           </q-input>
           <q-input color="black" label-color="primary" class="font-montserrat fw-500 q-mb-md q-px-sm" :type="isPwd ? 'password' : 'text'" outlined v-model="password" label="Password:">
             <template v-slot:append>
@@ -210,7 +208,7 @@ export default {
       loginPopup: false,
       signupPopup: false,
       isPwd: 'password',
-      emailAddress: '',
+      userName: '',
       password: '',
       dueDate: '',
       isConceive: false,
@@ -221,7 +219,7 @@ export default {
       this.openMenu = true
     },
     openUserPopup (action) {
-      this.emailAddress = ''
+      this.userName = ''
       this.password = ''
       this.dueDate = '',
       this.isConceive = false
@@ -235,7 +233,7 @@ export default {
       }
     },
     closeUserPopup (action) {
-      this.emailAddress = ''
+      this.userName = ''
       this.password = ''
       this.dueDate = '',
       this.isConceive = false
