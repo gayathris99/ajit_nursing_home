@@ -1,3 +1,3 @@
-export function functionName (state, value) {
-
+export function setDoctorId (state, value) {
+  state.doctorId = value
 }

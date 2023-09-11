@@ -14,7 +14,7 @@
       :modules="modules"
       class="mySwiper"
     >
-      <swiper-slide class="q-pt-md q-pb-xl column" v-for="(doctor,key) in doctors" :key="key">
+      <swiper-slide class="q-pt-md q-pb-xl column cursor-pointer" v-for="(doctor,key) in doctors" :key="key" @click="goToDoctorPage(doctor.firstName)">
         <q-img :src="doctor.profileImage" alt=""/>
         <div class="text-primary q-mt-sm fs-16 font-inter fw-600 text-center">{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</div>
         <div class="fs-14 font-inter fw-500 text-primary text-center">{{doctor.education}}</div>
@@ -47,7 +47,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 import { Navigation, Pagination } from 'swiper/modules';
-import { mapActions } from 'vuex';
+import { mapActions, mapMutations } from 'vuex';
 export default {
   name: 'OurDoctors',
   data () {
@@ -82,6 +82,15 @@ export default {
     ...mapActions({
       getDoctors: 'nursingHome/getDoctors'
     }),
+    ...mapMutations({
+      setDoctorId: 'nursingHome/setDoctorId'
+    }),
+    goToDoctorPage (key) {
+      this.setDoctorId(key)
+      this.$router.push({
+        name: 'our-doctors'
+      })
+    },
     async fetchDoctors () {
       try {
         const { data } = await this.getDoctors()

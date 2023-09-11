@@ -1,3 +1,3 @@
-export function functionName (state) {
-  return state
+export function getDoctorId (state) {
+  return state.doctorId
 }

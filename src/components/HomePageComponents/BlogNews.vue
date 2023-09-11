@@ -102,7 +102,6 @@ export default {
       try {
         const { data: { items }} = await this.getAllNews()
         this.news = items.slice(0,2)
-        console.log(items , 'news')
       } catch (error) {
         this.$q.notify({
           message: "Something went wrong, please try again",

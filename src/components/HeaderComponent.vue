@@ -1,6 +1,9 @@
 <template>
-  <q-header class="text-primary font-quicksand q-py-sm bg-header">
-    <div>
+  <q-header class="">
+    <div style="background:#004953" class="text-center q-pa-sm font-montserrat fw-700" @click="openUserPopup('signup')">
+      <div class="cursor-pointer fs-16" style="display:inline"><span class="text-underline">Join now</span> to personalize Ajit Nursing Home for your pregnancy <q-icon name="expand_more" size="md"></q-icon></div>
+    </div>
+    <div class="text-primary font-quicksand q-py-sm bg-header">
       <div class="row justify-between align-center items-center" :class="isDesktop ? 'q-px-xl' : 'q-px-md'">
         <div class="row items-center cursor-pointer">
           <q-icon name="menu" size="md" v-if="!isDesktop" class="text-primary cursor-pointer q-pr-sm" @click="openDrawer"/>

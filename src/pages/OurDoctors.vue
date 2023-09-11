@@ -6,7 +6,7 @@
     </div>
     <div class="font-roboto text-primary fw-700 q-mt-sm q-mb-lg q-px-sm" :class="isMobile ? 'fs-28': 'fs-40'">Our Doctors</div>
     <div class="doctors q-mt-sm font-inter">
-      <q-card bordered flat dense v-for="(doctor, id) in doctors" :key="id" class="q-my-md" :id="doctor.id">
+      <q-card bordered flat dense v-for="(doctor, id) in doctors" :key="id" class="q-my-md" :class="`${doctor.firstName}`">
         <div class="row items-center q-gutter-x-xl q-gutter-y-xs" :class="{'justify-center': !isDesktop}">
           <div class="col-sm-12 col-md-4 col-xs-12 doctor-image">
             <img :src="doctor.profileImage" alt=""/>
@@ -64,18 +64,22 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'OurDoctors',
   data () {
     return {
-      doctors: []
+      doctors: [],
+      doctorKey: null
     }
   },
   mounted () {
     this.fetchDoctors()
   },
   computed: {
+    ...mapGetters({
+      getDoctorId: 'nursingHome/getDoctorId'
+    }),
     isMobile () {
       return this.$q.screen.lt.sm
     },
@@ -87,6 +91,9 @@ export default {
     ...mapActions({
       getDoctors: 'nursingHome/getDoctors'
     }),
+    ...mapMutations({
+      setDoctorId: 'nursingHome/setDoctorId'
+    }),
     goTo (name) {
       this.$router.push({
         name
@@ -97,6 +104,14 @@ export default {
         const { data } = await this.getDoctors()
         console.log(data)
         this.doctors = data
+        this.doctorKey = this.getDoctorId
+        // console.log(this.getDoctorId)
+        // const doctor = this.getDoctorId
+        // console.log(document.getElementsByClassName(doctor))
+        // document.getElementsByClassName(doctor).scrollIntoView()
+        // document.getElementById(this.doctorKey).scrollIntoView()
+        // console.log(this.doctorKey, 'this.doctorKey')
+        // this.$refs[this.doctorKey].scrollIntoView()
       } catch (error) {
           this.$q.notify({
             message: "Something went wrong, please try again",
