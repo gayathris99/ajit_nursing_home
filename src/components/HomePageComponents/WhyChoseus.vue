@@ -3,7 +3,7 @@
     <div class="font-domine text-primary fw-600 padding-left" :class="isMobile ? 'q-pt-md fs-20': 'q-pt-xl fs-24'">Why Chose Us ?</div>
     <div class="check-row">
       <div class="padding-left font-oxygen text-primary col-sm-6 col-xs-12">
-        <div class="fw-400 fs-48 q-mt-sm title">Clinic experts on <br/>obstetric, gynecologic.</div>
+        <div class="fw-400 fs-48 font-domine q-mt-sm title">Clinic experts on <br/>obstetric, gynecologic.</div>
         <div class="q-mt-md text-justify description fw-400 q-pb-xl">Located in Raibag, our hospital stands as a beacon of healthcare within the community. With its state-of-the-art facilities and compassionate staff, it has garnered a reputation for delivering exceptional medical services. The hospital's commitment to patient care is evident in every aspect of its operation, making it a trusted institution among locals.</div>
       </div>
       <div class="image-section">
