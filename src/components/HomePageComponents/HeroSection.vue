@@ -54,17 +54,32 @@
         <div class="row items-center justify-end cursor-pointer q-pt-sm q-pr-sm" v-close-popup>
           <img src="~assets/closeIcon.svg" width="24" alt="">
         </div>
-        <q-card-section class="font-montserrat emergency-contacts q-px-md">
+        <q-card-section class="font-montserrat emergency-contacts column items-center justify-center q-px-md">
           <div>
-            <div class="fw-700 fs-16 text-primary">Connect via phone:</div>
             <a href="tel:08046808371" class="fs-20 q-pr-sm q-pl-xs">
-              <q-btn label="Call Now" color="secondary" class="fw-700 q-my-sm"></q-btn>
+              <q-btn  class="fw-700 q-my-sm" style="background-color: #BC3430; color: white">
+                <div class="row">
+                  <q-icon left>
+                    <img src="~assets/emergency-call.svg">
+                  </q-icon>
+                  <div>
+                    Call Now
+                  </div>
+                </div>
+              </q-btn>
             </a>
           </div>
-          <div class="or-content q-my-lg"><span>or</span></div>
           <div>
-            <div class="fw-700 fs-16 text-primary">Connect via Whatsapp:</div>
-            <q-btn label="Whatsapp Now" color="secondary" class="fw-700 q-my-sm" @click="goToWhatsapp"></q-btn>
+            <q-btn   style="background-color: #004953; color: white" class="fw-700 q-my-sm" @click="goToWhatsapp">
+              <div class="row">
+                <q-icon left>
+                  <img src="~assets/whatsappLogo.svg">
+                </q-icon>
+                <div>
+                  Connect on whatsapp
+                </div>
+              </div>
+            </q-btn>
           </div>
         </q-card-section>
       </q-card>
@@ -187,7 +202,7 @@ export default {
 }
 .emergency-contacts {
   .q-btn {
-    width: 200px;
+    width: 300px;
   }
 }
 </style>
