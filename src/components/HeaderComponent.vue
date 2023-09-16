@@ -128,7 +128,7 @@
         <div class="fs-16 fw-500 cursor-pointer login-tagline font-montserrat" @click="openUserPopup('signup')">New to Ajit Nursing Home? Join now!</div>
         <div class="fs-30 q-my-sm text-black" style="font-weight:bolder">Please log in</div>
         <div class="column q-gutter-md q-mb-md font-montserrat fw-500">
-          <q-input color="black" label-color="primary" outlined v-model="userName" label="Username:">
+          <q-input color="black" label-color="primary" outlined v-model="whatsappNumber" label="Whatsapp Number:">
           </q-input>
           <q-input color="black" label-color="primary" :type="isPwd ? 'password' : 'text'" outlined v-model="password" label="Password:">
             <template v-slot:append>
@@ -164,7 +164,7 @@
           <div class="sub-title fs-16 fw-500 text-center q-mt-xs q-px-xs font-montserrat">
             Get expert guidance from the world's #1 pregnancy and parenting resource, delivered via email, our apps, and website.
           </div>
-          <q-input color="black" class="font-montserrat fw-500 q-mb-md q-px-sm" label-color="primary" outlined v-model="userName" label="Username:">
+          <q-input color="black" id="phone" class="font-montserrat fw-500 q-mb-md q-px-sm" label-color="primary" outlined v-model="whatsappNumber" label="Whatsapp Number:">
           </q-input>
           <q-input color="black" label-color="primary" class="font-montserrat fw-500 q-mb-md q-px-sm" :type="isPwd ? 'password' : 'text'" outlined v-model="password" label="Password:">
             <template v-slot:append>
@@ -176,7 +176,12 @@
               />
             </template>
           </q-input>
-          <q-input color="black" label-color="primary" class="font-montserrat fw-500 q-px-sm" outlined v-model="dueDate" label="Due date or child's birthday:">
+          <q-input color="black" label-color="primary" class="font-montserrat fw-500 q-px-sm" outlined  @focus="onDateInputClick" v-model="dueDate" label="Due date:">
+            <template v-slot:append>
+              <q-btn-dropdown icon="calendar_month" color="secondary" dense flat ref="dateBtnDropdown" @click="onDateInputClick">
+                <q-date minimal color="secondary" v-model="dueDate" mask="DD/MM/YYYY" :options="dateOption"/>
+              </q-btn-dropdown>
+            </template>
           </q-input>
         </div>
         <div class="fs-12 font-montserrat q-px-md q-pb-xs q-mb-sm" style="text-align:left;">
@@ -191,7 +196,8 @@
           <q-btn
           label="JOIN NOW"
           class="font-montserrat signup-btn"
-          color="secondary"></q-btn>
+          color="secondary"
+          @click="onRegister"></q-btn>
           <div class="font-montserrat sub-title q-px-sm fs-12" style="color:#56584B; margin-bottom:20px">By registering, you confirm that you are 16 years of age or older, and you agree to our <span class="cursor-pointer text-underline" @click="goToNewTab('terms')">Terms of Use</span> & <span class="cursor-pointer text-underline" @click="goToNewTab('privacy')">Privacy Policy</span>. We use your information to send you emails, product samples, and promotions, and may share your information with partners as described <span class="cursor-pointer text-underline" @click="goToNewTab('privacy')">here</span>. We use your health information to make our site even more helpful.</div>
           <div class="text-primary font-montserrat fs-12 fw-500 cursor-pointer login-tagline" @click="openUserPopup('login')" style="margin-bottom: 28px">Already a member? Log in</div>
         </div>
@@ -208,18 +214,29 @@ export default {
       loginPopup: false,
       signupPopup: false,
       isPwd: 'password',
-      userName: '',
+      whatsappNumber: '',
       password: '',
       dueDate: '',
       isConceive: false,
     }
   },
   methods: {
+    dateOption (date) {
+      const fiveYearsAgo = this.subtractYears(new Date(), 5).toLocaleDateString('en-ZA') //dd/mm/yyyy
+      return date >= fiveYearsAgo
+    },
+    subtractYears(date, years) {
+      date.setFullYear(date.getFullYear() - years);
+      return date;
+    },
+    onDateInputClick () {
+      this.$refs.dateBtnDropdown.show()
+    },
     openDrawer () {
       this.openMenu = true
     },
     openUserPopup (action) {
-      this.userName = ''
+      this.whatsappNumber = ''
       this.password = ''
       this.dueDate = '',
       this.isConceive = false
@@ -233,7 +250,7 @@ export default {
       }
     },
     closeUserPopup (action) {
-      this.userName = ''
+      this.whatsappNumber = ''
       this.password = ''
       this.dueDate = '',
       this.isConceive = false
@@ -258,6 +275,9 @@ export default {
     goToNewTab (path) {
       let route = this.$router.resolve({name: path});
       window.open(route.href, '_blank');
+    },
+    onRegister () {
+
     }
   },
   computed: {
