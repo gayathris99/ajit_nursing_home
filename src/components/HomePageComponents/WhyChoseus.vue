@@ -1,6 +1,6 @@
 <template>
   <div class="bg-image">
-    <div class="font-domine text-primary fw-600 padding-left" :class="isMobile ? 'q-pt-md fs-20': 'q-pt-xl fs-24'">Why Chose Us ?</div>
+    <div class="font-inter text-primary fw-600 padding-left" :class="isMobile ? 'q-pt-md fs-20': 'q-pt-xl fs-24'">Why Chose Us ?</div>
     <div class="check-row">
       <div class="padding-left font-oxygen text-primary col-sm-6 col-xs-12">
         <div class="fw-400 fs-48 font-domine q-mt-sm title">Clinic experts on <br/>obstetric, gynecologic.</div>
