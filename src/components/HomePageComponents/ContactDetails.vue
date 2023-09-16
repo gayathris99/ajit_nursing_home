@@ -1,7 +1,7 @@
 <template>
   <div style="background:#F6F6F6" class="q-pb-md">
     <div class="font-oxygen text-primary">
-      <div class="fw-600 font-domine padding-left q-pt-md fs-36 q-pb-md">CONTACT US</div>
+      <div class="fw-600 font-domine padding-left q-pt-md fs-36 q-pb-md">Contact Us</div>
     </div>
     <div>
     <div class="row justify-between  q-gutter-xs padding-left padding-right text-primary font-oxygen">

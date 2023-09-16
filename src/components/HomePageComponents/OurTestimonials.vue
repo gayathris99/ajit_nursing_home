@@ -1,8 +1,8 @@
 <template>
   <div class="bg-image">
    <div class="font-inter text-primary fs-16 fw-600 padding-left" :class="isMobile ? 'q-pt-md': 'q-pt-xl'">Testimonials</div>
-   <div class="padding-left font-oxygen text-primary">
-    <div class="fw-400 q-mt-sm title">See what our patients say!</div>
+   <div class="padding-left text-primary">
+    <div class="fw-400 font-domine q-mt-sm title">See what our patients say!</div>
    </div>
     <swiper
       :slidesPerView="slidesCount"
