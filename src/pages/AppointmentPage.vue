@@ -42,7 +42,6 @@
           <q-btn
           style="background: #3363AC; color: white"
           label="Book Appointment"
-          rounded
           no-caps
           class="font-inter fs-18"
           :size="isDesktop ? 'lg' : 'md'"

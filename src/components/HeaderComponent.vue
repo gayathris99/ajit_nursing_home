@@ -159,14 +159,34 @@
         <div class="signup-image">
           <img src="~assets/signuppopupImage.svg" alt="">
         </div>
+        <q-form @submit.prevent.stop="onRegister">
         <div class="q-px-sm q-py-xs text-center column items-center justify-center">
           <div class="font-montserrat fw-700 fs-18 q-px-xs">Track your baby's development</div>
           <div class="sub-title fs-16 fw-500 text-center q-mt-xs q-px-xs font-montserrat">
             Get expert guidance from the world's #1 pregnancy and parenting resource, delivered via email, our apps, and website.
           </div>
-          <q-input color="black" id="phone" class="font-montserrat fw-500 q-mb-md q-px-sm" label-color="primary" outlined v-model="whatsappNumber" label="Whatsapp Number:">
+          <q-input
+          color="black"
+          id="phone"
+          class="font-montserrat fw-500 q-mb-sm q-px-sm"
+          label-color="primary"
+          outlined
+          v-model="whatsappNumber"
+          :rules="[val => !!val || 'Whatsapp Number is required',
+                  val => val.match(/^[0-9]+$/) || 'Only numbers allowed',
+                  val => val.length === 10 || 'Incorrect Number']"
+          label="Whatsapp Number:">
           </q-input>
-          <q-input color="black" label-color="primary" class="font-montserrat fw-500 q-mb-md q-px-sm" :type="isPwd ? 'password' : 'text'" outlined v-model="password" label="Password:">
+          <q-input
+          color="black"
+          label-color="primary"
+          class="font-montserrat fw-500 q-mb-sm q-px-sm"
+          :type="isPwd ? 'password' : 'text'"
+          outlined
+          v-model="password"
+          label="Password:"
+          :rules="[val => !!val || 'Password is required',
+                  val => val.length >= 8 || 'Password Length must be atleast 8 characters']">
             <template v-slot:append>
               <q-icon
                 :name="isPwd ? 'visibility_off' : 'visibility'"
@@ -197,15 +217,18 @@
           label="JOIN NOW"
           class="font-montserrat signup-btn"
           color="secondary"
-          @click="onRegister"></q-btn>
+          type="submit"
+          ></q-btn>
           <div class="font-montserrat sub-title q-px-sm fs-12" style="color:#56584B; margin-bottom:20px">By registering, you confirm that you are 16 years of age or older, and you agree to our <span class="cursor-pointer text-underline" @click="goToNewTab('terms')">Terms of Use</span> & <span class="cursor-pointer text-underline" @click="goToNewTab('privacy')">Privacy Policy</span>. We use your information to send you emails, product samples, and promotions, and may share your information with partners as described <span class="cursor-pointer text-underline" @click="goToNewTab('privacy')">here</span>. We use your health information to make our site even more helpful.</div>
           <div class="text-primary font-montserrat fs-12 fw-500 cursor-pointer login-tagline" @click="openUserPopup('login')" style="margin-bottom: 28px">Already a member? Log in</div>
         </div>
+        </q-form>
       </q-card-section>
     </q-card>
   </q-dialog>
 </template>
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'HeaderComponent',
   data () {
@@ -221,6 +244,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      registerUser: 'nursingHome/registerUser'
+    }),
     dateOption (date) {
       const fiveYearsAgo = this.subtractYears(new Date(), 5).toLocaleDateString('en-ZA') //dd/mm/yyyy
       return date >= fiveYearsAgo
@@ -276,8 +302,26 @@ export default {
       let route = this.$router.resolve({name: path});
       window.open(route.href, '_blank');
     },
-    onRegister () {
-
+    async onRegister (e) {
+      e.preventDefault()
+      try {
+        const result = await this.registerUser({
+           username : this.whatsappNumber ,
+           password : this.password ,
+           password2 : this.password ,
+           firstName : this.whatsappNumber ,
+           lastName : this.whatsappNumber,
+           dueDate : this.dueDate,
+           isTryingToConceive: this.isConceive
+        })
+      } catch (error) {
+        this.$q.notify({
+          message: "Something went wrong, please try again",
+          color: "red",
+          position: "top",
+          icon: "warning",
+        });
+      }
     }
   },
   computed: {

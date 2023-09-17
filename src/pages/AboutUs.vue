@@ -10,8 +10,8 @@
         Ajit Nursing Home Raibag
       </div>
 
-      <div class="q-mt-lg row items-center q-gutter-x-lg q-gutter-y-md padding-right" :class="isMobile ? 'justify-center': 'justify-evenly'">
-        <div class="vision col-md-5 col-sm-5 col-xs-10">
+      <div class="q-mt-lg row items-center q-gutter-x-lg q-gutter-y-md padding-right padding-left" :class="isMobile ? 'justify-center': 'justify-evenly'">
+        <div class="vision col-md-5 col-sm-5 col-xs-auto">
           <q-card
           style="background: radial-gradient(366.76% 156.07% at 4.50% 14.29%, #62A0FE 0%, #287AF6 100%)">
             <q-card-section class="text-white">
@@ -23,7 +23,7 @@
             </q-card-section>
           </q-card>
         </div>
-        <div class="mission col-md-5 col-sm-5 col-xs-10">
+        <div class="mission col-md-5 col-sm-5 col-xs-auto">
           <q-card
           style="background: linear-gradient(309deg, #6BD6CA 0%, #1EC2B1 100%);">
             <q-card-section class="text-white">
@@ -75,6 +75,12 @@ export default {
     width: 100%;
     min-height: 220px;
     object-fit: cover;
+  }
+}
+.q-card {
+  @media only screen and (max-width: $breakpoint-sm-max) and (min-width: 600px){
+   min-height: 250px;
+   height: 250pxp;
   }
 }
 </style>

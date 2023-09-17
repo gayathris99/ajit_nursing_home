@@ -46,7 +46,6 @@
               :loading="makingAppointment"
               no-caps
               dense
-              rounded
               class="fs-16 q-mt-md q-px-lg font-inter">
                 <template v-slot:loading>
                   <q-spinner class="on-right" />
@@ -106,7 +105,6 @@
             @click="createAppointment"
             no-caps
             dense
-            rounded
             class="fs-16 q-mt-lg q-px-lg font-inter">
               <template v-slot:loading>
                 <q-spinner class="on-right" />

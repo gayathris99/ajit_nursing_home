@@ -30,7 +30,6 @@
       <q-btn
       no-caps
       dense
-      rounded
       class="fs-20 q-mb-xl font-overlock text-bold"
       style="background: #3363AC; color: white"
       label="See More"/>

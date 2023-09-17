@@ -22,15 +22,14 @@
       </q-expansion-item>
       <q-separator />
     </q-list>
-    <div class="q-mt-xl column items-center font-inter" v-if="faqs.length">
+    <div class="q-mt-xl column items-center font-inter q-pa-sm" v-if="faqs.length">
       <div class=" fw-600 text-primary fs-30">Still have a question?</div>
-      <div class="fs-16 fw-400 text-primary">Our experienced doctors are here to help you with any of your queries </div>
+      <div class="fs-16 fw-400 text-primary text-center">Our experienced doctors are here to help you with any of your queries </div>
       <q-btn
       style="background: #3363AC; color: white"
       label="Contact Us"
-      rounded
       no-caps
-      class="font-inter fs-16 q-mt-lg"
+      class="font-inter fs-16 q-my-lg"
       @click="redirectToWhatsapp"
       />
     </div>

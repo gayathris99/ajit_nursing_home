@@ -23,7 +23,6 @@
           label="See More"
           @click="goTo('blogs')"
           no-caps
-          rounded
           class="fs-18 q-mt-md q-px-lg font-inter"/>
       </div>
     </div>
@@ -50,7 +49,6 @@
           color="secondary"
           label="See More"
           no-caps
-          rounded
           class="fs-18 q-mt-md q-px-lg font-inter"/>
       </div>
     </div>

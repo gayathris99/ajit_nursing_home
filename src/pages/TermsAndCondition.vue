@@ -1,10 +1,10 @@
 <template>
-  <div :class="isMobile ? 'q-pa-sm' : 'q-pa-xl'">
-    <div class="font-inter fs-16 fw-600 q-px-sm">
+  <div :class="isMobile ? 'q-pa-md' : 'q-pa-xl'">
+    <div class="font-inter fs-16 fw-600">
       <span class="text-grey cursor-pointer" @click="goTo('home')">Home / </span>
       <span class="text-primary cursor-pointer"  @click="goTo('terms')">Terms & Conditions</span>
     </div>
-    <div class="font-roboto text-primary fw-700 q-mt-sm q-mb-lg q-px-sm" :class="isMobile ? 'fs-28': 'fs-40'">Terms & Conditions</div>
+    <div class="font-roboto text-primary fw-700 q-mt-sm q-mb-lg" :class="isMobile ? 'fs-28': 'fs-40'">Terms & Conditions</div>
     <div class="font-inter fs-14 fw-400 color-primary-two q-mt-lg">
       <div>
         Please read the following terms and conditions carefully before using the services of our maternity hospital clinic. By accessing our clinic and utilizing our services, you agree to be bound by these terms and conditions. If you do not agree with any part of these terms, please refrain from using our services.
@@ -15,7 +15,7 @@
           <div class="q-py-sm">{{term.description}}</div>
         </div>
       </div>
-      <div>By continuing to use our maternity hospital clinic's services, you acknowledge that you have read, understood, and agreed to these terms and conditions. If you have any questions or concerns, please feel free to contact our clinic administration for clarification.</div>
+      <div class="q-mb-md">By continuing to use our maternity hospital clinic's services, you acknowledge that you have read, understood, and agreed to these terms and conditions. If you have any questions or concerns, please feel free to contact our clinic administration for clarification.</div>
     </div>
   </div>
 </template>

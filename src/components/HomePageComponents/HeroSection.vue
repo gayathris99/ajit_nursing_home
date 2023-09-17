@@ -30,7 +30,7 @@
       </div>
     </div>
     <div v-else class="bg-image">
-      <div class="content q-pt-xl q-px-md">
+      <div class="content q-pt-lg q-px-md">
         <div class="fs-36 font-domine fw-700 text-primary q-mt-sm text-center">You never understand life until it grows inside you!</div>
         <div class="q-mt-md font-oxygen fs-400 text-center" :class="isMobile ? 'fs-16': 'fs-20'">Discover the difference at Ajit Nursing Home, where medical excellence meets personalised care. Our mission is to guide you on your path to better health with cutting-edge treatments and unwavering support.</div>
         <div class=" justify-center items-center q-gutter-md q-mt-md" :class="isMobile ? 'column' : 'row'">
@@ -45,7 +45,8 @@
           no-caps
           style="background: #BC3430;"
           @click="toggleEmergencyPopup(true)"
-          class="btn-fixed-width fs-18 text-white q-py-sm"/>
+          class="btn-fixed-width fs-18 text-white q-py-sm "
+          :class="isMobile ? 'q-mb-lg' : ''"/>
         </div>
       </div>
     </div>
@@ -134,7 +135,8 @@ export default {
   }
   @media only screen and (max-width: $breakpoint-xs-max){
     background-image: url('~assets/heroMobile.svg');
-    height: 550px;
+    height: auto;
+    // height: 550px;
   }
 }
 .para-block {

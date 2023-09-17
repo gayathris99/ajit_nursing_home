@@ -1,10 +1,10 @@
 <template>
-  <div :class="isMobile ? 'q-pa-sm' : 'q-pa-xl'">
-    <div class="font-inter fs-16 fw-600 q-px-sm">
+  <div :class="isMobile ? 'q-pa-md' : 'q-pa-xl'">
+    <div class="font-inter fs-16 fw-600 ">
       <span class="text-grey cursor-pointer" @click="goTo('home')">Home / </span>
       <span class="text-primary cursor-pointer"  @click="goTo('privacy')">Privacy Policy</span>
     </div>
-    <div class="font-roboto text-primary fw-700 q-mt-sm q-mb-lg q-px-sm" :class="isMobile ? 'fs-28': 'fs-40'">Privacy Policy</div>
+    <div class="font-roboto text-primary fw-700 q-mt-sm q-mb-lg " :class="isMobile ? 'fs-28': 'fs-40'">Privacy Policy</div>
     <div class="font-inter fs-14 fw-400 color-primary-two q-mt-lg">
       <div>At Ajit Nursing Home, we value your privacy and are committed to safeguarding your personal information. This privacy policy outlines how we collect, use, disclose, and protect your personal data when you access and use our clinic's services. By utilizing our services, you consent to the practices described in this policy.</div>
       <div class="q-my-md">
@@ -50,7 +50,7 @@
           <div class="q-py-sm">We may update this privacy policy from time to time to reflect changes in legal or regulatory requirements or our practices. The updated version will be posted on our website, and we encourage you to review it periodically.</div>
         </div>
       </div>
-      <div>If you have any questions, concerns, or requests related to your personal information or this privacy policy, please contact our clinic administration. We are dedicated to addressing your inquiries and ensuring the security and privacy of your data.</div>
+      <div class="q-mb-md">If you have any questions, concerns, or requests related to your personal information or this privacy policy, please contact our clinic administration. We are dedicated to addressing your inquiries and ensuring the security and privacy of your data.</div>
     </div>
   </div>
 </template>

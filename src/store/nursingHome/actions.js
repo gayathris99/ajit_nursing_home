@@ -80,3 +80,14 @@ export async function getBlogFAQ({ commit, dispatch }, { blogId }) {
     throw (error)
   }
 }
+export async function registerUser({ commit, dispatch }, payload) {
+  try {
+    const data = await axios.post(
+      'https://anh.foxgloveteam.com/self/register',
+      payload
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
