@@ -40,20 +40,10 @@ export async function getDoctors({ commit, dispatch }) {
     throw (error)
   }
 }
-export async function getAllBlogs({ commit, dispatch }) {
+export async function getAllTabs({ commit, dispatch }) {
   try {
     const data = await axios.get(
-     'https://anh.foxgloveteam.com/api/v2/pages/?type=cms_dashboard.BlogPage&fields=tag%2Cdate%2Cintro%2Cimage&site=anh-cms.foxgloveteam'
-    );
-    return data;
-  } catch (error) {
-    throw (error)
-  }
-}
-export async function getAllNews({ commit, dispatch }) {
-  try {
-    const data = await axios.get(
-     'https://anh.foxgloveteam.com/api/v2/pages/?type=cms_dashboard.NewsArticlePage&fields=date%2Cintro%2Cimage&site=anh-cms.foxgloveteam'
+     `${process.env.BASE_URL}/tabdetails`
     );
     return data;
   } catch (error) {
@@ -74,6 +64,20 @@ export async function getBlogFAQ({ commit, dispatch }, { blogId }) {
   try {
     const data = await axios.get(
       `${process.env.BASE_URL}/faq/${blogId}`
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
+export async function getUserDetails({ commit, dispatch }, { accessToken }) {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    };
+    const data = await axios.get(
+      'https://anh.foxgloveteam.com/self/userdetails',
+      config
     );
     return data;
   } catch (error) {
