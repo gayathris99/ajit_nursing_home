@@ -6,7 +6,7 @@
       <div class="grey-border  q-mt-md" :class="isMobile ? 'q-pa-sm': 'q-py-lg q-px-md'">
         <img src="~assets/hospitalImage.svg" alt="">
       </div>
-      <div class="row justify-center q-mt-md font-inter fs-20 fw-400 text-grey">
+      <div class="row justify-center font-inter fw-400 text-grey" :class="isMobile ? 'fs-14 q-mt-sm' : 'fs-20 q-mt-md'">
         Ajit Nursing Home Raibag
       </div>
 
@@ -78,9 +78,11 @@ export default {
   }
 }
 .q-card {
+  min-height: 200px;
+   height: 200px;
   @media only screen and (max-width: $breakpoint-sm-max) and (min-width: 600px){
    min-height: 250px;
-   height: 250pxp;
+   height: 250px;
   }
 }
 </style>

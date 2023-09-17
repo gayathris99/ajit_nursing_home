@@ -124,30 +124,48 @@
       <div class="row items-center justify-end cursor-pointer q-pt-sm q-pr-sm" @click="closeUserPopup('login')">
         <img src="~assets/closeIcon.svg" width="24" alt="">
       </div>
-      <q-card-section class="q-px-lg q-py-xs text-primary ">
-        <div class="fs-16 fw-500 cursor-pointer login-tagline font-montserrat" @click="openUserPopup('signup')">New to Ajit Nursing Home? Join now!</div>
-        <div class="fs-30 q-my-sm text-black" style="font-weight:bolder">Please log in</div>
-        <div class="column q-gutter-md q-mb-md font-montserrat fw-500">
-          <q-input color="black" label-color="primary" outlined v-model="whatsappNumber" label="Whatsapp Number:">
-          </q-input>
-          <q-input color="black" label-color="primary" :type="isPwd ? 'password' : 'text'" outlined v-model="password" label="Password:">
-            <template v-slot:append>
-              <q-icon
-                :name="isPwd ? 'visibility_off' : 'visibility'"
-                class="cursor-pointer"
-                @click="isPwd = !isPwd"
-              />
-            </template>
-          </q-input>
-        </div>
-        <div class="fs-16 fw-500 cursor-pointer font-montserrat login-tagline q-mb-md">Forgot Password ?</div>
-        <q-btn
-        class="q-mb-lg login-btn font-montserrat"
-        label="LOG IN"
-        color="secondary"
-        size="md"
-        ></q-btn>
-      </q-card-section>
+      <q-form  @submit.prevent.stop="onLogin">
+        <q-card-section class="q-px-lg q-py-xs text-primary ">
+          <div class="fs-16 fw-500 cursor-pointer login-tagline font-montserrat" @click="openUserPopup('signup')">New to Ajit Nursing Home? Join now!</div>
+          <div class="fs-30 q-my-sm text-black" style="font-weight:bolder">Please log in</div>
+          <div class="column q-gutter-sm q-mb-md font-montserrat fw-500">
+            <q-input
+             color="black"
+            label-color="primary"
+            outlined
+            v-model="whatsappNumber"
+            label="Whatsapp Number:"
+            :rules="[val => !!val || 'Whatsapp Number is required',
+            val => val.match(/^[0-9]+$/) || 'Only numbers allowed',
+            val => val.length === 10 || 'Incorrect Number']">
+            </q-input>
+            <q-input
+            color="black"
+            label-color="primary"
+            :type="isPwd ? 'password' : 'text'"
+            outlined v-model="password"
+            label="Password:"
+            :rules="[val => !!val || 'Password is required',
+                    val => val.length >= 8 || 'Password Length must be atleast 8 characters']">
+              <template v-slot:append>
+                <q-icon
+                  :name="isPwd ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="isPwd = !isPwd"
+                />
+              </template>
+            </q-input>
+          </div>
+          <div class="fs-16 fw-500 cursor-pointer font-montserrat login-tagline q-mb-md">Forgot Password ?</div>
+          <q-btn
+          class="q-mb-lg login-btn font-montserrat"
+          label="LOG IN"
+          type="submit"
+          color="secondary"
+          size="md"
+          ></q-btn>
+        </q-card-section>
+      </q-form>
     </q-card>
   </q-dialog>
   <q-dialog v-model="signupPopup">
@@ -301,6 +319,9 @@ export default {
     goToNewTab (path) {
       let route = this.$router.resolve({name: path});
       window.open(route.href, '_blank');
+    },
+    onLogin (e) {
+      e.preventDefault()
     },
     async onRegister (e) {
       e.preventDefault()
