@@ -43,7 +43,7 @@ export async function getDoctors({ commit, dispatch }) {
 export async function getAllTabs({ commit, dispatch }) {
   try {
     const data = await axios.get(
-     `${process.env.BASE_URL}/tabdetails`
+     `${process.env.BASE_URL}/popularblogs`
     );
     return data;
   } catch (error) {
