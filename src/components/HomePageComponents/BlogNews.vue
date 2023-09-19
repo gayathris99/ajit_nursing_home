@@ -43,8 +43,13 @@
           </div>
         </div>
        </div>
-       <div class="row justify-center q-my-md">
-        <q-btn label="SEE MORE" style="background: #004953; color: white" class="font-montserrat q-px-md fw-700 fs-16"></q-btn>
+       <div class="row justify-center q-mt-sm q-mb-lg">
+        <q-btn
+        label="SEE MORE"
+        style="background: #004953; color: white"
+        class="font-montserrat q-px-md fw-700 fs-16"
+        @click="onGoToTabBlogsPage()"
+        ></q-btn>
        </div>
     </div>
   </div>
@@ -71,13 +76,12 @@ export default {
       deep: true,
       handler (newVal) {
         const tabTitle = this.tabTitles?.filter(tab => tab.isActive)[0]?.title.toUpperCase()
-        console.log(tabTitle)
         this.blogs = []
         const selectTab = this.originalBlogsData?.filter(tab => tab.id === newVal)
         selectTab[0]?.popularBlogsInside?.forEach(blog => {
           this.blogs.push({ ...blog, tabTitle })
         })
-        console.log(this.blogs)
+        // this.blogs = this.blogs.slice(0,)
       }
     }
   },
@@ -88,12 +92,23 @@ export default {
     ...mapMutations({
       setAllTabsData: 'nursingHome/setAllTabsData'
     }),
+    onGoToTabBlogsPage () {
+      const tabTitle = this.titleSelected?.toLowerCase()?.split(' ')?.join('-')
+      this.$router.push({
+        name: 'tab-blogs',
+        params: {
+          tabTitle,
+          tabId: this.tabSelected
+        }
+      })
+    },
     onTabClick ({ id, title }) {
       this.tabTitles?.forEach(tab => {
         if (tab.id === id) tab.isActive = true
         else tab.isActive = false
       })
       this.tabSelected = id
+      this.titleSelected = title
     },
     goTo (name) {
       this.$router.push({
@@ -103,7 +118,6 @@ export default {
     getDate (value) {
       const newValue = new Date(value)
       const monthValue = (newValue.getMonth() + 1) < 10 ? `0${newValue.getMonth() + 1}` : newValue.getMonth() + 1
-      console.log(value)
       return `${newValue.getDate()}-${monthValue}-${newValue.getFullYear()}`
     },
     async fetchAllBlogs () {
@@ -113,7 +127,10 @@ export default {
         this.originalBlogsData = JSON.parse(JSON.stringify(data))
         this.originalBlogsData?.forEach((tab, id) => {
           const isActive = id === 0 ? true : false
-          if (id === 0) this.tabSelected = tab.id
+          if (id === 0) {
+            this.tabSelected = tab.id
+            this.titleSelected = tab.title
+          }
           this.tabTitles.push({ ...tab, isActive})
         })
       } catch (error) {
@@ -143,7 +160,8 @@ export default {
       news: [],
       originalBlogsData: [],
       tabTitles: [],
-      tabSelected: null
+      tabSelected: null,
+      titleSelected: ''
     }
   }
 }

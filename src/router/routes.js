@@ -5,7 +5,8 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', name: 'home', component: () => import('pages/IndexPage.vue') },
-      { path: 'blogs', name: 'blogs', component: () => import('pages/AllBlogs.vue') },
+      // { path: 'blogs', name: 'blogs', component: () => import('pages/AllBlogs.vue') },
+      { path: ':tabTitle/:tabId', name: 'tab-blogs', component: () => import('pages/PopularTabBlogs.vue'), props: true },
       { path: 'blogs/:id', name: 'individual-blog', component: () => import('pages/IndividualBlogs.vue') },
       { path: 'faq', name: 'faq', component: () => import('pages/FaqPage.vue') },
       { path: 'our-doctors', name: 'our-doctors', component: () => import('pages/OurDoctors.vue') },
