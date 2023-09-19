@@ -1,12 +1,14 @@
 <template>
   <div :class="isMobile ? 'q-pa-md' : 'q-pa-xl'">
-    <div class="font-inter fs-16 fw-600 q-px-sm">
-      <span class="text-grey cursor-pointer" @click="goTo('home')">Home / </span>
-      <span class="text-primary cursor-pointer">{{unEditedTitle}}</span>
-    </div>
-    <div class="text-center font-domine q-mt-sm text-primary fw-500" :class="isDesktop ? 'fs-30' : 'fs-24'">{{unEditedTitle}}</div>
-    <div class="q-mt-lg intro-image">
-      <img :src="introImage" alt="">
+    <div class="q-pa-md">
+      <div class="font-inter fs-16 fw-600 q-px-sm">
+        <span class="text-grey cursor-pointer" @click="goTo('home')">Home / </span>
+        <span class="text-primary cursor-pointer">{{unEditedTitle}}</span>
+      </div>
+      <div class="text-center font-domine q-mt-sm text-primary fw-500" :class="isDesktop ? 'fs-30' : 'fs-24'">{{unEditedTitle}}</div>
+      <div class="q-mt-lg intro-image row justify-center">
+        <img :src="introImage" alt="">
+      </div>
     </div>
   </div>
 </template>
@@ -104,8 +106,8 @@ export default {
 <style lang="scss" scoped>
 .intro-image {
   img {
-  width: 100%;
-  height: 450px;
+  width: 90%;
+  height: 500px;
   object-fit: cover;
   }
 }
