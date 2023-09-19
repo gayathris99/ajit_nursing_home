@@ -40,6 +40,7 @@ export async function getDoctors({ commit, dispatch }) {
     throw (error)
   }
 }
+// HomePage allTab blogs
 export async function getAllTabs({ commit, dispatch }) {
   try {
     const data = await axios.get(
@@ -50,6 +51,30 @@ export async function getAllTabs({ commit, dispatch }) {
     throw (error)
   }
 }
+// Get tab intro only
+export async function getTabIntro({ commit, dispatch }, { tabId }) {
+  try {
+    const data = await axios.get(
+     `${process.env.BASE_URL}/tabdetails/${tabId}`
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
+// First level tab page blog (eg: anh.com/women-wellness/58)
+export async function getTabBlogs({ commit, dispatch }, { tabId }) {
+  try {
+    const data = await axios.get(
+     `${process.env.BASE_URL}/popularblogs/28`
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
+
+// Individual Blog
 export async function getBlog({ commit, dispatch }, { blogId }) {
   try {
     const data = await axios.get(
