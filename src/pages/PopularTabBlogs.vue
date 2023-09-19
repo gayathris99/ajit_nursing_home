@@ -4,10 +4,37 @@
       <span class="text-grey cursor-pointer" @click="goTo('home')">Home / </span>
       <span class="text-primary cursor-pointer">{{unEditedTitle}}</span>
     </div>
-    <div class="q-px-md">
-      <div class="text-center font-domine q-mt-sm text-primary fw-500" :class="isDesktop ? 'fs-30' : 'fs-24'">{{unEditedTitle}}</div>
-      <div class="q-mt-lg intro-image row justify-center">
+    <div :class="isDesktop ? 'q-px-md' : ''">
+      <div class="text-center font-domine q-mt-md text-primary fw-500" :class="isDesktop ? 'fs-30' : 'fs-24'">{{unEditedTitle}}</div>
+      <div class="intro-image row justify-center" :class="isDesktop ? 'q-mt-lg ' : 'q-mt-md'">
         <img :src="introImage" alt="">
+        <!-- <div class="text-container font-inter fs-16">{{imageQuotation}}</div> -->
+      </div>
+      <div class="q-mt-md" v-for="(tabBlog, key) in tabBlogData" :key="key">
+        <div class="text-center line-design q-mt-xl">
+           <img v-if="!isMobile" src="~assets/line-design-long.svg" alt="">
+           <img v-else src="~assets/line-design-short.svg" alt="">
+        </div>
+        <div class="text-center font-domine text-primary fs-24 q-mt-lg">{{tabBlog.title}}</div>
+        <div class="row items-center  q-gutter-x-lg q-gutter-y-md q-mt-md" :class="!isDesktop ? 'justify-center' : 'justify-evenly'">
+          <div class="col-md-2 col-sm-4 col-xs-10 blog-container cursor-pointer" v-for="(blog, id) in tabBlog.popularBlogsInside" :key="id" @click="goToBlog(blog.id)">
+            <img  v-if="blog.image" :src="blog.image" alt="">
+            <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg" alt="">
+            <div class="blog-title">
+              <div class="font-montserrat fw-700">{{blog.title}}</div>
+              <div class="font-montserrat fw-500 fs-12" style="color: #56584B;">Reviewed by Dr. Abhishek MBBS</div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-center font-montserrat q-mt-md">
+          <q-btn
+          label="Show more"
+          class="fw-700"
+          icon-right="expand_more"
+          outline
+          color="secondary"
+          ></q-btn>
+        </div>
       </div>
     </div>
   </div>
@@ -79,6 +106,7 @@ export default {
           tabId: this.tabId
         })
         this.tabBlogData = data
+        console.log(data)
       } catch (error) {
           this.$q.notify({
             message: "Something went wrong, please try again",
@@ -91,6 +119,14 @@ export default {
     goTo (name) {
       this.$router.push({
         name
+      })
+    },
+    goToBlog (id) {
+      this.$router.push({
+        name: 'individual-blog',
+        params: {
+          id
+        }
       })
     }
   },
@@ -105,10 +141,44 @@ export default {
 
 <style lang="scss" scoped>
 .intro-image {
+  // position: relative;
   img {
   width: 90%;
   height: 470px;
   object-fit: cover;
+  @media only screen and (max-width: $breakpoint-sm-max) {
+    height: 300px;
+    width: 100%;
   }
+  @media only screen and (max-width: $breakpoint-xs-max) {
+    height: 200px;
+    width: 100%;
+  }
+  }
+  // .text-container {
+  //   background: rgba(0, 73, 83, 0.60);
+  //   color: white;
+  //   position: absolute;
+  //   bottom: 0px;
+  //   left: 5%;
+  //   padding: 16px;
+  //   width: 1180.3px;
+  // }
+}
+.line-design {
+  img {
+    width: 100%;
+    height: 10px;
+  }
+}
+.blog-container {
+  img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+}
+.blog-title {
+  height: 70px;
 }
 </style>
