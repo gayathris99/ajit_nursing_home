@@ -1,6 +1,13 @@
 <template>
   <div :class="isMobile ? 'q-pa-md' : 'q-pa-xl'">
-    blogs
+    <div class="font-inter fs-16 fw-600 q-px-sm">
+      <span class="text-grey cursor-pointer" @click="goTo('home')">Home / </span>
+      <span class="text-primary cursor-pointer">{{unEditedTitle}}</span>
+    </div>
+    <div class="text-center font-domine q-mt-sm text-primary fw-500" :class="isDesktop ? 'fs-30' : 'fs-24'">{{unEditedTitle}}</div>
+    <div class="q-mt-lg intro-image">
+      <img :src="introImage" alt="">
+    </div>
   </div>
 </template>
 
@@ -12,6 +19,7 @@ export default {
     return {
       tabId: null,
       tabTitle: null,
+      unEditedTitle: '',
       introImage: null,
       imageQuotation: null,
       tabBlogData: []
@@ -23,6 +31,9 @@ export default {
     }),
     isMobile () {
       return this.$q.screen.lt.sm
+    },
+    isDesktop () {
+      return this.$q.screen.gt.sm
     }
   },
   methods: {
@@ -31,6 +42,7 @@ export default {
       getTabIntro: 'nursingHome/getTabIntro'
     }),
     async fetchTabIntro () {
+      this.$q.loading.show()
       if (!this.getAllTabsData.length) {
         try {
           const { data } = await this.getTabIntro({
@@ -38,6 +50,7 @@ export default {
           })
           this.imageQuotation = data?.quotation
           this.introImage = data?.image
+          this.unEditedTitle = data?.title
         } catch (error) {
           this.$q.notify({
             message: "Something went wrong, please try again",
@@ -52,9 +65,11 @@ export default {
         if (selectedTab.length) {
           this.introImage = selectedTab[0]?.image
           this.imageQuotation = selectedTab[0]?.quotation
+          this.unEditedTitle = selectedTab[0]?.title
         }
       }
       this.fetchTabBlogs()
+      this.$q.loading.hide()
     },
     async fetchTabBlogs () {
       try {
@@ -70,6 +85,11 @@ export default {
             icon: "warning",
           });
         }
+    },
+    goTo (name) {
+      this.$router.push({
+        name
+      })
     }
   },
   created () {
@@ -80,3 +100,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.intro-image {
+  img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  }
+}
+</style>
