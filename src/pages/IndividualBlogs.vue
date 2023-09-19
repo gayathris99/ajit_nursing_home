@@ -1,42 +1,46 @@
 <template>
-  <div :class="isMobile ? 'q-pa-md' : 'q-pa-xl'">
-    <div class="font-inter fs-16 fw-600 q-px-sm">
-      <span class="text-grey cursor-pointer" @click="goTo('home')">Home / </span>
-      <span class="text-grey cursor-pointer"  @click="goTo('blogs')">Blogs / </span>
-      <span class="text-primary cursor-pointer" @click="goToBlog()">{{blogContent.title}}</span>
-    </div>
-    <div class="row justify-between items-center font-inter fw-600 q-mt-lg q-gutter-y-xs-md">
-      <div class="title  text-primary col-md-10 col-sm-8 col-xs-12">{{blogContent.title}}</div>
-      <div class="fs-16 color-primary-two cursor-pointer" @click="openSharePopup">Share this post &nbsp;<span class="bg-icon q-pa-xs"><q-icon name="link"/></span></div>
-    </div>
-    <div class="font-inter fs-14 fw-600 q-mt-sm">
-      <span class="color-primary-two">Fact checked by: </span>
-      <span class="fw-400">Dr. Abhishek MBBS &#8226; {{blogContent.date}}</span>
-    </div>
-    <div class="grey-border  q-mt-md" :class="isMobile ? 'q-pa-sm': 'q-py-lg q-px-md'">
-      <q-img :src="blogContent?.image?.meta?.download_url"/>
-    </div>
-    <div class="q-mt-md blog-body font-inter text-primary fs-18" v-html="blogContent.body">
-    </div>
-    <div class="q-mt-xl" v-if="blogContentFAQ?.length">
-      <div class="text-primary fw-600 fs-30 q-mb-sm">Frequently Asked Questions</div>
-      <q-list  v-for="(faq, key) in blogContentFAQ" :key="key">
-        <q-expansion-item class="no-padding" >
-          <template v-slot:header>
-            <div class="font-roboto fw-700 fs-18 text-primary font-inter faq-question q-py-sm">
-              {{faq.question}}
-            </div>
-          </template>
-          <q-card>
-            <q-card-section>
-              <div class="font-inter fs-16 color-primary-two fw-400">
-                {{faq.answer}}
+  <div :class="isMobile ? 'q-pa-lg' : 'q-pa-xl'" class="blog-main-container">
+    <div v-if="blogContent">
+      <div class="title font-domine fw-500 text-primary">{{blogContent.title}}</div>
+      <div class="q-mt-sm font-domine fw-500 fs-14" style="color:#646464;">Last updated on {{blogContent.date}}</div>
+      <div class="row items-center justify-between font-domine  q-mt-xs"  style="color:#646464;">
+        <div class="row items-center q-gutter-x-xs"><span><q-icon name="task_alt" size="xs"/></span><span class="font-domine fw-500 fs-14">Reviewed by Abhishek S Bane, MBBS</span></div>
+        <div :class="isMobile ? 'q-mt-sm' : ''" class="fs-14 fw-700  cursor-pointer font-domine" @click="openSharePopup">SHARE THIS POST &nbsp;<span class="bg-icon q-pa-xs"><q-icon name="link"/></span></div>
+      </div>
+      <div class="image-container" :class="isDesktop ? 'q-mt-lg' : 'q-mt-md'">
+        <img v-if="blogContent?.image?.meta?.download_url" :src="blogContent?.image?.meta?.download_url" alt="">
+        <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg" alt="">
+      </div>
+      <div class="q-mt-md">
+        <div class="q-mt-md blog-body font-domine text-primary fs-18" v-html="blogContent.body"></div>
+      </div>
+      <div class="q-mt-xl" v-if="blogContentFAQ?.length">
+        <div class="text-primary fw-600 fs-30 q-mb-sm">Frequently Asked Questions</div>
+        <q-list  v-for="(faq, key) in blogContentFAQ" :key="key">
+          <q-expansion-item class="no-padding" >
+            <template v-slot:header>
+              <div class="font-roboto fw-700 fs-18 text-primary font-inter faq-question q-py-sm">
+                {{faq.question}}
               </div>
-            </q-card-section>
-          </q-card>
-        </q-expansion-item>
-        <q-separator />
-      </q-list>
+            </template>
+            <q-card>
+              <q-card-section>
+                <div class="font-inter fs-16 color-primary-two fw-400">
+                  {{faq.answer}}
+                </div>
+              </q-card-section>
+            </q-card>
+          </q-expansion-item>
+          <q-separator />
+        </q-list>
+      </div>
+    </div>
+    <div v-if="!blogContent && !isLoading">
+      <div class="column justify-center align-center items-center q-mt-md">
+        <q-img src="~assets/noResultFound.svg" width="250px"></q-img>
+        <div class="text-primary q-ml-md font-inter fs-16 fw-600 q-mt-md">No results found</div>
+        <q-btn label="Go Home" color="primary" class="q-mt-md font-montserrat q-ml-md fw-700" @click="goTo('home')"></q-btn>
+      </div>
     </div>
     <q-dialog v-model="sharePopup" class="share-popup">
      <q-card>
@@ -71,13 +75,17 @@ export default {
      blogContentFAQ: '',
      sharePopup: false,
      blogLink: null,
-     showCopied: false
+     showCopied: false,
+     isLoading: true
    }
   },
   computed: {
     isMobile () {
       return this.$q.screen.lt.sm
-    }
+    },
+    isDesktop () {
+      return this.$q.screen.gt.sm
+    },
   },
   methods: {
     ...mapActions({
@@ -111,6 +119,7 @@ export default {
     async fetchBlog () {
       const blogId = this.$route.params.id
       try {
+        this.isLoading = true
         this.$q.loading.show()
         const { data } = await this.getBlog({
           blogId
@@ -125,6 +134,7 @@ export default {
         });
       }
       finally {
+        this.isLoading = false
         this.$q.loading.hide()
       }
     },
@@ -159,33 +169,31 @@ export default {
 
 
 <style lang="scss" scoped>
-.banner-image {
-  max-height: 600px;
-  width: 50vw;
-  object-fit: scale-down;
-}
 .bg-icon {
   border-radius: 56px;
   background: var(--light-grey, #F4F4F4);
 }
-.grey-border {
-  border: 1px solid #EEE;
-  .q-img {
-    object-fit: cover;
-  }
-}
 :deep(.blog-body) {
   a {
-    color: blue;
+    color: $secondary;
     font-weight: bold;
   }
 
   h4, h3, h2, h1 {
-    margin: 30px 0px !important;
+    margin-top: 40px !important;
+    margin-bottom: 15px !important;
     font-size: 32px;
     font-style: normal;
     font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 40px !important;
+    @media only screen and (max-width: $breakpoint-xs-max) {
+      font-size: 26px;
+    }
   }
+  ul {
+  list-style-type: square;
+}
 }
 .faq-question {
   width: 100%;
@@ -197,6 +205,20 @@ export default {
   width: 300px;
   @media only screen and (max-width: $breakpoint-xs-max) {
     width: 220px;
+  }
+}
+.blog-main-container {
+  max-width: 1000px;
+  height: auto;
+    margin: auto;
+  // width: 50%;
+}
+.image-container {
+  img {
+    width: 100%;
+    object-fit: cover;
+    max-height: 450px;
+    box-shadow: 6px 5px 0 rgba(10,56,63,.1);
   }
 }
 </style>
