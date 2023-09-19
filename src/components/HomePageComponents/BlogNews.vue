@@ -27,7 +27,7 @@
        </q-scroll-area>
        <div v-else>
         <div v-if="tabSelected" class="row q-my-md q-gutter-x-xs justify-center q-gutter-y-lg">
-          <div v-for="(blog, key) in blogs" :key="key" @click="goToBlog(blog.id)" class="col-md-3 col-sm-5 col-xs-11">
+          <div v-for="(blog, key) in blogs.slice(0,3)" :key="key" @click="goToBlog(blog.id)" class="col-md-3 col-sm-5 col-xs-11">
             <q-card class="blog-container cursor-pointer">
               <img v-if="blog.image" :src="blog.image"/>
               <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg"/>
