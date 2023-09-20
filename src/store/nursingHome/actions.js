@@ -40,11 +40,12 @@ export async function getDoctors({ commit, dispatch }) {
     throw (error)
   }
 }
+
 // HomePage allTab blogs
 export async function getAllTabs({ commit, dispatch }) {
   try {
     const data = await axios.get(
-     `${process.env.BASE_URL}/popularblogs`
+     `${process.env.BASE_URL}/tab/popularblogs`
     );
     return data;
   } catch (error) {
@@ -55,7 +56,7 @@ export async function getAllTabs({ commit, dispatch }) {
 export async function getTabIntro({ commit, dispatch }, { tabId }) {
   try {
     const data = await axios.get(
-     `${process.env.BASE_URL}/tabdetails/${tabId}`
+     `${process.env.BASE_URL}/tab/${tabId}`
     );
     return data;
   } catch (error) {
@@ -66,7 +67,7 @@ export async function getTabIntro({ commit, dispatch }, { tabId }) {
 export async function getTabBlogs({ commit, dispatch }, { tabId }) {
   try {
     const data = await axios.get(
-     `${process.env.BASE_URL}/popularblogs/28`
+     `${process.env.BASE_URL}/tab/28/popularblogs`
     );
     return data;
   } catch (error) {
@@ -78,7 +79,8 @@ export async function getTabBlogs({ commit, dispatch }, { tabId }) {
 export async function getBlog({ commit, dispatch }, { blogId }) {
   try {
     const data = await axios.get(
-      `https://anh.foxgloveteam.com/api/v2/pages/${blogId}/?site=anh-cms.foxgloveteam`
+      `${process.env.BASE_URL}/tab/28/blogs/${blogId}`
+      // `https://anh.foxgloveteam.com/api/v2/pages/${blogId}/?site=anh-cms.foxgloveteam`
     );
     return data;
   } catch (error) {
