@@ -274,7 +274,7 @@ export default {
           menuTitle: 'Gynaecology'
         },
         {
-          menuTitle: 'Getting Preganant'
+          menuTitle: 'Getting Pregnant'
         }
       ]
     }

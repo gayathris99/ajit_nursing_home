@@ -6,7 +6,11 @@ const routes = [
     children: [
       { path: '', name: 'home', component: () => import('pages/IndexPage.vue') },
       // { path: 'blogs', name: 'blogs', component: () => import('pages/AllBlogs.vue') },
+      // First Level Tabs
       { path: ':tabTitle/:tabId', name: 'tab-blogs', component: () => import('pages/PopularTabBlogs.vue'), props: true },
+      // All Blogs
+      { path: ':mainTabTitle/:subTabTitle/:tabId', name: 'tab-all-blogs', component: () => import('pages/AllTabBlogs.vue'), props: true },
+
       { path: 'blogs/:id', name: 'individual-blog', component: () => import('pages/IndividualBlogs.vue') },
       { path: 'faq', name: 'faq', component: () => import('pages/FaqPage.vue') },
       { path: 'terms', name: 'terms', component: () => import('pages/TermsAndCondition.vue') },

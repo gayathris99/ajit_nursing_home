@@ -131,14 +131,16 @@ export default {
       })
     },
     onShowMore (tabBlog) {
-    //  const tabTitle = tabBlog?.title?.toLowerCase()?.split(' ')?.join('-')
-    //   this.$router.push({
-    //     name: 'tab-blogs',
-    //     params: {
-    //       tabTitle,
-    //       tabId: tabBlog.id
-    //     }
-    //   })
+    const { tabTitle } = this.$route.params
+     const subTabTitle = tabBlog?.title?.toLowerCase()?.split(' ')?.join('-')
+      this.$router.push({
+        name: 'tab-all-blogs',
+        params: {
+          mainTabTitle: tabTitle,
+          subTabTitle,
+          tabId: tabBlog.id
+        }
+      })
     }
   },
   created () {

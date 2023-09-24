@@ -74,6 +74,18 @@ export async function getTabBlogs({ commit, dispatch }, { tabId }) {
     throw (error)
   }
 }
+// get all blogs
+export async function getTabAllBlogs({ commit, dispatch }, { tabId }) {
+  try {
+    const data = await axios.get(
+     `${process.env.BASE_URL}/tab/59/blogs`
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
+
 // Individual Blog
 export async function getBlog({ commit, dispatch }, { blogId }) {
   try {
