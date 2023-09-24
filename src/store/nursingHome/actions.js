@@ -63,7 +63,7 @@ export async function getTabIntro({ commit, dispatch }, { tabId }) {
     throw (error)
   }
 }
-// First level tab page blog (eg: anh.com/women-wellness/58)
+// First level tab page blog (eg: anh.com/women-wellness/obgyn/58)
 export async function getTabBlogs({ commit, dispatch }, { tabId }) {
   try {
     const data = await axios.get(
@@ -74,7 +74,6 @@ export async function getTabBlogs({ commit, dispatch }, { tabId }) {
     throw (error)
   }
 }
-
 // Individual Blog
 export async function getBlog({ commit, dispatch }, { blogId }) {
   try {
@@ -87,6 +86,8 @@ export async function getBlog({ commit, dispatch }, { blogId }) {
     throw (error)
   }
 }
+
+
 export async function getBlogFAQ({ commit, dispatch }, { blogId }) {
   try {
     const data = await axios.get(

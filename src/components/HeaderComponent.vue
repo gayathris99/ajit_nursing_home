@@ -32,25 +32,13 @@
             </q-list>
           </q-btn-dropdown>
           <q-btn-dropdown label="Women Wellness" no-caps class="fs-16 fw-600 font-montserrat" flat dense>
-            <q-list class="fs-14 fw-600 font-montserrat text-primary column justify-center" style="width: 150px">
-              <q-item clickable v-close-popup>
-                <q-item-section>Planning a pregnancy</q-item-section>
-              </q-item>
-              <q-item clickable v-close-popup>
-                <q-item-section>Being Pregnant</q-item-section>
-              </q-item>
-              <q-item clickable v-close-popup>
-                <q-item-section>Giving birth</q-item-section>
-              </q-item>
-              <q-item clickable v-close-popup>
-                <q-item-section>After the birth</q-item-section>
-              </q-item>
-              <q-item clickable v-close-popup>
-                <q-item-section>Babies</q-item-section>
-              </q-item>
-              <q-item clickable v-close-popup>
-                <q-item-section>Life as a parent</q-item-section>
-              </q-item>
+            <q-list class="fs-14 fw-600 font-montserrat text-primary column justify-center q-py-sm" style="width:auto">
+              <span style="display:block;"  class="q-my-sm q-mx-md cursor-pointer menu-item" v-for="(menu, id) in womenWellnessMenu" :key="id" clickable v-close-popup>
+                {{menu.menuTitle}}
+              </span>
+                <!-- <q-item v-for="(menu, id) in womenWellnessMenu" :key="id" clickable v-close-popup class="no-padding" >
+                  <q-item-section>{{menu.menuTitle}}</q-item-section>
+                </q-item> -->
             </q-list>
           </q-btn-dropdown>
           <q-btn-dropdown label="Tools" no-caps class="fs-16 fw-600 font-montserrat" flat dense>
@@ -96,12 +84,7 @@
             group="somegroup"
             dense
             >
-            <div class="q-py-sm q-px-md cursor-pointer fs-14">Planning a pregnancy</div>
-            <div class="q-py-sm q-px-md cursor-pointer fs-14">Being Pregnant</div>
-            <div class="q-py-sm q-px-md cursor-pointer fs-14">Giving birth</div>
-            <div class="q-py-sm q-px-md cursor-pointer fs-14">After the birth</div>
-            <div class="q-py-sm q-px-md cursor-pointer fs-14">Babies</div>
-            <div class="q-py-sm q-px-md cursor-pointer fs-14">Life as a parent</div>
+            <div v-for="(menu, id) in womenWellnessMenu" :key="id" class="q-py-sm q-px-md cursor-pointer fs-14">{{menu.menuTitle}}</div>
           </q-expansion-item>
           <q-expansion-item
             class="fs-16"
@@ -259,6 +242,41 @@ export default {
       password: '',
       dueDate: '',
       isConceive: false,
+      womenWellnessMenu: [
+        {
+          menuTitle: 'OBGYN Introduction'
+        },
+        {
+          menuTitle: 'Planning a pregnancy'
+        },
+        {
+          menuTitle: 'Being Pregnant/Giving Birth'
+        },
+        {
+          menuTitle: 'Labor & Delivery'
+        },
+        {
+          menuTitle: 'After Pregnancy'
+        },
+        {
+          menuTitle: 'Abortion Care'
+        },
+        {
+          menuTitle: 'Fertility'
+        },
+        {
+          menuTitle: 'Baby'
+        },
+        {
+          menuTitle: 'Life as a parent'
+        },
+        {
+          menuTitle: 'Gynaecology'
+        },
+        {
+          menuTitle: 'Getting Preganant'
+        }
+      ]
     }
   },
   methods: {
@@ -428,6 +446,9 @@ export default {
       font-size: 16px;
     }
   }
+}
+.menu-item:hover {
+  color: #BC3430;
 }
 .thin-line {
   padding: 2px;

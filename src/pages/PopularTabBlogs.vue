@@ -33,6 +33,7 @@
           icon-right="expand_more"
           outline
           color="secondary"
+          @click="onShowMore(tabBlog)"
           ></q-btn>
         </div>
       </div>
@@ -128,6 +129,16 @@ export default {
           id
         }
       })
+    },
+    onShowMore (tabBlog) {
+    //  const tabTitle = tabBlog?.title?.toLowerCase()?.split(' ')?.join('-')
+    //   this.$router.push({
+    //     name: 'tab-blogs',
+    //     params: {
+    //       tabTitle,
+    //       tabId: tabBlog.id
+    //     }
+    //   })
     }
   },
   created () {

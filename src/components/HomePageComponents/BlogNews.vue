@@ -199,9 +199,13 @@ export default {
   box-shadow: 6px 5px 0 rgba(10,56,63,.05);
 
   img {
+    transition: transform .5s ease;
     height: 200px;
     object-fit: cover;
   }
+}
+.blog-container:hover img {
+  transform: scale(0.99);
 }
 .title-intro {
   height: 120px;
