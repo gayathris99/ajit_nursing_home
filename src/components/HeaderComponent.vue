@@ -168,6 +168,15 @@
           </div>
           <q-input
           color="black"
+          outlined
+          v-model="userName"
+          label="Name:"
+          class="font-montserrat fw-500 q-mb-sm q-px-sm"
+          label-color="primary"
+          :rules="[val => !!val || 'Name is required']">
+          </q-input>
+          <q-input
+          color="black"
           id="phone"
           class="font-montserrat fw-500 q-mb-sm q-px-sm"
           label-color="primary"
@@ -238,6 +247,7 @@ export default {
       loginPopup: false,
       signupPopup: false,
       isPwd: 'password',
+      userName: '',
       whatsappNumber: '',
       password: '',
       dueDate: '',
@@ -348,11 +358,12 @@ export default {
            username : this.whatsappNumber ,
            password : this.password ,
            password2 : this.password ,
-           firstName : this.whatsappNumber ,
-           lastName : this.whatsappNumber,
+           firstName : this.userName ,
+           lastName : this.userName,
            dueDate : this.dueDate,
            isTryingToConceive: this.isConceive
         })
+        this.signupPopup = false
       } catch (error) {
         this.$q.notify({
           message: "Something went wrong, please try again",
