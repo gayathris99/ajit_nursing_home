@@ -40,7 +40,17 @@ export async function getDoctors({ commit, dispatch }) {
     throw (error)
   }
 }
-
+// GetAllTabDetails
+export async function getAllTabDetails({ commit, dispatch }) {
+  try {
+    const data = await axios.get(
+     `${process.env.BASE_URL}/tab`
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
 // HomePage allTab blogs
 export async function getAllTabs({ commit, dispatch }) {
   try {
@@ -85,7 +95,6 @@ export async function getTabAllBlogs({ commit, dispatch }, { tabId }) {
     throw (error)
   }
 }
-
 // Individual Blog
 export async function getBlog({ commit, dispatch }, { blogId }) {
   try {

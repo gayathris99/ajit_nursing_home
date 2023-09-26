@@ -4,3 +4,6 @@ export function getDoctorId (state) {
 export function getAllTabsData (state) {
   return state.allTabsData
 }
+export function getTabDetailsData (state) {
+  return state.tabDetailsData
+}
