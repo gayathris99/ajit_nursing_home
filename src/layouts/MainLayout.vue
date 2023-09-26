@@ -45,7 +45,7 @@ export default {
     }
   },
   created () {
-    if (!this.getTabDetailsData) {
+    if (!this.getTabDetailsData.length) {
       this.fetchAllTabDetails()
     }
   }

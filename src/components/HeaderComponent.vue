@@ -33,7 +33,7 @@
           </q-btn-dropdown>
           <q-btn-dropdown label="Women Wellness" no-caps class="fs-16 fw-600 font-montserrat" flat dense>
             <q-list class="fs-14 fw-600 font-montserrat text-primary column justify-center q-py-sm" style="width:auto">
-              <span style="display:block;"  class="q-my-sm q-mx-md cursor-pointer menu-item" v-for="(menu, id) in womenWellnessMenu" :key="id" clickable v-close-popup>
+              <span style="display:block;"  class="q-my-sm q-mx-md cursor-pointer menu-item" v-for="(menu, id) in womenWellnessMenu" :key="id" clickable v-close-popup @click="onWomenWellnessClick(menu)">
                 {{menu.menuTitle}}
               </span>
                 <!-- <q-item v-for="(menu, id) in womenWellnessMenu" :key="id" clickable v-close-popup class="no-padding" >
@@ -84,7 +84,7 @@
             group="somegroup"
             dense
             >
-            <div v-for="(menu, id) in womenWellnessMenu" :key="id" class="q-py-sm q-px-md cursor-pointer fs-14">{{menu.menuTitle}}</div>
+            <div v-for="(menu, id) in womenWellnessMenu" :key="id" class="q-py-sm q-px-md cursor-pointer fs-14" @click="onWomenWellnessClick(menu)">{{menu.menuTitle}}</div>
           </q-expansion-item>
           <q-expansion-item
             class="fs-16"
@@ -238,7 +238,7 @@
   </q-dialog>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'HeaderComponent',
   data () {
@@ -293,6 +293,9 @@ export default {
     ...mapActions({
       registerUser: 'nursingHome/registerUser'
     }),
+    onWomenWellnessClick ({ menuTitle }) {
+      const getTabDetailsData = this.getTabDetailsData?.filter(tab => tab.title.toLowerCase() === menuTitle.toLowerCase())
+    },
     dateOption (date) {
       const fiveYearsAgo = this.subtractYears(new Date(), 5).toLocaleDateString('en-ZA') //dd/mm/yyyy
       return date >= fiveYearsAgo
@@ -375,6 +378,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      getTabDetailsData: 'nursingHome/getTabDetailsData'
+    }),
     isMobile () {
       return this.$q.screen.lt.sm
     },
@@ -387,7 +393,7 @@ export default {
     isHomePage () {
       return this.$route.name === 'home'
     }
-  },
+  }
 }
 </script>
 
