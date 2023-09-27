@@ -92,7 +92,6 @@ export default {
       immediate: true,
       deep: true,
       handler (newVal) {
-        console.log(newVal, '$route')
         let { tabTitle } = this.$route.params
         tabTitle = tabTitle?.split('-').join(' ')
         const tabDetails = this.getTabDetailsData?.filter(tab => tab.title.toLowerCase() === tabTitle.toLowerCase())
@@ -104,7 +103,6 @@ export default {
       deep: true,
       handler (newVal) {
         if (newVal) {
-          console.log(newVal, 'tabDetails')
           this.checkTabType(newVal.tabType)
         }
       }

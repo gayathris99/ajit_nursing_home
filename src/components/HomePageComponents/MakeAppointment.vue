@@ -62,7 +62,6 @@ export default {
       window.open('https://wa.me/919448420369', '_blank')
     },
     onClickAppt () {
-      console.log( document.getElementsByClassName('practo_abs_widget_button'))
       document.getElementsByClassName('practo_abs_widget_button').href.click()
     },
     goTo (name) {

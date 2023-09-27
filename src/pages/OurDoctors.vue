@@ -101,7 +101,6 @@ export default {
     async fetchDoctors () {
       try {
         const { data } = await this.getDoctors()
-        console.log(data)
         this.doctors = data
         this.doctorKey = this.getDoctorId
         // console.log(this.getDoctorId)

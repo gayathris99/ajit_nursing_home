@@ -295,7 +295,6 @@ export default {
     }),
     onWomenWellnessClick ({ menuTitle }) {
       const getTabDetailsData = this.getTabDetailsData?.filter(tab => tab.title.toLowerCase() === menuTitle.toLowerCase())
-      console.log(getTabDetailsData)
       if (getTabDetailsData.length) {
         this.$router.push({
           name: 'women-wellness-page',
