@@ -60,7 +60,7 @@
           <div v-else>
             <q-btn-dropdown icon="account_circle" flat dense size="20px">
               <q-list class="fs-14 fw-600 font-montserrat text-primary column justify-center" style="width: auto">
-                <q-item clickable v-close-popup>
+                <q-item clickable v-close-popup @click="goTo('account-settings')">
                   <q-item-section>Account Settings</q-item-section>
                 </q-item>
                 <q-item clickable v-close-popup @click="onLogout">
@@ -111,7 +111,7 @@
           <div class="cursor-pointer q-py-sm q-px-md fs-16">Contact Us</div>
           <div class="cursor-pointer q-py-sm q-px-md fs-16" v-if="!isUserLoggedIn" @click="openUserPopup('login')">Login</div>
           <div class="cursor-pointer q-py-sm q-px-md fs-16" v-if="!isUserLoggedIn" @click="openUserPopup('signup')">Signup</div>
-          <div class="cursor-pointer q-py-sm q-px-md fs-16" v-if="isUserLoggedIn">Account Settings</div>
+          <div class="cursor-pointer q-py-sm q-px-md fs-16" v-if="isUserLoggedIn"  @click="goTo('account-settings')">Account Settings</div>
           <div class="cursor-pointer q-py-sm q-px-md fs-16" v-if="isUserLoggedIn" @click="onLogout">Logout</div>
         </div>
       </q-drawer>
@@ -473,6 +473,7 @@ export default {
         this.userDetails = {}
         this.isUserLoggedIn = false
         localStorage.removeItem('userObj')
+        if (this.$route.name.includes('account-settings')) this.goTo('home')
       } catch (error) {
         this.$q.notify({
           message: "Something went wrong, please try again",
