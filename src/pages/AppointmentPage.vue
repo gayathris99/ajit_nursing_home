@@ -12,7 +12,7 @@
             <practo:abs_widget widget="c1652e7290313b78"></practo:abs_widget>
           </div> -->
           <q-btn
-          style="background: #3363AC; color: white; width: 310px;"
+          style="background: #004953; color: white; width: 310px;"
           label="BOOK APPOINTMENT ON WHATSAPP"
           no-caps
           class="font-montserrat fs-18"
@@ -20,7 +20,7 @@
           @click="bookWhatsappAppointment"
           />
           <q-btn
-          style="background: #3363AC; color: white; width: 310px;"
+          style="background: #097EA3; color: white; width: 310px;"
           label="BOOK APPOINTMENT ON PRACTO"
           no-caps
           class="font-montserrat fs-18"
