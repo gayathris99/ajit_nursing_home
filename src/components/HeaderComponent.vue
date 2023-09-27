@@ -295,6 +295,15 @@ export default {
     }),
     onWomenWellnessClick ({ menuTitle }) {
       const getTabDetailsData = this.getTabDetailsData?.filter(tab => tab.title.toLowerCase() === menuTitle.toLowerCase())
+      console.log(getTabDetailsData)
+      if (getTabDetailsData.length) {
+        this.$router.push({
+          name: 'women-wellness-page',
+          params: {
+            tabTitle: getTabDetailsData[0]?.title?.toLowerCase()?.split(' ')?.join('-')
+          },
+        })
+      }
     },
     dateOption (date) {
       const fiveYearsAgo = this.subtractYears(new Date(), 5).toLocaleDateString('en-ZA') //dd/mm/yyyy

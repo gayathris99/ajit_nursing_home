@@ -107,7 +107,6 @@ export default {
           tabId: this.tabId
         })
         this.tabBlogData = data
-        console.log(data)
       } catch (error) {
           this.$q.notify({
             message: "Something went wrong, please try again",

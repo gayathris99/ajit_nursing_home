@@ -77,7 +77,7 @@ export async function getTabIntro({ commit, dispatch }, { tabId }) {
 export async function getTabBlogs({ commit, dispatch }, { tabId }) {
   try {
     const data = await axios.get(
-     `${process.env.BASE_URL}/tab/28/popularblogs`
+     `${process.env.BASE_URL}/tab/${tabId}/popularblogs`
     );
     return data;
   } catch (error) {
@@ -88,7 +88,7 @@ export async function getTabBlogs({ commit, dispatch }, { tabId }) {
 export async function getTabAllBlogs({ commit, dispatch }, { tabId }) {
   try {
     const data = await axios.get(
-     `${process.env.BASE_URL}/tab/59/blogs`
+     `${process.env.BASE_URL}/tab/${tabId}/blogs`
     );
     return data;
   } catch (error) {
