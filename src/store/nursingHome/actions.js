@@ -136,7 +136,7 @@ export async function getUserDetails({ commit, dispatch }, { accessToken }) {
 export async function loginUser({ commit, dispatch }, payload) {
   try {
     const data = await axios.post(
-      'http://anh.foxgloveteam.com/oauth/token',
+      'https://anh.foxgloveteam.com/oauth/token',
       payload
     );
     return data;
