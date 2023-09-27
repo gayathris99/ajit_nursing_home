@@ -1,7 +1,8 @@
 <template>
   <q-header class="">
-    <div style="background:#004953" class="text-center q-pa-sm font-montserrat fw-700" @click="openUserPopup('signup')">
-      <div class="cursor-pointer" :class="isMobile ? 'fs-14' : 'fs-16'" style="display:inline"><span class="text-underline">Join now</span> to personalize Ajit Nursing Home for your pregnancy <q-icon name="expand_more" :size="isMobile ? 'sm' : 'md'"></q-icon></div>
+    <div style="background:#004953" class="text-center q-pa-sm font-montserrat fw-700">
+      <div class="cursor-pointer" v-if="!isUserLoggedIn" :class="isMobile ? 'fs-14' : 'fs-16'" style="display:inline" @click="openUserPopup('signup')"><span class="text-underline">Join now</span> to personalize Ajit Nursing Home for your pregnancy <q-icon name="expand_more" :size="isMobile ? 'sm' : 'md'"></q-icon></div>
+      <div class="cursor-pointer" v-else :class="isMobile ? 'fs-14' : 'fs-16'" style="display:inline">Hello {{userDetails.firstName}} &#128512;</div>
     </div>
     <div style="background:#F1B490" class="thin-line"></div>
     <div class="text-primary font-quicksand q-py-sm bg-header">
@@ -52,9 +53,21 @@
             </q-list>
           </q-btn-dropdown>
           <q-btn-dropdown label="Contact Us" no-caps class="fs-16 fw-600 font-montserrat" flat dense></q-btn-dropdown>
-          <div class="fs-16 fw-600 font-montserrat cursor-pointer">
+          <div class="fs-16 fw-600 font-montserrat cursor-pointer" v-if="!isUserLoggedIn">
             <span @click="openUserPopup('login')">LOGIN&nbsp;/&nbsp;</span>
             <span @click="openUserPopup('signup')">SIGNUP</span>
+          </div>
+          <div v-else>
+            <q-btn-dropdown icon="account_circle" flat dense size="20px">
+              <q-list class="fs-14 fw-600 font-montserrat text-primary column justify-center" style="width: auto">
+                <q-item clickable v-close-popup>
+                  <q-item-section>Account Settings</q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="onLogout">
+                  <q-item-section>Logout</q-item-section>
+                </q-item>
+              </q-list>
+            </q-btn-dropdown>
           </div>
         </div>
       </div>
@@ -96,8 +109,10 @@
             <div class="q-py-sm q-px-md cursor-pointer fs-14">Pregnancy Due Date Calculator</div>
           </q-expansion-item>
           <div class="cursor-pointer q-py-sm q-px-md fs-16">Contact Us</div>
-          <div class="cursor-pointer q-py-sm q-px-md fs-16" @click="openUserPopup('login')">Login</div>
-          <div class="cursor-pointer q-py-sm q-px-md fs-16" @click="openUserPopup('signup')">Signup</div>
+          <div class="cursor-pointer q-py-sm q-px-md fs-16" v-if="!isUserLoggedIn" @click="openUserPopup('login')">Login</div>
+          <div class="cursor-pointer q-py-sm q-px-md fs-16" v-if="!isUserLoggedIn" @click="openUserPopup('signup')">Signup</div>
+          <div class="cursor-pointer q-py-sm q-px-md fs-16" v-if="isUserLoggedIn">Account Settings</div>
+          <div class="cursor-pointer q-py-sm q-px-md fs-16" v-if="isUserLoggedIn" @click="onLogout">Logout</div>
         </div>
       </q-drawer>
     </div>
@@ -239,6 +254,7 @@
       </q-card-section>
     </q-card>
   </q-dialog>
+
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
@@ -289,13 +305,16 @@ export default {
         {
           menuTitle: 'Getting Pregnant'
         }
-      ]
+      ],
+      isUserLoggedIn: false,
+      userDetails: null
     }
   },
   methods: {
     ...mapActions({
       registerUser: 'nursingHome/registerUser',
       loginUser: 'nursingHome/loginUser',
+      logoutUser: 'nursingHome/logoutUser',
       getUserDetails: 'nursingHome/getUserDetails'
 
     }),
@@ -368,12 +387,13 @@ export default {
     async onLogin (e) {
       e.preventDefault()
       try {
-        const result = await this.loginUser({
+        this.$q.loading.show()
+        const { data } = await this.loginUser({
            username : this.whatsappNumber,
            password: this.password
 
         })
-        console.log(result)
+        await this.fetchUserDetails(data)
         this.loginPopup = false
       } catch (error) {
         this.$q.notify({
@@ -382,6 +402,8 @@ export default {
           position: "top",
           icon: "warning",
         });
+      } finally {
+        this.$q.loading.hide()
       }
     },
     async onRegister (e) {
@@ -410,6 +432,23 @@ export default {
         this.$q.loading.hide()
       }
     },
+    async onLogout () {
+      try {
+        const result = await this.logoutUser({
+          accessToken: this.userDetails.token
+        })
+        this.userDetails = {}
+        this.isUserLoggedIn = false
+        localStorage.removeItem('userObj')
+      } catch (error) {
+        this.$q.notify({
+          message: "Something went wrong, please try again",
+          color: "red",
+          position: "top",
+          icon: "warning",
+        });
+      }
+    },
     async fetchUserDetails (tokenData) {
       try {
         const { data } = await this.getUserDetails({
@@ -419,7 +458,9 @@ export default {
           ...data,
           token: tokenData.token
         }
-        sessionStorage.setItem('userObj', JSON.stringify(userObj));
+        localStorage.setItem('userObj', JSON.stringify(userObj));
+        this.isUserLoggedIn = true
+        this.userDetails = userObj
       } catch (error) {
         this.$q.notify({
           message: "Something went wrong, please try again",
@@ -445,6 +486,13 @@ export default {
     },
     isHomePage () {
       return this.$route.name === 'home'
+    }
+  },
+  mounted () {
+    const userDetails = JSON.parse(localStorage.getItem('userObj'))
+    if (userDetails) {
+      this.isUserLoggedIn = true
+      this.userDetails = userDetails
     }
   }
 }
@@ -520,6 +568,7 @@ export default {
 .menu-item:hover {
   color: #BC3430;
 }
+
 .thin-line {
   padding: 2px;
 }

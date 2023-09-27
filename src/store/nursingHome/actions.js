@@ -144,6 +144,19 @@ export async function loginUser({ commit, dispatch }, payload) {
     throw (error)
   }
 }
+export async function logoutUser({ commit, dispatch }, { accessToken }) {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    };
+    const data = await axios.get(
+      'https://anh.foxgloveteam.com/self/logout'
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
 export async function registerUser({ commit, dispatch }, payload) {
   try {
     const data = await axios.post(
