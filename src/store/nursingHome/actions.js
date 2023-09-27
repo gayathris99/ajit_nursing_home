@@ -133,6 +133,17 @@ export async function getUserDetails({ commit, dispatch }, { accessToken }) {
     throw (error)
   }
 }
+export async function loginUser({ commit, dispatch }, payload) {
+  try {
+    const data = await axios.post(
+      'http://anh.foxgloveteam.com/oauth/token',
+      payload
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
 export async function registerUser({ commit, dispatch }, payload) {
   try {
     const data = await axios.post(
@@ -144,3 +155,5 @@ export async function registerUser({ commit, dispatch }, payload) {
     throw (error)
   }
 }
+
+

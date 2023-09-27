@@ -102,6 +102,7 @@
       </q-drawer>
     </div>
   </q-header>
+  <!-- Login - popup -->
   <q-dialog v-model="loginPopup">
     <q-card class="font-domine login-popup">
       <div class="row items-center justify-end cursor-pointer q-pt-sm q-pr-sm" @click="closeUserPopup('login')">
@@ -151,6 +152,8 @@
       </q-form>
     </q-card>
   </q-dialog>
+
+  <!-- Signup - popup -->
   <q-dialog v-model="signupPopup">
     <q-card class="signup-popup no-padding">
       <q-card-section class="no-padding">
@@ -291,7 +294,10 @@ export default {
   },
   methods: {
     ...mapActions({
-      registerUser: 'nursingHome/registerUser'
+      registerUser: 'nursingHome/registerUser',
+      loginUser: 'nursingHome/loginUser',
+      getUserDetails: 'nursingHome/getUserDetails'
+
     }),
     onWomenWellnessClick ({ menuTitle }) {
       const getTabDetailsData = this.getTabDetailsData?.filter(tab => tab.title.toLowerCase() === menuTitle.toLowerCase())
@@ -359,13 +365,30 @@ export default {
       let route = this.$router.resolve({name: path});
       window.open(route.href, '_blank');
     },
-    onLogin (e) {
+    async onLogin (e) {
       e.preventDefault()
+      try {
+        const result = await this.loginUser({
+           username : this.whatsappNumber,
+           password: this.password
+
+        })
+        console.log(result)
+        this.loginPopup = false
+      } catch (error) {
+        this.$q.notify({
+          message: "Something went wrong, please try again",
+          color: "red",
+          position: "top",
+          icon: "warning",
+        });
+      }
     },
     async onRegister (e) {
       e.preventDefault()
       try {
-        const result = await this.registerUser({
+        this.$q.loading.show()
+        const { data } = await this.registerUser({
            username : this.whatsappNumber ,
            password : this.password ,
            password2 : this.password ,
@@ -375,6 +398,28 @@ export default {
            isTryingToConceive: this.isConceive
         })
         this.signupPopup = false
+        await this.fetchUserDetails(data)
+      } catch (error) {
+        this.$q.notify({
+          message: "Something went wrong, please try again",
+          color: "red",
+          position: "top",
+          icon: "warning",
+        });
+      } finally {
+        this.$q.loading.hide()
+      }
+    },
+    async fetchUserDetails (tokenData) {
+      try {
+        const { data } = await this.getUserDetails({
+          accessToken: tokenData.token
+        })
+        const userObj = {
+          ...data,
+          token: tokenData.token
+        }
+        sessionStorage.setItem('userObj', JSON.stringify(userObj));
       } catch (error) {
         this.$q.notify({
           message: "Something went wrong, please try again",
