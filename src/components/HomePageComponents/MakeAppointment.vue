@@ -31,7 +31,7 @@
     </q-card>
     <q-card flat dense class="col-md-6 col-sm-12 col-xs-12 q-pa-xl font-oxygen">
       <div class=" text-primary fw-700 font-domine fs-36">APPOINTMENT</div>
-      <div class="text-primary fw-700 fs-20 q-mt-sm">Book  with gynecologist</div>
+      <div class="text-primary fw-700 fs-20 q-mt-sm">Book  with gynaecologist</div>
       <div class="q-mt-md fw-400 fs-18 text-primary">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</div>
       <div class="q-mt-lg">
         <q-btn

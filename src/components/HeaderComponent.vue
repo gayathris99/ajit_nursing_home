@@ -224,17 +224,29 @@
               />
             </template>
           </q-input>
-          <q-input color="black" label-color="primary" class="font-montserrat fw-500 q-px-sm" outlined  @focus="onDateInputClick" v-model="dueDate" label="Due date:">
+          <q-input
+          color="black"
+          label-color="primary"
+          class="font-montserrat fw-500 q-px-sm"
+          outlined
+          :error="showDueDateError"
+          @focus="onDateInputClick"
+          v-model="dueDate"
+          label="Due date:">
             <template v-slot:append>
-              <q-btn-dropdown icon="calendar_month" color="secondary" dense flat ref="dateBtnDropdown" @click="onDateInputClick">
-                <q-date minimal color="secondary" v-model="dueDate" mask="DD/MM/YYYY" :options="dateOption"/>
-              </q-btn-dropdown>
+              <q-icon name="cancel" @click.stop.prevent="dueDate = null" class="cursor-pointer" v-if="dueDate" />
+              <div @click="onDateInputClick">
+                <q-btn-dropdown icon="calendar_month" color="secondary" dense flat ref="dateBtnDropdown" >
+                  <q-date minimal color="secondary" v-model="dueDate" mask="DD/MM/YYYY" :options="dateOption"/>
+                </q-btn-dropdown>
+              </div>
             </template>
           </q-input>
         </div>
         <div class="fs-12 font-montserrat q-px-md q-pb-xs q-mb-sm" style="text-align:left;">
           <span style="color:#56584B">Don't know your due date? </span>
           <span class="text-primary login-tagline cursor-pointer fw-500">Calculate my due date</span>
+          <div class="fs-14 q-mt-md text-red" v-if="showDueDateError">Enter due date if applicable or click on trying to conceive</div>
         </div>
         <div class="q-px-sm">
           <q-checkbox v-model="isConceive" class="fs-16 fw-500 font-montserrat" label="Trying to Conceive?" color="secondary"/>
@@ -269,7 +281,7 @@ export default {
       userName: '',
       whatsappNumber: '',
       password: '',
-      dueDate: '',
+      dueDate: null,
       isConceive: false,
       womenWellnessMenu: [
         {
@@ -307,7 +319,24 @@ export default {
         }
       ],
       isUserLoggedIn: false,
-      userDetails: null
+      userDetails: null,
+      showDueDateError: false
+    }
+  },
+  watch: {
+    dueDate: {
+      immediate: true,
+      deep: true,
+      handler (newVal) {
+        if (newVal) this.showDueDateError = false
+      }
+    },
+    isConceive: {
+      immediate: true,
+      deep: true,
+      handler (newVal) {
+        if (newVal) this.showDueDateError = false
+      }
     }
   },
   methods: {
@@ -346,7 +375,7 @@ export default {
     openUserPopup (action) {
       this.whatsappNumber = ''
       this.password = ''
-      this.dueDate = '',
+      this.dueDate = null,
       this.isConceive = false
       if (!this.isDesktop) this.openMenu = false
       if (action === 'login') {
@@ -360,7 +389,7 @@ export default {
     closeUserPopup (action) {
       this.whatsappNumber = ''
       this.password = ''
-      this.dueDate = '',
+      this.dueDate = null,
       this.isConceive = false
       if (action === 'login') {
         this.loginPopup = false
@@ -409,18 +438,22 @@ export default {
     async onRegister (e) {
       e.preventDefault()
       try {
+        if (!this.dueDate && !this.isConceive) {
+          this.showDueDateError = true
+          return
+        } else this.showDueDateError = false
         this.$q.loading.show()
-        const { data } = await this.registerUser({
-           username : this.whatsappNumber ,
-           password : this.password ,
-           password2 : this.password ,
-           firstName : this.userName ,
-           lastName : this.userName,
-           dueDate : this.dueDate,
-           isTryingToConceive: this.isConceive
-        })
-        this.signupPopup = false
-        await this.fetchUserDetails(data)
+        // const { data } = await this.registerUser({
+        //    username : this.whatsappNumber ,
+        //    password : this.password ,
+        //    password2 : this.password ,
+        //    firstName : this.userName ,
+        //    lastName : this.userName,
+        //    dueDate : this.dueDate,
+        //    isTryingToConceive: this.isConceive
+        // })
+        // this.signupPopup = false
+        // await this.fetchUserDetails(data)
       } catch (error) {
         this.$q.notify({
           message: "Something went wrong, please try again",
