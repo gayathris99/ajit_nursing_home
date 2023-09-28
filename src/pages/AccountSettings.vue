@@ -3,9 +3,9 @@
     <div class="">
       <div class="title font-domine fw-500 text-primary">Account Settings</div>
       <div class="scroll-container">
-        <div class="q-mt-md tab-container font-montserrat" style="width: max-content">
+        <div class="q-mt-md tab-container font-montserrat" style="width:100%">
           <div
-          class="tab-item cursor-pointer fw-600"
+          class="tab-item cursor-pointer fw-600 q-mr-lg"
           v-for="(tab, id) in tabDetails"
           :key="id"
           :class="{'tab-active' : tab.value === selectedTab}"

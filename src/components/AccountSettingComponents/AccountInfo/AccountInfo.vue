@@ -46,7 +46,7 @@ export default {
 
 <style lang="scss" scoped>
 .q-input {
-  width: 90%;
+  width: 100%;
   @media only screen and (max-width: $breakpoint-sm-max) {
     width: 100%;
   }
