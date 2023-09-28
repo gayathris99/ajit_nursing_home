@@ -13,9 +13,9 @@
             &nbsp;{{tab.label}}&nbsp;
           </div>
         </div>
-        <div class="q-mt-md">
-          <account-info v-if="selectedTab === 'accountInfo'"/>
-        </div>
+      </div>
+      <div class="q-mt-md">
+        <account-info v-if="selectedTab === 'accountInfo'"/>
       </div>
     </div>
   </div>
@@ -67,11 +67,16 @@ export default {
 }
 .tab-container {
   display: flex;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
   white-space: nowrap;
   border-bottom: 1px solid grey
 }
 .scroll-container{
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
   :deep(.q-scrollarea__thumb) {
     display: none;
   }

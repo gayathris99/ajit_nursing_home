@@ -47,6 +47,9 @@ export default {
 <style lang="scss" scoped>
 .q-input {
   width: 90%;
+  @media only screen and (max-width: $breakpoint-sm-max) {
+    width: 100%;
+  }
 }
 .change-password:hover {
   text-decoration: underline;
