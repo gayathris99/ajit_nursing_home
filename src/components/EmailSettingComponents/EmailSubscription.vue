@@ -1,0 +1,3 @@
+<template>
+  EmailSubscription.vue
+</template>

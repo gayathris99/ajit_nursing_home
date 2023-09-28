@@ -62,10 +62,7 @@
                   />
                 </template>
               </q-input>
-
-              <div class="text-underline fw-500 fs-16 cursor-pointer text-primary">Forgot your password ?</div>
-
-              <div class="row items-center justify-end q-mt-md fw-700 q-gutter-md">
+              <div class="row items-center justify-end fw-700 q-gutter-md">
                 <q-btn flat dense label="cancel" color="secondary" class="fw-700" v-close-popup></q-btn>
                 <q-btn flat dense label="save" color="secondary" class="fw-700" type="submit"></q-btn>
               </div>

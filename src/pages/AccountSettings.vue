@@ -16,6 +16,9 @@
       </div>
       <div class="q-mt-md">
         <account-info v-if="selectedTab === 'accountInfo'"/>
+        <family-info v-if="selectedTab === 'familyInfo'"/>
+        <whatsapp-subscription v-if="selectedTab === 'whatsappSubscription'"/>
+        <email-subscription v-if="selectedTab === 'emailSubscription'"/>
       </div>
     </div>
   </div>
@@ -23,9 +26,12 @@
 
 <script>
 import AccountInfo from 'src/components/AccountSettingComponents/AccountInfo/AccountInfo.vue'
+import FamilyInfo from 'src/components/FamilySettingComponents/FamilyInfo.vue'
+import WhatsappSubscription from 'src/components/WhatsappSettingComponents/WhatsappSubscription.vue'
+import EmailSubscription from 'src/components/EmailSettingComponents/EmailSubscription.vue'
 export default {
   name: 'AccountSettings',
-  components: { AccountInfo },
+  components: { AccountInfo, EmailSubscription, FamilyInfo, WhatsappSubscription },
   data () {
     return {
       userDetails: null,
@@ -33,8 +39,8 @@ export default {
       tabDetails: [
         { label: 'Account Info', value: 'accountInfo' },
         { label: 'Family Info', value: 'familyInfo' },
-        { label: 'Whatsapp Subscription', value: 'whatsappSubscription' },
-        { label: 'Email Subscription', value: 'emailSubscription' },
+        { label: 'Whatsapp Subscriptions', value: 'whatsappSubscription' },
+        { label: 'Email Subscriptions', value: 'emailSubscription' },
       ]
     }
   },
@@ -92,8 +98,8 @@ export default {
   background: #f7f7f6;
 }
 .tab-active {
-  color: green;
+  color: #004953;
   font-weight: 700;
-  border-bottom: 1px solid green
+  border-bottom: 1px solid #004953
 }
 </style>

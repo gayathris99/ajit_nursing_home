@@ -1,0 +1,3 @@
+<template>
+  WhatsappSubscription.vue
+</template>

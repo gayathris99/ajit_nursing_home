@@ -1,0 +1,3 @@
+<template>
+  FamilyInfo.vue
+</template>
