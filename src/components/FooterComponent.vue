@@ -26,7 +26,7 @@
         </a> -->
       </div>
     </div>
-    <div class="text-center">Designed and Developed by <a href="https://www.foxgloveteam.com/#/" target="_blank"> Foxglove Tech</a></div>
+    <div class="text-center">Designed and Developed by <a href="https://www.foxgloveteam.com/#/" target="_blank"> Foxglove Team</a></div>
   </div>
 </template>
 
