@@ -11,7 +11,22 @@
         <img v-if="blogContent?.image?.meta?.download_url" :src="blogContent?.image?.meta?.download_url" alt="">
         <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg" alt="">
       </div>
-      <div class="q-mt-md">
+      <div v-if="isDesktop" class="row q-gutter-x-sm q-mt-md">
+        <div class="table-of-contents-wrapper col-md-2 q-mr-lg" >
+          <q-card style="background-color:#FFDBD3" class="table-of-contents">
+              <q-card-section>
+                <div class="font-domine text-primary fs-16 q-my-xs fw-600">Table of contents</div>
+                <div v-for="(title, key) in tableOfContents" :key="key"
+                class="font-domine q-py-sm cursor-pointer toc-title"
+                @click="onParseDocument(title)">
+                  {{title.label}}
+                </div>
+              </q-card-section>
+          </q-card>
+        </div>
+        <div class="blog-body font-domine text-primary fs-18 col-md-9" v-html="blogContent.body"></div>
+      </div>
+      <div class="q-mt-md" v-else>
         <div class="q-mt-md blog-body font-domine text-primary fs-18" v-html="blogContent.body"></div>
       </div>
       <div class="q-mt-xl" v-if="blogContentFAQ?.length">
@@ -76,7 +91,8 @@ export default {
      sharePopup: false,
      blogLink: null,
      showCopied: false,
-     isLoading: true
+     isLoading: true,
+     tableOfContents: []
    }
   },
   computed: {
@@ -86,6 +102,17 @@ export default {
     isDesktop () {
       return this.$q.screen.gt.sm
     },
+  },
+  watch: {
+    blogContent: {
+      immediate: true,
+      deep: true,
+      handler (newVal) {
+        if (newVal.body) {
+          setTimeout(this.fetchBlogTitles, 100)
+        }
+      }
+    }
   },
   methods: {
     ...mapActions({
@@ -98,6 +125,29 @@ export default {
     },
     shareOnWhatsapp () {
       window.open(`https://api.whatsapp.com/send?text=${this.blogLink}`)
+    },
+    onParseDocument ({ label, value }) {
+      const element = document.getElementById(value)
+      const headerOffset = 130;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    },
+    fetchBlogTitles () {
+      const titles = []
+      document.querySelectorAll('h2')?.forEach(ele => {
+        const modifiedTitle = ele.innerHTML.split(' ').join('-')
+        titles.push({
+          label: ele.innerHTML,
+          value: modifiedTitle
+        })
+        ele.setAttribute('id', ele.innerHTML.split(' ').join('-'))
+      })
+      this.tableOfContents = titles
     },
     goTo (name) {
       this.$router.push({
@@ -173,6 +223,22 @@ export default {
   border-radius: 56px;
   background: var(--light-grey, #F4F4F4);
 }
+.toc-title:hover {
+  text-decoration: underline;
+}
+.table-of-contents-wrapper {
+  position: relative;
+}
+.table-of-contents {
+  position: sticky;
+  top: 150px;
+}
+  :deep(.q-scrollarea__thumb) {
+    display: none;
+  }
+::-webkit-scrollbar {
+   display: none;
+}
 :deep(.blog-body) {
   a {
     color: $secondary;
@@ -208,9 +274,9 @@ export default {
   }
 }
 .blog-main-container {
-  max-width: 1000px;
+  max-width: 1100px;
   height: auto;
-    margin: auto;
+  margin: auto;
   // width: 50%;
 }
 .image-container {
@@ -220,5 +286,8 @@ export default {
     max-height: 450px;
     box-shadow: 6px 5px 0 rgba(10,56,63,.1);
   }
+}
+.table-of-content {
+  position: fixed;
 }
 </style>
