@@ -1,4 +1,25 @@
 <template>
+<div style="position:relative">
+  <div v-if="showStickyHeader && !isDesktop && tableOfContents.length" class="sticky-header">
+    <q-expansion-item
+      expand-separator
+      v-model="isExpanded"
+      label="Table of Contents"
+      class="font-montserrat fw-700 fs-16 text-primary text-center"
+    >
+      <q-card>
+        <q-card-section class="text-left">
+          <div v-for="(title, key) in tableOfContents" :key="key"
+          class="font-domine q-py-sm cursor-pointer toc-title"
+          v-close-popup
+          @click="onParseDocument(title)">
+            {{title.label}}
+          </div>
+        </q-card-section>
+      </q-card>
+    </q-expansion-item>
+  </div>
+</div>
   <div :class="isMobile ? 'q-pa-lg' : 'q-pa-xl'" class="blog-main-container">
     <div v-if="blogContent">
       <div class="title font-domine fw-500 text-primary">{{blogContent.title}}</div>
@@ -11,8 +32,10 @@
         <img v-if="blogContent?.image?.meta?.download_url" :src="blogContent?.image?.meta?.download_url" alt="">
         <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg" alt="">
       </div>
+
+      <!-- Desktop blog -->
       <div v-if="isDesktop" class="row q-gutter-x-sm q-mt-md">
-        <div class="table-of-contents-wrapper col-md-2 q-mr-lg" >
+        <div class="table-of-contents-wrapper col-md-2 q-mr-lg" v-if="tableOfContents.length">
           <q-card style="background-color:#FFDBD3" class="table-of-contents">
               <q-card-section>
                 <div class="font-domine text-primary fs-16 q-my-xs fw-600">Table of contents</div>
@@ -24,11 +47,26 @@
               </q-card-section>
           </q-card>
         </div>
-        <div class="blog-body font-domine text-primary fs-18 col-md-9" v-html="blogContent.body"></div>
+        <div class="blog-body font-domine text-primary fs-18" :class="{'col-md-9' : tableOfContents.length}" v-html="blogContent.body"></div>
       </div>
-      <div class="q-mt-md" v-else>
+
+
+      <div v-if="!isDesktop && tableOfContents.length" class="q-mt-md non-desktop-toc">
+        <q-card style="background-color:#FFDBD3">
+          <q-card-section>
+            <div class="font-domine text-primary fs-16 q-my-xs fw-600">Table of contents</div>
+            <div v-for="(title, key) in tableOfContents" :key="key"
+            class="font-domine q-py-sm cursor-pointer toc-title"
+            @click="onParseDocument(title)">
+              {{title.label}}
+            </div>
+          </q-card-section>
+        </q-card>
+      </div>
+      <div class="q-mt-md" v-if="!isDesktop">
         <div class="q-mt-md blog-body font-domine text-primary fs-18" v-html="blogContent.body"></div>
       </div>
+      <!-- <div v-if="!isDesktop" class="bottom-container">&nbsp;</div> -->
       <div class="q-mt-xl" v-if="blogContentFAQ?.length">
         <div class="text-primary fw-600 fs-30 q-mb-sm">Frequently Asked Questions</div>
         <q-list  v-for="(faq, key) in blogContentFAQ" :key="key">
@@ -92,7 +130,9 @@ export default {
      blogLink: null,
      showCopied: false,
      isLoading: true,
-     tableOfContents: []
+     tableOfContents: [],
+     showStickyHeader: false,
+     isExpanded: false
    }
   },
   computed: {
@@ -102,6 +142,14 @@ export default {
     isDesktop () {
       return this.$q.screen.gt.sm
     },
+  },
+  created () {
+    if (!this.isDesktop) {
+      window.addEventListener("scroll", this.handleScroll);
+    }
+  },
+  beforeUnmount () {
+    if (!this.isDesktop) window.removeEventListener("scroll", this.handleScroll);
   },
   watch: {
     blogContent: {
@@ -119,6 +167,15 @@ export default {
       getBlog: 'nursingHome/getBlog',
       getBlogFAQ: 'nursingHome/getBlogFAQ'
     }),
+    handleScroll () {
+      const card = document.getElementsByClassName('non-desktop-toc')[0]
+      if (window.pageYOffset > card?.offsetTop + card?.offsetHeight) {
+        this.showStickyHeader = true
+        console.log(window.pageYOffset)
+      } else {
+        this.showStickyHeader = false
+      }
+    },
     copyLink () {
       navigator.clipboard.writeText(this.blogLink)
       this.showCopied = true
@@ -127,8 +184,9 @@ export default {
       window.open(`https://api.whatsapp.com/send?text=${this.blogLink}`)
     },
     onParseDocument ({ label, value }) {
+      if (!this.isDesktop) this.isExpanded = false
       const element = document.getElementById(value)
-      const headerOffset = 130;
+      const headerOffset = this.isDesktop ?  130 : 150;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -223,6 +281,9 @@ export default {
   border-radius: 56px;
   background: var(--light-grey, #F4F4F4);
 }
+.non-desktop-toc {
+  position: relative;
+}
 .toc-title:hover {
   text-decoration: underline;
 }
@@ -289,5 +350,18 @@ export default {
 }
 .table-of-content {
   position: fixed;
+}
+.sticky-header {
+  position: fixed;
+  width: 100%;
+  @media only screen and (max-width: $breakpoint-sm-max) {
+   top: 120px;
+  }
+  @media only screen and (max-width: $breakpoint-xs-max) {
+   top: 100px;
+  }
+}
+.q-expansion-item {
+  background: #edfbfc;
 }
 </style>
