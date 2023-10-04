@@ -186,7 +186,7 @@ export default {
     onParseDocument ({ label, value }) {
       if (!this.isDesktop) this.isExpanded = false
       const element = document.getElementById(value)
-      const headerOffset = this.isDesktop ?  130 : 150;
+      const headerOffset = this.isDesktop ?  130 : this.isMobile ?  150 : 170;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 

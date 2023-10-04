@@ -112,7 +112,7 @@ export async function getBlog({ commit, dispatch }, { blogId }) {
 export async function getBlogFAQ({ commit, dispatch }, { blogId }) {
   try {
     const data = await axios.get(
-      `${process.env.BASE_URL}/faq/${blogId}`
+      `${process.env.BASE_URL}/faq/blog/${blogId}`
     );
     return data;
   } catch (error) {
