@@ -1,25 +1,4 @@
 <template>
-<div style="position:relative">
-  <div v-if="showStickyHeader && !isDesktop && tableOfContents.length" class="sticky-header">
-    <q-expansion-item
-      expand-separator
-      v-model="isExpanded"
-      label="Table of Contents"
-      class="font-montserrat fw-700 fs-16 text-primary text-center"
-    >
-      <q-card>
-        <q-card-section class="text-left">
-          <div v-for="(title, key) in tableOfContents" :key="key"
-          class="font-domine q-py-sm cursor-pointer toc-title"
-          v-close-popup
-          @click="onParseDocument(title)">
-            {{title.label}}
-          </div>
-        </q-card-section>
-      </q-card>
-    </q-expansion-item>
-  </div>
-</div>
   <div :class="isMobile ? 'q-pa-lg' : 'q-pa-xl'" class="blog-main-container">
     <div v-if="blogContent">
       <div class="title font-domine fw-500 text-primary">{{blogContent.title}}</div>
@@ -116,6 +95,27 @@
       </q-card>
     </q-dialog>
   </div>
+  <q-page-sticky position="top" style="width: 100%" expand>
+  <div v-if="showStickyHeader && !isDesktop && tableOfContents.length" style="width:100%">
+    <q-expansion-item
+      expand-separator
+      v-model="isExpanded"
+      label="Table of Contents"
+      class="font-montserrat fw-700 fs-16 text-primary text-center"
+    >
+      <q-card>
+        <q-card-section class="text-left">
+          <div v-for="(title, key) in tableOfContents" :key="key"
+          class="font-domine q-py-sm cursor-pointer toc-title"
+          v-close-popup
+          @click="onParseDocument(title)">
+            {{title.label}}
+          </div>
+        </q-card-section>
+      </q-card>
+    </q-expansion-item>
+  </div>
+  </q-page-sticky>
 </template>
 
 <script>
