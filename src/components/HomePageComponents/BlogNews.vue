@@ -60,10 +60,13 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex'
+import { mapActions, mapMutations, mapGetters } from 'vuex'
 export default {
   name: 'OurBlog',
   computed: {
+    ...mapGetters({
+      getTabDetailsData: 'nursingHome/getTabDetailsData'
+    }),
     isMobile () {
       return this.$q.screen.lt.sm
     },
@@ -97,14 +100,23 @@ export default {
       setAllTabsData: 'nursingHome/setAllTabsData'
     }),
     onGoToTabBlogsPage () {
-      const tabTitle = this.titleSelected?.toLowerCase()?.split(' ')?.join('-')
-      this.$router.push({
-        name: 'tab-blogs',
-        params: {
-          tabTitle,
-          tabId: this.tabSelected
-        }
-      })
+      // const tabTitle = this.titleSelected?.toLowerCase()?.split(' ')?.join('-')
+      // this.$router.push({
+      //   name: 'tab-blogs',
+      //   params: {
+      //     tabTitle,
+      //     tabId: this.tabSelected
+      //   }
+      // })
+      const getTabDetailsData = this.getTabDetailsData?.filter(tab => tab.title.toLowerCase() === this.titleSelected.toLowerCase())
+      if (getTabDetailsData.length) {
+        this.$router.push({
+          name: 'women-wellness-page',
+          params: {
+            tabTitle: getTabDetailsData[0]?.title?.toLowerCase()?.split(' ')?.join('-')
+          },
+        })
+      }
     },
     onTabClick ({ id, title }) {
       this.tabTitles?.forEach(tab => {
