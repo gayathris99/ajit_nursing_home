@@ -20,15 +20,17 @@
         <div class="text-center font-domine text-primary fs-24 q-mt-lg">{{tabBlog.title}}</div>
         <div class="row items-center  q-gutter-x-lg q-gutter-y-md q-mt-md" :class="!isDesktop ? 'justify-center' : 'justify-evenly'">
           <div class="col-md-2 col-sm-4 col-xs-10 blog-container cursor-pointer" v-for="(blog, id) in tabBlog.popularBlogsInside" :key="id" @click="goToBlog(blog.id)">
-            <img  v-if="blog.image" :src="blog.image" alt="">
+            <blog-component
+            :blog="blog"/>
+            <!-- <img  v-if="blog.image" :src="blog.image" alt="">
             <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg" alt="">
             <div class="blog-title">
               <div class="font-montserrat fw-700">{{blog.title}}</div>
               <div class="font-montserrat fw-500 fs-12" style="color: #56584B;">Reviewed by Dr. Abhishek MBBS</div>
-            </div>
+            </div> -->
           </div>
         </div>
-        <div class="row justify-center font-montserrat q-mt-md">
+        <div class="row justify-center font-montserrat q-mt-xl">
           <q-btn
           label="Show more"
           class="fw-700"
@@ -47,12 +49,14 @@
            <img v-else src="~assets/line-design-short.svg" alt="">
         </div>
         <div class="col-md-2 col-sm-4 col-xs-10 blog-container cursor-pointer" v-for="(blog, id) in allBlogsData" :key="id" @click="goToBlog(blog.id)">
-          <img  v-if="blog.image" :src="blog.image" alt="">
+          <blog-component
+          :blog="blog"/>
+          <!-- <img  v-if="blog.image" :src="blog.image" alt="">
           <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg" alt="">
           <div class="blog-title">
             <div class="font-montserrat fw-700">{{blog.title}}</div>
             <div class="font-montserrat fw-500 fs-12" style="color: #56584B;">Reviewed by Dr. Abhishek MBBS</div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -60,9 +64,11 @@
 </template>
 
 <script>
+import BlogComponent from 'src/components/WomenWellnessComponents/BlogComponent.vue'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'WomenWellnessPages',
+  components: { BlogComponent },
   computed: {
     ...mapGetters({
       getTabDetailsData: 'nursingHome/getTabDetailsData'
