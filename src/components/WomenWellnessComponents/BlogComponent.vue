@@ -6,11 +6,11 @@
         <img v-else src="~assets/DefaultBlog.png"/>
         <div class="text-primary image-category fs-14 fw-700 font-monstserrat" style="letter-spacing: 2px;">{{blog.tabTitle}}</div>
       </div>
-      <div class="details-container q-px-md q-pb-md q-mt-md font-montserrat">
+      <div class="details-container q-px-md q-pb-md q-mt-sm font-montserrat">
         <div class="title-intro">
           <div class="fs-14 fw-700 q-mt-sm font-domine ellipsis-3-lines blog-title" style="color:#004953">{{blog.title}}</div>
         </div>
-        <div class="q-mt-xs text-primary fw-500 fs-12">Fact Checked by <br/> Dr. Abhishek MBBS &#8226; {{ getDate(blog.lastPublishedAt) }}</div>
+        <div class="q-mt-xs text-primary fw-500" style="font-size: 11px">Fact Checked by <br/> Dr. Abhishek MBBS &#8226; {{ getDate(blog.lastPublishedAt) }}</div>
       </div>
     </q-card>
   </div>
@@ -39,7 +39,7 @@ export default {
   border: 1px solid #eee;
   border-right: 0;
   box-shadow: 6px 5px 0 rgba(10,56,63,.05);
-  width: 250px;
+  width: 260px;
   @media only screen and (max-width: $breakpoint-sm-max) {
    width: 200px
   }

@@ -4,7 +4,7 @@
       <span class="text-grey cursor-pointer" @click="goTo('home')">Home / </span>
       <span class="text-primary cursor-pointer">{{tabDetails?.title}}</span>
     </div>
-    <div :class="isDesktop ? 'q-px-md' : ''">
+    <div :class="isDesktop ? 'q-px-xl' : ''" class="column justify-center">
       <div class="text-center font-domine q-mt-md text-primary fw-500" :class="isDesktop ? 'fs-30' : 'fs-24'">{{tabDetails?.title}}</div>
       <div class="intro-image row justify-center" :class="isDesktop ? 'q-mt-lg ' : 'q-mt-md'">
         <img  v-if="tabDetails?.image" :src="tabDetails?.image" alt="">
@@ -18,7 +18,7 @@
            <img v-else src="~assets/line-design-short.svg" alt="">
         </div>
         <div class="text-center font-domine text-primary fs-24 q-mt-lg">{{tabBlog.title}}</div>
-        <div class="row items-center  q-gutter-y-md q-gutter-x-xl q-mt-md" :class="isMobile ? 'justify-center' : 'justify-start'">
+        <div class="row items-center  q-gutter-y-lg q-gutter-x-xl q-mt-md" :class="isMobile ? 'justify-center' : 'justify-start'">
           <div class="blog-container cursor-pointer" v-for="(blog, id) in tabBlog.popularBlogsInside" :key="id" @click="goToBlog(blog.id)">
             <blog-component
             :blog="blog"/>
@@ -47,7 +47,7 @@
           <img v-if="!isMobile" src="~assets/line-design-long.svg" alt="">
           <img v-else src="~assets/line-design-short.svg" alt="">
       </div>
-      <div class="row items-center q-gutter-y-md q-gutter-x-xl q-mt-xl q-mb-md " :class="isMobile ? 'justify-center' : 'justify-start'">
+      <div class="row items-center q-gutter-y-lg q-gutter-x-xl q-mt-xl q-mb-md " :class="isMobile ? 'justify-center' : 'justify-start'">
         <div class="blog-container cursor-pointer" v-for="(blog, id) in allBlogsData" :key="id" @click="goToBlog(blog.id)">
           <blog-component
           :blog="blog"/>
