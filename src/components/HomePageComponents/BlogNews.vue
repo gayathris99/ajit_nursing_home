@@ -11,10 +11,12 @@
         <div v-if="tabSelected" class="row q-my-md q-gutter-x-xs justify-start q-gutter-x-lg q-gutter-y-lg no-wrap q-px-md">
           <div v-for="(blog, key) in blogs" :key="key" @click="goToBlog(blog.id)" class="col-md-3 col-sm-5 col-xs-6">
             <q-card class="blog-container cursor-pointer">
-              <img v-if="blog.image" :src="blog.image"/>
-              <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg"/>
-              <div class="details-container q-pa-md q-mt-sm font-montserrat">
-                <div class="text-primary fs-14 fw-700" style="letter-spacing: 2px;">{{blog.tabTitle}}</div>
+              <div class="image-container">
+                <img v-if="blog.image" :src="blog.image"/>
+                <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg"/>
+                <div class="text-primary image-category fs-14 fw-700 font-monstserrat" style="letter-spacing: 2px;">{{blog.tabTitle}}</div>
+              </div>
+              <div class="details-container q-px-md q-pb-md q-mt-md font-montserrat">
                 <div class="title-intro">
                   <div class="fs-20 fw-700 q-mt-sm font-domine ellipsis-3-lines blog-title" style="color:#004953">{{blog.title}}</div>
                   <div class="ellipsis-2-lines text-grey q-mt-sm">{{blog.intro}}</div>
@@ -29,10 +31,12 @@
         <div v-if="tabSelected" class="row q-my-md q-gutter-x-xs justify-center q-gutter-y-lg">
           <div v-for="(blog, key) in blogs.slice(0,3)" :key="key" @click="goToBlog(blog.id)" class="col-md-3 col-sm-5 col-xs-11">
             <q-card class="blog-container cursor-pointer">
-              <img v-if="blog.image" :src="blog.image"/>
-              <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg"/>
-              <div class="details-container q-pa-md q-mt-sm font-montserrat">
-                <div class="text-primary fs-14 fw-700" style="letter-spacing: 2px;">{{blog.tabTitle}}</div>
+              <div class="image-container">
+                <img v-if="blog.image" :src="blog.image"/>
+                <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg"/>
+                <div class="text-primary image-category fs-14 fw-700 font-monstserrat" style="letter-spacing: 2px;">{{blog.tabTitle}}</div>
+              </div>
+              <div class="details-container q-px-md q-pb-md q-mt-mdfont-montserrat">
                 <div class="title-intro">
                   <div class="fs-20 fw-700 q-mt-sm font-domine ellipsis-3-lines blog-title" style="color:#004953">{{blog.title}}</div>
                   <div class="ellipsis-2-lines text-grey">{{blog.intro}}</div>
@@ -202,6 +206,22 @@ export default {
     transition: transform .5s ease;
     height: 200px;
     object-fit: cover;
+  }
+}
+.image-container {
+  position: relative;
+    img {
+    width: 100%;
+    transition: transform .5s ease;
+    height: 200px;
+    object-fit: cover;
+  }
+  .image-category {
+  position: absolute;
+  bottom: 6.25px;
+  left: 0px;
+  padding: 5px 10px;
+  background: #DFEEED;
   }
 }
 .blog-container:hover img {

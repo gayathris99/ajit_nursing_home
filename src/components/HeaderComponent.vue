@@ -443,17 +443,17 @@ export default {
           return
         } else this.showDueDateError = false
         this.$q.loading.show()
-        // const { data } = await this.registerUser({
-        //    username : this.whatsappNumber ,
-        //    password : this.password ,
-        //    password2 : this.password ,
-        //    firstName : this.userName ,
-        //    lastName : this.userName,
-        //    dueDate : this.dueDate,
-        //    isTryingToConceive: this.isConceive
-        // })
-        // this.signupPopup = false
-        // await this.fetchUserDetails(data)
+        const { data } = await this.registerUser({
+           username : this.whatsappNumber ,
+           password : this.password ,
+           password2 : this.password ,
+           firstName : this.userName ,
+          //  lastName : this.userName,
+           dueDate : this.dueDate,
+           isTryingToConceive: this.isConceive
+        })
+        this.signupPopup = false
+        await this.fetchUserDetails(data)
       } catch (error) {
         this.$q.notify({
           message: "Something went wrong, please try again",
