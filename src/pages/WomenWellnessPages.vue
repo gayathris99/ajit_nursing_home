@@ -53,6 +53,28 @@
           :blog="blog"/>
         </div>
       </div>
+
+      <!-- Faq -->
+      <div class="q-mt-xl" v-if="tabFaqs?.length">
+        <div class="text-primary fw-600 fs-30 q-mb-sm">Frequently Asked Questions</div>
+        <q-list  v-for="(faq, key) in tabFaqs" :key="key">
+          <q-expansion-item class="no-padding" >
+            <template v-slot:header>
+              <div class="font-roboto fw-700 fs-18 text-primary font-inter faq-question q-py-sm">
+                {{faq.question}}
+              </div>
+            </template>
+            <q-card>
+              <q-card-section>
+                <div class="font-inter fs-16 color-primary-two fw-400">
+                  {{faq.answer}}
+                </div>
+              </q-card-section>
+            </q-card>
+          </q-expansion-item>
+          <q-separator />
+        </q-list>
+      </div>
     </div>
   </div>
 </template>
@@ -78,7 +100,8 @@ export default {
     return {
       tabDetails: null,
       allBlogsData: [],
-      tabBlogs: []
+      tabBlogs: [],
+      tabFaqs: []
     }
   },
   watch: {
@@ -115,7 +138,9 @@ export default {
   methods: {
     ...mapActions({
       getTabAllBlogs: 'nursingHome/getTabAllBlogs',
-      getTabBlogs: 'nursingHome/getTabBlogs'
+      getTabBlogs: 'nursingHome/getTabBlogs',
+      getTabFaq: 'nursingHome/getTabFaq',
+
     }),
     goToBlog (id) {
       this.$router.push({
@@ -166,6 +191,21 @@ export default {
           });
         }
     },
+    async fetchTabFaq () {
+      try {
+        const { data } = await this.getTabFaq({
+          tabId: this.tabDetails.id
+        })
+        this.tabFaqs = data
+      } catch (error) {
+          this.$q.notify({
+            message: "Something went wrong, please try again",
+            color: "red",
+            position: "top",
+            icon: "warning",
+          });
+        }
+    },
     checkTabType (tabType) {
       switch (tabType) {
         case 'OnlyBlogsInside': {
@@ -179,6 +219,7 @@ export default {
           this.fetchTabAllBlogs()
         }
       }
+      this.fetchTabFaq()
     }
   }
 }
@@ -226,6 +267,12 @@ export default {
 }
 .blog-title {
   height: 70px;
+}
+.q-expansion-item {
+  background: #edfbfc;
+}
+.faq-question {
+  width: 100%;
 }
 </style>
 

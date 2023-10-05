@@ -119,6 +119,16 @@ export async function getBlogFAQ({ commit, dispatch }, { blogId }) {
     throw (error)
   }
 }
+export async function getTabFaq({ commit, dispatch }, { tabId }) {
+  try {
+    const data = await axios.get(
+      `${process.env.BASE_URL}/faq/tab/${tabId}`
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
 export async function getUserDetails({ commit, dispatch }, { accessToken }) {
   try {
     const config = {
