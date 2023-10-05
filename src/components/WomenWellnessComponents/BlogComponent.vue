@@ -8,7 +8,7 @@
       </div>
       <div class="details-container q-px-md q-pb-md q-mt-md font-montserrat">
         <div class="title-intro">
-          <div class="fs-18 fw-700 q-mt-sm font-domine ellipsis-3-lines blog-title" style="color:#004953">{{blog.title}}</div>
+          <div class="fs-14 fw-700 q-mt-sm font-domine ellipsis-3-lines blog-title" style="color:#004953">{{blog.title}}</div>
         </div>
         <div class="q-mt-xs text-primary fw-500 fs-12">Fact Checked by <br/> Dr. Abhishek MBBS &#8226; {{ getDate(blog.lastPublishedAt) }}</div>
       </div>
@@ -54,9 +54,6 @@ export default {
   }
 }
 .title-intro {
-  height: 90px;
-  @media only screen and (max-width: $breakpoint-xs-max) {
-   height: 80px;
-  }
+  height: 50px;
 }
 </style>
