@@ -9,7 +9,7 @@
       </div>
       <div class="image-container" :class="isDesktop ? 'q-mt-lg' : 'q-mt-md'">
         <img v-if="blogContent?.image?.meta?.download_url" :src="blogContent?.image?.meta?.download_url" alt="">
-        <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg" alt="">
+        <img v-else src="~assets/DefaultBlog.png" alt="">
       </div>
 
       <!-- Desktop blog -->

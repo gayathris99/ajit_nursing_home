@@ -10,7 +10,7 @@
         <div class="title-intro">
           <div class="fs-18 fw-700 q-mt-sm font-domine ellipsis-3-lines blog-title" style="color:#004953">{{blog.title}}</div>
         </div>
-        <div class="q-mt-xs text-primary fw-500">Fact Checked by <br/> Dr. Abhishek MBBS &#8226; {{ getDate(blog.lastPublishedAt) }}</div>
+        <div class="q-mt-xs text-primary fw-500 fs-12">Fact Checked by <br/> Dr. Abhishek MBBS &#8226; {{ getDate(blog.lastPublishedAt) }}</div>
       </div>
     </q-card>
   </div>
@@ -40,7 +40,12 @@ export default {
   border-right: 0;
   box-shadow: 6px 5px 0 rgba(10,56,63,.05);
   width: 250px;
-
+  @media only screen and (max-width: $breakpoint-sm-max) {
+   width: 200px
+  }
+  @media only screen and (max-width: $breakpoint-xs-max) {
+   width: 85vw;
+  }
   img {
     width: 100%;
     transition: transform .5s ease;
@@ -50,5 +55,8 @@ export default {
 }
 .title-intro {
   height: 90px;
+  @media only screen and (max-width: $breakpoint-xs-max) {
+   height: 80px;
+  }
 }
 </style>

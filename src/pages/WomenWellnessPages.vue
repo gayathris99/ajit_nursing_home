@@ -18,8 +18,8 @@
            <img v-else src="~assets/line-design-short.svg" alt="">
         </div>
         <div class="text-center font-domine text-primary fs-24 q-mt-lg">{{tabBlog.title}}</div>
-        <div class="row items-center  q-gutter-x-lg q-gutter-y-md q-mt-md" :class="!isDesktop ? 'justify-center' : 'justify-evenly'">
-          <div class="col-md-2 col-sm-4 col-xs-10 blog-container cursor-pointer" v-for="(blog, id) in tabBlog.popularBlogsInside" :key="id" @click="goToBlog(blog.id)">
+        <div class="row items-center  q-gutter-y-md q-gutter-x-xl q-mt-md" :class="isMobile ? 'justify-center' : 'justify-start'">
+          <div class="blog-container cursor-pointer" v-for="(blog, id) in tabBlog.popularBlogsInside" :key="id" @click="goToBlog(blog.id)">
             <blog-component
             :blog="blog"/>
             <!-- <img  v-if="blog.image" :src="blog.image" alt="">
@@ -43,20 +43,14 @@
       </div>
 
       <!-- All Blogs -->
-      <div class="row items-center q-mt-xl q-gutter-x-lg q-gutter-y-md" :class="!isDesktop ? 'justify-center' : 'justify-evenly'">
-        <div class="text-center line-design q-my-lg">
-           <img v-if="!isMobile" src="~assets/line-design-long.svg" alt="">
-           <img v-else src="~assets/line-design-short.svg" alt="">
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-10 blog-container cursor-pointer" v-for="(blog, id) in allBlogsData" :key="id" @click="goToBlog(blog.id)">
+      <div class="text-center line-design q-my-lg">
+          <img v-if="!isMobile" src="~assets/line-design-long.svg" alt="">
+          <img v-else src="~assets/line-design-short.svg" alt="">
+      </div>
+      <div class="row items-center q-gutter-y-md q-gutter-x-xl q-mt-xl q-mb-md " :class="isMobile ? 'justify-center' : 'justify-start'">
+        <div class="blog-container cursor-pointer" v-for="(blog, id) in allBlogsData" :key="id" @click="goToBlog(blog.id)">
           <blog-component
           :blog="blog"/>
-          <!-- <img  v-if="blog.image" :src="blog.image" alt="">
-          <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg" alt="">
-          <div class="blog-title">
-            <div class="font-montserrat fw-700">{{blog.title}}</div>
-            <div class="font-montserrat fw-500 fs-12" style="color: #56584B;">Reviewed by Dr. Abhishek MBBS</div>
-          </div> -->
         </div>
       </div>
     </div>
