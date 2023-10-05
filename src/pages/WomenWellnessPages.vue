@@ -42,6 +42,10 @@
 
       <!-- All Blogs -->
       <div class="row items-center q-mt-xl q-gutter-x-lg q-gutter-y-md" :class="!isDesktop ? 'justify-center' : 'justify-evenly'">
+        <div class="text-center line-design q-my-lg">
+           <img v-if="!isMobile" src="~assets/line-design-long.svg" alt="">
+           <img v-else src="~assets/line-design-short.svg" alt="">
+        </div>
         <div class="col-md-2 col-sm-4 col-xs-10 blog-container cursor-pointer" v-for="(blog, id) in allBlogsData" :key="id" @click="goToBlog(blog.id)">
           <img  v-if="blog.image" :src="blog.image" alt="">
           <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg" alt="">
@@ -120,6 +124,17 @@ export default {
           id
         }
       })
+    },
+    onShowMore (tabBlog) {
+      const getTabDetailsData = this.getTabDetailsData?.filter(tab => tab.title.toLowerCase() === tabBlog.title.toLowerCase())
+      if (getTabDetailsData.length) {
+        this.$router.push({
+          name: 'women-wellness-page',
+          params: {
+            tabTitle: getTabDetailsData[0]?.title?.toLowerCase()?.split(' ')?.join('-')
+          },
+        })
+      }
     },
     async fetchTabBlogs () {
       try {

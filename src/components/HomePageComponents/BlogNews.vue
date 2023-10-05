@@ -100,14 +100,6 @@ export default {
       setAllTabsData: 'nursingHome/setAllTabsData'
     }),
     onGoToTabBlogsPage () {
-      // const tabTitle = this.titleSelected?.toLowerCase()?.split(' ')?.join('-')
-      // this.$router.push({
-      //   name: 'tab-blogs',
-      //   params: {
-      //     tabTitle,
-      //     tabId: this.tabSelected
-      //   }
-      // })
       const getTabDetailsData = this.getTabDetailsData?.filter(tab => tab.title.toLowerCase() === this.titleSelected.toLowerCase())
       if (getTabDetailsData.length) {
         this.$router.push({
