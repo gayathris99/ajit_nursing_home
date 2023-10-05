@@ -13,7 +13,7 @@
             <q-card class="blog-container cursor-pointer">
               <div class="image-container">
                 <img v-if="blog.image" :src="blog.image"/>
-                <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg"/>
+                <img v-else src="~assets/DefaultBlog.png"/>
                 <div class="text-primary image-category fs-14 fw-700 font-monstserrat" style="letter-spacing: 2px;">{{blog.tabTitle}}</div>
               </div>
               <div class="details-container q-px-md q-pb-md q-mt-md font-montserrat">
@@ -33,7 +33,7 @@
             <q-card class="blog-container cursor-pointer">
               <div class="image-container">
                 <img v-if="blog.image" :src="blog.image"/>
-                <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg"/>
+                <img v-else src="~assets/DefaultBlog.png"/>
                 <div class="text-primary image-category fs-14 fw-700 font-monstserrat" style="letter-spacing: 2px;">{{blog.tabTitle}}</div>
               </div>
               <div class="details-container q-px-md q-pb-md q-mt-mdfont-montserrat">

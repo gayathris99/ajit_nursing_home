@@ -52,7 +52,7 @@
               </q-item>
             </q-list>
           </q-btn-dropdown>
-          <q-btn-dropdown label="Contact Us" no-caps class="fs-16 fw-600 font-montserrat" flat dense></q-btn-dropdown>
+          <q-btn-dropdown label="Contact Us" @click="redirectToWhatsapp" no-caps class="fs-16 fw-600 font-montserrat" flat dense></q-btn-dropdown>
           <div class="fs-16 fw-600 font-montserrat cursor-pointer" v-if="!isUserLoggedIn">
             <span @click="openUserPopup('login')">LOGIN&nbsp;/&nbsp;</span>
             <span @click="openUserPopup('signup')">SIGNUP</span>
@@ -108,7 +108,7 @@
             <div class="q-py-sm q-px-md cursor-pointer fs-14">Ovulation Calculator</div>
             <div class="q-py-sm q-px-md cursor-pointer fs-14">Pregnancy Due Date Calculator</div>
           </q-expansion-item>
-          <div class="cursor-pointer q-py-sm q-px-md fs-16">Contact Us</div>
+          <div class="cursor-pointer q-py-sm q-px-md fs-16" @click="redirectToWhatsapp">Contact Us</div>
           <div class="cursor-pointer q-py-sm q-px-md fs-16" v-if="!isUserLoggedIn" @click="openUserPopup('login')">Login</div>
           <div class="cursor-pointer q-py-sm q-px-md fs-16" v-if="!isUserLoggedIn" @click="openUserPopup('signup')">Signup</div>
           <div class="cursor-pointer q-py-sm q-px-md fs-16" v-if="isUserLoggedIn"  @click="goTo('account-settings')">Account Settings</div>
@@ -347,6 +347,9 @@ export default {
       getUserDetails: 'nursingHome/getUserDetails'
 
     }),
+    redirectToWhatsapp () {
+      window.open('https://wa.me/919448420369', '_blank')
+    },
     onWomenWellnessClick ({ menuTitle }) {
       const getTabDetailsData = this.getTabDetailsData?.filter(tab => tab.title.toLowerCase() === menuTitle.toLowerCase())
       if (getTabDetailsData.length) {
