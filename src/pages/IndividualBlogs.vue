@@ -9,7 +9,7 @@
       </div>
       <div class="image-container" :class="isDesktop ? 'q-mt-lg' : 'q-mt-md'">
         <img v-if="blogContent?.image?.meta?.download_url" :src="blogContent?.image?.meta?.download_url" alt="">
-        <img v-else src="~assets/blog.png" alt="">
+        <!-- <img v-else src="~assets/blog.png" alt=""> -->
       </div>
 
       <!-- Desktop blog -->
