@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="tabTitles.length && blogs.length">
     <div class="font-inter text-primary fs-24 fw-600 text-center q-mb-md q-mt-lg">BLOGS</div>
     <div class="scroll-container q-px-md">
       <div class="tab-container">
