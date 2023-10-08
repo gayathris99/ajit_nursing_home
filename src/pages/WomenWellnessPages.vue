@@ -12,7 +12,7 @@
       </div>
 
       <!-- Tabs with blogs -->
-      <div v-if="tabBlogs.length" class="column justify-center items-center">
+      <div v-if="tabBlogs.length">
         <div class="q-mt-md" v-for="(tabBlog, key) in tabBlogs" :key="key">
           <div class="text-center line-design q-mt-xl">
             <img v-if="!isMobile" src="~assets/line-design-long.svg" alt="">
@@ -43,7 +43,7 @@
           <img v-if="!isMobile" src="~assets/line-design-long.svg" alt="">
           <img v-else src="~assets/line-design-short.svg" alt="">
       </div>
-      <div class="column items-center justify-center">
+      <div>
         <div class="row items-center q-gutter-y-lg q-gutter-x-xl q-pt-md q-mb-md " v-if="allBlogsData" :class="isMobile ? 'justify-center' : 'justify-start'">
           <div class="blog-container cursor-pointer" v-for="(blog, id) in allBlogsData" :key="id" @click="goToBlog(blog)">
             <blog-component
@@ -118,6 +118,7 @@ export default {
       handler (newVal) {
         let { tabTitle } = this.$route.params
         tabTitle = tabTitle?.split('-').join(' ')
+        this.tabDetails = null
         const tabDetails = newVal?.filter(tab => tab.title.toLowerCase() === tabTitle.toLowerCase())
         this.tabDetails = tabDetails[0]
       }
