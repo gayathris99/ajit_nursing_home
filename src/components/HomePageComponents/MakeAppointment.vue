@@ -18,7 +18,7 @@
       <div class=" text-primary font-domine fw-700 fs-36">QUESTION ?</div>
       <div class="text-primary fw-700 fs-20 q-mt-sm">Ask to doctor</div>
       <div class="q-mt-md fw-400 fs-18 text-primary" style="height: 85px"> For quick responses regarding diagnosis, evaluation and treatment regarding pregnancy and other gynaecological issues kindly click on the button below.</div>
-      <div class="q-mt-lg">
+      <div class="q-mt-lg" :class="{'q-mt-xl q-pt-lg' : isMobile}">
         <q-btn
         style="background: #3363AC; color: white"
         label="Ask a question"
@@ -33,7 +33,7 @@
       <div class=" text-primary fw-700 font-domine fs-36">APPOINTMENT</div>
       <div class="text-primary fw-700 fs-20 q-mt-sm">Book  with gynaecologist</div>
       <div class="q-mt-md fw-400 fs-18 text-primary" style="height: 85px">Schedule an Appointment with Dr. Gayathri, an experienced female OBGYN with a wealth of knowledge to address your needs. Click here to book your appointment.</div>
-      <div class="q-mt-lg">
+      <div class="q-mt-lg" :class="{'q-mt-xl q-pt-xl' : isMobile}">
         <q-btn
         style="background: #3363AC; color: white"
         label="Make an Appointment"
@@ -54,7 +54,10 @@ export default {
   computed: {
   isDesktop () {
     return this.$q.screen.gt.sm
-    }
+    },
+    isMobile () {
+      return this.$q.screen.lt.sm
+    },
   },
   methods: {
 

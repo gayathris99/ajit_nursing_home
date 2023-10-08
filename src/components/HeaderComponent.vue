@@ -16,7 +16,8 @@
           </div>
         </div>
         <div class="row items-center q-gutter-md fs-16 fw-600" v-if="isDesktop">
-          <q-btn-dropdown label="Hospital" no-caps class="fs-16 fw-600 font-montserrat" flat dense>
+          <!-- Hospital -->
+          <q-btn-dropdown label="Hospital" v-model="hospitalMenu" no-caps class="fs-16 fw-600 font-montserrat" flat dense >
             <q-list class="fs-14 fw-600 font-montserrat text-primary column justify-center" style="width: 150px">
               <q-item clickable v-close-popup @click="goTo('about-us')">
                 <q-item-section @click="goTo('about-us')">About Us</q-item-section>
@@ -32,17 +33,18 @@
               </q-item>
             </q-list>
           </q-btn-dropdown>
-          <q-btn-dropdown label="Women Wellness" no-caps class="fs-16 fw-600 font-montserrat" flat dense>
+
+          <!-- Women wellness -->
+          <q-btn-dropdown label="Women Wellness" v-model="womenWellnessOptions" no-caps class="fs-16 fw-600 font-montserrat" flat dense >
             <q-list class="fs-14 fw-600 font-montserrat text-primary column justify-center q-py-sm" style="width:auto">
               <span style="display:block;"  class="q-my-sm q-mx-md cursor-pointer menu-item" v-for="(menu, id) in womenWellnessMenu" :key="id" clickable v-close-popup @click="onWomenWellnessClick(menu)">
                 {{menu.menuTitle}}
               </span>
-                <!-- <q-item v-for="(menu, id) in womenWellnessMenu" :key="id" clickable v-close-popup class="no-padding" >
-                  <q-item-section>{{menu.menuTitle}}</q-item-section>
-                </q-item> -->
             </q-list>
           </q-btn-dropdown>
-          <q-btn-dropdown label="Tools" no-caps class="fs-16 fw-600 font-montserrat" flat dense>
+
+          <!-- Tools -->
+          <q-btn-dropdown label="Tools"  v-model="toolsMenu" no-caps class="fs-16 fw-600 font-montserrat"  flat dense>
             <q-list class="fs-14 fw-600 font-montserrat text-primary column justify-center" style="width: 150px">
               <q-item clickable v-close-popup>
                 <q-item-section>Ovulation Calculator</q-item-section>
@@ -52,6 +54,7 @@
               </q-item>
             </q-list>
           </q-btn-dropdown>
+
           <q-btn-dropdown label="Contact Us" @click="redirectToWhatsapp" no-caps class="fs-16 fw-600 font-montserrat" flat dense></q-btn-dropdown>
           <div class="fs-16 fw-600 font-montserrat cursor-pointer" v-if="!isUserLoggedIn">
             <span @click="openUserPopup('login')">LOGIN&nbsp;/&nbsp;</span>
@@ -270,6 +273,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import { debounce } from 'quasar'
 export default {
   name: 'HeaderComponent',
   data () {
@@ -320,7 +324,14 @@ export default {
       ],
       isUserLoggedIn: false,
       userDetails: null,
-      showDueDateError: false
+      showDueDateError: false,
+      hospitalMenu: false,
+      hospitalMenuOver: false,
+      hospitalListOver: false,
+      womenWellnessOptions: false,
+      womenWellnessOptionsOver: false,
+      womenWellnessOptionsListOver: false,
+      toolsMenu: false
     }
   },
   watch: {
@@ -337,7 +348,43 @@ export default {
       handler (newVal) {
         if (newVal) this.showDueDateError = false
       }
-    }
+    },
+    // hospitalListOver: {
+    //   handler (newVal) {
+    //     if (newVal) {
+    //       this.hospitalMenu = true
+    //       this.womenWellnessOptions = false
+    //     }
+    //     else {
+    //       this.hospitalMenu = false
+    //       this.hospitalMenuOver = false
+    //       this.womenWellnessOptions = false
+    //     }
+    //   }
+    // },
+    // hospitalMenuOver: {
+    //   handler (newVal) {
+    //     if (newVal) this.hospitalMenu = true
+    //   }
+    // },
+    // womenWellnessOptionsListOver: {
+    //   handler (newVal) {
+    //     if (newVal) {
+    //       this.womenWellnessOptions = true
+    //       this.hospitalMenu = false
+    //     }
+    //     else {
+    //       this.womenWellnessOptions = false
+    //       this.womenWellnessOptionsOver = false
+    //       this.hospitalMenu = false
+    //     }
+    //   }
+    // },
+    // womenWellnessOptionsOver: {
+    //   handler (newVal) {
+    //     if (newVal) this.womenWellnessOptions = true
+    //   }
+    // },
   },
   methods: {
     ...mapActions({
@@ -345,11 +392,23 @@ export default {
       loginUser: 'nursingHome/loginUser',
       logoutUser: 'nursingHome/logoutUser',
       getUserDetails: 'nursingHome/getUserDetails'
-
     }),
     redirectToWhatsapp () {
       window.open('https://wa.me/919448420369', '_blank')
     },
+    // hospitalDebounceFunction () {
+    //   console.log('hospitalDebounceFunction')
+    //   debounce(this.checkHospitalMenu, 300)
+    // },
+    // checkHospitalMenu () {
+    //   if (this.hospitalMenuOver || this.hospitalListOver) {
+    //     console.log('debounce')
+    //     this.hospitalMenu = true
+    //   }
+    //   else {
+    //     this.hospitalMenu = false
+    //   }
+    // },
     onWomenWellnessClick ({ menuTitle }) {
       const getTabDetailsData = this.getTabDetailsData?.filter(tab => tab.title.toLowerCase() === menuTitle.toLowerCase())
       if (getTabDetailsData.length) {
