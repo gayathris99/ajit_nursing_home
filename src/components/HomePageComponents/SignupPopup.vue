@@ -1,5 +1,6 @@
 <template>
   <q-card class="signup-popup no-padding">
+    <!-- <div id="otpless-login-page"></div> -->
     <q-card-section class="no-padding">
       <div class="close-btn cursor-pointer" @click="closeUserPopup('signup')">
         <img src="~assets/closeIconSecondary.svg" width="24" alt="">
@@ -184,9 +185,18 @@ export default {
         this.$q.loading.hide()
       }
     },
-  }
+  },
+  // created() {
+  //   const scriptTag = document.createElement('script')
+  //   scriptTag.setAttribute('src', 'https://otpless.com/auth.js')
+  //   // scriptTag.setAttribute('cid', 'QX4ILBYQVYMMFXFXNZMUIO9JSKYPU3DF')
+  //   scriptTag.cid = 'QX4ILBYQVYMMFXFXNZMUIO9JSKYPU3DF'
+  //   document.head.appendChild(scriptTag)
+  // }
 }
 </script>
+
+
 
 <style lang="scss" scoped>
 .bg-header {

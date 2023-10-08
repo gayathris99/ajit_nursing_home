@@ -12,7 +12,7 @@
       </div>
 
       <!-- Tabs with blogs -->
-      <div v-if="tabBlogs.length">
+      <div v-if="tabBlogs.length" class="column justify-center items-center">
         <div class="q-mt-md" v-for="(tabBlog, key) in tabBlogs" :key="key">
           <div class="text-center line-design q-mt-xl">
             <img v-if="!isMobile" src="~assets/line-design-long.svg" alt="">
@@ -20,15 +20,9 @@
           </div>
           <div class="text-center font-domine text-primary fs-24 q-mt-lg">{{tabBlog.title}}</div>
           <div class="row items-center  q-gutter-y-lg q-gutter-x-xl q-mt-md" :class="isMobile ? 'justify-center' : 'justify-start'">
-            <div class="blog-container cursor-pointer" v-for="(blog, id) in tabBlog.popularBlogsInside" :key="id" @click="goToBlog(blog.id)">
+            <div class="blog-container cursor-pointer" v-for="(blog, id) in tabBlog.popularBlogsInside" :key="id" @click="goToBlog(blog)">
               <blog-component
               :blog="blog"/>
-              <!-- <img  v-if="blog.image" :src="blog.image" alt="">
-              <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg" alt="">
-              <div class="blog-title">
-                <div class="font-montserrat fw-700">{{blog.title}}</div>
-                <div class="font-montserrat fw-500 fs-12" style="color: #56584B;">Reviewed by Dr. Abhishek MBBS</div>
-              </div> -->
             </div>
           </div>
           <div class="row justify-center font-montserrat q-mt-xl">
@@ -49,17 +43,20 @@
           <img v-if="!isMobile" src="~assets/line-design-long.svg" alt="">
           <img v-else src="~assets/line-design-short.svg" alt="">
       </div>
-      <div class="row items-center q-gutter-y-lg q-gutter-x-xl q-pt-md q-mb-md " v-if="allBlogsData" :class="isMobile ? 'justify-center' : 'justify-start'">
-        <div class="blog-container cursor-pointer" v-for="(blog, id) in allBlogsData" :key="id" @click="goToBlog(blog.id)">
-          <blog-component
-          :blog="blog"/>
+      <div class="column items-center justify-center">
+        <div class="row items-center q-gutter-y-lg q-gutter-x-xl q-pt-md q-mb-md " v-if="allBlogsData" :class="isMobile ? 'justify-center' : 'justify-start'">
+          <div class="blog-container cursor-pointer" v-for="(blog, id) in allBlogsData" :key="id" @click="goToBlog(blog)">
+            <blog-component
+            :blog="blog"/>
+          </div>
         </div>
-      </div>
-      <div class="row items-center q-gutter-y-xl q-gutter-x-xl q-mb-md " :class="isMobile ? 'justify-center' : 'justify-start'">
-        <div class="blog-container cursor-pointer" v-for="(blog, id) in faqBlogs" :key="id" @click="goToBlog(blog.id)">
-          <blog-component
-          :blog="blog"
-          :isTypeFaqs="true"/>
+        <!-- Faq type blog -->
+        <div class="row items-center q-gutter-y-xl q-gutter-x-xl q-mb-md " :class="isMobile ? 'justify-center' : 'justify-start'">
+          <div class="blog-container cursor-pointer" v-for="(blog, id) in faqBlogs" :key="id" @click="goToBlog(blog)">
+            <blog-component
+            :blog="blog"
+            :isTypeFaqs="true"/>
+          </div>
         </div>
       </div>
 
@@ -153,13 +150,23 @@ export default {
       getFaqPages: 'nursingHome/getFaqPages',
 
     }),
-    goToBlog (id) {
-      this.$router.push({
-        name: 'individual-blog',
-        params: {
-          id
-        }
-      })
+    goToBlog (blog) {
+      console.log(blog)
+      if (blog.tabType === 'OnlyFAQPagesInside') {
+        this.$router.push({
+          name: 'women-wellness-page',
+          params: {
+            tabTitle: blog.title.toLowerCase().split(' ').join('-')
+          },
+        })
+      } else {
+        this.$router.push({
+          name: 'individual-blog',
+          params: {
+            id: blog.id
+          }
+        })
+      }
     },
     onShowMore (tabBlog) {
       const getTabDetailsData = this.getTabDetailsData?.filter(tab => tab.title.toLowerCase() === tabBlog.title.toLowerCase())
@@ -174,6 +181,8 @@ export default {
     },
     async fetchTabBlogs () {
       try {
+        this.$q.loading.show()
+        this.tabBlogs = []
         const { data } = await this.getTabBlogs({
           tabId: this.tabDetails.id
         })
@@ -185,10 +194,14 @@ export default {
             position: "top",
             icon: "warning",
           });
-        }
+        } finally {
+        this.$q.loading.hide()
+      }
     },
     async fetchTabAllBlogs () {
       try {
+        this.$q.loading.show()
+        this.allBlogsData = []
         const { data } = await this.getTabAllBlogs({
           tabId: this.tabDetails.id
         })
@@ -200,10 +213,14 @@ export default {
             position: "top",
             icon: "warning",
           });
+        } finally {
+          this.$q.loading.hide()
         }
     },
     async fetchTabFaq () {
       try {
+        this.$q.loading.show()
+        this.tabFaqs = []
         const { data } = await this.getTabFaq({
           tabId: this.tabDetails.id
         })
@@ -215,10 +232,14 @@ export default {
             position: "top",
             icon: "warning",
           });
+        } finally {
+          this.$q.loading.hide()
         }
     },
     async fetchFaqPages () {
         try {
+        this.$q.loading.show()
+        this.faqBlogs = []
         const { data } = await this.getFaqPages({
           tabId: this.tabDetails.id
         })
@@ -230,23 +251,32 @@ export default {
             position: "top",
             icon: "warning",
           });
+        } finally {
+          this.$q.loading.hide()
         }
     },
     checkTabType (tabType) {
-      console.log(tabType)
+      this.tabBlogs = []
+      this.allBlogsData = []
+      this.tabFaqs = []
+      this.faqBlogs = []
       switch (tabType) {
         case 'OnlyBlogsInside': {
           this.fetchTabAllBlogs()
+          break
         }
         case 'OnlyTabsInside': {
           this.fetchTabBlogs()
+          break
         }
         case 'Tabs&BlogsInside': {
           this.fetchTabBlogs()
           this.fetchTabAllBlogs()
+          break
         }
         case 'OnlyFAQPagesInside': {
           this.fetchFaqPages()
+          break
         }
       }
       this.fetchTabFaq()
@@ -258,7 +288,7 @@ export default {
 
 <style lang="scss" scoped>
 .women-wellness-container {
-  max-width: 1100px;
+  max-width: 1200px;
   height: auto;
   margin: auto;
 }
