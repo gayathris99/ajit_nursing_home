@@ -446,13 +446,15 @@ export default {
           return
         } else this.showDueDateError = false
         this.$q.loading.show()
+        const splitDueDate = this.dueDate.split('/')
+        const dueDate = `${splitDueDate[2]}-${splitDueDate[1]}-${splitDueDate[0]}`
         const { data } = await this.registerUser({
            username : this.whatsappNumber ,
            password : this.password ,
            password2 : this.password ,
            firstName : this.userName ,
           //  lastName : this.userName,
-           dueDate : this.dueDate,
+           dueDate,
            isTryingToConceive: this.isConceive
         })
         this.signupPopup = false
