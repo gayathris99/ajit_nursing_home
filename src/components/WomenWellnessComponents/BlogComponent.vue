@@ -10,7 +10,7 @@
         <div class="title-intro">
           <div class="fs-14 fw-700 q-mt-sm font-domine ellipsis-3-lines blog-title" style="color:#004953">{{blog.title}}</div>
         </div>
-        <div class="q-mt-xs text-primary fw-500" style="font-size: 11px">Fact Checked by <br/> Dr. Abhishek MBBS &#8226; {{ getDate(blog.lastPublishedAt) }}</div>
+        <div v-if="!isTypeFaqs" class="q-mt-xs text-primary fw-500" style="font-size: 11px">Fact Checked by <br/> Dr. Abhishek MBBS &#8226; {{ getDate(blog.lastPublishedAt) }}</div>
       </div>
     </q-card>
   </div>
@@ -22,6 +22,9 @@ export default {
   props: {
     blog: {
       default: {}
+    },
+    isTypeFaqs: {
+      default: false
     }
   },
   methods: {

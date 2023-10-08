@@ -129,6 +129,16 @@ export async function getTabFaq({ commit, dispatch }, { tabId }) {
     throw (error)
   }
 }
+export async function getFaqPages({ commit, dispatch }, { tabId }) {
+  try {
+    const data = await axios.get(
+      `${process.env.BASE_URL}/tab/${tabId}/children?childrenType=FAQ_TAB`
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
 export async function getUserDetails({ commit, dispatch }, { accessToken }) {
   try {
     const config = {

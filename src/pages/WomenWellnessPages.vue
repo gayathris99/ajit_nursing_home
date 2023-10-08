@@ -1,5 +1,5 @@
 <template>
-  <div :class="isMobile ? 'q-pa-md' : 'q-pa-xl'">
+  <div :class="isMobile ? 'q-pa-md' : 'q-pa-xl'" class="women-wellness-container">
     <div class="font-inter fs-16 fw-600 q-px-sm">
       <span class="text-grey cursor-pointer" @click="goTo('home')">Home / </span>
       <span class="text-primary cursor-pointer">{{tabDetails?.title}}</span>
@@ -12,33 +12,35 @@
       </div>
 
       <!-- Tabs with blogs -->
-      <div class="q-mt-md" v-for="(tabBlog, key) in tabBlogs" :key="key">
-        <div class="text-center line-design q-mt-xl">
-           <img v-if="!isMobile" src="~assets/line-design-long.svg" alt="">
-           <img v-else src="~assets/line-design-short.svg" alt="">
-        </div>
-        <div class="text-center font-domine text-primary fs-24 q-mt-lg">{{tabBlog.title}}</div>
-        <div class="row items-center  q-gutter-y-lg q-gutter-x-xl q-mt-md" :class="isMobile ? 'justify-center' : 'justify-start'">
-          <div class="blog-container cursor-pointer" v-for="(blog, id) in tabBlog.popularBlogsInside" :key="id" @click="goToBlog(blog.id)">
-            <blog-component
-            :blog="blog"/>
-            <!-- <img  v-if="blog.image" :src="blog.image" alt="">
-            <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg" alt="">
-            <div class="blog-title">
-              <div class="font-montserrat fw-700">{{blog.title}}</div>
-              <div class="font-montserrat fw-500 fs-12" style="color: #56584B;">Reviewed by Dr. Abhishek MBBS</div>
-            </div> -->
+      <div v-if="tabBlogs.length">
+        <div class="q-mt-md" v-for="(tabBlog, key) in tabBlogs" :key="key">
+          <div class="text-center line-design q-mt-xl">
+            <img v-if="!isMobile" src="~assets/line-design-long.svg" alt="">
+            <img v-else src="~assets/line-design-short.svg" alt="">
           </div>
-        </div>
-        <div class="row justify-center font-montserrat q-mt-xl">
-          <q-btn
-          label="Show more"
-          class="fw-700"
-          icon-right="expand_more"
-          outline
-          color="secondary"
-          @click="onShowMore(tabBlog)"
-          ></q-btn>
+          <div class="text-center font-domine text-primary fs-24 q-mt-lg">{{tabBlog.title}}</div>
+          <div class="row items-center  q-gutter-y-lg q-gutter-x-xl q-mt-md" :class="isMobile ? 'justify-center' : 'justify-start'">
+            <div class="blog-container cursor-pointer" v-for="(blog, id) in tabBlog.popularBlogsInside" :key="id" @click="goToBlog(blog.id)">
+              <blog-component
+              :blog="blog"/>
+              <!-- <img  v-if="blog.image" :src="blog.image" alt="">
+              <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg" alt="">
+              <div class="blog-title">
+                <div class="font-montserrat fw-700">{{blog.title}}</div>
+                <div class="font-montserrat fw-500 fs-12" style="color: #56584B;">Reviewed by Dr. Abhishek MBBS</div>
+              </div> -->
+            </div>
+          </div>
+          <div class="row justify-center font-montserrat q-mt-xl">
+            <q-btn
+            label="Show more"
+            class="fw-700"
+            icon-right="expand_more"
+            outline
+            color="secondary"
+            @click="onShowMore(tabBlog)"
+            ></q-btn>
+          </div>
         </div>
       </div>
 
@@ -47,10 +49,17 @@
           <img v-if="!isMobile" src="~assets/line-design-long.svg" alt="">
           <img v-else src="~assets/line-design-short.svg" alt="">
       </div>
-      <div class="row items-center q-gutter-y-lg q-gutter-x-xl q-mt-xl q-mb-md " :class="isMobile ? 'justify-center' : 'justify-start'">
+      <div class="row items-center q-gutter-y-lg q-gutter-x-xl q-pt-md q-mb-md " v-if="allBlogsData" :class="isMobile ? 'justify-center' : 'justify-start'">
         <div class="blog-container cursor-pointer" v-for="(blog, id) in allBlogsData" :key="id" @click="goToBlog(blog.id)">
           <blog-component
           :blog="blog"/>
+        </div>
+      </div>
+      <div class="row items-center q-gutter-y-xl q-gutter-x-xl q-mb-md " :class="isMobile ? 'justify-center' : 'justify-start'">
+        <div class="blog-container cursor-pointer" v-for="(blog, id) in faqBlogs" :key="id" @click="goToBlog(blog.id)">
+          <blog-component
+          :blog="blog"
+          :isTypeFaqs="true"/>
         </div>
       </div>
 
@@ -101,7 +110,8 @@ export default {
       tabDetails: null,
       allBlogsData: [],
       tabBlogs: [],
-      tabFaqs: []
+      tabFaqs: [],
+      faqBlogs: []
     }
   },
   watch: {
@@ -140,6 +150,7 @@ export default {
       getTabAllBlogs: 'nursingHome/getTabAllBlogs',
       getTabBlogs: 'nursingHome/getTabBlogs',
       getTabFaq: 'nursingHome/getTabFaq',
+      getFaqPages: 'nursingHome/getFaqPages',
 
     }),
     goToBlog (id) {
@@ -206,7 +217,23 @@ export default {
           });
         }
     },
+    async fetchFaqPages () {
+        try {
+        const { data } = await this.getFaqPages({
+          tabId: this.tabDetails.id
+        })
+        this.faqBlogs = data
+      } catch (error) {
+          this.$q.notify({
+            message: "Something went wrong, please try again",
+            color: "red",
+            position: "top",
+            icon: "warning",
+          });
+        }
+    },
     checkTabType (tabType) {
+      console.log(tabType)
       switch (tabType) {
         case 'OnlyBlogsInside': {
           this.fetchTabAllBlogs()
@@ -218,6 +245,9 @@ export default {
           this.fetchTabBlogs()
           this.fetchTabAllBlogs()
         }
+        case 'OnlyFAQPagesInside': {
+          this.fetchFaqPages()
+        }
       }
       this.fetchTabFaq()
     }
@@ -227,10 +257,15 @@ export default {
 
 
 <style lang="scss" scoped>
+.women-wellness-container {
+  max-width: 1100px;
+  height: auto;
+  margin: auto;
+}
 .intro-image {
   // position: relative;
   img {
-  width: 90%;
+  width: 100%;
   height: 470px;
   object-fit: cover;
   @media only screen and (max-width: $breakpoint-sm-max) {
@@ -267,9 +302,6 @@ export default {
 }
 .blog-title {
   height: 70px;
-}
-.q-expansion-item {
-  background: #edfbfc;
 }
 .faq-question {
   width: 100%;

@@ -361,7 +361,4 @@ export default {
    top: 100px;
   }
 }
-.q-expansion-item {
-  background: #edfbfc;
-}
 </style>
