@@ -11,7 +11,7 @@
             <q-icon name="schedule" size="sm"/>
             <div class="fs-20 fw-600">Timings (open 24/7)</div>
           </div>
-          <div class="fs-14 fw-400 q-mt-sm">Timings that hospitals is open for and their timings</div>
+          <div class="fs-14 fw-400 q-mt-sm">Hospital Operational Timings</div>
           <div class="fs-16 q-mt-sm font-inter">
             <div>Mon-Sat - 10:00AM - 7:00PM</div>
             <div class="fw-500">24/7 Emergency Care Available</div>

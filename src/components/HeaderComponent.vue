@@ -199,7 +199,8 @@ export default {
       womenWellnessOptions: false,
       womenWellnessOptionsOver: false,
       womenWellnessOptionsListOver: false,
-      toolsMenu: false
+      toolsMenu: false,
+      signupUserPopup: false
     }
   },
   watch: {

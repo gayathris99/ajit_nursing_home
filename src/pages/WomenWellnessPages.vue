@@ -289,7 +289,7 @@ export default {
 
 <style lang="scss" scoped>
 .women-wellness-container {
-  max-width: 1200px;
+  max-width: 1400px;
   height: auto;
   margin: auto;
 }
