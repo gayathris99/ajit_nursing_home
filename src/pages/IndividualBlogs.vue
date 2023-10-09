@@ -8,7 +8,7 @@
         <div :class="isMobile ? 'q-mt-sm' : ''" class="fs-14 fw-700  cursor-pointer font-domine" @click="openSharePopup">SHARE THIS POST &nbsp;<span class="bg-icon q-pa-xs"><q-icon name="link"/></span></div>
       </div>
       <div class="image-container" :class="isDesktop ? 'q-mt-lg' : 'q-mt-md'">
-        <img v-if="blogContent?.image?.meta?.download_url" :src="blogContent?.image?.meta?.download_url" alt="">
+        <img v-if="blogContent?.image" :src="blogContent?.image" alt="">
         <!-- <img v-else src="~assets/blog.png" alt=""> -->
       </div>
 
