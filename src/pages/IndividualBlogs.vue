@@ -157,7 +157,10 @@ export default {
       deep: true,
       handler (newVal) {
         if (newVal.body) {
-          setTimeout(this.fetchBlogTitles, 100)
+          setTimeout(() => {
+            this.fetchBlogTitles()
+            this.fetchAnchorTags()
+          }, 100)
         }
       }
     }
@@ -206,6 +209,11 @@ export default {
         ele.setAttribute('id', ele.innerHTML.split(' ').join('-'))
       })
       this.tableOfContents = titles
+    },
+    fetchAnchorTags () {
+      document.querySelectorAll('a')?.forEach(ele => {
+        ele.setAttribute('target', '_blank')
+      })
     },
     goTo (name) {
       this.$router.push({
