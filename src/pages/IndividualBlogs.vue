@@ -95,7 +95,7 @@
       </q-card>
     </q-dialog>
   </div>
-  <q-page-sticky position="top" style="width: 100%" expand>
+  <q-page-sticky position="top" style="width: 100%; background:#D8ECE9" expand>
   <div v-if="showStickyHeader && !isDesktop && tableOfContents.length" style="width:100%">
     <q-expansion-item
       expand-separator
@@ -119,7 +119,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'IndividualBlogs',
   data () {
