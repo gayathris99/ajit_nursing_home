@@ -17,7 +17,7 @@
         </div>
         <div class="text-center font-domine text-primary fs-24 q-mt-lg">{{tabBlog.title}}</div>
         <div class="row items-center  q-gutter-x-lg q-gutter-y-md q-mt-md" :class="!isDesktop ? 'justify-center' : 'justify-evenly'">
-          <div class="col-md-2 col-sm-4 col-xs-10 blog-container cursor-pointer" v-for="(blog, id) in tabBlog.popularBlogsInside" :key="id" @click="goToBlog(blog.id)">
+          <div class="col-md-2 col-sm-4 col-xs-10 blog-container cursor-pointer" v-for="(blog, id) in tabBlog.popularBlogsInside" :key="id" @click="goToBlog(blog)">
             <img  v-if="blog.image" :src="blog.image" alt="">
             <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg" alt="">
             <div class="blog-title">
@@ -121,11 +121,11 @@ export default {
         name
       })
     },
-    goToBlog (id) {
+    goToBlog (blog) {
       this.$router.push({
         name: 'individual-blog',
         params: {
-          id
+          id: blog.slug
         }
       })
     },

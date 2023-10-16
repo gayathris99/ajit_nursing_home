@@ -11,7 +11,7 @@
         <!-- <div class="text-container font-inter fs-16">{{imageQuotation}}</div> -->
       </div>
       <div class="row items-center q-mt-xl q-gutter-x-lg q-gutter-y-md" :class="!isDesktop ? 'justify-center' : 'justify-evenly'">
-        <div class="col-md-2 col-sm-4 col-xs-10 blog-container cursor-pointer" v-for="(blog, id) in tabBlogData" :key="id" @click="goToBlog(blog.id)">
+        <div class="col-md-2 col-sm-4 col-xs-10 blog-container cursor-pointer" v-for="(blog, id) in tabBlogData" :key="id" @click="goToBlog(blog)">
           <img  v-if="blog.image" :src="blog.image" alt="">
           <img v-else src="https://portfolio-platform.s3.amazonaws.com/media/anh/public/original_images/kelly-sikkema-IE8KfewAp-w-unsplash.jpg" alt="">
           <div class="blog-title">

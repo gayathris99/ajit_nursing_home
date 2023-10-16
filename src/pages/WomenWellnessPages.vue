@@ -152,7 +152,6 @@ export default {
 
     }),
     goToBlog (blog) {
-      console.log(blog)
       if (blog.tabType === 'OnlyFAQPagesInside') {
         this.$router.push({
           name: 'women-wellness-page',
@@ -164,7 +163,7 @@ export default {
         this.$router.push({
           name: 'individual-blog',
           params: {
-            id: blog.id
+            id: blog.slug
           }
         })
       }

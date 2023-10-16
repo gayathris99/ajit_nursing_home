@@ -16,7 +16,7 @@
           <q-select class="q-mt-sm" v-model="selectedCategory" map-options emit-value outlined :options="categories" />
         </div>
         <div class="col" v-if="!isLoading && !noResults">
-          <div class="first-blog text-primary cursor-pointer" @click="goToBlog(firstBlog[0]?.id)">
+          <div class="first-blog text-primary cursor-pointer" @click="goToBlog(firstBlog[0])">
             <img :src="firstBlog[0]?.image?.meta?.download_url"/>
             <br>
             <div class="q-my-md category q-px-sm q-py-xs fs-12 fw-600">
@@ -31,7 +31,7 @@
             <div class="q-mt-md fw-400">Read More &nbsp; &#62;</div>
           </div>
           <div class="q-mt-md row justify-between q-gutter-x-sm q-gutter-y-md items-center other-blogs col-md-9 col-sm-9 col-xs-12">
-            <div class="cursor-pointer" v-for="(blog, i) in blogs" :key="i" @click="goToBlog(blog?.id)">
+            <div class="cursor-pointer" v-for="(blog, i) in blogs" :key="i" @click="goToBlog(blog)">
               <img :src="blog?.image?.meta?.download_url"/>
               <br>
               <div class="q-my-md category q-px-sm q-py-xs fs-12 fw-600">
@@ -113,11 +113,11 @@ export default {
         this.$q.loading.hide()
       }
     },
-    goToBlog (id) {
+    goToBlog (blog) {
       this.$router.push({
         name: 'individual-blog',
         params: {
-          id
+          id: blog.slug
         }
       })
     }

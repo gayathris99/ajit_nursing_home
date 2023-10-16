@@ -81,7 +81,6 @@ export default {
         this.$emit('closeUserPopup', 'login')
         this.$emit('fetchUserDetails', data)
       } catch (error) {
-        console.log(error)
         this.$q.notify({
           message: "Something went wrong, please try again",
           color: "red",

@@ -99,7 +99,7 @@ export async function getTabAllBlogs({ commit, dispatch }, { tabId }) {
 export async function getBlog({ commit, dispatch }, { blogId }) {
   try {
     const data = await axios.get(
-      `${process.env.BASE_URL}/tab/28/blogs/${blogId}`
+      `${process.env.BASE_URL}/tab/59/blogs/${blogId}`
       // `https://anh.foxgloveteam.com/api/v2/pages/${blogId}/?site=anh-cms.foxgloveteam`
     );
     return data;

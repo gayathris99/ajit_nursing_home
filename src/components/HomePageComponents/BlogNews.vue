@@ -9,7 +9,7 @@
       </div>
       <q-scroll-area style="height: 500px" v-if="isDesktop || isTablet">
         <div v-if="tabSelected" class="row q-my-md q-gutter-x-xs justify-start q-gutter-x-lg q-gutter-y-lg no-wrap q-px-md">
-          <div v-for="(blog, key) in blogs" :key="key" @click="goToBlog(blog.id)" class="col-md-3 col-sm-5 col-xs-6">
+          <div v-for="(blog, key) in blogs" :key="key" @click="goToBlog(blog)" class="col-md-3 col-sm-5 col-xs-6">
             <q-card class="blog-container cursor-pointer">
               <div class="image-container">
                 <img v-if="blog.image" :src="blog.image"/>
@@ -29,7 +29,7 @@
        </q-scroll-area>
        <div v-else>
         <div v-if="tabSelected" class="row q-my-md q-gutter-x-xs justify-center q-gutter-y-lg">
-          <div v-for="(blog, key) in blogs.slice(0,3)" :key="key" @click="goToBlog(blog.id)" class="col-md-3 col-sm-5 col-xs-11">
+          <div v-for="(blog, key) in blogs.slice(0,3)" :key="key" @click="goToBlog(blog)" class="col-md-3 col-sm-5 col-xs-11">
             <q-card class="blog-container cursor-pointer">
               <div class="image-container">
                 <img v-if="blog.image" :src="blog.image"/>
@@ -150,11 +150,11 @@ export default {
         });
       }
     },
-    goToBlog (id) {
+    goToBlog (blog) {
       this.$router.push({
         name: 'individual-blog',
         params: {
-          id
+          id: blog.slug
         }
       })
     }
