@@ -96,11 +96,11 @@ export async function getTabAllBlogs({ commit, dispatch }, { tabId }) {
   }
 }
 // Individual Blog
-export async function getBlog({ commit, dispatch }, { blogId }) {
+export async function getBlog({ commit, dispatch }, { blogSlug }) {
   try {
     const data = await axios.get(
-      `${process.env.BASE_URL}/tab/59/blogs/${blogId}`
-      // `https://anh.foxgloveteam.com/api/v2/pages/${blogId}/?site=anh-cms.foxgloveteam`
+      `${process.env.BASE_URL}/tab/59/blogs/${blogSlug}`
+      // `https://anh.foxgloveteam.com/api/v2/pages/${blogSlug}/?site=anh-cms.foxgloveteam`
     );
     return data;
   } catch (error) {
