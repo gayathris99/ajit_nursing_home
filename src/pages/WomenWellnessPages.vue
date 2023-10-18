@@ -1,10 +1,10 @@
 <template>
-  <div :class="isMobile ? 'q-pa-md' : 'q-pa-xl'" class="women-wellness-container">
+  <div :class="isMobile ? 'q-pa-md' : 'q-pa-xl'" class="women-wellness-container q-mb-xl">
     <div class="font-inter fs-16 fw-600 q-px-sm">
       <span class="text-grey cursor-pointer" @click="goTo('home')">Home / </span>
       <span class="text-primary cursor-pointer">{{tabDetails?.title}}</span>
     </div>
-    <div :class="isDesktop ? 'q-px-xl' : ''" class="column justify-center">
+    <div :class="isDesktop ? 'q-px-xl' : ''" class="column justify-center q-mb-xl">
       <div class="text-center font-domine q-mt-md text-primary fw-500" :class="isDesktop ? 'fs-30' : 'fs-24'">{{tabDetails?.title}}</div>
       <div class="intro-image row justify-center" :class="isDesktop ? 'q-mt-lg ' : 'q-mt-md'">
         <img  v-if="tabDetails?.image" :src="tabDetails?.image" alt="">
