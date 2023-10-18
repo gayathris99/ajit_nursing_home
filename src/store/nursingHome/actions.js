@@ -188,5 +188,27 @@ export async function registerUser({ commit, dispatch }, payload) {
     throw (error)
   }
 }
+export async function verifyUser({ commit, dispatch }, payload) {
+  try {
+    const data = await axios.post(
+      'https://anh.foxgloveteam.com/self/register/check',
+      payload
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
+export async function verifyOtp({ commit, dispatch }, payload) {
+  try {
+    const data = await axios.post(
+      'https://anh.foxgloveteam.com/self/verify',
+      payload
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
 
 
