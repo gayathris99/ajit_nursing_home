@@ -7,7 +7,7 @@
         <q-card-section class="q-px-lg q-py-xs text-primary ">
           <div class="fs-16 fw-500 cursor-pointer login-tagline font-montserrat" @click="openUserPopup('signup')">New to Ajit Nursing Home? Join now!</div>
           <div class="fs-30 q-my-sm text-black" style="font-weight:bolder">Please log in</div>
-          <div class="column q-gutter-sm q-mb-md font-montserrat fw-500">
+          <div class="column q-gutter-sm q-mb-sm font-montserrat fw-500">
             <q-input
              color="black"
             label-color="primary"
@@ -35,6 +35,7 @@
               </template>
             </q-input>
           </div>
+          <div class="fs-16 font-montserrat text-red q-mb-sm fw-500" v-if="showErrorMessage">Invalid credentials. Please try again!</div>
           <div class="fs-16 fw-500 cursor-pointer font-montserrat login-tagline q-mb-md" @click="this.$router.push({
             name: 'forgot-password'
           })">Forgot Password ?</div>
@@ -58,7 +59,8 @@ export default {
     return {
       whatsappNumber: null,
       password: null,
-      isPwd: true
+      isPwd: true,
+      showErrorMessage: false
     }
   },
   methods: {
@@ -72,6 +74,7 @@ export default {
     this.$emit('openUserPopup', value)
     },
     async onLogin (e) {
+      this.showErrorMessage = false
       e.preventDefault()
       try {
         this.$q.loading.show()
@@ -83,17 +86,30 @@ export default {
         this.$emit('closeUserPopup', 'login')
         this.$emit('fetchUserDetails', data)
       } catch (error) {
-        this.$q.notify({
-          message: "Something went wrong, please try again",
-          color: "red",
-          position: "top",
-          icon: "warning",
-        });
+        this.showErrorMessage = true
       } finally {
         this.$q.loading.hide()
       }
     },
   },
+  watch: {
+    checkValues: {
+      immediate: true,
+      deep: true,
+      handler (newVal) {
+        if (this.showErrorMessage) this.showErrorMessage = false
+      }
+    }
+  },
+  computed: {
+    checkValues () {
+      const { whatsappNumber, password } = this
+      return {
+        whatsappNumber,
+        password
+      }
+    }
+  }
 }
 </script>
 
