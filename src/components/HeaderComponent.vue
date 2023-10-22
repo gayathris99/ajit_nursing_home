@@ -1,6 +1,6 @@
 <template>
   <q-header class="">
-    <div style="background:#004953" class="text-center q-pa-sm font-montserrat fw-700">
+    <div style="background:#004953" class="text-center q-pa-sm font-montserrat fw-700" v-if="!isForgotPasswordRoute">
       <div class="cursor-pointer" v-if="!isUserLoggedIn" :class="isMobile ? 'fs-14' : 'fs-16'" style="display:inline" @click="openUserPopup('signup')"><span class="text-underline">Join now</span> to personalize Ajit Nursing Home for your pregnancy <q-icon name="expand_more" :size="isMobile ? 'sm' : 'md'"></q-icon></div>
       <div class="cursor-pointer" v-else :class="isMobile ? 'fs-14' : 'fs-16'" style="display:inline">Hello {{userDetails.firstName}} &#128512;</div>
     </div>
@@ -56,12 +56,12 @@
           </q-btn-dropdown>
 
           <q-btn-dropdown label="Contact Us" @click="redirectToWhatsapp" no-caps class="fs-16 fw-600 font-montserrat" flat dense></q-btn-dropdown>
-          <div class="fs-16 fw-600 font-montserrat cursor-pointer" v-if="!isUserLoggedIn">
+          <div class="fs-16 fw-600 font-montserrat cursor-pointer" v-if="!isUserLoggedIn && !isForgotPasswordRoute">
             <span @click="openUserPopup('login')">LOGIN&nbsp;/&nbsp;</span>
             <span @click="openUserPopup('signup')">SIGNUP</span>
           </div>
           <div v-else>
-            <q-btn-dropdown icon="account_circle" flat dense size="20px">
+            <q-btn-dropdown icon="account_circle" flat dense size="20px" v-if="!isForgotPasswordRoute">
               <q-list class="fs-14 fw-600 font-montserrat text-primary column justify-center" style="width: auto">
                 <q-item clickable v-close-popup @click="goTo('account-settings')">
                   <q-item-section>Account Settings</q-item-section>
@@ -112,8 +112,8 @@
             <div class="q-py-sm q-px-md cursor-pointer fs-14">Pregnancy Due Date Calculator</div>
           </q-expansion-item>
           <div class="cursor-pointer q-py-sm q-px-md fs-16" @click="redirectToWhatsapp">Contact Us</div>
-          <div class="cursor-pointer q-py-sm q-px-md fs-16" v-if="!isUserLoggedIn" @click="openUserPopup('login')">Login</div>
-          <div class="cursor-pointer q-py-sm q-px-md fs-16" v-if="!isUserLoggedIn" @click="openUserPopup('signup')">Signup</div>
+          <div class="cursor-pointer q-py-sm q-px-md fs-16" v-if="!isUserLoggedIn && !isForgotPasswordRoute" @click="openUserPopup('login')">Login</div>
+          <div class="cursor-pointer q-py-sm q-px-md fs-16" v-if="!isUserLoggedIn && !isForgotPasswordRoute" @click="openUserPopup('signup')">Signup</div>
           <div class="cursor-pointer q-py-sm q-px-md fs-16" v-if="isUserLoggedIn"  @click="goTo('account-settings')">Account Settings</div>
           <div class="cursor-pointer q-py-sm q-px-md fs-16" v-if="isUserLoggedIn" @click="onLogout">Logout</div>
         </div>
@@ -230,8 +230,11 @@ export default {
           this.userDetails = {}
           this.isUserLoggedIn = false
           this.$router.push({
-            name: 'home'
+            name: 'forgot-password'
           })
+        } else if (newVal === 'removeUser') {
+          this.userDetails = {}
+          this.isUserLoggedIn = false
         }
       }
     },
@@ -243,20 +246,8 @@ export default {
           this.loginPopup = true
           this.setOpenLoginPopup(false)
         }
-        // if (newVal === 'Y' && this.$route.name === 'home') {
-        // }
       }
     }
-    // getOpenLoginPopup: {
-    //   immediate: true,
-    //   deep: true,
-    //   handler (newVal) {
-    //     if (newVal === 'Y' && this.$route.name === 'home') {
-    //       this.loginPopup = true
-    //       this.setOpenLoginPopup(false)
-    //     }
-    //   }
-    // }
   },
   methods: {
     ...mapActions({
@@ -369,6 +360,9 @@ export default {
     },
     isHomePage () {
       return this.$route.name === 'home'
+    },
+    isForgotPasswordRoute () {
+      return this.$route.name === 'forgot-password'
     }
   },
   mounted () {

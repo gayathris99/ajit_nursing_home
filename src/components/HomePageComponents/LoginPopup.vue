@@ -35,7 +35,9 @@
               </template>
             </q-input>
           </div>
-          <div class="fs-16 fw-500 cursor-pointer font-montserrat login-tagline q-mb-md">Forgot Password ?</div>
+          <div class="fs-16 fw-500 cursor-pointer font-montserrat login-tagline q-mb-md" @click="this.$router.push({
+            name: 'forgot-password'
+          })">Forgot Password ?</div>
           <q-btn
           class="q-mb-lg login-btn font-montserrat"
           label="LOG IN"

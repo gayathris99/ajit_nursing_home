@@ -12,6 +12,7 @@ const routes = [
       { path: ':mainTabTitle/:subTabTitle/:tabId', name: 'tab-all-blogs', component: () => import('pages/AllTabBlogs.vue'), props: true },
       { path: 'blogs/:id', name: 'individual-blog', component: () => import('pages/IndividualBlogs.vue') },
       { path: 'account-settings', name: 'account-settings', component: () => import('pages/AccountSettings.vue') },
+      { path: 'forgot-password', name: 'forgot-password', component: () => import('pages/ForgotPassword.vue') },
       { path: 'faq', name: 'faq', component: () => import('pages/FaqPage.vue') },
       { path: 'terms', name: 'terms', component: () => import('pages/TermsAndCondition.vue') },
       { path: 'privacy', name: 'privacy', component: () => import('pages/PrivacyPolicy.vue') },

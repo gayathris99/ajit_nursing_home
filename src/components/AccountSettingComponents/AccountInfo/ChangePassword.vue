@@ -175,9 +175,6 @@ export default {
       localStorage.removeItem('userObj')
       this.$emit('closePopup')
       this.setCheckUserLoggedIn('failure')
-      this.$router.push({
-        name: 'home'
-      })
     }
   }
 }
