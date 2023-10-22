@@ -236,5 +236,34 @@ export async function forgotPassword({ commit, dispatch }, payload) {
     throw (error)
   }
 }
+export async function getSubscriptions({ commit, dispatch }, { subscriptionType, accessToken}) {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    };
+    const data = await axios.get(
+      `${process.env.BASE_URL}/notification/subscription/${subscriptionType}`,
+      config
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
+export async function updateSubscriptions({ commit, dispatch }, { payload, accessToken, subscriptionType}) {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    };
+    const data = await axios.put(
+      `${process.env.BASE_URL}/notification/subscription/${subscriptionType}`,
+      payload,
+      config
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
 
 

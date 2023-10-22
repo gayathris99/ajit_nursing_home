@@ -23,6 +23,7 @@
           label="SAVE"
           color="secondary"
           size="sm"
+          @click="onUpdateSubscriptions"
           ></q-btn>
       </div>
     </div>
@@ -30,6 +31,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'EmailSubscription',
   data () {
@@ -53,7 +55,77 @@ export default {
           this.pregnancyHighlights = false
         }
       }
+    },
+    allValues: {
+      immediate: true,
+      deep: true,
+      handler (newVal) {
+        const { isTryingToConceive, pregnancyWeek, pregnancyHighlights } = newVal
+        if (isTryingToConceive && pregnancyWeek && pregnancyHighlights) this.selectAll = true
+      }
     }
+  },
+  methods: {
+    ...mapActions({
+      getSubscriptions: 'nursingHome/getSubscriptions',
+      updateSubscriptions: 'nursingHome/updateSubscriptions'
+    }),
+    async fetchSubscriptions () {
+      try {
+        this.$q.loading.show()
+        const accessToken = JSON.parse(localStorage.getItem('userObj'))?.token
+        const { data } = await this.getSubscriptions({
+          subscriptionType: 'email',
+          accessToken
+        })
+        this.isTryingToConceive = data.gettingPregnantHighlights
+        this.pregnancyWeek = data.myPregnancyThisWeek
+        this.pregnancyHighlights = data.pregnancyHighlights
+      } catch (error) {}
+      finally {
+        this.$q.loading.hide()
+      }
+    },
+    async onUpdateSubscriptions () {
+      try {
+        this.$q.loading.show()
+        const accessToken = JSON.parse(localStorage.getItem('userObj'))?.token
+        const { data } = await this.updateSubscriptions({
+          subscriptionType: 'email',
+          accessToken,
+          payload: {
+            isActive: true,
+            gettingPregnantHighlights: this.isTryingToConceive,
+            myPregnancyThisWeek: this.pregnancyWeek,
+            pregnancyHighlights: this.pregnancyHighlights
+          }
+        })
+        this.isTryingToConceive = data.gettingPregnantHighlights
+        this.pregnancyWeek = data.myPregnancyThisWeek
+        this.pregnancyHighlights = data.pregnancyHighlights
+        this.$q.notify({
+          message: "Your subscriptions are updated",
+          color: "green",
+          position: "top"
+      });
+      } catch (error) {}
+      finally {
+        this.$q.loading.hide()
+      }
+    }
+  },
+  computed: {
+    allValues () {
+      const { isTryingToConceive, pregnancyWeek, pregnancyHighlights } = this
+      return {
+        isTryingToConceive,
+        pregnancyWeek,
+        pregnancyHighlights
+      }
+    }
+  },
+  mounted () {
+    this.fetchSubscriptions()
   }
 }
 </script>
