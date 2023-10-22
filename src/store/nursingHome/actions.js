@@ -210,5 +210,31 @@ export async function verifyOtp({ commit, dispatch }, payload) {
     throw (error)
   }
 }
+export async function resetPassword({ commit, dispatch }, { payload, accessToken }) {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    };
+    const data = await axios.post(
+      'https://anh.foxgloveteam.com/self/password/reset',
+      payload,
+      config
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
+export async function forgotPassword({ commit, dispatch }, payload) {
+  try {
+    const data = await axios.post(
+      'https://anh.foxgloveteam.com/self/password/forgot',
+      payload
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
 
 

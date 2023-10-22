@@ -2,6 +2,9 @@ export default function () {
   return {
     doctorId: '',
     allTabsData: [],
-    tabDetailsData: []
+    tabDetailsData: [],
+    openLoginPopup: false,
+    openSignupPopup: false,
+    checkUserLoggedIn: false
   }
 }

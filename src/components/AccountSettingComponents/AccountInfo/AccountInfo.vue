@@ -18,7 +18,8 @@
       </div>
     </div>
     <q-dialog v-model="showChangePasswordPopup">
-      <change-password/>
+      <change-password
+      @closePopup="closeChangePassword"/>
     </q-dialog>
   </div>
 </template>
@@ -39,6 +40,9 @@ export default {
   methods: {
     onChangePassword () {
       this.showChangePasswordPopup = true
+    },
+    closeChangePassword () {
+      this.showChangePasswordPopup = false
     }
   }
 }

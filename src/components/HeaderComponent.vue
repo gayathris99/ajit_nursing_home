@@ -138,7 +138,7 @@
 
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import LoginPopup from './HomePageComponents/LoginPopup.vue'
 import SignupPopup from './HomePageComponents/SignupPopup.vue'
 
@@ -218,65 +218,57 @@ export default {
         if (newVal) this.showDueDateError = false
       }
     },
-    // hospitalListOver: {
+    getCheckUserLoggedIn: {
+      async handler (newVal) {
+        if (newVal === 'success') {
+          this.userDetails = {}
+          this.isUserLoggedIn = false
+          this.$router.push({
+            name: 'home'
+          })
+        } else if (newVal === 'failure') {
+          this.userDetails = {}
+          this.isUserLoggedIn = false
+          this.$router.push({
+            name: 'home'
+          })
+        }
+      }
+    },
+    $route: {
+      immediate: true,
+      deep: true,
+      handler (newVal) {
+        if (this.getOpenLoginPopup === 'Y' && newVal.name === 'home') {
+          this.loginPopup = true
+          this.setOpenLoginPopup(false)
+        }
+        // if (newVal === 'Y' && this.$route.name === 'home') {
+        // }
+      }
+    }
+    // getOpenLoginPopup: {
+    //   immediate: true,
+    //   deep: true,
     //   handler (newVal) {
-    //     if (newVal) {
-    //       this.hospitalMenu = true
-    //       this.womenWellnessOptions = false
-    //     }
-    //     else {
-    //       this.hospitalMenu = false
-    //       this.hospitalMenuOver = false
-    //       this.womenWellnessOptions = false
+    //     if (newVal === 'Y' && this.$route.name === 'home') {
+    //       this.loginPopup = true
+    //       this.setOpenLoginPopup(false)
     //     }
     //   }
-    // },
-    // hospitalMenuOver: {
-    //   handler (newVal) {
-    //     if (newVal) this.hospitalMenu = true
-    //   }
-    // },
-    // womenWellnessOptionsListOver: {
-    //   handler (newVal) {
-    //     if (newVal) {
-    //       this.womenWellnessOptions = true
-    //       this.hospitalMenu = false
-    //     }
-    //     else {
-    //       this.womenWellnessOptions = false
-    //       this.womenWellnessOptionsOver = false
-    //       this.hospitalMenu = false
-    //     }
-    //   }
-    // },
-    // womenWellnessOptionsOver: {
-    //   handler (newVal) {
-    //     if (newVal) this.womenWellnessOptions = true
-    //   }
-    // },
+    // }
   },
   methods: {
     ...mapActions({
-      // registerUser: 'nursingHome/registerUser',
       logoutUser: 'nursingHome/logoutUser',
       getUserDetails: 'nursingHome/getUserDetails'
+    }),
+    ...mapMutations({
+      setOpenLoginPopup: 'nursingHome/setOpenLoginPopup',
     }),
     redirectToWhatsapp () {
       window.open('https://wa.me/919448420369', '_blank')
     },
-    // hospitalDebounceFunction () {
-    //   console.log('hospitalDebounceFunction')
-    //   debounce(this.checkHospitalMenu, 300)
-    // },
-    // checkHospitalMenu () {
-    //   if (this.hospitalMenuOver || this.hospitalListOver) {
-    //     console.log('debounce')
-    //     this.hospitalMenu = true
-    //   }
-    //   else {
-    //     this.hospitalMenu = false
-    //   }
-    // },
     onWomenWellnessClick ({ menuTitle }) {
       const getTabDetailsData = this.getTabDetailsData?.filter(tab => tab.title.toLowerCase() === menuTitle.toLowerCase())
       if (getTabDetailsData.length) {
@@ -362,7 +354,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getTabDetailsData: 'nursingHome/getTabDetailsData'
+      getTabDetailsData: 'nursingHome/getTabDetailsData',
+      getCheckUserLoggedIn: 'nursingHome/getCheckUserLoggedIn',
+      getOpenLoginPopup: 'nursingHome/getOpenLoginPopup'
     }),
     isMobile () {
       return this.$q.screen.lt.sm
