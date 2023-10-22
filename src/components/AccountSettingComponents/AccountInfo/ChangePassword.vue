@@ -15,7 +15,7 @@
           </div>
           <div class="font-montserrat q-mt-md">
             <q-form @submit.prevent.stop="onSave">
-              <q-input
+              <!-- <q-input
               color="black"
               label-color="primary"
               outlined
@@ -24,7 +24,7 @@
               :rules="[val => !!val || 'Whatsapp Number is required',
               val => val.match(/^[0-9]+$/) || 'Only numbers allowed',
               val => val.length === 10 || 'Incorrect Number']">
-              </q-input>
+              </q-input> -->
               <q-input
               label="Old Password"
               v-model="oldPassword"
@@ -145,7 +145,7 @@ export default {
         this.$q.loading.hide()
         const { data } = await this.resetPassword({
           payload: {
-            username: this.whatsappNumber,
+            username: JSON.parse(localStorage.getItem('userObj'))?.username,
             password: this.oldPassword,
             newpassword: this.newPassword,
             newpassword2: this.newPassword2,
