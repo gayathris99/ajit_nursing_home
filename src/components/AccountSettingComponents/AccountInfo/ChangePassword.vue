@@ -15,16 +15,6 @@
           </div>
           <div class="font-montserrat q-mt-md">
             <q-form @submit.prevent.stop="onSave">
-              <!-- <q-input
-              color="black"
-              label-color="primary"
-              outlined
-              v-model="whatsappNumber"
-              label="Whatsapp Number:"
-              :rules="[val => !!val || 'Whatsapp Number is required',
-              val => val.match(/^[0-9]+$/) || 'Only numbers allowed',
-              val => val.length === 10 || 'Incorrect Number']">
-              </q-input> -->
               <q-input
               label="Old Password"
               v-model="oldPassword"
@@ -98,7 +88,6 @@ export default {
   data () {
     return {
       oldPassword: '',
-      whatsappNumber: '',
       isOldPwd: 'password',
       isNewPwd: 'password',
       isNewPwd2: 'password',
@@ -119,9 +108,8 @@ export default {
   },
   computed: {
     inputValues () {
-      const { whatsappNumber, oldPassword, newPassword, newPassword2 } = this
+      const { oldPassword, newPassword, newPassword2 } = this
       return  {
-        whatsappNumber,
         oldPassword,
         newPassword,
         newPassword2
