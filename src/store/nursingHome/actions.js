@@ -153,6 +153,21 @@ export async function getUserDetails({ commit, dispatch }, { accessToken }) {
     throw (error)
   }
 }
+export async function updateUserDetails({ commit, dispatch }, { accessToken, payload }) {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    };
+    const data = await axios.put(
+      'https://anh.foxgloveteam.com/self/userdetails',
+      payload,
+      config
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
 export async function loginUser({ commit, dispatch }, payload) {
   try {
     const data = await axios.post(
