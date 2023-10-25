@@ -168,6 +168,8 @@ export async function updateUserDetails({ commit, dispatch }, { accessToken, pay
     throw (error)
   }
 }
+
+
 export async function loginUser({ commit, dispatch }, payload) {
   try {
     const data = await axios.post(
@@ -251,6 +253,8 @@ export async function forgotPassword({ commit, dispatch }, payload) {
     throw (error)
   }
 }
+
+
 export async function getSubscriptions({ commit, dispatch }, { subscriptionType, accessToken}) {
   try {
     const config = {
@@ -282,3 +286,18 @@ export async function updateSubscriptions({ commit, dispatch }, { payload, acces
 }
 
 
+
+export async function getFamilyInfo({ commit, dispatch }, {accessToken}) {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    };
+    const data = await axios.get(
+      `${process.env.BASE_URL}/familyinfo`,
+      config
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
