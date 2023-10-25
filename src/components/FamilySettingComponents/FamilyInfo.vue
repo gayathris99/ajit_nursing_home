@@ -17,14 +17,14 @@
       </div>
     </div> -->
     <div class="border-bottom q-my-lg"></div>
-    <div class="row items-center q-gutter-x-sm cursor-pointer" @click="() => showAddPregnancyPopup = true">
+    <div class="row items-center q-gutter-x-sm cursor-pointer" @click="addFamily('pregnancy')">
       <q-icon name="add" size="sm" color="secondary"></q-icon>
       <div class="fs-16 fw-700 text-secondary">Add Pregnancy</div>
     </div>
     <div class="border-bottom q-my-lg"></div>
     <div class="q-mt-xl fw-700 fs-18 text-primary">My children</div>
     <div class="border-bottom q-my-lg"></div>
-    <div class="row items-center q-gutter-x-sm cursor-pointer">
+    <div class="row items-center q-gutter-x-sm cursor-pointer" @click="addFamily('child')">
       <q-icon name="add" size="sm" color="secondary"></q-icon>
       <div class="fs-16 fw-700 text-secondary">Add a child</div>
     </div>
@@ -33,23 +33,25 @@
   <q-dialog persistent v-model="tryingToConceivePopup">
     <trying-to-conceive-popup/>
   </q-dialog>
-  <q-dialog  v-model="showAddPregnancyPopup">
-    <add-pregnancy-popup/>
+  <q-dialog  v-model="showAddFamilyPopup">
+    <add-family-popup
+    :isFamilyTypeChild="isFamilyTypeChild"/>
   </q-dialog>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import TryingToConceivePopup from './TryingToConceivePopup.vue'
-import AddPregnancyPopup from './AddPregnancyPopup.vue'
+import AddFamilyPopup from './AddFamilyPopup.vue'
 export default {
   name: 'FamilyInfo',
-  components: { TryingToConceivePopup, AddPregnancyPopup },
+  components: { TryingToConceivePopup, AddFamilyPopup },
   data () {
     return {
       isTryingToConceive: false,
       tryingToConceivePopup: false,
-      showAddPregnancyPopup: false
+      showAddFamilyPopup: false,
+      isFamilyTypeChild: false
     }
   },
   mounted () {
@@ -59,6 +61,12 @@ export default {
     ...mapActions({
       getFamilyInfo: 'nursingHome/getFamilyInfo'
     }),
+    addFamily (type) {
+      if (type === 'child') {
+        this.isFamilyTypeChild = true
+      } else this.isFamilyTypeChild = false
+      this.showAddFamilyPopup = true
+    },
     async fetchFamilyInfo () {
       try {
         this.$q.loading.show()

@@ -5,7 +5,7 @@
         <img src="~assets/closeIconSecondary.svg" width="24" alt="">
       </div>
       <div class="q-px-md q-pb-md q-pt-xs font-montserrat">
-        <div class="fw-700 text-primary fs-20 q-mb-lg">My Pregnancy</div>
+        <div class="fw-700 text-primary fs-20 q-mb-lg">{{getTitle}}</div>
         <div class="fw-700 text-primary fs-16">Photo</div>
         <div class="row items-center no-wrap q-mt-sm q-gutter-x-md">
           <div class="text-primary fs-16 fw-500 photo-subtitle">A photo helps you personalize your baby's account</div>
@@ -18,7 +18,7 @@
           </q-avatar>
 
         </div>
-        <div class="fw-700 text-primary fs-16 q-mt-md">Due Date</div>
+        <div class="fw-700 text-primary fs-16 q-mt-md">{{getDateTitle}}</div>
         <div class="row items-center  no-wrap font-montserrat q-mt-sm justify-between">
           <q-select
           class="col-4"
@@ -77,7 +77,7 @@
 
 <script>
 export default {
-  name: 'AddPregnancyPopup',
+  name: 'AddFamilyPopup',
   data () {
     return {
       monthOptions: [
@@ -91,7 +91,18 @@ export default {
       isSubscribed: true
     }
   },
+  props: {
+    isFamilyTypeChild: {
+      default: false
+    }
+  },
   computed: {
+    getTitle () {
+      return this.isFamilyTypeChild ? 'My Child' : 'My pregnancy'
+    },
+    getDateTitle () {
+      return this.isFamilyTypeChild ? 'Birthday' : 'Due Date'
+    },
     datesOptions () {
       const dates = []
       for (let i = 1; i < 32; i++) {
