@@ -212,7 +212,7 @@ export default {
         formData.append('name', this.babyName)
         formData.append('gender', this.babySex)
         // formData.append('image', null)
-        formData.append('isActive', true)
+        formData.append('isActive', 'True')
         const { data } = await this.editFamilyInfo({
           accessToken: this.accessToken,
           payload: formData,
