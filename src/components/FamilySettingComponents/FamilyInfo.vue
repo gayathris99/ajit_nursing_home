@@ -62,6 +62,7 @@
     :isEditFamily="isEditFamily"
     :editFamilyValue="editFamilyValue"
     @closeFamilyPopup="closeFamilyPopup"
+    @removeChildPopup="removeChildPopup"
     @showExperiencePopup="showExperiencePopup"/>
   </q-dialog>
   <q-dialog v-model="isExperiencedLossPopup">
@@ -72,6 +73,11 @@
   <q-dialog v-model="showMessageAfterKeepLoss">
     <keep-loss-message/>
   </q-dialog>
+  <q-dialog v-model="isRemoveChildPopup">
+    <remove-child
+    :editFamilyValue="editFamilyValue"
+    @closeFamilyPopup="closeFamilyPopup"/>
+  </q-dialog>
 </template>
 
 <script>
@@ -80,9 +86,10 @@ import TryingToConceivePopup from './TryingToConceivePopup.vue'
 import AddFamilyPopup from './AddFamilyPopup.vue'
 import ExperiencedLoss from './ExperiencedLoss.vue'
 import KeepLossMessage from './KeepLossMessage.vue'
+import RemoveChild from './RemoveChild.vue'
 export default {
   name: 'FamilyInfo',
-  components: { TryingToConceivePopup, AddFamilyPopup, ExperiencedLoss, KeepLossMessage },
+  components: { TryingToConceivePopup, AddFamilyPopup, ExperiencedLoss, KeepLossMessage, RemoveChild },
   data () {
     return {
       isTryingToConceive: false,
@@ -95,6 +102,7 @@ export default {
       editFamilyValue: null,
       isExperiencedLossPopup: false,
       showMessageAfterKeepLoss: false,
+      isRemoveChildPopup: false,
       monthList: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     }
   },
@@ -105,12 +113,14 @@ export default {
     ...mapActions({
       getFamilyInfo: 'nursingHome/getFamilyInfo'
     }),
-    closeFamilyPopup ({ lossType }) {
-      console.log(lossType)
+    closeFamilyPopup (lossType) {
       this.showAddFamilyPopup = false
       if (this.isExperiencedLossPopup) {
         this.isExperiencedLossPopup = false
-        if(lossType === 'keep') this.showMessageAfterKeepLoss = true
+        if(lossType?.lossType === 'keep') this.showMessageAfterKeepLoss = true
+      }
+      if (this.isRemoveChildPopup) {
+        this.isRemoveChildPopup = false
       }
       this.fetchFamilyInfo()
       this.$q.notify({
@@ -124,6 +134,11 @@ export default {
       this.showAddFamilyPopup = false
       this.isExperiencedLossPopup = true
       this.editFamilyValue = value
+    },
+    removeChildPopup (value) {
+      this.showAddFamilyPopup = false
+      this.editFamilyValue = value
+      this.isRemoveChildPopup = true
     },
     isMemorium (child) {
       return child.status === 'EXPERIENCED_LOSS'
