@@ -61,7 +61,16 @@
     :isFamilyTypeChild="isFamilyTypeChild"
     :isEditFamily="isEditFamily"
     :editFamilyValue="editFamilyValue"
+    @closeFamilyPopup="closeFamilyPopup"
+    @showExperiencePopup="showExperiencePopup"/>
+  </q-dialog>
+  <q-dialog v-model="isExperiencedLossPopup">
+    <experienced-loss
+    :editFamilyValue="editFamilyValue"
     @closeFamilyPopup="closeFamilyPopup"/>
+  </q-dialog>
+  <q-dialog v-model="showMessageAfterKeepLoss">
+    <keep-loss-message/>
   </q-dialog>
 </template>
 
@@ -69,9 +78,11 @@
 import { mapActions } from 'vuex'
 import TryingToConceivePopup from './TryingToConceivePopup.vue'
 import AddFamilyPopup from './AddFamilyPopup.vue'
+import ExperiencedLoss from './ExperiencedLoss.vue'
+import KeepLossMessage from './KeepLossMessage.vue'
 export default {
   name: 'FamilyInfo',
-  components: { TryingToConceivePopup, AddFamilyPopup },
+  components: { TryingToConceivePopup, AddFamilyPopup, ExperiencedLoss, KeepLossMessage },
   data () {
     return {
       isTryingToConceive: false,
@@ -82,6 +93,8 @@ export default {
       exisitingChildren: [],
       isEditFamily: false,
       editFamilyValue: null,
+      isExperiencedLossPopup: false,
+      showMessageAfterKeepLoss: false,
       monthList: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     }
   },
@@ -92,8 +105,13 @@ export default {
     ...mapActions({
       getFamilyInfo: 'nursingHome/getFamilyInfo'
     }),
-    closeFamilyPopup () {
+    closeFamilyPopup ({ lossType }) {
+      console.log(lossType)
       this.showAddFamilyPopup = false
+      if (this.isExperiencedLossPopup) {
+        this.isExperiencedLossPopup = false
+        if(lossType === 'keep') this.showMessageAfterKeepLoss = true
+      }
       this.fetchFamilyInfo()
       this.$q.notify({
         message: "Your updates are saved!",
@@ -101,6 +119,11 @@ export default {
         position: "top",
         classes: 'font-montserrat fw-700'
       });
+    },
+    showExperiencePopup (value) {
+      this.showAddFamilyPopup = false
+      this.isExperiencedLossPopup = true
+      this.editFamilyValue = value
     },
     isMemorium (child) {
       return child.status === 'EXPERIENCED_LOSS'
