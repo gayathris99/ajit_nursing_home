@@ -53,7 +53,6 @@ export default {
         })
         this.$emit('closeFamilyPopup')
       } catch (error) {
-        console.log(error)
       }
       finally {
         this.$q.loading.hide()

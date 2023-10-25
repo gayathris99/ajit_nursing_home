@@ -16,13 +16,13 @@
         This will erase all photos, milestones, and announcements associated with this child on our website.
       </div>
       <div class="row items-center justify-center q-my-md">
-            <q-btn
-            label="SAVE"
-            class="font-montserrat fw-700 save-btn"
-            color="secondary"
-            type="submit"
-            @click="onSave"
-            ></q-btn>
+        <q-btn
+        label="SAVE"
+        class="font-montserrat fw-700 save-btn"
+        color="secondary"
+        type="submit"
+        @click="onSave"
+        ></q-btn>
       </div>
     </q-card-section>
   </q-card>
@@ -49,7 +49,6 @@ export default {
     }),
     async onSave () {
       try {
-        console.log('onsave')
         this.$q.loading.show()
         const experiencedLoss = 'True'
         const isActive = this.lossValue === 'keep' ? 'True' : 'False'

@@ -63,6 +63,7 @@
     :editFamilyValue="editFamilyValue"
     @closeFamilyPopup="closeFamilyPopup"
     @removeChildPopup="removeChildPopup"
+    @showBabyBornPopup="showBabyBornPopup"
     @showExperiencePopup="showExperiencePopup"/>
   </q-dialog>
   <q-dialog v-model="isExperiencedLossPopup">
@@ -78,6 +79,11 @@
     :editFamilyValue="editFamilyValue"
     @closeFamilyPopup="closeFamilyPopup"/>
   </q-dialog>
+  <q-dialog v-model="isBabyBornPopup">
+    <baby-born
+    :editFamilyValue="editFamilyValue"
+    @closeFamilyPopup="closeFamilyPopup"/>
+  </q-dialog>
 </template>
 
 <script>
@@ -87,9 +93,10 @@ import AddFamilyPopup from './AddFamilyPopup.vue'
 import ExperiencedLoss from './ExperiencedLoss.vue'
 import KeepLossMessage from './KeepLossMessage.vue'
 import RemoveChild from './RemoveChild.vue'
+import BabyBorn from './BabyBorn.vue'
 export default {
   name: 'FamilyInfo',
-  components: { TryingToConceivePopup, AddFamilyPopup, ExperiencedLoss, KeepLossMessage, RemoveChild },
+  components: { TryingToConceivePopup, AddFamilyPopup, ExperiencedLoss, KeepLossMessage, RemoveChild, BabyBorn },
   data () {
     return {
       isTryingToConceive: false,
@@ -103,6 +110,7 @@ export default {
       isExperiencedLossPopup: false,
       showMessageAfterKeepLoss: false,
       isRemoveChildPopup: false,
+      isBabyBornPopup: false,
       monthList: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     }
   },
@@ -119,6 +127,7 @@ export default {
         this.isExperiencedLossPopup = false
         if(lossType?.lossType === 'keep') this.showMessageAfterKeepLoss = true
       }
+      if (this.isBabyBornPopup) this.isBabyBornPopup = false
       if (this.isRemoveChildPopup) {
         this.isRemoveChildPopup = false
       }
@@ -134,6 +143,11 @@ export default {
       this.showAddFamilyPopup = false
       this.isExperiencedLossPopup = true
       this.editFamilyValue = value
+    },
+    showBabyBornPopup (value) {
+      this.showAddFamilyPopup = false
+      this.editFamilyValue = value
+      this.isBabyBornPopup = true
     },
     removeChildPopup (value) {
       this.showAddFamilyPopup = false

@@ -89,7 +89,7 @@
             ></q-btn>
           </div>
           <div class="column q-gutter-y-md items-center justify-center text-primary fs-14">
-            <div class="cursor-pointer" v-if="!isFamilyTypeChild">My baby is born</div>
+            <div class="cursor-pointer" v-if="!isFamilyTypeChild" @click="() => this.$emit('showBabyBornPopup', editFamilyValue)">My baby is born</div>
             <div class="cursor-pointer" @click="() => this.$emit('showExperiencePopup', editFamilyValue)" v-if="editFamilyValue.status !== 'EXPERIENCED_LOSS'">I experienced a loss</div>
             <div class="cursor-pointer" @click="() => this.$emit('removeChildPopup', editFamilyValue)">Remove from profile</div>
           </div>
