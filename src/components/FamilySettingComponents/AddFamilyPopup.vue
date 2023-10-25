@@ -11,9 +11,12 @@
           <div class="row items-center no-wrap q-mt-sm q-gutter-x-md">
             <div class="text-primary fs-16 fw-500 photo-subtitle">A photo helps you personalize your baby's account</div>
             <q-avatar size="75px" class="avatar-container">
-              <q-icon name="account_circle" size="75px" color="grey" class="icon-img"/>
+              <q-icon name="account_circle" v-if="!profilePic && !editFamilyValue?.image" size="75px" color="grey" class="icon-img"/>
+              <img v-show="profilePic" src="" alt="" id="uploaded-image">
+              <img v-if="editFamilyValue?.image && !profilePic" :src="editFamilyValue?.image" alt="" class="existing-image">
               <!-- <img src="https://cdn.quasar.dev/img/avatar.png"> -->
-              <span class="material-symbols-outlined add-icon">
+              <q-file v-model="profilePic" v-show="false" ref="filepicker" accept=".jpg, image/*"></q-file>
+              <span class="material-symbols-outlined add-icon" @click="addPicture">
               add_a_photo
               </span>
             </q-avatar>
@@ -106,6 +109,7 @@ export default {
   name: 'AddFamilyPopup',
   data () {
     return {
+      profilePic: null,
       monthOptions: [
         { label: 'January', value: '01'},
         { label: 'February', value: '02'},
@@ -154,6 +158,15 @@ export default {
           this.selectedMonth = this.monthOptions.filter(month => month.value === splitDate[1])[0]?.value
         }
       }
+    },
+    profilePic: {
+      handler (newVal) {
+        if (newVal) {
+          const imageEl = document.getElementById('uploaded-image')
+          console.log(document.getElementById('uploaded-image'))
+          imageEl.src = URL.createObjectURL(newVal)
+        }
+      }
     }
   },
   computed: {
@@ -185,6 +198,9 @@ export default {
       addFamilyInfo: 'nursingHome/addFamilyInfo',
       editFamilyInfo: 'nursingHome/editFamilyInfo'
     }),
+    addPicture () {
+      this.$refs.filepicker.pickFiles()
+    },
     async onNewFamilyAdded (e) {
       e.preventDefault()
       try {
@@ -193,7 +209,9 @@ export default {
         formData.append('date', `${this.selectedDate}-${this.selectedMonth}-${this.selectedYear}`)
         formData.append('name', this.babyName)
         formData.append('gender', this.babySex)
-        // formData.append('image', null)
+        if (this.profilePic) {
+          formData.append('image', this.profilePic)
+        }
         const { data } = await this.addFamilyInfo({
           accessToken: this.accessToken,
           payload: formData,
@@ -211,7 +229,11 @@ export default {
         formData.append('date', `${this.selectedDate}-${this.selectedMonth}-${this.selectedYear}`)
         formData.append('name', this.babyName)
         formData.append('gender', this.babySex)
-        // formData.append('image', null)
+        if (this.profilePic) {
+          formData.append('image', this.profilePic)
+        } else if (this.editFamilyValue?.image) {
+          formData.append('image', this.editFamilyValue?.image)
+        }
         formData.append('isActive', 'True')
         const { data } = await this.editFamilyInfo({
           accessToken: this.accessToken,
@@ -276,5 +298,13 @@ export default {
   :deep(.q-btn__content) {
     font-size: 18px;
   }
+}
+#uploaded-image {
+  object-fit: cover;
+  width: 75px;
+}
+.existing-image {
+  object-fit: cover;
+  width: 75px;
 }
 </style>

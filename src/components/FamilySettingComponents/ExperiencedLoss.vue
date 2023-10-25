@@ -58,6 +58,7 @@ export default {
         formData.append('gender', this.editFamilyValue.gender)
         formData.append('isActive', isActive)
         formData.append('experiencedLoss', experiencedLoss)
+        // formData.append('image', this.editFamilyValue.image)
         const { data } = await this.editFamilyInfo({
           accessToken: this.accessToken,
           payload: formData,

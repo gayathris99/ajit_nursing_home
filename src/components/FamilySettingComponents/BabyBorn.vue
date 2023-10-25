@@ -98,6 +98,7 @@ export default {
         formData.append('date', `${this.selectedDate}-${this.selectedMonth}-${this.selectedYear}`)
         formData.append('name', this.editFamilyValue.name)
         formData.append('gender', this.babySex)
+        formData.append('image', this.editFamilyValue.image)
         const { data } = await this.editFamilyInfo({
           accessToken: JSON.parse(localStorage.getItem('userObj'))?.token,
           id: this.editFamilyValue.id,

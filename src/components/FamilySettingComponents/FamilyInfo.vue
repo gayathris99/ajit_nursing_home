@@ -6,11 +6,17 @@
     <div v-for="pregnancy in existingPregnancies" :key="pregnancy.id">
       <div class="border-bottom q-my-lg"></div>
       <div class="row items-center justify-between">
-        <div>
-          <div class="fw-700 fs-16 text-primary">{{pregnancy.name || 'My pregnancy'}}</div>
-          <div class="row items-center justify-between q-gutter-x-sm q-mt-sm">
-            <q-icon name="event" size="sm" color="grey"></q-icon>
-            <div class="text-grey fw-500 fs-16">{{displayDate(pregnancy.date)}}</div>
+        <div class="row items-center">
+          <q-icon v-if="!pregnancy.image" name="account_circle"  size="60px" color="grey"></q-icon>
+          <div class="profile-image" v-if="pregnancy.image">
+            <img :src="pregnancy.image" alt="">
+          </div>
+          <div class="q-pl-md">
+            <div class="fw-700 fs-16 text-primary">{{pregnancy.name || 'My pregnancy'}}</div>
+            <div class="row items-center justify-between q-gutter-x-sm q-mt-sm">
+              <q-icon name="event" size="sm" color="grey"></q-icon>
+              <div class="text-grey fw-500 fs-16">{{displayDate(pregnancy.date)}}</div>
+            </div>
           </div>
         </div>
         <div>
@@ -30,15 +36,21 @@
     <div v-for="children in exisitingChildren" :key="children.id">
       <div class="border-bottom q-my-lg"></div>
       <div class="row items-center justify-between">
-        <div>
-          <div style="color:#56584B;" class="row items-center q-gutter-x-sm q-mb-sm memorium" v-if="isMemorium(children)">
-            <div>In memorium</div>
-            <img src="~assets/memorium.png" alt="">
+        <div class="row items-center">
+          <q-icon v-if="!children.image" name="account_circle"  size="60px" color="grey"></q-icon>
+          <div class="profile-image" v-if="children.image">
+            <img :src="children.image" alt="">
           </div>
-          <div class="fw-700 fs-16 text-primary">{{children.name || 'My child'}}</div>
-          <div class="row items-center justify-between q-gutter-x-sm q-mt-sm">
-            <q-icon name="cake" size="sm" color="grey"></q-icon>
-            <div class="text-grey fw-500 fs-16">{{displayDate(children.date)}}</div>
+          <div class="q-pl-md">
+            <div style="color:#56584B;" class="row items-center q-gutter-x-sm q-mb-sm memorium" v-if="isMemorium(children)">
+              <div>In memorium</div>
+              <img src="~assets/memorium.png" alt="">
+            </div>
+            <div class="fw-700 fs-16 text-primary">{{children.name || 'My child'}}</div>
+            <div class="row items-center justify-between q-gutter-x-sm q-mt-sm">
+              <q-icon name="cake" size="sm" color="grey"></q-icon>
+              <div class="text-grey fw-500 fs-16">{{displayDate(children.date)}}</div>
+            </div>
           </div>
         </div>
         <div>
@@ -206,5 +218,15 @@ export default {
   img {
     width: 15px;
   }
+}
+.profile-image {
+  width: 60px;
+  img {
+      object-fit: cover;
+   border-radius: 50%;
+   width: 100%;
+   height: 60px;
+  }
+
 }
 </style>
