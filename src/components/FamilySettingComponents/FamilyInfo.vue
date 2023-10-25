@@ -3,28 +3,51 @@
     <div class="font-domine subtitle fw-500 text-primary">My Family</div>
     <q-checkbox v-model="isTryingToConceive" class="fs-16 q-mt-md fw-500 font-montserrat text-primary" label="Trying to conceive" color="secondary" @click="() => tryingToConceivePopup = true"/>
     <div class="q-mt-md fw-700 fs-18 text-primary">My pregnancy</div>
-    <!-- <div class="border-bottom q-my-lg"></div> -->
-    <!-- <div class="row items-center justify-between">
-      <div>
-        <div class="fw-700 fs-16 text-primary">My pregnancy</div>
-        <div class="row items-center justify-between q-gutter-x-sm q-mt-sm">
-          <q-icon name="event" size="sm" color="grey"></q-icon>
-          <div class="text-grey fw-500 fs-16">April 11 2024</div>
+    <div v-for="pregnancy in existingPregnancies" :key="pregnancy.id">
+      <div class="border-bottom q-my-lg"></div>
+      <div class="row items-center justify-between">
+        <div>
+          <div class="fw-700 fs-16 text-primary">{{pregnancy.name || 'My pregnancy'}}</div>
+          <div class="row items-center justify-between q-gutter-x-sm q-mt-sm">
+            <q-icon name="event" size="sm" color="grey"></q-icon>
+            <div class="text-grey fw-500 fs-16">{{displayDate(pregnancy.date)}}</div>
+          </div>
+        </div>
+        <div>
+          <q-icon name="edit" color="secondary" class="cursor-pointer" size="sm" @click="addFamily('pregnancy', pregnancy)"></q-icon>
         </div>
       </div>
-      <div>
-        <q-icon name="edit" color="secondary" class="cursor-pointer" size="sm"></q-icon>
-      </div>
-    </div> -->
+    </div>
     <div class="border-bottom q-my-lg"></div>
-    <div class="row items-center q-gutter-x-sm cursor-pointer" @click="addFamily('pregnancy')">
+    <div class="row items-center q-gutter-x-sm cursor-pointer" @click="addFamily('pregnancy', null)">
       <q-icon name="add" size="sm" color="secondary"></q-icon>
       <div class="fs-16 fw-700 text-secondary">Add Pregnancy</div>
     </div>
     <div class="border-bottom q-my-lg"></div>
+
+
     <div class="q-mt-xl fw-700 fs-18 text-primary">My children</div>
+    <div v-for="children in exisitingChildren" :key="children.id">
+      <div class="border-bottom q-my-lg"></div>
+      <div class="row items-center justify-between">
+        <div>
+          <div style="color:#56584B;" class="row items-center q-gutter-x-sm q-mb-sm memorium" v-if="isMemorium(children)">
+            <div>In memorium</div>
+            <img src="~assets/memorium.png" alt="">
+          </div>
+          <div class="fw-700 fs-16 text-primary">{{children.name || 'My child'}}</div>
+          <div class="row items-center justify-between q-gutter-x-sm q-mt-sm">
+            <q-icon name="cake" size="sm" color="grey"></q-icon>
+            <div class="text-grey fw-500 fs-16">{{displayDate(children.date)}}</div>
+          </div>
+        </div>
+        <div>
+          <q-icon name="edit" color="secondary" class="cursor-pointer" size="sm" @click="addFamily('child', children)"></q-icon>
+        </div>
+      </div>
+    </div>
     <div class="border-bottom q-my-lg"></div>
-    <div class="row items-center q-gutter-x-sm cursor-pointer" @click="addFamily('child')">
+    <div class="row items-center q-gutter-x-sm cursor-pointer" @click="addFamily('child', null)">
       <q-icon name="add" size="sm" color="secondary"></q-icon>
       <div class="fs-16 fw-700 text-secondary">Add a child</div>
     </div>
@@ -35,7 +58,10 @@
   </q-dialog>
   <q-dialog  v-model="showAddFamilyPopup">
     <add-family-popup
-    :isFamilyTypeChild="isFamilyTypeChild"/>
+    :isFamilyTypeChild="isFamilyTypeChild"
+    :isEditFamily="isEditFamily"
+    :editFamilyValue="editFamilyValue"
+    @closeFamilyPopup="closeFamilyPopup"/>
   </q-dialog>
 </template>
 
@@ -51,7 +77,12 @@ export default {
       isTryingToConceive: false,
       tryingToConceivePopup: false,
       showAddFamilyPopup: false,
-      isFamilyTypeChild: false
+      isFamilyTypeChild: false,
+      existingPregnancies: [],
+      exisitingChildren: [],
+      isEditFamily: false,
+      editFamilyValue: null,
+      monthList: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     }
   },
   mounted () {
@@ -61,19 +92,51 @@ export default {
     ...mapActions({
       getFamilyInfo: 'nursingHome/getFamilyInfo'
     }),
-    addFamily (type) {
+    closeFamilyPopup () {
+      this.showAddFamilyPopup = false
+      this.fetchFamilyInfo()
+      this.$q.notify({
+        message: "Your updates are saved!",
+        color: "green",
+        position: "top",
+        classes: 'font-montserrat fw-700'
+      });
+    },
+    isMemorium (child) {
+      return child.status === 'EXPERIENCED_LOSS'
+    },
+    displayDate (value) {
+      const splitDate = value.split('-')
+      const month = this.monthList[splitDate[1]-1]
+      return `${month} ${splitDate[0]} ${splitDate[2]}`
+    },
+    addFamily (type, value) {
       if (type === 'child') {
         this.isFamilyTypeChild = true
-      } else this.isFamilyTypeChild = false
+      } else {
+        this.isFamilyTypeChild = false
+      }
+      if (value) {
+        this.isEditFamily = true
+        this.editFamilyValue = value
+      } else {
+        this.isEditFamily = false
+        this.editFamilyValue = null
+      }
       this.showAddFamilyPopup = true
     },
     async fetchFamilyInfo () {
       try {
         this.$q.loading.show()
+        this.existingPregnancies = []
+        this.exisitingChildren = []
         const { data } = await this.getFamilyInfo({
           accessToken: JSON.parse(localStorage.getItem('userObj'))?.token
         })
-        console.log(data)
+        data?.forEach(value => {
+          if (value?.status === 'BORN' || value?.status === 'EXPERIENCED_LOSS') this.exisitingChildren.push(value)
+          else if (value?.status === 'DUE_YET') this.existingPregnancies.push(value)
+        })
       } catch (error) {}
       finally {
         this.$q.loading.hide()
@@ -86,5 +149,10 @@ export default {
 <style lang="scss" scoped>
 .border-bottom {
   border-bottom: 1px solid grey
+}
+.memorium {
+  img {
+    width: 15px;
+  }
 }
 </style>

@@ -301,3 +301,33 @@ export async function getFamilyInfo({ commit, dispatch }, {accessToken}) {
     throw (error)
   }
 }
+export async function addFamilyInfo({ commit, dispatch }, { accessToken, payload}) {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    };
+    const data = await axios.post(
+      `${process.env.BASE_URL}/familyinfo`,
+      payload,
+      config
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
+export async function editFamilyInfo({ commit, dispatch }, { accessToken, payload, id}) {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    };
+    const data = await axios.put(
+      `${process.env.BASE_URL}/familyinfo/${id}`,
+      payload,
+      config
+    );
+    return data;
+  } catch (error) {
+    throw (error)
+  }
+}
