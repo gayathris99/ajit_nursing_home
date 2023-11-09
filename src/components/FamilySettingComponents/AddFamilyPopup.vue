@@ -4,7 +4,7 @@
       <div class="row items-center justify-end cursor-pointer q-pt-xs q-pr-sm" v-close-popup>
         <img src="~assets/closeIconSecondary.svg" width="24" alt="">
       </div>
-      <q-form @submit.prevent.stop="isEditFamily ? onEditFamily : onNewFamilyAdded">
+      <q-form @submit.prevent.stop="updateFamilyData">
         <div class="q-px-md q-pb-md q-pt-xs font-montserrat">
           <div class="fw-700 text-primary fs-20 q-mb-lg">{{getTitle}}</div>
           <div class="fw-700 text-primary fs-16">Photo</div>
@@ -77,7 +77,6 @@
                 class="font-montserrat fw-700"
                 color="secondary"
                 type="submit"
-                @click="onNewFamilyAdded"
                 ></q-btn>
             </div>
           </div>
@@ -88,7 +87,6 @@
             class="font-montserrat fw-700 save-btn"
             color="secondary"
             type="submit"
-            @click="onEditFamily"
             ></q-btn>
           </div>
           <div class="column q-gutter-y-md items-center justify-center text-primary fs-14">
@@ -198,6 +196,10 @@ export default {
       addFamilyInfo: 'nursingHome/addFamilyInfo',
       editFamilyInfo: 'nursingHome/editFamilyInfo'
     }),
+    updateFamilyData (e) {
+      e.preventDefault()
+      this.isEditFamily ? this.onEditFamily(e) : this.onNewFamilyAdded(e)
+    },
     addPicture () {
       this.$refs.filepicker.pickFiles()
     },
@@ -231,9 +233,10 @@ export default {
         formData.append('gender', this.babySex)
         if (this.profilePic) {
           formData.append('image', this.profilePic)
-        } else if (this.editFamilyValue?.image) {
-          formData.append('image', this.editFamilyValue?.image)
         }
+        // else if (this.editFamilyValue?.image) {
+        //   formData.append('image', this.editFamilyValue?.image)
+        // }
         formData.append('isActive', 'True')
         const { data } = await this.editFamilyInfo({
           accessToken: this.accessToken,
